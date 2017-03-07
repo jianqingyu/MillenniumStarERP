@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettlementListVC">
+            <connections>
+                <outlet property="setListTable" destination="r38-3G-bDs" id="C51-E1-gjY"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r38-3G-bDs">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Y1M-7h-zhU"/>
+                        <outlet property="delegate" destination="-1" id="gWa-Nd-9Nn"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="r38-3G-bDs" secondAttribute="trailing" id="MkC-dK-kzV"/>
+                <constraint firstAttribute="bottom" secondItem="r38-3G-bDs" secondAttribute="bottom" id="dAD-54-z4X"/>
+                <constraint firstItem="r38-3G-bDs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nEQ-S9-5A9"/>
+                <constraint firstItem="r38-3G-bDs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pFj-bt-vJO"/>
+            </constraints>
+            <point key="canvasLocation" x="452" y="493"/>
+        </view>
+    </objects>
+</document>
