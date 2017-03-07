@@ -29,7 +29,7 @@
     self.title = @"定制";
     titleArray = @[@{@"title":@"待审核",@"netUrl":@"ModelOrderWaitCheckList",@"proId":@"10"},
                    @{@"title":@"生产中",@"netUrl":@"ModelOrderProduceListPage",@"proId":@"20"},
-                   @{@"title":@"已发货",@"netUrl":@"",@"proId":@"30"},
+                   @{@"title":@"已发货",@"netUrl":@"ModelOrderProduceListPage",@"proId":@"30"},
                    @{@"title":@"已完成",@"netUrl":@"",@"proId":@"40"}];
     [self initCustomView];
 }
