@@ -30,4 +30,21 @@
     return [[NSBundle mainBundle]loadNibNamed:@"SettlementHeadView" owner:nil options:nil][0];
 }
 
+- (void)setHeadInfo:(SettlementHeadInfo *)headInfo{
+    if (headInfo) {
+        _headInfo = headInfo;
+        NSString *string = _headInfo.recDate;
+        string = [string substringToIndex:10];//截取掉下标10之后的字符串
+        NSString *string1 = _headInfo.orderDate;
+        string1 = [string1 substringToIndex:10];//截取掉下标10之后的字符串
+        self.cusName.text = _headInfo.customerName;
+        self.colorLab.text = _headInfo.purityName;
+        self.comDate.text = string;
+        self.dedate.text = _headInfo.accountID;
+        self.orderNum.text = _headInfo.orderNum;
+        self.orderDate.text = string1;
+        self.comNum.text = _headInfo.recNum;
+    }
+}
+
 @end

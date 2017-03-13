@@ -143,8 +143,8 @@
     
     UIButton *headBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [headBtn setLayerWithW:0.1 andColor:DefaultColor andBackW:0.8];
-    [headBtn setImage:[UIImage imageNamed:@"icon_up_o"] forState:UIControlStateNormal];
-    [headBtn setImage:[UIImage imageNamed:@"icon_down_o"] forState:UIControlStateSelected];
+    [headBtn setImage:[UIImage imageNamed:@"icon_up"] forState:UIControlStateNormal];
+    [headBtn setImage:[UIImage imageNamed:@"icon_down"] forState:UIControlStateSelected];
     headBtn.backgroundColor = CUSTOM_COLOR(245, 245, 247);
     [headBtn addTarget:self action:@selector(btnShow:)
       forControlEvents:UIControlEventTouchUpInside];

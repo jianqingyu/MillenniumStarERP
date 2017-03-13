@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SettlementListInfo.h"
 @interface SettlementSecHedView : UIView
 + (SettlementSecHedView *)creatView;
-@property (nonatomic,weak)UILabel *tLab;
-@property (nonatomic,weak)UILabel *priceLab;
+@property (nonatomic,strong)SettlementListInfo *secInfo;
 @end

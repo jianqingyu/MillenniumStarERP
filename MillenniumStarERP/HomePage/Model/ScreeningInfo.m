@@ -7,12 +7,10 @@
 //
 
 #import "ScreeningInfo.h"
-#import "MJExtension.h"
 #import "ScreenDetailInfo.h"
 @implementation ScreeningInfo
 + (NSDictionary *)objectClassInArray
 {
     return @{@"attributeList":[ScreenDetailInfo class]};
 }
-
 @end

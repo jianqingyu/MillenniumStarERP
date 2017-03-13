@@ -8,7 +8,7 @@
 
 #import "DeliveryOrderVC.h"
 #import "DeliveryListInfo.h"
-#import "DetailHeadInfo.h"
+#import "DeliveryHeadInfo.h"
 #import "DeliveryOrderHeadView.h"
 #import "DeliveryOrderTableCell.h"
 @interface DeliveryOrderVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -23,35 +23,11 @@
     [super viewDidLoad];
     self.title = @"出货单";
     [self setBaseView];
+    [self loadDeliveryData];
 }
 
 - (void)setBaseView{
     self.deliveryTab.backgroundColor = DefaultColor;
-    
-    DeliveryListInfo *info = [DeliveryListInfo new];
-    info.title = @"女戒";
-    info.ordernum = @"5623545";
-    info.price = 881.5;
-    info.pic = @"aaaa";
-    info.sDetail = @"手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g";
-    info.detail = @"手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g";
-    DeliveryListInfo *info1 = [DeliveryListInfo new];
-    info1.title = @"女戒";
-    info1.ordernum = @"5623545";
-    info1.price = 881.5;
-    info1.pic = @"aaaa";
-    info1.sDetail = @"手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g";
-    info1.detail = @"手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g";
-    info1.isOpen = YES;
-    DeliveryListInfo *info2 = [DeliveryListInfo new];
-    info2.title = @"女戒";
-    info2.ordernum = @"5623545";
-    info2.price = 881.5;
-    info2.pic = @"aaaa";
-    info2.sDetail = @"手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g";
-    info2.detail = @"手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g 净金重:3.15g 耗损:0.85g 手寸：11 毛重:3g";
-    self.listArr = @[info,info1,info2];
-    
     UIView *headV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth, 120)];
     DeliveryOrderHeadView *headView = [DeliveryOrderHeadView createHeadView];
     [headV addSubview:headView];
@@ -64,6 +40,26 @@
     self.deliveryTab.tableHeaderView = headV;
     self.deliveryTab.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.delHView = headView;
+}
+
+- (void)loadDeliveryData{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    NSString *url = [NSString stringWithFormat:@"%@ModelArriveBillMo",baseUrl];
+    params[@"tokenKey"] = [AccountTool account].tokenKey;
+    params[@"moNum"] = self.orderNum;
+    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
+        if ([response.error intValue]==0) {
+            if ([YQObjectBool boolForObject:response.data[@"moItem"]]) {
+                DeliveryHeadInfo *info = [DeliveryHeadInfo objectWithKeyValues:response.data[@"moItem"]];
+                self.delHView.delHInfo = info;
+            }
+            if ([YQObjectBool boolForObject:response.data[@"modelList"]]) {
+                self.listArr = [DeliveryListInfo objectArrayWithKeyValuesArray:
+                                response.data[@"modelList"]];
+                [self.deliveryTab reloadData];
+            }
+        }
+    } requestURL:url params:params];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -92,7 +88,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DeliveryListInfo *sInfo = self.listArr[indexPath.row];
     sInfo.isOpen = !sInfo.isOpen;
     [_deliveryTab reloadRowsAtIndexPaths:@[indexPath]

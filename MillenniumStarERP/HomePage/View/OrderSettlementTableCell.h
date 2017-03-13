@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "OrderListNewInfo.h"
 @interface OrderSettlementTableCell : UITableViewCell
 + (id)cellWithTableView:(UITableView *)tableView;
+@property(nonatomic,strong)OrderListNewInfo *listInfo;
 @end

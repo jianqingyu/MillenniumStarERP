@@ -88,7 +88,7 @@
 
 - (void)creatNaviBtn{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(10, 40, 48, 48);
+    btn.frame = CGRectMake(10, 35, 54, 54);
     btn.backgroundColor = [UIColor clearColor];
     [btn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     [btn setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
@@ -235,19 +235,19 @@
     }
     NSArray *headArr;
     //苹果是200x200 400x400,IPAD是400x400 800x800
-    if (IsPhone) {
-        if (pic.count==0) {
-            pic = @[@"pic"].mutableCopy;
-        }
-        headArr = pic.copy;
-        self.IDarray = [mPic copy];
-    }else{
+//    if (IsPhone) {
+//        if (pic.count==0) {
+//            pic = @[@"pic"].mutableCopy;
+//        }
+//        headArr = pic.copy;
+//        self.IDarray = [mPic copy];
+//    }else{
         if (mPic.count==0) {
             mPic = @[@"pic"].mutableCopy;
         }
         headArr = mPic.copy;
         self.IDarray = [bPic copy];
-    }
+//    }
     [self setupHeadView:headArr];
 }
 

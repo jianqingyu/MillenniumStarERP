@@ -31,4 +31,17 @@
     return [[NSBundle mainBundle]loadNibNamed:@"DeliveryOrderHeadView" owner:nil options:nil][0];
 }
 
+- (void)setDelHInfo:(DeliveryHeadInfo *)delHInfo{
+    if (delHInfo) {
+        _delHInfo = delHInfo;
+        self.cusName.text = _delHInfo.customerName;
+        self.orderNum.text = _delHInfo.orderNum;
+        self.deliveryNum.text = _delHInfo.moNum;
+        self.colorLab.text = _delHInfo.purityName;
+        self.goldLab.text = [NSString stringWithFormat:@"￥%0.1f",_delHInfo.goldPrice];
+        self.totalNum.text = [NSString stringWithFormat:@"%d件",_delHInfo.number];
+        self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",_delHInfo.totalPrice];
+    }
+}
+
 @end

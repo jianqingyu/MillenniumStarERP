@@ -10,5 +10,5 @@
 #import "DeliveryHeadInfo.h"
 @interface DeliveryOrderHeadView : UIView
 + (id)createHeadView;
-@property (nonatomic,strong)DeliveryHeadInfo *deliveryHInfo;
+@property (nonatomic,strong)DeliveryHeadInfo *delHInfo;
 @end

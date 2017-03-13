@@ -14,19 +14,20 @@
 @implementation UIWindow (Extension)
 
 - (void)switchRootViewController{
-    NSString *key = @"CFBundleVersion";
-    //取出的版本
-    NSString *lastVersion = [[NSUserDefaults standardUserDefaults]objectForKey:key];
-    //当前的版本
-    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
-    if ([currentVersion isEqualToString:lastVersion]) {
-        self.rootViewController = [[LoginViewController alloc]init];
-    }else{
-        self.rootViewController = [[NewfeatureViewController alloc]init];
-        //将当前版本存入
-        [[NSUserDefaults standardUserDefaults]setObject:currentVersion forKey:key];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-    }
+    self.rootViewController = [[LoginViewController alloc]init];
+//    NSString *key = @"CFBundleVersion";
+//    //取出的版本
+//    NSString *lastVersion = [[NSUserDefaults standardUserDefaults]objectForKey:key];
+//    //当前的版本
+//    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+//    if ([currentVersion isEqualToString:lastVersion]) {
+//        self.rootViewController = [[LoginViewController alloc]init];
+//    }else{
+//        self.rootViewController = [[NewfeatureViewController alloc]init];
+//        //将当前版本存入
+//        [[NSUserDefaults standardUserDefaults]setObject:currentVersion forKey:key];
+//        [[NSUserDefaults standardUserDefaults]synchronize];
+//    }
 }
 
 @end

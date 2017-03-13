@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SettlementHeadInfo.h"
 @interface SettlementHeadView : UIView
 + (id)createHeadView;
+@property (nonatomic,strong)SettlementHeadInfo *headInfo;
 @end

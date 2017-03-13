@@ -43,34 +43,30 @@
 }
 
 - (void)creatBaseLab{
-    NSInteger total = self.info.titles.count;
+    NSInteger total = self.info.list.count;
     CGFloat labH = 24;
     CGFloat labW = 0;
     NSInteger ACount = 0;
     if (IsPhone) {
-        labW = (SDevWidth-20)/4;
-        ACount = [self.info.titles[0] count];
+        labW = (int)(SDevWidth-20)/4;
+        ACount = [self.info.list[0] count];
         [self createScrollView:CGRectMake(10+labW, 0, SDevWidth-10-labW, total*labH)];
         self.backScroll.contentSize = CGSizeMake((ACount-1)*labW+10, 0);
     }else{
-        labW = (SDevWidth-20)/7;
+        labW = (int)(SDevWidth-20)/7;
         ACount = 7;
-        //labW = (SDevWidth-20)/countArr.count;
     }
     for (int j=0; j<total; j++) {
-        NSArray *arr = self.info.titles[j];
+        NSArray *arr = self.info.list[j];
         for (int i=0; i<ACount; i++) {
-            UILabel *lab = [[UILabel alloc]init];
-            lab.textAlignment = NSTextAlignmentCenter;
-            lab.font = [UIFont systemFontOfSize:12];
-            [lab setAdjustsFontSizeToFitWidth:YES];
-            lab.textColor = [UIColor darkGrayColor];
+            UILabel *lab = [self creatLab];
             if (j==0||j==total-1) {
                 lab.font = [UIFont systemFontOfSize:14];
                 lab.backgroundColor = CUSTOM_COLOR(245, 245, 247);
             }
             if (IsPhone) {
-                lab.text = arr[i];
+                NSString *str = [NSString stringWithFormat:@"%@",arr[i]];
+                lab.text = [self strWithStr:str];
                 if (i==0) {
                     lab.frame = CGRectMake(10,j*labH, labW, labH);
                     [self.contentView addSubview:lab];
@@ -82,14 +78,35 @@
                 lab.frame = CGRectMake(10+labW*i,j*labH, labW, labH);
                 [self.contentView addSubview:lab];
                 if (i<arr.count-1) {
-                    lab.text = arr[i];
+                    NSString *str = [NSString stringWithFormat:@"%@",arr[i]];
+                    lab.text = [self strWithStr:str];
                 }
                 if (i==ACount-1) {
-                    lab.text = [arr lastObject];
+                    NSString *str = [NSString stringWithFormat:@"%@",[arr lastObject]];
+                    lab.text = [self strWithStr:str];
                 }
             }
         }
     }
+}
+
+- (NSString *)strWithStr:(NSString *)str{
+    if ([str containsString:@"."]) {
+        NSRange range = [str rangeOfString:@"."];//匹配得到的下标
+        if ((str.length - range.location)>2) {
+            str = [str substringToIndex:(range.location+3)];//截取掉下标之后的字符串
+        }
+    }
+    return str;
+}
+
+- (UILabel *)creatLab{
+    UILabel *lab = [[UILabel alloc]init];
+    lab.textAlignment = NSTextAlignmentCenter;
+    lab.textColor = [UIColor darkGrayColor];
+    lab.font = [UIFont systemFontOfSize:12];
+    [lab setAdjustsFontSizeToFitWidth:YES];
+    return lab;
 }
 
 @end

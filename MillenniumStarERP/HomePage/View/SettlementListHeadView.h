@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderSetmentInfo.h"
 typedef void (^SetlistHeadBack)(BOOL isSel);
 @interface SettlementListHeadView : UIView
 @property (nonatomic,copy)SetlistHeadBack clickBack;
+@property (nonatomic,strong)OrderSetmentInfo *headInfo;
 + (id)createHeadView;
 @end

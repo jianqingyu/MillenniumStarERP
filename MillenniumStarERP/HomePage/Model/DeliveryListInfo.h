@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface DeliveryListInfo : NSObject
-@property (nonatomic,copy)NSString *title;
-@property (nonatomic,copy)NSString *ordernum;
-@property (nonatomic,copy)NSString *sDetail;
-@property (nonatomic,copy)NSString *detail;
+@property (nonatomic,copy)NSString *modelNum;
+@property (nonatomic,copy)NSString *typeName;
+@property (nonatomic,copy)NSString *sInfo;
+@property (nonatomic,copy)NSString *dInfo;
+@property (nonatomic,copy)NSString *remark;
 @property (nonatomic,copy)NSString *pic;
-@property (nonatomic,assign)double price;
+@property (nonatomic,assign)double unitPrice;
 @property (nonatomic,assign)BOOL isOpen;
+
 @end

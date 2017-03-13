@@ -7,7 +7,11 @@
 //
 
 #import "SettlementFootView.h"
-
+@interface SettlementFootView()
+@property (weak, nonatomic) IBOutlet UILabel *numLab;
+@property (weak, nonatomic) IBOutlet UILabel *priceLab;
+@property (weak, nonatomic) IBOutlet UILabel *orderName;
+@end
 @implementation SettlementFootView
 
 - (id)initWithFrame:(CGRect)frame{
@@ -20,6 +24,15 @@
 
 + (id)createHeadView{
     return [[NSBundle mainBundle]loadNibNamed:@"SettlementFootView" owner:nil options:nil][0];
+}
+
+- (void)setFootInfo:(SettlementHeadInfo *)footInfo{
+    if (footInfo) {
+        _footInfo = footInfo;
+        self.numLab.text = [NSString stringWithFormat:@"%d件",_footInfo.number];
+        self.orderName.text = _footInfo.recOperator;
+        self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",_footInfo.totalPrice];
+    }
 }
 
 @end

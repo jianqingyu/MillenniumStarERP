@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface DeliveryHeadInfo : NSObject
-@property (nonatomic,copy)NSString *title;
-@property (nonatomic,copy)NSString *ordernum;
-@property (nonatomic,copy)NSString *delNum;
-@property (nonatomic,copy)NSString *color;
-@property (nonatomic,assign)double price;
-@property (nonatomic,assign)double gold;
-@property (nonatomic,assign)int num;
+@property (nonatomic,copy)NSString *moNum;
+@property (nonatomic,copy)NSString *orderNum;
+@property (nonatomic,copy)NSString *moDate;
+@property (nonatomic,copy)NSString *customerName;
+@property (nonatomic,copy)NSString *purityName;
+@property (nonatomic,assign)double goldPrice;
+@property (nonatomic,assign)double totalPrice;
+@property (nonatomic,assign)int number;
 @end

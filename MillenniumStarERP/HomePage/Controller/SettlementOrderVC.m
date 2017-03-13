@@ -13,6 +13,7 @@
 #import "SettlementHeadView.h"
 #import "SettlementTableCell.h"
 #import "SettlementFootView.h"
+#import "ArrayWithDict.h"
 @interface SettlementOrderVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak,  nonatomic) IBOutlet UITableView *settlementTab;
 @property (nonatomic,strong) NSArray *listArr;
@@ -26,19 +27,11 @@
     [super viewDidLoad];
     self.title = @"结算单";
     [self setBaseView];
+    [self loadSetmentData];
 }
 
 - (void)setBaseView{
     self.settlementTab.backgroundColor = DefaultColor;
-    
-    SettlementListInfo *info = [SettlementListInfo new];
-    info.titles =  @[@[@"品名",@"净金重",@"损耗",@"金价",@"金额"],@[@"男戒",@"0.16",@"0.56",@"293.6",@"56301.0"],@[@"男戒",@"0.16",@"0.56",@"293.6",@"56301.0"],@[@"男戒",@"0.16",@"0.56",@"293.6",@"56301.0"],@[@"男戒",@"0.16",@"0.56",@"293.6",@"56301.0"],@[@"小计",@"0.16",@"",@"",@"56301.0"]];
-    SettlementListInfo *info1 = [SettlementListInfo new];
-    info1.titles = @[@[@"品名",@"件数",@"单件工费",@"超额工费",@"起版费",@"金额"],@[@"男戒",@"0.16",@"0.56",@"293.6",@"293.6",@"56301.0"],@[@"小计",@"2",@"",@"0.16",@"0.56",@"56301.0"]];
-    SettlementListInfo *info2 = [SettlementListInfo new];
-    info2.titles = @[@[@"品名",@"数量",@"工费",@"金额"],@[@"男戒",@"0.16",@"0.56",@"56301.0"],@[@"小计",@"",@"0.56",@"56301.0"]];
-    self.listArr = @[info,info1,info2];
-    
     UIView *headV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth, 130)];
     headV.backgroundColor = DefaultColor;
     SettlementHeadView *headView = [SettlementHeadView createHeadView];
@@ -66,6 +59,36 @@
     self.delFView = footView;
 }
 
+- (void)loadSetmentData{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    NSString *url = [NSString stringWithFormat:@"%@ModelBillFinishDetailRec",baseUrl];
+    params[@"tokenKey"] = [AccountTool account].tokenKey;
+    params[@"recNum"] = self.orderNum;
+    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
+        if ([response.error intValue]==0) {
+            if ([YQObjectBool boolForObject:response.data[@"recItem"]]) {
+                SettlementHeadInfo *info = [SettlementHeadInfo
+                                 objectWithKeyValues:response.data[@"recItem"]];
+                self.delHView.headInfo = info;
+                self.delFView.footInfo = info;
+            }
+            self.listArr = @[[self setData:response.data andStr:@"recMaterials"],
+                             [self setData:response.data andStr:@"recOtherProcessExpenseses"],
+                             [self setData:response.data andStr:@"recProcessExpenseses"],
+                             [self setData:response.data andStr:@"recStones"]];
+            [self.settlementTab reloadData];
+        }
+    } requestURL:url params:params];
+}
+
+- (SettlementListInfo *)setData:(NSDictionary *)dict andStr:(NSString *)key{
+    NSDictionary *dic = dict[key];
+    SettlementListInfo *sInfo = [SettlementListInfo objectWithKeyValues:dic];
+    NSDictionary *par = @{key:dic};
+    sInfo.list = [ArrayWithDict DateWithDict:par];
+    return sInfo;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.listArr.count;
 }
@@ -83,7 +106,9 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    SettlementListInfo *sInfo = self.listArr[section];
     SettlementSecHedView *headV = [SettlementSecHedView creatView];
+    headV.secInfo = sInfo;
     return headV;
 }
 
@@ -98,7 +123,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     SettlementListInfo *sInfo = self.listArr[indexPath.section];
-    return 24*sInfo.titles.count;
+    return 24*sInfo.list.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -103,7 +103,18 @@
         if ([response.error intValue]==0) {
             [self setupFootRefresh];
             if ([YQObjectBool boolForObject:response.data]){
-                [self setupListDataWithDict:response.data[@"orderList"]];
+                switch (self.proid) {
+                    case 10:case 20:
+                        [self setListData:response.data[@"orderList"][@"list"] and:response.data[@"orderList"][@"list_count"]];
+                        break;
+                    case 30:
+                        [self setListData:response.data[@"orderList"]and:response.data[@"list_count"]];
+                        break;
+                    case 40:
+                        break;
+                    default:
+                        break;
+                }
                 if ([YQObjectBool boolForObject:response.data[@"statusCount"]]) {
                     StausCount *staC = [StausCount objectWithKeyValues:response.data[@"statusCount"]];
                     NSArray *arr = @[@(staC.waitForValidate),@(staC.produceding),
@@ -122,12 +133,12 @@
 }
 
 //更新list数据
-- (void)setupListDataWithDict:(NSDictionary *)dicList{
-    if([YQObjectBool boolForObject:dicList[@"list"]]){
+- (void)setListData:(NSDictionary *)dicList and:(id)couDic{
+    if([YQObjectBool boolForObject:dicList]){
         _mTableView.footer.state = MJRefreshStateIdle;
         curPage++;
-        totalCount = [dicList[@"list_count"]intValue];
-        NSArray *seaArr = [OrderListNewInfo objectArrayWithKeyValuesArray:dicList[@"list"]];
+        totalCount = [couDic intValue];
+        NSArray *seaArr = [OrderListNewInfo objectArrayWithKeyValuesArray:dicList];
         [_dataArray addObjectsFromArray:seaArr];
         if(_dataArray.count>=totalCount){
             //已加载全部数据
@@ -142,7 +153,6 @@
         _mTableView.footer.state = MJRefreshStateNoMoreData;
     }
 }
-
 #pragma mark -- UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -155,7 +165,22 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 220+(SDevWidth-70)/4;
+    CGFloat rowH = 0;
+    switch (self.proid) {
+        case 10:case 20:
+            rowH = 220+(SDevWidth-70)/4;
+            break;
+        case 30:
+            rowH = 165;
+            break;
+        case 40:
+            rowH = 0;
+            break;
+        default:
+            rowH = 0;
+            break;
+    }
+    return rowH;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -170,15 +195,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc]init];
+    OrderListNewInfo *newInfo;
+    if (indexPath.section<_dataArray.count) {
+        newInfo = _dataArray[indexPath.section];
+    }
     switch (self.proid) {
-        case 10:
-            cell = [self CellWithTab:tableView andIndex:indexPath];
-            break;
-        case 20:
-            cell = [self CellWithTab:tableView andIndex:indexPath];
+        case 10:case 20:
+            cell = [self CellWithTab:tableView andIndex:indexPath andInfo:newInfo];
             break;
         case 30:
-            cell = [self CellWithSTab:tableView andIndex:indexPath];
+            cell = [self CellWithSTab:tableView andIndex:indexPath andInfo:newInfo];
             break;
         case 40:
             break;
@@ -188,18 +214,17 @@
     return cell;
 }
 #pragma mark -- 不同的Cell
-- (OrderListTableCell *)CellWithTab:(UITableView *)tableView andIndex:(NSIndexPath *)indexPath{
+- (OrderListTableCell *)CellWithTab:(UITableView *)tableView
+                           andIndex:(NSIndexPath *)indexPath andInfo:(OrderListNewInfo *)info{
     OrderListTableCell *cell = [OrderListTableCell cellWithTableView:tableView];
-    OrderListNewInfo *newInfo;
-    if (indexPath.section<_dataArray.count) {
-        newInfo = _dataArray[indexPath.section];
-    }
-    cell.listInfo = newInfo;
+    cell.listInfo = info;
     return cell;
 }
 
-- (OrderSettlementTableCell *)CellWithSTab:(UITableView *)tableView andIndex:(NSIndexPath *)indexPath{
+- (OrderSettlementTableCell *)CellWithSTab:(UITableView *)tableView
+                                  andIndex:(NSIndexPath *)indexPath andInfo:(OrderListNewInfo *)info{
     OrderSettlementTableCell *cell = [OrderSettlementTableCell cellWithTableView:tableView];
+    cell.listInfo = info;
     return cell;
 }
 
@@ -264,6 +289,8 @@
 //已发货
 - (void)loadDeliveryWithIndex:(NSIndexPath *)indexPath{
     SettlementListVC *listVc = [SettlementListVC new];
+    OrderListNewInfo *newInfo = _dataArray[indexPath.section];
+    listVc.orderNumber = newInfo.orderNum;
     [self.superNav pushViewController:listVc animated:YES];
 }
 //已完成

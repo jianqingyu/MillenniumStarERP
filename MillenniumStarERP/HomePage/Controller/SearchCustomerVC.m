@@ -39,6 +39,7 @@
     titleFie.font = [UIFont systemFontOfSize:14];
     titleFie.borderStyle = UITextBorderStyleRoundedRect;
     titleFie.returnKeyType = UIReturnKeySearch;
+    titleFie.clearButtonMode = UITextFieldViewModeAlways;
     
     UIButton *seaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     seaBtn.frame = CGRectMake(SDevWidth*0.8-35, 0, 30, 30);

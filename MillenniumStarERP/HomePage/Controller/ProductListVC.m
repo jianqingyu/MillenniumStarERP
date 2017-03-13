@@ -64,6 +64,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setBaseAllViewData];
+}
+
+- (void)setBaseAllViewData{
     self.dataArray = [NSMutableArray new];
     self.orderNumLab.layer.cornerRadius = 8;
     self.orderNumLab.layer.masksToBounds = YES;
@@ -73,7 +77,8 @@
     [self setupSearchBar];
     [self setupRightItem];
     [self setupRightSiderBar];
-    [self setBaseViewData];
+    [self setProTableView];
+    [self setPopView];
     [self setupHeadView];
     [self setupHeaderRefresh];
     [self creatNearNetView:^(BOOL isWifi) {
@@ -93,7 +98,7 @@
 }
 
 #pragma mark -- 创建导航按钮-头视图
-- (void)setBaseViewData{
+- (void)setProTableView{
     self.tableView = [[UITableView alloc]init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -109,17 +114,19 @@
 }
 
 - (void)setupSearchBar{
-    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth*0.70 , 30)];
+    CGFloat width = SDevWidth*0.70;
+    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,  width, 30)];
     titleView.backgroundColor = [UIColor clearColor];
-    UITextField *titleFie = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, SDevWidth*0.70-40, 30)];
+    UITextField *titleFie = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, width-40, 30)];
     titleFie.placeholder = @"请输入搜索关键词";
     titleFie.delegate = self;
     titleFie.font = [UIFont systemFontOfSize:14];
     titleFie.borderStyle = UITextBorderStyleRoundedRect;
     titleFie.returnKeyType = UIReturnKeySearch;
+    titleFie.clearButtonMode = UITextFieldViewModeAlways;
     
     UIButton *seaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    seaBtn.frame = CGRectMake(SDevWidth*0.70-35, 0, 30, 30);
+    seaBtn.frame = CGRectMake(width-35, 0, 30, 30);
     [seaBtn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
     [seaBtn setImage:[UIImage imageNamed:@"icon_search"] forState:UIControlStateNormal];
     [titleView addSubview:titleFie];
@@ -154,34 +161,8 @@
 
 - (void)setupRightItem{
     UIView *right = [YQItemTool setItem:self Action:@selector(scan:)
-                                            image:@"iocn_qr" title:@"扫一扫"];
+                                               image:@"iocn_qr" title:@"扫一扫"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:right];
-    
-    CGRect allFrame = CGRectMake(0, 40, SDevWidth, SDevHeight-40);
-    AllListPopView * allPop = [[AllListPopView alloc]initWithFrame:allFrame
-                                                      andFloat:self.titleLab.x];
-    allPop.popBack = ^(id dict){
-        if (self.titleBtn.selected){
-            self.titleBtn.selected = NO;
-        }
-        [_backDict removeAllObjects];
-        _titleLab.text = [dict allValues][0];
-        _backDict[@"category"] = [dict allKeys][0];
-        [self changeTextFieKeyWord:@""];
-    };
-    self.popClassView = allPop;
-    
-    CGRect frame = CGRectMake(0, 80, SDevWidth, SDevHeight-80);
-    ScreenPopView *popView = [[ScreenPopView alloc]initWithFrame:frame];
-    popView.popBack = ^(NSDictionary *dict){
-        if (self.heaView.lBtn.selected){
-            self.heaView.lBtn.selected = NO;
-        }
-        [_backDict removeAllObjects];
-        [_backDict addEntriesFromDictionary:dict];
-        [self.tableView.header beginRefreshing];
-    };
-    self.screenPop = popView;
 }
 
 - (void)scan:(id)sender{
@@ -196,13 +177,6 @@
     _searchFie.text = searchWord;
     _keyWord = searchWord;
     [self.tableView.header beginRefreshing];
-    if (searchWord.length>0) {
-        NSString *title = [NSString stringWithFormat:@"%@ x",self.keyWord];
-        [self.heaView.deleBtn setTitle:title forState:UIControlStateNormal];
-        self.heaView.deleBtn.enabled = YES;
-    }else{
-        self.heaView.deleBtn.enabled = NO;
-    }
 }
 
 #pragma mark -- 创建侧滑菜单
@@ -292,15 +266,13 @@
 - (void)setupHeadView{
     CGRect frame = CGRectMake(0, 0, SDevWidth, 40);
     AllListHeadView *headView = [[AllListHeadView alloc]initWithFrame:frame];
-    [headView.tBtn addTarget:self action:@selector(scrClick:)
-                                  forControlEvents:UIControlEventTouchUpInside];
-    [headView.deleBtn addTarget:self action:@selector(deleClick:)
+    [headView.tBtn addTarget:self action:@selector(openClick:)
                                   forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableHeaderView = headView;
     self.heaView = headView;
 }
 
-- (void)scrClick:(UIButton *)btn{
+- (void)openClick:(UIButton *)btn{
     [_searchFie resignFirstResponder];
     self.heaView.lBtn.selected = !self.heaView.lBtn.selected;
     if (self.heaView.lBtn.selected) {
@@ -309,10 +281,33 @@
         [self.screenPop removeFromSuperview];
     }
 }
-
-- (void)deleClick:(UIButton *)btn{
-    [self changeTextFieKeyWord:@""];
-    btn.enabled = NO;
+//弹出视图
+- (void)setPopView{
+    CGRect allFrame = CGRectMake(0, 40, SDevWidth, SDevHeight-40);
+    AllListPopView * allPop = [[AllListPopView alloc]initWithFrame:allFrame
+                                                          andFloat:self.titleLab.x];
+    allPop.popBack = ^(id dict){
+        if (self.titleBtn.selected){
+            self.titleBtn.selected = NO;
+        }
+        [_backDict removeAllObjects];
+        _titleLab.text = [dict allValues][0];
+        _backDict[@"category"] = [dict allKeys][0];
+        [self changeTextFieKeyWord:@""];
+    };
+    self.popClassView = allPop;
+    
+    CGRect frame = CGRectMake(0, 80, SDevWidth, SDevHeight-80);
+    ScreenPopView *popView = [[ScreenPopView alloc]initWithFrame:frame];
+    popView.popBack = ^(NSDictionary *dict){
+        if (self.heaView.lBtn.selected){
+            self.heaView.lBtn.selected = NO;
+        }
+        [_backDict removeAllObjects];
+        [_backDict addEntriesFromDictionary:dict];
+        [self.tableView.header beginRefreshing];
+    };
+    self.screenPop = popView;
 }
 
 #pragma mark -- 网络请求

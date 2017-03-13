@@ -32,7 +32,7 @@
                 <constraint firstItem="Xry-H3-uum" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Zig-lr-UDq"/>
                 <constraint firstAttribute="trailing" secondItem="Xry-H3-uum" secondAttribute="trailing" id="tr0-pg-NRt"/>
             </constraints>
-            <point key="canvasLocation" x="589" y="301"/>
+            <point key="canvasLocation" x="-67" y="-35"/>
         </view>
     </objects>
 </document>

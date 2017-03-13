@@ -16,11 +16,11 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWp-GR-rb4">
-                    <rect key="frame" x="266" y="10" width="44" height="44"/>
+                    <rect key="frame" x="265" y="5" width="50" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="N6E-Sz-PLO"/>
-                        <constraint firstAttribute="height" constant="44" id="SJP-1b-2eR"/>
+                        <constraint firstAttribute="width" constant="50" id="N6E-Sz-PLO"/>
+                        <constraint firstAttribute="height" constant="50" id="SJP-1b-2eR"/>
                     </constraints>
                     <state key="normal" image="icon_seting"/>
                 </button>
@@ -54,14 +54,14 @@
                 <constraint firstAttribute="bottom" secondItem="9KB-Qk-c4I" secondAttribute="bottom" id="2bi-XN-HET"/>
                 <constraint firstItem="8kB-hH-Qb6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="5UO-Zi-6Zw"/>
                 <constraint firstItem="8kB-hH-Qb6" firstAttribute="top" secondItem="uyg-fc-OSF" secondAttribute="bottom" constant="5" id="HOl-fR-Nv6"/>
-                <constraint firstItem="kWp-GR-rb4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="Ubv-ja-sXD"/>
+                <constraint firstItem="kWp-GR-rb4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="Ubv-ja-sXD"/>
                 <constraint firstItem="9KB-Qk-c4I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Vcw-Fo-yBX"/>
                 <constraint firstItem="uyg-fc-OSF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="b3O-oZ-zC7"/>
                 <constraint firstItem="9KB-Qk-c4I" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cTd-CD-tGb"/>
                 <constraint firstAttribute="trailing" secondItem="9KB-Qk-c4I" secondAttribute="trailing" id="fXp-qD-uxd"/>
                 <constraint firstItem="uyg-fc-OSF" firstAttribute="top" secondItem="ds2-rc-M1Z" secondAttribute="bottom" constant="7" id="jn1-gh-jAk"/>
                 <constraint firstItem="ds2-rc-M1Z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pmR-nS-mBh"/>
-                <constraint firstAttribute="trailing" secondItem="kWp-GR-rb4" secondAttribute="trailing" constant="10" id="wnr-F5-b7x"/>
+                <constraint firstAttribute="trailing" secondItem="kWp-GR-rb4" secondAttribute="trailing" constant="5" id="wnr-F5-b7x"/>
                 <constraint firstItem="ds2-rc-M1Z" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="yZh-8V-pxo"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

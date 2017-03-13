@@ -20,4 +20,9 @@
 @property (nonatomic,copy)NSString *otherInfo;
 @property (nonatomic,copy)NSString *orderStatusTitle;
 @property (nonatomic,copy)NSArray *pics;
+@property (nonatomic,copy)NSString *purityName;
+@property (nonatomic,assign)int number;
+@property (nonatomic,assign)int moNum;
+@property (nonatomic,assign)int recNum;
+@property (nonatomic,assign)int recBillNum;
 @end

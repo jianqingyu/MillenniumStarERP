@@ -15,6 +15,8 @@
 @property (nonatomic,weak)UILabel *detailLab;
 @property (nonatomic,weak)UIImageView *imageV;
 @property (nonatomic,weak)UILabel *detailLab2;
+@property (nonatomic,weak)UILabel *detailLab3;
+@property (nonatomic,weak)UILabel *detailLab4;
 @end
 
 @implementation DeliveryOrderTableCell
@@ -24,6 +26,7 @@
     DeliveryOrderTableCell *tableCell = [tableView dequeueReusableCellWithIdentifier:Id];
     if (tableCell==nil) {
         tableCell = [[DeliveryOrderTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Id];
+        tableCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return tableCell;
 }
@@ -53,7 +56,7 @@
 }
 
 - (void)creatImageView{
-    self.titleLab = [self LabWithFont:16 andColor:[UIColor blackColor]];
+    self.titleLab = [self LabWithFont:16 andColor:[UIColor darkGrayColor]];
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(10);
         make.left.equalTo(self).offset(15);
@@ -67,7 +70,7 @@
         make.height.mas_equalTo(@20);
     }];
     
-    UILabel *lab = [self LabWithFont:16 andColor:[UIColor blackColor]];
+    UILabel *lab = [self LabWithFont:16 andColor:[UIColor darkGrayColor]];
     lab.text = @"成本：";
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.priceLab.mas_left).with.offset(0);
@@ -85,7 +88,7 @@
         make.right.equalTo(self).offset(-15);
     }];
     
-    self.detailLab = [self Lab:14 Color:[UIColor darkGrayColor] andSup:self.LabView];
+    self.detailLab = [self Lab:14 Color:[UIColor lightGrayColor] andSup:self.LabView];
     [self.detailLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.LabView).offset(0);
         make.left.equalTo(self.LabView).offset(0);
@@ -99,6 +102,7 @@
         make.right.equalTo(self.LabView).offset(0);
         make.size.mas_equalTo(CGSizeMake(20, 20));
     }];
+    
     //图片列表
     self.imgView = [[UIView alloc]init];
     [self addSubview:self.imgView];
@@ -118,13 +122,26 @@
     }];
     self.imageV = image;
     
-    self.detailLab2 = [self Lab:14 Color:[UIColor darkGrayColor] andSup:self.imgView];
-    self.detailLab2.numberOfLines = 0;
+    self.detailLab2 = [self Lab:14 Color:[UIColor lightGrayColor] andSup:self.imgView];
     [self.detailLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imgView).with.offset(0);
         make.left.equalTo(self.imageV.mas_right).with.offset(3);
-        make.bottom.equalTo(self.imgView).offset(0);
-        make.right.equalTo(self.imgView).offset(0);
+        make.right.equalTo(self.imgView).offset(-10);
+    }];
+    
+    self.detailLab3 = [self Lab:14 Color:[UIColor lightGrayColor] andSup:self.imgView];
+    self.detailLab3.numberOfLines = 0;
+    [self.detailLab3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.detailLab2.mas_bottom).with.offset(3);
+        make.left.equalTo(self.imageV.mas_right).with.offset(3);
+        make.right.equalTo(self.imgView).offset(-10);
+    }];
+    
+    self.detailLab4 = [self Lab:14 Color:[UIColor lightGrayColor] andSup:self.imgView];
+    self.detailLab4.numberOfLines = 0;
+    [self.detailLab4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.detailLab3.mas_bottom).with.offset(3);
+        make.left.equalTo(self.imageV.mas_right).with.offset(3);
     }];
     
     UIImageView *imgLog2 = [[UIImageView alloc]init];
@@ -140,17 +157,15 @@
 - (void)setDeliveryInfo:(DeliveryListInfo *)deliveryInfo{
     if (deliveryInfo) {
         _deliveryInfo = deliveryInfo;
-        CGSize size = _deliveryInfo.isOpen?CGSizeMake(70, 70):CGSizeMake(0, 0);
-        [self.imageV mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(size);
-        }];
         self.LabView.hidden = _deliveryInfo.isOpen;
         self.imgView.hidden = !_deliveryInfo.isOpen;
-        NSString *title = [NSString stringWithFormat:@"%d %@ %@",self.index,_deliveryInfo.title,_deliveryInfo.ordernum];
+        NSString *title = [NSString stringWithFormat:@"%d %@ %@",self.index,_deliveryInfo.typeName,_deliveryInfo.modelNum];
         self.titleLab.text = title;
-        self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",_deliveryInfo.price];
-        self.detailLab.text = _deliveryInfo.sDetail;
-        self.detailLab2.text = _deliveryInfo.detail;
+        self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",_deliveryInfo.unitPrice];
+        self.detailLab.text = _deliveryInfo.sInfo;
+        self.detailLab2.text = _deliveryInfo.sInfo;
+        self.detailLab3.text = _deliveryInfo.dInfo;
+        self.detailLab4.text = _deliveryInfo.remark;
         [self.imageV sd_setImageWithURL:[NSURL URLWithString:_deliveryInfo.pic] placeholderImage:DefaultImage];
     }
 }

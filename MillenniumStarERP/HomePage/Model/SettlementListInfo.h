@@ -9,10 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface SettlementListInfo : NSObject
-@property (nonatomic,copy)NSString *title;
-@property (nonatomic,copy)NSString *ordernum;
-@property (nonatomic,copy)NSString *sDetail;
-@property (nonatomic,copy)NSString *detail;
-@property (nonatomic,copy)NSArray *titles;
-@property (nonatomic,assign)double price;
+@property (nonatomic,  copy)NSString *title;
+@property (nonatomic,  copy)NSArray *list;
+@property (nonatomic,assign)double moneySum;
 @end

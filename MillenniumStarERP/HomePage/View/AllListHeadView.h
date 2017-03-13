@@ -11,6 +11,4 @@
 @interface AllListHeadView : UIView
 @property (nonatomic,weak)UIButton *tBtn;
 @property (nonatomic,weak)UIButton *lBtn;
-@property (nonatomic,weak)UILabel *seaLab;
-@property (nonatomic,weak)UIButton *deleBtn;
 @end

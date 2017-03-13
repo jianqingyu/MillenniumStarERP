@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SettlementHeadInfo.h"
 @interface SettlementFootView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *numLab;
-@property (weak, nonatomic) IBOutlet UILabel *priceLab;
-@property (weak, nonatomic) IBOutlet UILabel *nameLab;
 + (id)createHeadView;
+@property (nonatomic,strong)SettlementHeadInfo *footInfo;
 @end

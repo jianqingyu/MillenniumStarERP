@@ -69,6 +69,7 @@
 		793B9F4F1D910B7F00DCFB6E /* AllListPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793B9F4E1D910B7F00DCFB6E /* AllListPopView.m */; };
 		793B9F521D91112C00DCFB6E /* CDRTranslucentSideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 793B9F511D91112C00DCFB6E /* CDRTranslucentSideBar.m */; };
 		793B9F551D9112DF00DCFB6E /* ScreeningRightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 793B9F541D9112DF00DCFB6E /* ScreeningRightView.m */; };
+		793BD0961E7240C700E32389 /* ArrayWithDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 793BD0951E7240C700E32389 /* ArrayWithDict.m */; };
 		793FC6771E4C15C8009F6296 /* PackagingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 793FC6761E4C15C8009F6296 /* PackagingTool.m */; };
 		7944BF8D1E0123C600AE894A /* InvoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7944BF8B1E0123C600AE894A /* InvoiceViewController.m */; };
 		7944BF8E1E0123C600AE894A /* InvoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7944BF8C1E0123C600AE894A /* InvoiceViewController.xib */; };
@@ -89,6 +90,7 @@
 		794EDBE91DDD38CD0018DDF3 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 794EDBDA1DDD38CD0018DDF3 /* IQUIView+Hierarchy.m */; };
 		794EDBEA1DDD38CD0018DDF3 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 794EDBDC1DDD38CD0018DDF3 /* IQUIView+IQKeyboardToolbar.m */; };
 		794EDBEB1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 794EDBDE1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.m */; };
+		794F22481E71306B0095899E /* DelSListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F22471E71306B0095899E /* DelSListInfo.m */; };
 		795224ED1DC33A5A0044F880 /* PayErrorReturnVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 795224EB1DC33A5A0044F880 /* PayErrorReturnVc.m */; };
 		795224EE1DC33A5A0044F880 /* PayErrorReturnVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 795224EC1DC33A5A0044F880 /* PayErrorReturnVc.xib */; };
 		795515961D9BAF7800A458AE /* AddEditAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 795515941D9BAF7800A458AE /* AddEditAddressVC.m */; };
@@ -168,6 +170,8 @@
 		7969FB731DBE05FF00139681 /* ChooseAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7969FB711DBE05FF00139681 /* ChooseAddressVC.xib */; };
 		7969FB771DBE068900139681 /* ChooseAddressTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969FB751DBE068900139681 /* ChooseAddressTableCell.m */; };
 		7969FB781DBE068900139681 /* ChooseAddressTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7969FB761DBE068900139681 /* ChooseAddressTableCell.xib */; };
+		796B1F5B1E6FACFC006B7330 /* AppDownViewC.m in Sources */ = {isa = PBXBuildFile; fileRef = 796B1F591E6FACFC006B7330 /* AppDownViewC.m */; };
+		796B1F5C1E6FACFC006B7330 /* AppDownViewC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796B1F5A1E6FACFC006B7330 /* AppDownViewC.xib */; };
 		796BFF871DE28B11008D78A4 /* ProductionOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 796BFF851DE28B11008D78A4 /* ProductionOrderVC.m */; };
 		796BFF881DE28B11008D78A4 /* ProductionOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796BFF861DE28B11008D78A4 /* ProductionOrderVC.xib */; };
 		796BFF8B1DE28F60008D78A4 /* ProduceHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796BFF8A1DE28F60008D78A4 /* ProduceHeadView.m */; };
@@ -208,6 +212,7 @@
 		79CD81A51D9E073F00B7BC84 /* CustomInvoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD81A41D9E073F00B7BC84 /* CustomInvoice.m */; };
 		79CD81A91D9E376C00B7BC84 /* PayReturnPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD81A71D9E376C00B7BC84 /* PayReturnPageVC.m */; };
 		79CD81AA1D9E376C00B7BC84 /* PayReturnPageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD81A81D9E376C00B7BC84 /* PayReturnPageVC.xib */; };
+		79CDBCF31E710839004080CE /* OrderSetmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CDBCF21E710839004080CE /* OrderSetmentInfo.m */; };
 		79D1F1671DB8A5340000F86A /* WeightInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D1F1661DB8A5330000F86A /* WeightInfo.m */; };
 		79E177871E690F6400318916 /* DeliveryOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E177851E690F6400318916 /* DeliveryOrderVC.m */; };
 		79E177881E690F6400318916 /* DeliveryOrderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79E177861E690F6400318916 /* DeliveryOrderVC.xib */; };
@@ -376,6 +381,8 @@
 		793B9F511D91112C00DCFB6E /* CDRTranslucentSideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDRTranslucentSideBar.m; sourceTree = "<group>"; };
 		793B9F531D9112DF00DCFB6E /* ScreeningRightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningRightView.h; sourceTree = "<group>"; };
 		793B9F541D9112DF00DCFB6E /* ScreeningRightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningRightView.m; sourceTree = "<group>"; };
+		793BD0941E7240C700E32389 /* ArrayWithDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayWithDict.h; sourceTree = "<group>"; };
+		793BD0951E7240C700E32389 /* ArrayWithDict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayWithDict.m; sourceTree = "<group>"; };
 		793FC6751E4C15C8009F6296 /* PackagingTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackagingTool.h; sourceTree = "<group>"; };
 		793FC6761E4C15C8009F6296 /* PackagingTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackagingTool.m; sourceTree = "<group>"; };
 		7944BF8A1E0123C600AE894A /* InvoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvoiceViewController.h; sourceTree = "<group>"; };
@@ -416,6 +423,8 @@
 		794EDBDD1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIWindow+Hierarchy.h"; sourceTree = "<group>"; };
 		794EDBDE1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIWindow+Hierarchy.m"; sourceTree = "<group>"; };
 		794EDBDF1DDD38CD0018DDF3 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
+		794F22461E71306B0095899E /* DelSListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelSListInfo.h; sourceTree = "<group>"; };
+		794F22471E71306B0095899E /* DelSListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelSListInfo.m; sourceTree = "<group>"; };
 		795224EA1DC33A5A0044F880 /* PayErrorReturnVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayErrorReturnVc.h; sourceTree = "<group>"; };
 		795224EB1DC33A5A0044F880 /* PayErrorReturnVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayErrorReturnVc.m; sourceTree = "<group>"; };
 		795224EC1DC33A5A0044F880 /* PayErrorReturnVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayErrorReturnVc.xib; sourceTree = "<group>"; };
@@ -559,6 +568,9 @@
 		7969FB741DBE068800139681 /* ChooseAddressTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseAddressTableCell.h; sourceTree = "<group>"; };
 		7969FB751DBE068900139681 /* ChooseAddressTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressTableCell.m; sourceTree = "<group>"; };
 		7969FB761DBE068900139681 /* ChooseAddressTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseAddressTableCell.xib; sourceTree = "<group>"; };
+		796B1F581E6FACFC006B7330 /* AppDownViewC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDownViewC.h; sourceTree = "<group>"; };
+		796B1F591E6FACFC006B7330 /* AppDownViewC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDownViewC.m; sourceTree = "<group>"; };
+		796B1F5A1E6FACFC006B7330 /* AppDownViewC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppDownViewC.xib; sourceTree = "<group>"; };
 		796BFF841DE28B11008D78A4 /* ProductionOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionOrderVC.h; sourceTree = "<group>"; };
 		796BFF851DE28B11008D78A4 /* ProductionOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductionOrderVC.m; sourceTree = "<group>"; };
 		796BFF861DE28B11008D78A4 /* ProductionOrderVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductionOrderVC.xib; sourceTree = "<group>"; };
@@ -629,6 +641,8 @@
 		79CD81A61D9E376C00B7BC84 /* PayReturnPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayReturnPageVC.h; sourceTree = "<group>"; };
 		79CD81A71D9E376C00B7BC84 /* PayReturnPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayReturnPageVC.m; sourceTree = "<group>"; };
 		79CD81A81D9E376C00B7BC84 /* PayReturnPageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayReturnPageVC.xib; sourceTree = "<group>"; };
+		79CDBCF11E710839004080CE /* OrderSetmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSetmentInfo.h; sourceTree = "<group>"; };
+		79CDBCF21E710839004080CE /* OrderSetmentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSetmentInfo.m; sourceTree = "<group>"; };
 		79D1F1651DB8A5330000F86A /* WeightInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightInfo.h; sourceTree = "<group>"; };
 		79D1F1661DB8A5330000F86A /* WeightInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightInfo.m; sourceTree = "<group>"; };
 		79E177841E690F6400318916 /* DeliveryOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryOrderVC.h; sourceTree = "<group>"; };
@@ -943,6 +957,8 @@
 				79FA0F921E554B85007D4BD7 /* NewUIAlertTool.m */,
 				7979A0271E5BCFAF00604BD5 /* CommonUsedTool.h */,
 				7979A0281E5BCFAF00604BD5 /* CommonUsedTool.m */,
+				793BD0941E7240C700E32389 /* ArrayWithDict.h */,
+				793BD0951E7240C700E32389 /* ArrayWithDict.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -976,6 +992,9 @@
 				79655E1D1D7D0F1D006B90FC /* HelpMenuVC.h */,
 				79655E1E1D7D0F1D006B90FC /* HelpMenuVC.m */,
 				79655E1F1D7D0F1D006B90FC /* HelpMenuVC.xib */,
+				796B1F581E6FACFC006B7330 /* AppDownViewC.h */,
+				796B1F591E6FACFC006B7330 /* AppDownViewC.m */,
+				796B1F5A1E6FACFC006B7330 /* AppDownViewC.xib */,
 			);
 			path = HelpMenu;
 			sourceTree = "<group>";
@@ -1198,6 +1217,10 @@
 				79050ADA1DF7B84700DCEA69 /* DetailHeadInfo.m */,
 				794CDFEF1E037B48008FC37B /* StausCount.h */,
 				794CDFF01E037B48008FC37B /* StausCount.m */,
+				79CDBCF11E710839004080CE /* OrderSetmentInfo.h */,
+				79CDBCF21E710839004080CE /* OrderSetmentInfo.m */,
+				794F22461E71306B0095899E /* DelSListInfo.h */,
+				794F22471E71306B0095899E /* DelSListInfo.m */,
 				79E177981E6924E800318916 /* DeliveryHeadInfo.h */,
 				79E177991E6924E800318916 /* DeliveryHeadInfo.m */,
 				79E1779B1E69256400318916 /* DeliveryListInfo.h */,
@@ -1526,6 +1549,7 @@
 				79F1C7D21D9D165D00C58335 /* PayViewController.xib in Resources */,
 				79655D911D7D0668006B90FC /* LaunchScreen.storyboard in Resources */,
 				7958EF281D87DABA009084B5 /* CustomProDetailVC.xib in Resources */,
+				796B1F5C1E6FACFC006B7330 /* AppDownViewC.xib in Resources */,
 				7930F5A11E6D0881008549C3 /* SettlementFootView.xib in Resources */,
 				7959A8C41D810CC5009CAA02 /* ProductListVC.xib in Resources */,
 				799235E51DB766BE0003379B /* ClassListController.xib in Resources */,
@@ -1667,6 +1691,7 @@
 				7930F59C1E6D043C008549C3 /* SettlementSecHedView.m in Sources */,
 				790C70A11DCC1B23007343BA /* NearbyNetworkView.m in Sources */,
 				79655DE71D7D0AAA006B90FC /* UIWindow+Extension.m in Sources */,
+				793BD0961E7240C700E32389 /* ArrayWithDict.m in Sources */,
 				79E177901E69109600318916 /* DeliveryOrderHeadView.m in Sources */,
 				79655DF61D7D0AAA006B90FC /* CommonUtils.m in Sources */,
 				79B4B82B1DA8C3F500B97070 /* OrderDetailVC.m in Sources */,
@@ -1712,6 +1737,7 @@
 				79655DF51D7D0AAA006B90FC /* AccountTool.m in Sources */,
 				796793F61D93B46F005AEBFB /* ScreeningHeadSView.m in Sources */,
 				7958EF2C1D87DB0C009084B5 /* CustomProCell.m in Sources */,
+				794F22481E71306B0095899E /* DelSListInfo.m in Sources */,
 				79050ADB1DF7B84700DCEA69 /* DetailHeadInfo.m in Sources */,
 				7959A8DD1D814F23009CAA02 /* SKTag.m in Sources */,
 				79F1C7D11D9D165D00C58335 /* PayViewController.m in Sources */,
@@ -1726,6 +1752,7 @@
 				792DF4BB1E021B7E00128456 /* ChooseInvoiceCell.m in Sources */,
 				79E1779D1E69256400318916 /* DeliveryListInfo.m in Sources */,
 				796218F61D98FD6200FE01D6 /* ETFoursquareImages.m in Sources */,
+				79CDBCF31E710839004080CE /* OrderSetmentInfo.m in Sources */,
 				795224ED1DC33A5A0044F880 /* PayErrorReturnVc.m in Sources */,
 				7962BEA91DB5D6B000459245 /* DetailModel.m in Sources */,
 				79655DED1D7D0AAA006B90FC /* LoginViewController.m in Sources */,
@@ -1737,6 +1764,7 @@
 				794CDFF11E037B48008FC37B /* StausCount.m in Sources */,
 				792B85E01DBF015400A71635 /* CustomerInfo.m in Sources */,
 				79655D831D7D0668006B90FC /* main.m in Sources */,
+				796B1F5B1E6FACFC006B7330 /* AppDownViewC.m in Sources */,
 				795515961D9BAF7800A458AE /* AddEditAddressVC.m in Sources */,
 				796218ED1D98DAFB00FE01D6 /* ScreenPopView.m in Sources */,
 				7922F2971DCADD88003E0C8F /* CusTomLoginView.m in Sources */,
@@ -1958,7 +1986,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.MillenniumStarERP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0a31a122-0c67-469d-af1a-3e14b75f3675";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1979,7 +2007,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.MillenniumStarERP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0a31a122-0c67-469d-af1a-3e14b75f3675";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
