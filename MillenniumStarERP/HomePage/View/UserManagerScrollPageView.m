@@ -8,7 +8,6 @@
 
 #import "UserManagerScrollPageView.h"
 #import "UserManagerTableView.h"
-UINavigationController*navigationController;
 @implementation UserManagerScrollPageView
 
 - (id)initScrollPageView:(CGRect)frame navigation:(UINavigationController*)navigation{
@@ -17,7 +16,7 @@ UINavigationController*navigationController;
         mNeedUseDelegate = YES;
         [self commInit];
     }
-    navigationController = navigation;
+    self.navigationController = navigation;
     return self;
 }
 
@@ -35,12 +34,17 @@ UINavigationController*navigationController;
 
 #pragma mark - 其他辅助功能
 #pragma mark 添加ScrollowViewd的ContentView
--(void)setContentOfTables:(NSArray*)proidArray nav:(UINavigationController*)nav{
-    for (int i=0;i<proidArray.count;i++) {;
-        UserManagerTableView*contentView = [[UserManagerTableView alloc]initWithFrame:CGRectMake(i*SDevWidth, 0, SDevWidth, self.frame.size.height)];
-        contentView.superNav = self.navigationController;
-        contentView.netUrl = proidArray[i][@"netUrl"];
-        contentView.proid = [proidArray[i][@"proId"] intValue];
+- (void)setContentOfTables:(NSArray*)proidArray table:(NSString *)table{
+    proArr = proidArray;
+    Class c = NSClassFromString(table);
+    for (int i=0;i<proidArray.count;i++) {
+        CGRect frame = CGRectMake(i*SDevWidth, 0, SDevWidth, self.frame.size.height);
+        UIView *contentView = [[c alloc]initWithFrame:frame];
+        [contentView setValue:self.navigationController forKey:@"superNav"];
+//        [contentView setValue:proidArray[i] forKey:@"dict"];
+//        UserManagerTableView*contentView = [[UserManagerTableView alloc]initWithFrame:CGRectMake(i*SDevWidth, 0, SDevWidth, self.frame.size.height)];
+//        contentView.superNav = self.navigationController;
+//        contentView.dict = proidArray[i];
         [_scrollView addSubview:contentView];
         [_contentItems addObject:contentView];
     }
@@ -49,10 +53,13 @@ UINavigationController*navigationController;
 
 #pragma mark 移动ScrollView到某个页面
 - (void)moveScrollowViewAthIndex:(NSInteger)index{
+    UIView *contentView = _contentItems[index];
+    [contentView setValue:proArr[index] forKey:@"dict"];
+
     mNeedUseDelegate = NO;
     CGRect vMoveRect = CGRectMake(self.frame.size.width * index, 0, self.frame.size.width, self.frame.size.width);
     [_scrollView scrollRectToVisible:vMoveRect animated:YES];
-    mCurrentPage= index;
+    mCurrentPage = index;
     if ([_delegate respondsToSelector:@selector(didScrollPageViewChangedPage:)]) {
         [_delegate didScrollPageViewChangedPage:mCurrentPage];
     }

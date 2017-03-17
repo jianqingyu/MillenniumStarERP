@@ -58,7 +58,7 @@
 #define CUSTOM_COLOR_ALPHA(a,b,c,d) [UIColor colorWithRed:a/255.0f green:b/255.0f blue:c/255.0f alpha:d]
 #define DefaultColor [UIColor colorWithRed:240/255.0f green:239/255.0f blue:245/255.0f alpha:1]
 //网络接口
-#define baseUrl @"http://appapi.fanerweb.com/api/aproxy/"
+#define baseUrl @"http://appapi1.fanerweb.com/api/aproxy/"
 #define WeiXinPay @"http://www.fanershop.com/mobile/api/payment/wxpay/redirect_uri.php"//微信支付网址
 /**选择地址通知名字*/
 #define NotificationName @"NotificationChangeCity"

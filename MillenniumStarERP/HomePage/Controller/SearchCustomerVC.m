@@ -9,6 +9,7 @@
 #import "SearchCustomerVC.h"
 #import "CustomerInfo.h"
 #import "StrWithIntTool.h"
+#import "CustomTextField.h"
 @interface SearchCustomerVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>{
     int curPage;
     int pageCount;
@@ -30,19 +31,15 @@
 
 #pragma mark -- 创建导航按钮-头视图
 - (void)setupSearchBar{
-    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth*0.8 , 30)];
+    CGFloat width = SDevWidth*0.8;
+    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
     titleView.backgroundColor = [UIColor clearColor];
-    UITextField *titleFie = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, SDevWidth*0.8-40, 30)];
+    CustomTextField *titleFie = [[CustomTextField alloc]initWithFrame:CGRectMake(0, 0, width-40, 30)];
     titleFie.text = _searchMes;
     titleFie.delegate = self;
-    titleFie.placeholder = @"请输入搜索关键词";
-    titleFie.font = [UIFont systemFontOfSize:14];
-    titleFie.borderStyle = UITextBorderStyleRoundedRect;
-    titleFie.returnKeyType = UIReturnKeySearch;
-    titleFie.clearButtonMode = UITextFieldViewModeAlways;
-    
+
     UIButton *seaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    seaBtn.frame = CGRectMake(SDevWidth*0.8-35, 0, 30, 30);
+    seaBtn.frame = CGRectMake(width-35, 0, 30, 30);
     [seaBtn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
     [seaBtn setImage:[UIImage imageNamed:@"icon_search"] forState:UIControlStateNormal];
     [titleView addSubview:titleFie];
@@ -110,6 +107,8 @@
             }
         }
         self.searchMes = [StrWithIntTool strWithArr:addArr];
+    }else{
+        self.searchMes = @"";
     }
     [self setupHeaderRefresh];
 }
@@ -154,8 +153,6 @@
         MJRefreshAutoNormalFooter*footer = (MJRefreshAutoNormalFooter*)_searchTab.footer;
         [footer setTitle:@"暂时没有商品" forState:MJRefreshStateNoMoreData];
         _searchTab.footer.state = MJRefreshStateNoMoreData;
-        self.searchTab.footer.hidden = YES;
-        self.searchTab.header.hidden = YES;
     }
 }
 

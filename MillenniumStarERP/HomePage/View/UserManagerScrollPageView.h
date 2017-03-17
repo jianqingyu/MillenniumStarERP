@@ -9,15 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @protocol UserManagerScrollPageViewDelegate <NSObject>
--(void)didScrollPageViewChangedPage:(NSInteger)aPage;
+- (void)didScrollPageViewChangedPage:(NSInteger)aPage;
 @end
 
 @interface UserManagerScrollPageView : UIView<UIScrollViewDelegate>
 {
     NSInteger mCurrentPage;
     BOOL mNeedUseDelegate;
+    NSArray *proArr;
 }
-@property(retain,nonatomic)UINavigationController*navigationController;
+@property (nonatomic,retain) UINavigationController*navigationController;
 
 @property (nonatomic,retain) UIScrollView *scrollView;
 
@@ -25,9 +26,10 @@
 
 @property (nonatomic,assign) id<UserManagerScrollPageViewDelegate> delegate;
 #pragma mark 添加ScrollowViewd的ContentView
--(void)setContentOfTables:(NSArray*)proidArray nav:(UINavigationController*)nav;
+- (void)setContentOfTables:(NSArray*)proidArray table:(NSString *)table;
 #pragma mark 滑动到某个页面
--(void)moveScrollowViewAthIndex:(NSInteger)index;
+- (void)moveScrollowViewAthIndex:(NSInteger)index;
 #pragma mark 改变TableView上面滚动栏的内容
 - (id)initScrollPageView:(CGRect)frame navigation:(UINavigationController*)navigation;
+
 @end

@@ -76,13 +76,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     DeliveryListInfo *sInfo = self.listArr[indexPath.row];
-    return sInfo.isOpen?130:80;
+    return sInfo.isOpen?130+sInfo.stInfo.count*20:80;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     DeliveryOrderTableCell *cell = [DeliveryOrderTableCell cellWithTableView:tableView];
     DeliveryListInfo *sInfo = self.listArr[indexPath.row];
-    cell.index = (int)indexPath.row+1;
     cell.deliveryInfo = sInfo;
     return cell;
 }

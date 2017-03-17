@@ -19,6 +19,7 @@
 @property(strong,nonatomic) UserInfo *userInfo;
 @property(nonatomic,  weak) HomeHeadView *headView;
 @property(nonatomic,  copy) NSArray *list;
+@property(nonatomic,  copy) NSDictionary *versionDic;
 @property(nonatomic,  weak) UIButton *selBtn;
 @end
 
@@ -26,10 +27,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setHeaderView];
     self.view.backgroundColor = DefaultColor;
+    [self setHeaderView];
     [self setupFootBtn];
     [self loadHomeData];
+    [self loadNewVersion];
+}
+
+#pragma mark -- 检查新版本
+- (void)loadNewVersion{
+    NSString *url = [NSString stringWithFormat:@"%@currentVersion",baseUrl];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"device"] = @"ios";
+    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
+        if ([response.error intValue]==0) {
+            self.versionDic = response.data;
+            [self loadAlertView];
+        }
+    } requestURL:url params:params];
+}
+
+- (void)loadAlertView{
+    double doubleCurrentVersion = [[NSBundle mainBundle].infoDictionary[@"CFBundleVersion"]doubleValue];
+    if (doubleCurrentVersion<[self.versionDic[@"version"]doubleValue]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示"
+                            message:self.versionDic[@"message"] delegate:self
+                        cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self exitApplication];
+    UIApplication *application = [UIApplication sharedApplication];
+    [application openURL:[NSURL URLWithString:self.versionDic[@"url"]]];
+    application = nil;
+}
+
+- (void)exitApplication {
+//    UIWindow *window =  [UIApplication sharedApplication].keyWindow;
+//    [UIView animateWithDuration:1.0f animations:^{
+//        window.alpha = 0;
+//        window.frame = CGRectMake(0, window.bounds.size.width, 0, 0);
+//    } completion:^(BOOL finished) {
+//        exit(0);
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -94,7 +136,7 @@
     [footBtn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:footBtn];
     [footBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(280);
+        make.top.equalTo(self.headView.mas_bottom).with.offset(20);
         make.centerX.mas_equalTo(self.view.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(100, 50));
     }];

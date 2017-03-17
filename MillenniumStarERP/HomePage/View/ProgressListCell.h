@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ProgressListInfo.h"
-static CGFloat proHeight = 5;
+static CGFloat proHeight = 30;
 static CGFloat proMar = 10;
 @interface ProgressListCell : UITableViewCell
 + (id)cellWithTableView:(UITableView *)tableView;
 @property (nonatomic,strong)ProgressListInfo *proInfo;
 @property (nonatomic,assign)float totalNum;
+
 @end

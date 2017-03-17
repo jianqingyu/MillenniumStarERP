@@ -29,6 +29,7 @@
 #import "OrderListController.h"
 #import "ConfirmOrderVC.h"
 #import "OrderNumTool.h"
+#import "CustomTextField.h"
 #define MENUHEIHT 40
 @interface ProductListVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,
                         productItemClickDelegate,CDRTranslucentSideBarDelegate>{
@@ -117,14 +118,9 @@
     CGFloat width = SDevWidth*0.70;
     UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,  width, 30)];
     titleView.backgroundColor = [UIColor clearColor];
-    UITextField *titleFie = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, width-40, 30)];
-    titleFie.placeholder = @"请输入搜索关键词";
+    CustomTextField *titleFie = [[CustomTextField alloc]initWithFrame:CGRectMake(0, 0, width-40, 30)];
     titleFie.delegate = self;
-    titleFie.font = [UIFont systemFontOfSize:14];
-    titleFie.borderStyle = UITextBorderStyleRoundedRect;
-    titleFie.returnKeyType = UIReturnKeySearch;
-    titleFie.clearButtonMode = UITextFieldViewModeAlways;
-    
+
     UIButton *seaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     seaBtn.frame = CGRectMake(width-35, 0, 30, 30);
     [seaBtn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];

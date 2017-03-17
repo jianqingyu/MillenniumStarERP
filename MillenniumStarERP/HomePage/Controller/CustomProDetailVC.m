@@ -220,15 +220,15 @@
     NSMutableArray *mPic = @[].mutableCopy;
     NSMutableArray *bPic = @[].mutableCopy;
     for (NSDictionary*dict in self.modelInfo.pics) {
-        NSString *str = dict[@"pic"];
+        NSString *str = [dict[@"pic"]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         if (str.length>0) {
             [pic addObject:str];
         }
-        NSString *strm = dict[@"picm"];
+        NSString *strm = [dict[@"picm"]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
         if (strm.length>0) {
             [mPic addObject:strm];
         }
-        NSString *strb = dict[@"picb"];
+        NSString *strb = [dict[@"picb"]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];;
         if (strb.length>0) {
             [bPic addObject:strb];
         }

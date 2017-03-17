@@ -92,16 +92,6 @@
         make.height.mas_equalTo(@1);
     }];
     
-    UILabel *Ordlab = [[UILabel alloc]init];
-    Ordlab.font = [UIFont systemFontOfSize:16];
-    Ordlab.textColor = [UIColor blackColor];
-    Ordlab.text = @"状态：分单";
-    [self addSubview:Ordlab];
-    [Ordlab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self).offset(-15);
-        make.bottom.equalTo(line.mas_top).with.offset(-10);
-    }];
-    
     self.footView = [[UIView alloc]init];
     [self addSubview:self.footView];
     [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {

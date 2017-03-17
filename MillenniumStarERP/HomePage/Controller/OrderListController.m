@@ -9,17 +9,13 @@
 #import "OrderListController.h"
 #import "UserManagerMenuHrizontal.h"
 #import "UserManagerScrollPageView.h"
+#import "SearchOrderVc.h"
 #define MENUHEIHT 40
 @interface OrderListController ()<UserManagerMenuHrizontalDelegate,UserManagerScrollPageViewDelegate>{
     NSArray*titleArray;
     UserManagerScrollPageView*mScrollPageView;
     UserManagerMenuHrizontal*menuHorizontalView;
 }
-@property (nonatomic, strong) NSArray *array;
-@property (nonatomic, strong) NSArray *cellDataArray;
-@property (nonatomic, strong) UIView *tempPagesView;
-@property (nonatomic, copy) NSString *keyWord;
-@property (nonatomic, assign) int intoViewCount;
 @end
 
 @implementation OrderListController
@@ -32,6 +28,20 @@
                    @{@"title":@"已发货",@"netUrl":@"ModelBillList",@"proId":@"30"},
                    @{@"title":@"已完成",@"netUrl":@"",@"proId":@"40"}];
     [self initCustomView];
+    [self setNaviBtn];
+}
+
+- (void)setNaviBtn{
+    UIButton *seaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    seaBtn.frame = CGRectMake(0, 0, 30, 30);
+    [seaBtn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
+    [seaBtn setImage:[UIImage imageNamed:@"icon_search"] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:seaBtn];
+}
+
+- (void)searchClick{
+    SearchOrderVc *seaVc = [SearchOrderVc new];
+    [self.navigationController pushViewController:seaVc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -56,13 +66,12 @@
     menuHorizontalView.delegate = self;
     //默认选中第一个button
     [menuHorizontalView clickButtonAtIndex:_index];
-    
     [mainContentView addSubview:menuHorizontalView];
+    
     //初始化滑动列表
     mScrollPageView = [[UserManagerScrollPageView alloc] initScrollPageView:CGRectMake(0, MENUHEIHT, SDevWidth, mainContentView.frame.size.height - MENUHEIHT) navigation:self.navigationController];
-    mScrollPageView.navigationController = self.navigationController;
     mScrollPageView.delegate = self;
-    [mScrollPageView setContentOfTables:titleArray nav:self.navigationController];
+    [mScrollPageView setContentOfTables:titleArray table:@"UserManagerTableView"];
     [mainContentView addSubview:mScrollPageView];
     //初始化选择
     [mScrollPageView moveScrollowViewAthIndex:_index];
@@ -71,13 +80,13 @@
 }
 
 #pragma mark - 其他辅助功能
--(void)didMenuHrizontalClickedButtonAtIndex:(NSInteger)index{
+- (void)didMenuHrizontalClickedButtonAtIndex:(NSInteger)index{
     _index = (int)index;
     [mScrollPageView moveScrollowViewAthIndex:index];
 }
 
 #pragma mark ScrollPageViewDelegate
--(void)didScrollPageViewChangedPage:(NSInteger)page{
+- (void)didScrollPageViewChangedPage:(NSInteger)page{
     _index = (int)page;
     [menuHorizontalView changeButtonStateAtIndex:page];
 }

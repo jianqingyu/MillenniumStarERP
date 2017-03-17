@@ -10,6 +10,5 @@
 #import "DeliveryListInfo.h"
 @interface DeliveryOrderTableCell : UITableViewCell
 + (id)cellWithTableView:(UITableView *)tableView;
-@property (nonatomic,assign)int index;
 @property (nonatomic,strong)DeliveryListInfo *deliveryInfo;
 @end

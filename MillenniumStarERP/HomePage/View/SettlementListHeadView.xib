@@ -21,16 +21,16 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看结算单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RtS-QA-wEq">
-                            <rect key="frame" x="219" y="11" width="75" height="18"/>
+                            <rect key="frame" x="214" y="11" width="75" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_right2" translatesAutoresizingMaskIntoConstraints="NO" id="IMb-if-g4o">
-                            <rect key="frame" x="295" y="13" width="10" height="15"/>
+                            <rect key="frame" x="290" y="13" width="15" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="Yxa-pi-UsU"/>
-                                <constraint firstAttribute="width" constant="10" id="sbb-O5-VJ2"/>
+                                <constraint firstAttribute="width" constant="15" id="sbb-O5-VJ2"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C75-4L-6H8">
@@ -142,6 +142,7 @@
                 <outlet property="purLab" destination="cI4-LI-7pK" id="RaL-g8-1ZN"/>
                 <outlet property="recDateLab" destination="ZIE-rS-dvT" id="W46-cx-y0i"/>
                 <outlet property="recNumLab" destination="dUa-ZV-vHa" id="acU-SS-3Uz"/>
+                <outlet property="toLab" destination="Dyu-yd-iGm" id="aKx-Vs-feK"/>
             </connections>
             <point key="canvasLocation" x="193" y="264"/>
         </view>

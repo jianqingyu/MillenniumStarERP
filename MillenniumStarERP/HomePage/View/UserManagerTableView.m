@@ -19,6 +19,7 @@
     int totalCount;//商品总数量
     NSMutableArray *_dataArray;
     UITableView *_mTableView;
+    BOOL isFir;
 }
 
 @end
@@ -30,7 +31,7 @@
     if (self) {
         curPage = 1;
         _dataArray = [NSMutableArray array];
-        CGRect tabFrame = CGRectMake(0, 0, SDevWidth, SDevHeight-40-64);
+        CGRect tabFrame = CGRectMake(0, 0, SDevWidth, self.frame.size.height-64);
         _mTableView = [[UITableView alloc]initWithFrame:tabFrame
                                                 style:UITableViewStyleGrouped];
         _mTableView.delegate = self;
@@ -42,12 +43,16 @@
     return self;
 }
 
-- (void)setNetUrl:(NSString *)netUrl{
-    if (netUrl) {
-        _netUrl = netUrl;
+- (void)setDict:(NSDictionary *)dict{
+    if (dict) {
+        _dict = dict;
+        if (isFir) {
+            return;
+        }
         [_mTableView.header beginRefreshing];
     }
 }
+
 #pragma mark -- 网络请求
 - (void)setupHeaderRefresh{
     // 刷新功能
@@ -88,22 +93,23 @@
 }
 #pragma mark - 网络数据
 - (void)getCommodityData{
-    if (_netUrl.length==0) {
+    if ([self.dict[@"netUrl"]length]==0) {
         [_mTableView.header endRefreshing];
         return;
     }
+    isFir = YES;
     [SVProgressHUD show];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     params[@"cpage"] = @(curPage);
-    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,self.netUrl];
+    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,self.dict[@"netUrl"]];
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         [_mTableView.header endRefreshing];
         [_mTableView.footer endRefreshing];
         if ([response.error intValue]==0) {
             [self setupFootRefresh];
             if ([YQObjectBool boolForObject:response.data]){
-                switch (self.proid) {
+                switch ([self.dict[@"proId"]intValue]) {
                     case 10:case 20:
                         [self setListData:response.data[@"orderList"][@"list"] and:response.data[@"orderList"][@"list_count"]];
                         break;
@@ -166,7 +172,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat rowH = 0;
-    switch (self.proid) {
+    switch ([self.dict[@"proId"]intValue]) {
         case 10:case 20:
             rowH = 220+(SDevWidth-70)/4;
             break;
@@ -199,7 +205,7 @@
     if (indexPath.section<_dataArray.count) {
         newInfo = _dataArray[indexPath.section];
     }
-    switch (self.proid) {
+    switch ([self.dict[@"proId"]intValue]) {
         case 10:case 20:
             cell = [self CellWithTab:tableView andIndex:indexPath andInfo:newInfo];
             break;
@@ -230,7 +236,7 @@
 
 #pragma mark -- UITableDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    switch (self.proid) {
+    switch ([self.dict[@"proId"]intValue]) {
         case 10:
             [self loadListVcWithIndex:indexPath];
             break;

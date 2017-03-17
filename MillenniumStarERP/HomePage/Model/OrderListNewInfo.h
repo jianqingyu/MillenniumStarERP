@@ -21,8 +21,8 @@
 @property (nonatomic,copy)NSString *orderStatusTitle;
 @property (nonatomic,copy)NSArray *pics;
 @property (nonatomic,copy)NSString *purityName;
-@property (nonatomic,assign)int number;
-@property (nonatomic,assign)int moNum;
-@property (nonatomic,assign)int recNum;
-@property (nonatomic,assign)int recBillNum;
+@property (nonatomic,copy)NSString *number;
+@property (nonatomic,copy)NSString *moNum;
+@property (nonatomic,copy)NSString *recNum;
+@property (nonatomic,copy)NSString *recBillNum;
 @end

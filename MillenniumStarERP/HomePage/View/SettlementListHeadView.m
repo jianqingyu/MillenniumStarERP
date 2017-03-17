@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *purLab;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
 @property (weak, nonatomic) IBOutlet UILabel *numLab;
+@property (weak, nonatomic) IBOutlet UILabel *toLab;
 @end
 @implementation SettlementListHeadView
 
@@ -33,6 +34,7 @@
 - (void)setHeadInfo:(OrderSetmentInfo *)headInfo{
     if (headInfo) {
         _headInfo = headInfo;
+        [self.toLab setAdjustsFontSizeToFitWidth:YES];
         NSString *string = _headInfo.recDate;
         string = [string substringToIndex:10];//截取掉下标10之后的字符串
         NSString *string1 = _headInfo.orderDate;

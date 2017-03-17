@@ -13,8 +13,10 @@
 @property (nonatomic,copy)NSString *typeName;
 @property (nonatomic,copy)NSString *sInfo;
 @property (nonatomic,copy)NSString *dInfo;
+@property (nonatomic,copy)NSArray *stInfo;
 @property (nonatomic,copy)NSString *remark;
 @property (nonatomic,copy)NSString *pic;
+@property (nonatomic,copy)NSString *modNum;
 @property (nonatomic,assign)double unitPrice;
 @property (nonatomic,assign)BOOL isOpen;
 

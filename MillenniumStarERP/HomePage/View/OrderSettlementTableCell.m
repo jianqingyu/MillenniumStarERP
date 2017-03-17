@@ -47,10 +47,10 @@
         self.customLab.text = _listInfo.customerName;
         self.orderDate.text = string;
         self.colorLab.text = _listInfo.purityName;
-        self.numLab.text = [NSString stringWithFormat:@"%d件",_listInfo.number];
-        self.deNumLab.text = [NSString stringWithFormat:@"%d件",_listInfo.moNum];
-        self.setNumLab.text = [NSString stringWithFormat:@"%d件",_listInfo.recNum];
-        self.lookSetNum.text = [NSString stringWithFormat:@"查看结算单(%d)",_listInfo.recBillNum];
+        self.numLab.text = [NSString stringWithFormat:@"%@件",_listInfo.number];
+        self.deNumLab.text = [NSString stringWithFormat:@"%@件",_listInfo.moNum];
+        self.setNumLab.text = [NSString stringWithFormat:@"%@件",_listInfo.recNum];
+        self.lookSetNum.text = [NSString stringWithFormat:@"查看结算单(%@)",_listInfo.recBillNum];
     }
 }
 

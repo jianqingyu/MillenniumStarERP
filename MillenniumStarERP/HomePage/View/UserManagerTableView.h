@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UserManagerTableView : UIView
-@property(assign,nonatomic)int proid;
-@property(copy,  nonatomic)NSString *netUrl;
+@property(strong,nonatomic)NSDictionary *dict;
 @property(strong,nonatomic)UINavigationController*superNav;
 @end

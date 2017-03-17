@@ -56,4 +56,39 @@
     return right;
 }
 
++ (UIView *)setBtn:(id)target Act:(SEL)action img:(NSString *)image str:(NSString *)title frame:(CGRect)frame{
+    UIView *right = [[UIView alloc]initWithFrame:frame];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setBackgroundImage:[UIImage imageNamed:image]
+                   forState:UIControlStateNormal];
+    [right addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(right).offset(0);
+        make.centerY.mas_equalTo(right.mas_centerY);
+        make.size.mas_equalTo(btn.currentBackgroundImage.size);
+    }];
+    
+    UILabel *lab = [UILabel new];
+    lab.text = title;
+    lab.textAlignment = NSTextAlignmentCenter;
+    lab.font = [UIFont systemFontOfSize:12];
+    [right addSubview:lab];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(right.mas_centerY);
+        make.left.equalTo(right).offset(0);
+        make.right.equalTo(btn.mas_left).with.offset(-3);
+    }];
+    
+    UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    [right addSubview:backBtn];
+    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(right).offset(0);
+        make.bottom.equalTo(right).offset(0);
+        make.left.equalTo(right).offset(0);
+        make.right.equalTo(right).offset(0);
+    }];
+    return right;
+}
+
 @end
