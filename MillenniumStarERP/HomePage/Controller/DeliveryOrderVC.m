@@ -44,13 +44,15 @@
 
 - (void)loadDeliveryData{
     NSMutableDictionary *params = [NSMutableDictionary new];
-    NSString *url = [NSString stringWithFormat:@"%@ModelArriveBillMo",baseUrl];
+    NSString *str = self.isSea?@"ModelArriveBillMoForSearch":@"ModelArriveBillMo";
+    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,str];
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     params[@"moNum"] = self.orderNum;
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {
             if ([YQObjectBool boolForObject:response.data[@"moItem"]]) {
-                DeliveryHeadInfo *info = [DeliveryHeadInfo objectWithKeyValues:response.data[@"moItem"]];
+                DeliveryHeadInfo *info = [DeliveryHeadInfo
+                                    objectWithKeyValues:response.data[@"moItem"]];
                 self.delHView.delHInfo = info;
             }
             if ([YQObjectBool boolForObject:response.data[@"modelList"]]) {
@@ -90,7 +92,7 @@
     DeliveryListInfo *sInfo = self.listArr[indexPath.row];
     sInfo.isOpen = !sInfo.isOpen;
     [_deliveryTab reloadRowsAtIndexPaths:@[indexPath]
-                        withRowAnimation:UITableViewRowAnimationNone];
+                                  withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end

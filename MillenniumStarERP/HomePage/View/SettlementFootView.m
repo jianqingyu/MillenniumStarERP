@@ -29,7 +29,7 @@
 - (void)setFootInfo:(SettlementHeadInfo *)footInfo{
     if (footInfo) {
         _footInfo = footInfo;
-        self.numLab.text = [NSString stringWithFormat:@"%d件",_footInfo.number];
+        self.numLab.text = [NSString stringWithFormat:@"%@件",_footInfo.number];
         self.orderName.text = _footInfo.recOperator;
         self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",_footInfo.totalPrice];
     }

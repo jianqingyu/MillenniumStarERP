@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SearchResultInfo.h"
 @interface SearchResultTableCell : UITableViewCell
 + (id)cellWithTableView:(UITableView *)tableView;
+@property (nonatomic,strong)SearchResultInfo *info;
 @end

@@ -41,10 +41,19 @@
         CGRect frame = CGRectMake(i*SDevWidth, 0, SDevWidth, self.frame.size.height);
         UIView *contentView = [[c alloc]initWithFrame:frame];
         [contentView setValue:self.navigationController forKey:@"superNav"];
-//        [contentView setValue:proidArray[i] forKey:@"dict"];
-//        UserManagerTableView*contentView = [[UserManagerTableView alloc]initWithFrame:CGRectMake(i*SDevWidth, 0, SDevWidth, self.frame.size.height)];
-//        contentView.superNav = self.navigationController;
-//        contentView.dict = proidArray[i];
+        [_scrollView addSubview:contentView];
+        [_contentItems addObject:contentView];
+    }
+    [_scrollView setContentSize:CGSizeMake(SDevWidth * proidArray.count, self.frame.size.height)];
+}
+#pragma mark 添加ScrollowViewd的ContentView
+- (void)setContentOfTables:(NSArray*)proidArray andStr:(NSArray *)arr{
+    proArr = proidArray;
+    for (int i=0;i<proidArray.count;i++) {
+        Class c = NSClassFromString(arr[i]);
+        CGRect frame = CGRectMake(i*SDevWidth, 0, SDevWidth, self.frame.size.height-64);
+        UIView *contentView = [[c alloc]initWithFrame:frame];
+        [contentView setValue:self.navigationController forKey:@"superNav"];
         [_scrollView addSubview:contentView];
         [_contentItems addObject:contentView];
     }
@@ -55,7 +64,6 @@
 - (void)moveScrollowViewAthIndex:(NSInteger)index{
     UIView *contentView = _contentItems[index];
     [contentView setValue:proArr[index] forKey:@"dict"];
-
     mNeedUseDelegate = NO;
     CGRect vMoveRect = CGRectMake(self.frame.size.width * index, 0, self.frame.size.width, self.frame.size.width);
     [_scrollView scrollRectToVisible:vMoveRect animated:YES];

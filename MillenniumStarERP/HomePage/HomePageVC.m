@@ -31,6 +31,13 @@
     [self setHeaderView];
     [self setupFootBtn];
     [self loadHomeData];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    //注册kvo通知
+    //[self addObserver:self.tabBarController forKeyPath:@"tabCount" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    [super viewWillAppear:animated];
+    self.navigationController.delegate = self;
     [self loadNewVersion];
 }
 
@@ -58,27 +65,9 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [self exitApplication];
     UIApplication *application = [UIApplication sharedApplication];
     [application openURL:[NSURL URLWithString:self.versionDic[@"url"]]];
     application = nil;
-}
-
-- (void)exitApplication {
-//    UIWindow *window =  [UIApplication sharedApplication].keyWindow;
-//    [UIView animateWithDuration:1.0f animations:^{
-//        window.alpha = 0;
-//        window.frame = CGRectMake(0, window.bounds.size.width, 0, 0);
-//    } completion:^(BOOL finished) {
-//        exit(0);
-//    }];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    //注册kvo通知
-    //    [self addObserver:self.tabBarController forKeyPath:@"tabCount" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
-    [super viewWillAppear:animated];
-    self.navigationController.delegate = self;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

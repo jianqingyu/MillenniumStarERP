@@ -16,5 +16,5 @@
 @property (nonatomic,copy)NSString *purityName;
 @property (nonatomic,assign)double goldPrice;
 @property (nonatomic,assign)double totalPrice;
-@property (nonatomic,assign)int number;
+@property (nonatomic,copy)NSString *number;
 @end

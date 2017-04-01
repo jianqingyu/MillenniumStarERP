@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface SearchResultsVC : BaseViewController
-
+@property (nonatomic,strong)NSDictionary *mutDic;
 @end

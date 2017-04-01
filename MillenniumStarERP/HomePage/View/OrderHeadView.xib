@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_01" translatesAutoresizingMaskIntoConstraints="NO" id="y2G-GD-hcX">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="anios" translatesAutoresizingMaskIntoConstraints="NO" id="y2G-GD-hcX">
                     <rect key="frame" x="10" y="15" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="DY8-4g-hzO"/>
@@ -48,6 +48,6 @@
         </view>
     </objects>
     <resources>
-        <image name="img_01" width="749" height="433"/>
+        <image name="anios" width="100" height="100"/>
     </resources>
 </document>

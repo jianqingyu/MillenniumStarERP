@@ -18,5 +18,5 @@
 @property (nonatomic,copy)NSString *orderDate;
 @property (nonatomic,copy)NSString *recOperator;
 @property (nonatomic,assign)double totalPrice;
-@property (nonatomic,assign)int number;
+@property (nonatomic,copy)NSString *number;
 @end

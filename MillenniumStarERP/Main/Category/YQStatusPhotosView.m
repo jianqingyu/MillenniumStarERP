@@ -43,7 +43,8 @@
             photoView.hidden = YES;
         }
         photoView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lookClick:)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                  action:@selector(lookClick:)];
         tap.view.tag = i;
         [photoView addGestureRecognizer:tap];
     }

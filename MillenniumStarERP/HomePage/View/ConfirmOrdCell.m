@@ -62,7 +62,7 @@
 - (void)setIsTopHidden:(BOOL)isTopHidden{
     if (isTopHidden) {
         _isTopHidden = isTopHidden;
-        self.topView.hidden = YES;
+        [self.topView removeFromSuperview];
     }
 }
 

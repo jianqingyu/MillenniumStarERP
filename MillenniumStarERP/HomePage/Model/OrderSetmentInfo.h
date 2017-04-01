@@ -14,7 +14,7 @@
 @property (nonatomic,copy)NSString *orderDate;
 @property (nonatomic,copy)NSString *recDate;
 @property (nonatomic,copy)NSString *purityName;
-@property (nonatomic,assign)int number;
+@property (nonatomic,copy)NSString *number;
 @property (nonatomic,assign)double totalPrice;
 @property (nonatomic,copy)NSArray *moList;
 @end

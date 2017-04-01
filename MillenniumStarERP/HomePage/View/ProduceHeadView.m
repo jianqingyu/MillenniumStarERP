@@ -28,11 +28,14 @@
         self.orderDateLab.text = _orderInfo.orderDate;
         self.conrimDateLab.text = _orderInfo.confirmDate;
         self.otherInfoLab.text = _orderInfo.otherInfo;
-        self.noteLab.text = _orderInfo.orderNote;
+        self.noteLab.text = [NSString stringWithFormat:@"备注:%@",_orderInfo.orderNote];
         if (_orderInfo.invoiceTitle.length>0) {
             NSString * invoStr = [NSString stringWithFormat:@"类型:%@ 抬头:%@",_orderInfo.invoiceType,_orderInfo.invoiceTitle];
             self.invoiceLab.text = invoStr;
         }
+        CGRect rect = CGRectMake(0, 0, SDevWidth-30, 999);
+        rect = [self.otherInfoLab textRectForBounds:rect limitedToNumberOfLines:2];
+        self.high = 180-36+rect.size.height;
     }
 }
 

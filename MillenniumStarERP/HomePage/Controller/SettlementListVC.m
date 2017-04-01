@@ -9,10 +9,6 @@
 #import "SettlementListVC.h"
 #import "OrderSetmentInfo.h"
 #import "DelSListInfo.h"
-#import "SettlementListHeadView.h"
-#import "SettlementListCell.h"
-#import "DeliveryOrderVC.h"
-#import "SettlementOrderVC.h"
 #import "SettlementDetailView.h"
 @interface SettlementListVC ()
 @property (nonatomic, weak)SettlementDetailView *setView;

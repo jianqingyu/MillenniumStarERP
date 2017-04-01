@@ -11,4 +11,5 @@
 @interface ProduceHeadView : UIView
 + (id)view;
 @property (nonatomic,strong)ProduceOrderInfo *orderInfo;
+@property (nonatomic,assign)CGFloat high;
 @end

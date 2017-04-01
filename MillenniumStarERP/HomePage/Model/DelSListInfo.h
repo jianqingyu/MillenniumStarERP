@@ -12,6 +12,6 @@
 @property (nonatomic,copy)NSString *recNum;
 @property (nonatomic,copy)NSString *moNum;
 @property (nonatomic,copy)NSString *moDate;
-@property (nonatomic,assign)int number;
+@property (nonatomic,copy)NSString *number;
 @property (nonatomic,assign)double totalPrice;
 @end

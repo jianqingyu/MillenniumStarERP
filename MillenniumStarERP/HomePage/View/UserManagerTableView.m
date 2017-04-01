@@ -36,6 +36,8 @@
                                                 style:UITableViewStyleGrouped];
         _mTableView.delegate = self;
         _mTableView.dataSource = self;
+        _mTableView.rowHeight = UITableViewAutomaticDimension;
+        _mTableView.estimatedRowHeight = 80;
         _mTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         [self addSubview:_mTableView];
         [self setupHeaderRefresh];
@@ -169,25 +171,25 @@
     return 0.001f;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat rowH = 0;
-    switch ([self.dict[@"proId"]intValue]) {
-        case 10:case 20:
-            rowH = 220+(SDevWidth-70)/4;
-            break;
-        case 30:
-            rowH = 165;
-            break;
-        case 40:
-            rowH = 0;
-            break;
-        default:
-            rowH = 0;
-            break;
-    }
-    return rowH;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    CGFloat rowH = 0;
+//    switch ([self.dict[@"proId"]intValue]) {
+//        case 10:case 20:
+//            rowH = 220+(SDevWidth-70)/4;
+//            break;
+//        case 30:
+//            rowH = 165;
+//            break;
+//        case 40:
+//            rowH = 0;
+//            break;
+//        default:
+//            rowH = 0;
+//            break;
+//    }
+//    return rowH;
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

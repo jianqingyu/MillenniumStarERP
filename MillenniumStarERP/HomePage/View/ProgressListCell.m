@@ -112,7 +112,7 @@
         [self.imageV sd_setImageWithURL:[NSURL URLWithString:_proInfo.pic] placeholderImage:DefaultImage];
         self.titleL.text = _proInfo.title;
         self.otherL.text = _proInfo.modelInfo;
-        self.numL.text = [NSString stringWithFormat:@"%d件",_proInfo.number];
+        self.numL.text = [NSString stringWithFormat:@"%@件",_proInfo.number];
         if (_proInfo.progress.count==0) {
             return;
         }

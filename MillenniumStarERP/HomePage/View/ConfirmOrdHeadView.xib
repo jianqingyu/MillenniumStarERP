@@ -342,7 +342,7 @@
                 <outletCollection property="allBtns" destination="RXY-Ef-cQD" id="IgU-t1-Jci"/>
                 <outletCollection property="allBtns" destination="moX-Hf-9f6" id="w4p-uo-SlW"/>
             </connections>
-            <point key="canvasLocation" x="603" y="314.5"/>
+            <point key="canvasLocation" x="238" y="352.5"/>
         </view>
     </objects>
     <resources>

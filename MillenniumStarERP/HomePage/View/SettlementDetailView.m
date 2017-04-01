@@ -110,6 +110,7 @@
     DelSListInfo *sInfo = list.moList[indexPath.row];
     DeliveryOrderVC *orderVc = [DeliveryOrderVC new];
     orderVc.orderNum = sInfo.moNum;
+    orderVc.isSea = [self.dict[@"isSearch"]intValue];
     [self.superNav pushViewController:orderVc animated:YES];
 }
 //结算单
@@ -118,6 +119,7 @@
     OrderSetmentInfo *list = arr[section];
     SettlementOrderVC *orderVc = [SettlementOrderVC new];
     orderVc.orderNum = list.recNum;
+    orderVc.isSea = [self.dict[@"isSearch"]intValue];
     [self.superNav pushViewController:orderVc animated:YES];
 }
 

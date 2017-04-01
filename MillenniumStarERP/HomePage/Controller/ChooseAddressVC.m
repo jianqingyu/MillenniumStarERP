@@ -30,6 +30,8 @@
     self.addressTab = [[UITableView alloc]initWithFrame:CGRectZero style:
                                                        UITableViewStyleGrouped];
     self.addressTab.backgroundColor = DefaultColor;
+    self.addressTab.rowHeight = UITableViewAutomaticDimension;
+    self.addressTab.estimatedRowHeight = 90;
     [self.view addSubview:self.addressTab];
     [self.addressTab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(0);
@@ -103,9 +105,9 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 90;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10.0f;
@@ -151,6 +153,7 @@
     };
     [self.navigationController pushViewController:editVc animated:YES];
 }
+
 - (void)deleteAdd:(AddressInfo *)addInfo{
     [SVProgressHUD show];
     NSString *regiUrl = [NSString stringWithFormat:@"%@deleteAddressDo",baseUrl];

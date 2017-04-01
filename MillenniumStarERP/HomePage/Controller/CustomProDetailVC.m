@@ -25,6 +25,7 @@
 #import "StrWithIntTool.h"
 #import "OrderNumTool.h"
 #import "CommonUtils.h"
+#import "CustomBottomView.h"
 @interface CustomProDetailVC ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate,imageTapDelegate>
 @property (nonatomic,  weak) IBOutlet UITableView *tableView;
 @property (nonatomic,  weak) IBOutlet UIButton *lookBtn;
@@ -43,6 +44,7 @@
 @property (nonatomic,  strong)NSMutableArray*bools;
 @property (nonatomic,  strong)DetailModel *modelInfo;
 @property (nonatomic,  strong)CustomPopView *popView;
+@property (nonatomic,  strong)CustomBottomView *popBtmView;
 @property (nonatomic,  strong)RemarkPopView *remarkPopView;
 @property (nonatomic,  strong)DetailTextCustomView *textCView;
 @property (nonatomic,  weak) ETFoursquareImages *foursquareImages;
@@ -312,12 +314,24 @@
 
 #pragma mark -- CustomPopView
 - (void)setupPopView{
-    CustomPopView *popV = [[CustomPopView alloc]initWithFrame:
-                           CGRectMake(0, 0, SDevWidth, SDevHeight)];
+    CustomBottomView *popV = [[CustomBottomView alloc]init];
     popV.popBack = ^(id dict){
         [self chooseType:dict];
     };
-    self.popView = popV;
+    [self.view addSubview:popV];
+    [popV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self).offset(-10);
+        make.top.equalTo(self).offset(0);
+        make.height.mas_equalTo(@44);
+        make.width.mas_equalTo(@60);
+    }];
+    self.popBtmView = popV;
+//    CustomPopView *popV = [[CustomPopView alloc]initWithFrame:
+//                           CGRectMake(0, 0, SDevWidth, SDevHeight)];
+//    popV.popBack = ^(id dict){
+//        [self chooseType:dict];
+//    };
+//    self.popView = popV;
 }
 
 #pragma mark -- CustomPopView
@@ -374,7 +388,10 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.popView removeFromSuperview];
+//    [self.popView removeFromSuperview];
+    [UIView animateWithDuration:1 animations:^{
+        self.popBtmView.x = SDevHeight;
+    }];
     [self.remarkPopView removeFromSuperview];
     [self.textCView removeFromSuperview];
 }
@@ -447,9 +464,14 @@
         [self.view addSubview:self.textCView];
     }else{
         NSArray *dictArr = self.chooseArr[inPath.row];
-        self.popView.typeList = dictArr;
-        self.popView.section = inPath;
-        [self.view addSubview:self.popView];
+        self.popBtmView.typeList = dictArr;
+        self.popBtmView.section = inPath;
+        [UIView animateWithDuration:1 animations:^{
+            self.popBtmView.x = SDevHeight-64-SDevHeight*0.3;
+        }];
+//        self.popView.typeList = dictArr;
+//        self.popView.section = inPath;
+//        [self.view addSubview:self.popView];
     }
 }
 

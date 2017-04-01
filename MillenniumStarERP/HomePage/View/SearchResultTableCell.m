@@ -36,4 +36,18 @@
     return self;
 }
 
+- (void)setInfo:(SearchResultInfo *)info{
+    if (info) {
+        _info = info;
+        self.orderNum.text = _info.orderNum;
+        NSString *string = _info.orderDate;
+        string = [string substringToIndex:10];//截取掉下标10之后的字符串
+        self.orderDate.text = string;
+        self.pureyLab.text = _info.purityName;
+        self.customer.text = _info.customerName;
+        self.goldLab.text = [NSString stringWithFormat:@"￥%0.2f",_info.goldPrice];
+        self.numLab.text = [NSString stringWithFormat:@"%@件",_info.number];
+    }
+}
+
 @end

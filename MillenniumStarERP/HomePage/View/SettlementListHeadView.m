@@ -44,7 +44,7 @@
         self.recDateLab.text = [NSString stringWithFormat:@"结算日期 : %@",string];
         self.orderDateLab.text = [NSString stringWithFormat:@"下单日期 : %@",string1];
         self.purLab.text = [NSString stringWithFormat:@"成色 : %@",_headInfo.purityName];
-        self.numLab.text = [NSString stringWithFormat:@"数量 : %d件",_headInfo.number];
+        self.numLab.text = [NSString stringWithFormat:@"数量 : %@件",_headInfo.number];
         self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",_headInfo.totalPrice];
     }
 }

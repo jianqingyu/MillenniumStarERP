@@ -40,6 +40,7 @@
 - (void)createMenuItems:(NSArray *)itemArray{
     int i = 0;
     float menuWidth = 0.0;
+    float num = 4;
     for (NSDictionary *dic in itemArray) {
         NSString *buttonTitle = dic[@"title"];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -52,11 +53,11 @@
         [button setTag:i];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
         [button addTarget:self action:@selector(menuButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [button setFrame:CGRectMake(menuWidth, 0, SDevWidth/itemArray.count, self.frame.size.height)];
+        [button setFrame:CGRectMake(menuWidth, 0, SDevWidth/num, self.frame.size.height)];
         [mScrollView addSubview:button];
         [mButtonArray addObject:button];
         
-        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(SDevWidth/itemArray.count-16, 8, 16 ,16)];
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(SDevWidth/num-16, 8, 16 ,16)];
         lab.layer.cornerRadius = 8;
         lab.layer.masksToBounds = YES;
         lab.backgroundColor = MAIN_COLOR;
@@ -69,9 +70,9 @@
         [button addSubview:lab];
         [mLabArray addObject:lab];
         
-        menuWidth += SDevWidth/itemArray.count;
+        menuWidth += SDevWidth/num;
         i++;
-        //保存button资源信息，同时增加button.oringin.x的位置，方便点击button时，移动位置。
+        //保存button资源信息，同div增加button.oringin.x的位置，方便点击button时，移动位置。
         NSMutableDictionary *newDic = [dic mutableCopy];
         [newDic setObject:[NSNumber numberWithFloat:menuWidth] forKey:TOTALWIDTH];
         [mItemInfoArray addObject:newDic];

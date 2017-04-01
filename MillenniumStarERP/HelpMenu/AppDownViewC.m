@@ -24,7 +24,6 @@
 
 - (IBAction)btnClick:(id)sender {
     UIApplication *application = [UIApplication sharedApplication];
-//    NSString *str = @"itms-services://?action=download-manifest&url=https%3A%2F%2Fwww.pgyer.com%2Fapiv1%2Fapp%2Fplist%3FaId%3D13d7af0fc022f6c7db56913c4bc7cbc1%26_api_key%3D90266c3f38506a07ee9bfb3b5ea4fdd9";
     [application openURL:[NSURL URLWithString:self.dict[@"url"]]];
     application = nil;
 }

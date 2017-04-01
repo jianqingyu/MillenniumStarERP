@@ -27,8 +27,8 @@
     
     // 监听网络状态改变的通知
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name: kReachabilityChangedNotification object: nil];
+                 selector:@selector(reachabilityChanged:)
+                            name: kReachabilityChangedNotification object: nil];
     hostReach = [Reachability reachabilityWithHostName:@"www.google.com"];
     [hostReach startNotifier];
     
@@ -37,7 +37,6 @@
     [[UINavigationBar appearance] setTintColor:CUSTOM_COLOR(50, 50, 50)];
     NSDictionary *attbutes = @{NSForegroundColorAttributeName:CUSTOM_COLOR(50, 50, 50)};
     [[UINavigationBar appearance]setTitleTextAttributes:attbutes];
-    
     return YES;
 }
 
@@ -66,78 +65,11 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    //指纹验证
-//    [self authenticateUser];
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)authenticateUser
-{
-    //初始化上下文对象
-    LAContext* context = [[LAContext alloc] init];
-    //错误对象
-    NSError* error = nil;
-    NSString* result = @"通过验证指纹解锁应用";
-    //首先使用canEvaluatePolicy 判断设备支持状态
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-        //支持指纹验证
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:result reply:^(BOOL success, NSError *error) {
-            if (success) {
-                //验证成功，主线程处理UI
-                return;
-            }else{
-//                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                    ShowLoginViewTool *login = [ShowLoginViewTool creatTool];
-//                    [login showLoginView:YES];
-//                }];
-//                switch (error.code) {
-//                    case LAErrorSystemCancel:
-//                    {
-//                        //切换到其他APP，系统取消验证Touch ID
-//                        break;
-//                    }
-//                    case LAErrorUserCancel:
-//                    {
-//                        //用户取消验证Touch ID
-//                        break;
-//                    }
-//                    case LAErrorUserFallback:
-//                    {
-//                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                            //用户选择输入密码，切换主线程处理
-//                        }];
-//                        break;
-//                    }
-//                    default:
-//                    {
-//                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//                            //其他情况，切换主线程处理
-//                        }];
-//                        break;
-//                    }
-//                }
-            }
-        }];
-    }else{
-        //不支持指纹识别，LOG出错误详情
-        switch (error.code) {
-            case LAErrorTouchIDNotEnrolled:
-            {
-                break;
-            }
-            case LAErrorPasscodeNotSet:
-            {
-                break;
-            }
-            default:
-            {
-                break;
-            }
-        }
-    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

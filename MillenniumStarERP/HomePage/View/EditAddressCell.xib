@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment version="2048" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -80,40 +80,29 @@
                             <action selector="btnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iRO-4X-KSd"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d00-Bq-3oZ">
-                        <rect key="frame" x="10" y="35" width="300" height="39"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广东省深圳市罗湖区翠竹街道布心2039号输变电大厦" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYb-Sd-Bbl">
-                                <rect key="frame" x="0.0" y="0.0" width="295" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="39" id="Is0-j9-pd9"/>
-                            <constraint firstItem="KYb-Sd-Bbl" firstAttribute="leading" secondItem="d00-Bq-3oZ" secondAttribute="leading" id="ast-rF-FHp"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KYb-Sd-Bbl" secondAttribute="trailing" id="hfa-gM-kSQ"/>
-                            <constraint firstItem="KYb-Sd-Bbl" firstAttribute="centerY" secondItem="d00-Bq-3oZ" secondAttribute="centerY" id="vTc-Fu-5so"/>
-                        </constraints>
-                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广东省深圳市罗湖区翠竹街道布心2039号输变电大厦" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYb-Sd-Bbl">
+                        <rect key="frame" x="10" y="34" width="300" height="39"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="iBd-YV-AME" firstAttribute="leading" secondItem="S6H-6d-SxV" secondAttribute="trailing" constant="25" id="41b-l4-dCu"/>
                     <constraint firstItem="lqv-S2-Vdv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="73s-pb-hvM"/>
                     <constraint firstItem="osH-xe-jKE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="7HA-X1-n0f"/>
+                    <constraint firstItem="KYb-Sd-Bbl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Bjb-Rl-4Q1"/>
                     <constraint firstItem="4Db-cz-xeA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ErG-rj-jJi"/>
+                    <constraint firstItem="KYb-Sd-Bbl" firstAttribute="top" secondItem="4Db-cz-xeA" secondAttribute="bottom" constant="4" id="I3R-M3-KAF"/>
+                    <constraint firstAttribute="trailing" secondItem="KYb-Sd-Bbl" secondAttribute="trailing" constant="10" id="JuO-hA-eDE"/>
                     <constraint firstAttribute="trailing" secondItem="osH-xe-jKE" secondAttribute="trailing" constant="10" id="QeL-Ci-Fqy"/>
                     <constraint firstItem="S6H-6d-SxV" firstAttribute="centerY" secondItem="lqv-S2-Vdv" secondAttribute="centerY" id="RWa-pm-x5c"/>
                     <constraint firstItem="osH-xe-jKE" firstAttribute="top" secondItem="IyM-dU-dyp" secondAttribute="bottom" constant="5" id="UPo-oh-4cr"/>
                     <constraint firstItem="iBd-YV-AME" firstAttribute="height" secondItem="S6H-6d-SxV" secondAttribute="height" id="VfC-19-AdY"/>
                     <constraint firstItem="IyM-dU-dyp" firstAttribute="leading" secondItem="4Db-cz-xeA" secondAttribute="leading" id="Xvv-a7-hbl"/>
-                    <constraint firstItem="d00-Bq-3oZ" firstAttribute="top" secondItem="4Db-cz-xeA" secondAttribute="bottom" constant="5" id="ZUq-mk-Ah7"/>
+                    <constraint firstItem="IyM-dU-dyp" firstAttribute="top" secondItem="KYb-Sd-Bbl" secondAttribute="bottom" constant="5" id="aA5-uc-EXX"/>
                     <constraint firstItem="S6H-6d-SxV" firstAttribute="top" secondItem="osH-xe-jKE" secondAttribute="bottom" constant="13" id="bee-Ib-7s8"/>
-                    <constraint firstItem="d00-Bq-3oZ" firstAttribute="leading" secondItem="4Db-cz-xeA" secondAttribute="leading" id="jPe-Fd-Q9s"/>
                     <constraint firstAttribute="trailing" secondItem="iBd-YV-AME" secondAttribute="trailing" constant="10" id="jua-XF-H27"/>
-                    <constraint firstAttribute="trailing" secondItem="d00-Bq-3oZ" secondAttribute="trailing" constant="10" id="kc0-Pq-Dzm"/>
                     <constraint firstItem="4Db-cz-xeA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="qz9-Ro-Avk"/>
                     <constraint firstItem="iBd-YV-AME" firstAttribute="centerY" secondItem="lqv-S2-Vdv" secondAttribute="centerY" id="tJR-96-K1L"/>
                     <constraint firstItem="iBd-YV-AME" firstAttribute="width" secondItem="S6H-6d-SxV" secondAttribute="width" id="tWS-uk-4cu"/>

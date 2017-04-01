@@ -12,6 +12,6 @@
 @property (nonatomic,copy)NSString *title;
 @property (nonatomic,copy)NSString *modelInfo;
 @property (nonatomic,copy)NSString *pic;
-@property (nonatomic,assign)int number;
+@property (nonatomic,copy)NSString *number;
 @property (nonatomic,copy)NSArray *progress;
 @end

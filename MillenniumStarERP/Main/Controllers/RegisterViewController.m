@@ -48,10 +48,6 @@
     [self.codeBtn setbuttenfrontTitle:@"" backtitle:@"s后获取"];
 }
 
-- (IBAction)back:(id)sender {
-    [self backClick];
-}
-
 - (IBAction)getCode:(UIButton *)btn{
     if (self.phonefie.text.length!=11) {
         SHOWALERTVIEW(@"您输入的手机号有误");

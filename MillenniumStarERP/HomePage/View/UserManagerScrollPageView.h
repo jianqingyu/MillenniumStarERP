@@ -27,6 +27,7 @@
 @property (nonatomic,assign) id<UserManagerScrollPageViewDelegate> delegate;
 #pragma mark 添加ScrollowViewd的ContentView
 - (void)setContentOfTables:(NSArray*)proidArray table:(NSString *)table;
+- (void)setContentOfTables:(NSArray*)proidArray andStr:(NSArray *)arr;
 #pragma mark 滑动到某个页面
 - (void)moveScrollowViewAthIndex:(NSInteger)index;
 #pragma mark 改变TableView上面滚动栏的内容

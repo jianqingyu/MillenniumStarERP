@@ -61,7 +61,9 @@
 
 - (void)loadSetmentData{
     NSMutableDictionary *params = [NSMutableDictionary new];
-    NSString *url = [NSString stringWithFormat:@"%@ModelBillFinishDetailRec",baseUrl];
+    NSString *str = self.isSea?@"ModelBillFinishDetailRecForSearch"
+                                                   :@"ModelBillFinishDetailRec";
+    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,str];
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     params[@"recNum"] = self.orderNum;
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {

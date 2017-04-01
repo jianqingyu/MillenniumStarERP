@@ -160,40 +160,13 @@
     {
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex:0];
         stringValue = metadataObject.stringValue;
-        
         [_session stopRunning];
         [timer invalidate];
         if (stringValue.length > 0) {
             if (self.scanBack) {
                 self.scanBack(stringValue);
             }
-            //            NSString *url = [NSURL URLWithString:@"html/judgement.html" relativeToURL:[ZXApiClient sharedClient].baseURL].absoluteString;
-            //
-            //            if ([stringValue hasPrefix:url]) {
-            //                NSArray *arr = [stringValue componentsSeparatedByString:@"?"];
-            //                if (arr.count > 1) {
-            //                    NSString *uid = [[arr objectAtIndex:1] substringFromIndex:4];
-            //
-            //                    if (uid.integerValue == GLOBAL_UID) {
-            //                        ZXMyProfileViewController *vc = [ZXMyProfileViewController viewControllerFromStoryboard];
-            //                        [self.navigationController pushViewController:vc animated:YES];
-            //                    } else {
-            //                        ZXUserProfileViewController *vc = [ZXUserProfileViewController viewControllerFromStoryboard];
-            //                        vc.uid = uid.integerValue;
-            //                        [self.navigationController pushViewController:vc animated:YES];
-            //                    }
-            //                }
-            //            }
-            //            else if ([stringValue hasPrefix:[NSString stringWithFormat:@"%@qrcodelogin?qrcodeId=",@"http://www.aierbon.com/"]]) {
-            //                NSString *qrcodeId = [[stringValue componentsSeparatedByString:@"="] lastObject];
-            //                ZXLoginBackendViewController *vc = [ZXLoginBackendViewController viewControllerFromStoryboard];
-            //                vc.qrcodeid = qrcodeId;
-            //                [self.navigationController pushViewController:vc animated:YES];
-            //            }
-            //            else {
             [self.navigationController popViewControllerAnimated:YES];
-            //                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:stringValue]];
-            //            }
         }
     }
 }

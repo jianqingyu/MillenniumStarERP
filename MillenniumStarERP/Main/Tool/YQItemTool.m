@@ -10,7 +10,7 @@
 #import "UIView+Extension.h"
 @implementation YQItemTool
 + (UIBarButtonItem *)setItem:(id)target Action:(SEL)action image:(NSString *)image
-                  hightImage:(NSString *)hightImage{
+                                              hightImage:(NSString *)hightImage{
     UIButton *btn = [[UIButton alloc]init];
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     [btn setBackgroundImage:[UIImage imageNamed:image] forState:UIControlStateNormal];

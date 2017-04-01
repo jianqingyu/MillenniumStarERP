@@ -29,7 +29,8 @@
 }
 
 - (void)setupTableView{
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectZero
+                                                 style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -54,8 +55,9 @@
 
 - (void)loadProgressData{
     NSMutableDictionary *params = [NSMutableDictionary new];
-    NSString *url = [NSString stringWithFormat:
-            @"%@ModelOrderProduceDetailShowRateProgressPage",baseUrl];
+    NSString *str = self.isSea?@"ModelOrderProduceDetailShowRateProgressPageForSearch":
+                                  @"ModelOrderProduceDetailShowRateProgressPage";
+    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,str];
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     params[@"orderNum"] = self.orderNum;
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {

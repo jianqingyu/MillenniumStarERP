@@ -10,4 +10,5 @@
 
 @interface DeliveryOrderVC : BaseViewController
 @property (nonatomic,copy)NSString *orderNum;
+@property (nonatomic,assign)BOOL isSea;
 @end

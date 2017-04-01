@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -112,6 +112,7 @@
                     <constraint firstItem="AdX-Vq-NeP" firstAttribute="leading" secondItem="cdZ-zv-ERi" secondAttribute="trailing" constant="5" id="JFg-H3-VaG"/>
                     <constraint firstItem="pvn-u3-ZZW" firstAttribute="leading" secondItem="1sC-JF-X4I" secondAttribute="trailing" constant="5" id="Svs-qe-yCx"/>
                     <constraint firstItem="K71-R1-7je" firstAttribute="centerY" secondItem="swJ-a8-k0J" secondAttribute="centerY" id="Vmk-bI-TuX"/>
+                    <constraint firstAttribute="bottom" secondItem="rRM-nW-6gg" secondAttribute="bottom" constant="14" id="by2-iE-N9J"/>
                     <constraint firstItem="Fj7-sF-8dE" firstAttribute="centerY" secondItem="5TR-t3-sN8" secondAttribute="centerY" id="cXS-ft-Cvn"/>
                     <constraint firstItem="1sC-JF-X4I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="eX7-mH-RrP"/>
                     <constraint firstItem="AdX-Vq-NeP" firstAttribute="centerY" secondItem="cdZ-zv-ERi" secondAttribute="centerY" id="ek7-fp-Uvi"/>

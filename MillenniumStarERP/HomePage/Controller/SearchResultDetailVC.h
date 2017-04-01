@@ -10,4 +10,5 @@
 
 @interface SearchResultDetailVC : BaseViewController
 @property (nonatomic, assign) int index;
+@property (nonatomic,   copy)NSString *orderNum;
 @end

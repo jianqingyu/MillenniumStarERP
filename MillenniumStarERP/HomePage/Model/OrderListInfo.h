@@ -19,4 +19,5 @@
 @property (nonatomic,assign)float needPayPrice;
 @property (nonatomic,copy)NSString *number;
 @property (nonatomic,copy)NSString *info;
+
 @end

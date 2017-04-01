@@ -8,7 +8,7 @@
 
 #import "CustomDatePick.h"
 @interface CustomDatePick()
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePick;
+
 @end
 @implementation CustomDatePick
 
