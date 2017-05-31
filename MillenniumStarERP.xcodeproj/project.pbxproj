@@ -109,8 +109,6 @@
 		794EDBEA1DDD38CD0018DDF3 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 794EDBDC1DDD38CD0018DDF3 /* IQUIView+IQKeyboardToolbar.m */; };
 		794EDBEB1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 794EDBDE1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.m */; };
 		794F22481E71306B0095899E /* DelSListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F22471E71306B0095899E /* DelSListInfo.m */; };
-		795224ED1DC33A5A0044F880 /* PayErrorReturnVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 795224EB1DC33A5A0044F880 /* PayErrorReturnVc.m */; };
-		795224EE1DC33A5A0044F880 /* PayErrorReturnVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 795224EC1DC33A5A0044F880 /* PayErrorReturnVc.xib */; };
 		795515961D9BAF7800A458AE /* AddEditAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 795515941D9BAF7800A458AE /* AddEditAddressVC.m */; };
 		795515971D9BAF7800A458AE /* AddEditAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 795515951D9BAF7800A458AE /* AddEditAddressVC.xib */; };
 		7955159A1D9BB81800A458AE /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 795515991D9BB81800A458AE /* AddressInfo.m */; };
@@ -478,9 +476,6 @@
 		794EDBDF1DDD38CD0018DDF3 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
 		794F22461E71306B0095899E /* DelSListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelSListInfo.h; sourceTree = "<group>"; };
 		794F22471E71306B0095899E /* DelSListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelSListInfo.m; sourceTree = "<group>"; };
-		795224EA1DC33A5A0044F880 /* PayErrorReturnVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayErrorReturnVc.h; sourceTree = "<group>"; };
-		795224EB1DC33A5A0044F880 /* PayErrorReturnVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayErrorReturnVc.m; sourceTree = "<group>"; };
-		795224EC1DC33A5A0044F880 /* PayErrorReturnVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayErrorReturnVc.xib; sourceTree = "<group>"; };
 		795515931D9BAF7800A458AE /* AddEditAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEditAddressVC.h; sourceTree = "<group>"; };
 		795515941D9BAF7800A458AE /* AddEditAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEditAddressVC.m; sourceTree = "<group>"; };
 		795515951D9BAF7800A458AE /* AddEditAddressVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddEditAddressVC.xib; sourceTree = "<group>"; };
@@ -1228,9 +1223,6 @@
 				79CD81A61D9E376C00B7BC84 /* PayReturnPageVC.h */,
 				79CD81A71D9E376C00B7BC84 /* PayReturnPageVC.m */,
 				79CD81A81D9E376C00B7BC84 /* PayReturnPageVC.xib */,
-				795224EA1DC33A5A0044F880 /* PayErrorReturnVc.h */,
-				795224EB1DC33A5A0044F880 /* PayErrorReturnVc.m */,
-				795224EC1DC33A5A0044F880 /* PayErrorReturnVc.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1573,7 +1565,7 @@
 				TargetAttributes = {
 					79655D7D1D7D0668006B90FC = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = X8G7G96C6P;
+						DevelopmentTeam = BFL2K257T7;
 					};
 					79655D961D7D0668006B90FC = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1680,7 +1672,6 @@
 				79B4B8311DA8C5F100B97070 /* OrderBottomTableCell.xib in Resources */,
 				7926B62D1E6952E70022B4A3 /* SettlementHeadView.xib in Resources */,
 				796218FB1D98FFF400FE01D6 /* FinishedProFCell.xib in Resources */,
-				795224EE1DC33A5A0044F880 /* PayErrorReturnVc.xib in Resources */,
 				792C01C21D890682005943AE /* ConfirmOrdHeadView.xib in Resources */,
 				796FD1861E6E3D5100A50DDC /* SettlementListHeadView.xib in Resources */,
 			);
@@ -1862,7 +1853,6 @@
 				7915BCE61E7A6F9B00407927 /* FinishedDetailView.m in Sources */,
 				7948B3451E79138100909601 /* SearchResultsVC.m in Sources */,
 				79CDBCF31E710839004080CE /* OrderSetmentInfo.m in Sources */,
-				795224ED1DC33A5A0044F880 /* PayErrorReturnVc.m in Sources */,
 				7962BEA91DB5D6B000459245 /* DetailModel.m in Sources */,
 				79655DED1D7D0AAA006B90FC /* LoginViewController.m in Sources */,
 				7915BCE31E7A6F5100407927 /* SettlementDetailView.m in Sources */,
@@ -2099,7 +2089,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.MillenniumStarERP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.mStar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2121,7 +2111,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.MillenniumStarERP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.mStar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
