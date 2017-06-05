@@ -51,6 +51,7 @@
 @property (nonatomic, strong) AllListPopView *popClassView;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
 @property (nonatomic, strong) ScreeningRightView *slideRightTab;
+@property (nonatomic, assign)BOOL isShowPrice;
 @end
 
 @implementation ProductListVC
@@ -385,6 +386,9 @@
 }
 //初始化数据
 - (void)setupDataWithData:(NSDictionary *)data{
+    if([YQObjectBool boolForObject:data[@"model"]]){
+        self.isShowPrice = [data[@"model"][@"isShowPrice"]intValue];
+    }
     if([YQObjectBool boolForObject:data[@"typeList"]]){
         self.slideRightTab.goods = [ScreeningInfo
                               objectArrayWithKeyValuesArray:data[@"typeList"]];
@@ -411,7 +415,6 @@
             self.tableView.footer.state = MJRefreshStateNoMoreData;
         }
     }else{
-//        [self.tableView.header removeFromSuperview];
         MJRefreshAutoNormalFooter*footer = (MJRefreshAutoNormalFooter*)self.tableView.footer;
         [footer setTitle:@"暂时没有商品" forState:MJRefreshStateNoMoreData];
         self.tableView.footer.state = MJRefreshStateNoMoreData;
@@ -440,7 +443,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ProductListTableCell *tableCell = [ProductListTableCell cellWithTableView:tableView
-                                                                andDelegate:self];
+                                                andDelegate:self with:self.isShowPrice];
     [tableCell updateDevInfoWith:self.dataArray index:(int)indexPath.row];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     return tableCell;

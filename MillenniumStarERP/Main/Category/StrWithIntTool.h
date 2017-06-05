@@ -16,6 +16,7 @@
 /**
  *  把字符串数组转成字符串
  */
++ (NSString *)strWithArr:(NSArray *)array With:(NSString *)str;
 + (NSString *)strWithArr:(NSArray *)array;
 + (NSString *)strWithIntOrStrArr:(NSArray *)array;
 + (NSData *)dataWithData:(UIImage *)image;

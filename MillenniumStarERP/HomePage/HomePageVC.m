@@ -13,6 +13,7 @@
 #import "ProductListVC.h"
 #import "UserInfo.h"
 #import "CusTomLoginView.h"
+#import "NakedDriLibViewController.h"
 @interface HomePageVC ()<UINavigationControllerDelegate,UICollectionViewDataSource,
                                    UICollectionViewDelegate>
 @property(strong,nonatomic) UICollectionView * rightCollection;
@@ -55,7 +56,7 @@
 }
 
 - (void)loadAlertView{
-    double doubleCurrentVersion = [[NSBundle mainBundle].infoDictionary[@"CFBundleVersion"]doubleValue];
+    double doubleCurrentVersion = [[NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]doubleValue];
     if (doubleCurrentVersion<[self.versionDic[@"version"]doubleValue]) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"温馨提示"
                             message:self.versionDic[@"message"] delegate:self
@@ -186,9 +187,20 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProductListVC*listVc = [[ProductListVC alloc]init];
-    listVc.backDict = [NSMutableDictionary new];
-    [self.navigationController pushViewController:listVc animated:YES];
+    switch (indexPath.row) {
+        case 0:{
+            ProductListVC*listVc = [[ProductListVC alloc]init];
+            listVc.backDict = [NSMutableDictionary new];
+            [self.navigationController pushViewController:listVc animated:YES];
+        }
+            break;
+        case 1:{
+            NakedDriLibViewController*listVc = [[NakedDriLibViewController alloc]init];
+            [self.navigationController pushViewController:listVc animated:YES];
+        }
+        default:
+            break;
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{

@@ -12,4 +12,5 @@ typedef void (^InvoiceBack)(id object);
 @interface InvoiceViewController : BaseViewController
 @property (nonatomic,copy)InvoiceBack invoBack;
 @property (nonatomic,strong)DetailTypeInfo *invoInfo;
+@property (nonatomic,assign)BOOL isStone;
 @end

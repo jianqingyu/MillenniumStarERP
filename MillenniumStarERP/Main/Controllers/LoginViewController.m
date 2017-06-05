@@ -18,7 +18,7 @@
 @interface LoginViewController ()
 @property (weak,  nonatomic) IBOutlet UITextField *nameFie;
 @property (weak,  nonatomic) IBOutlet UITextField *passWordFie;
-@property (weak,  nonatomic) IBOutlet UITextField *phoneField;
+
 @property (weak,  nonatomic) IBOutlet UITextField *keyField;
 @property (weak,  nonatomic) IBOutlet UIView *loginView;
 @property (weak,  nonatomic) IBOutlet UIButton *loginBtn;
@@ -109,7 +109,6 @@
     [self resignFirst];
     if (self.nameFie.text.length==0||self.passWordFie.text==0){
         [NewUIAlertTool show:@"请输入用户名和密码" with:self];
-//        SHOWALERTVIEW(@"请输入用户名和密码");
         return;
     }
     [self requestCheckWord];
@@ -125,7 +124,6 @@
             [MBProgressHUD showMessage:response.message];
         }else{
             [NewUIAlertTool show:response.message with:self];
-//            SHOWALERTVIEW(response.message);
         }
     } requestURL:codeUrl params:params];
 }

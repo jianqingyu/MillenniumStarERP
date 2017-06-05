@@ -8,7 +8,7 @@
 
 #import "CustomFirstCell.h"
 @interface CustomFirstCell()<UITextFieldDelegate>
-@property (nonatomic,strong)NSMutableArray *arr;
+
 @end
 @implementation CustomFirstCell
 
@@ -18,9 +18,9 @@
     if (addCell==nil) {
         addCell = [[CustomFirstCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Id];
         addCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [addCell.btn setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
-        [addCell.fie1 setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
-        [addCell.fie2 setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
+        [addCell.btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
+        [addCell.fie1 setLayerWithW:3.0 andColor:BordColor andBackW:0.001];
+        [addCell.handbtn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
     }
     return addCell;
 }
@@ -29,37 +29,66 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self = [[NSBundle mainBundle]loadNibNamed:@"CustomFirstCell" owner:nil options:nil][0];
-        self.fie1.tag = 1;
-        self.fie2.tag = 2;
         self.fie1.delegate = self;
-        self.fie2.delegate = self;
-        self.arr = @[@"",@""].mutableCopy;
     }
     return self;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField.tag==1) {
-        if (![textField.text isEqualToString:@"0.5"]&&[textField.text containsString:@"."]) {
-            [MBProgressHUD showError:@"请填写正确件数"];
-            textField.text = @"";
-        }
+    if (![textField.text isEqualToString:@"0.5"]&&[textField.text containsString:@"."]) {
+        [MBProgressHUD showError:@"请填写正确件数"];
+        textField.text = @"";
     }
-    [self.arr setObject:textField.text atIndexedSubscript:textField.tag-1];
     if (self.MessBack) {
-        self.MessBack(self.arr);
+        self.MessBack(YES,textField.text);
     }
 }
 
-- (void)setMessArr:(NSArray *)messArr{
+- (IBAction)handClick:(id)sender {
+    if (self.MessBack) {
+        self.MessBack(NO,@"");
+    }
+}
+
+- (IBAction)accClick:(id)sender {
+    float str = [self.fie1.text floatValue];
+    if (str==0) {
+        return;
+    }
+    str--;
+    [self backText:str];
+}
+
+- (IBAction)addClick:(id)sender {
+    float str = [self.fie1.text floatValue];
+    str++;
+    [self backText:str];
+}
+
+- (void)backText:(float)str{
+    NSString *string = [NSString stringWithFormat:@"%0.1f",str];
+    if ([string rangeOfString:@".5"].location != NSNotFound) {
+        self.fie1.text = string;
+    }else{
+        self.fie1.text = [NSString stringWithFormat:@"%0.0f",str];
+    }
+    if (self.MessBack) {
+        self.MessBack(YES,self.fie1.text);
+    }
+}
+
+- (void)setMessArr:(NSString *)messArr{
     if (messArr) {
         _messArr = messArr;
-        self.arr = _messArr.mutableCopy;
-        self.fie1.text = _messArr[0];
-        if (![_messArr[1] isEqualToString:@"0"]) {
-            self.fie2.text = _messArr[1];
-        }
+        self.fie1.text = _messArr;
     }
+}
+
+- (void)setHandSize:(NSString *)handSize{
+    if (handSize) {
+        _handSize = handSize;
+    }
+    [self.handbtn setTitle:_handSize forState:UIControlStateNormal];
 }
 
 @end

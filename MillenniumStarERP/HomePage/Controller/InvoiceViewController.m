@@ -65,7 +65,8 @@
 
 - (void)loadInvoData{
     [SVProgressHUD show];
-    NSString *regiUrl = [NSString stringWithFormat:@"%@ModelInvoicePage",baseUrl];
+    NSString *str = self.isStone?@"StoneInvoicePage":@"ModelInvoicePage";
+    NSString *regiUrl = [NSString stringWithFormat:@"%@%@",baseUrl,str];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {

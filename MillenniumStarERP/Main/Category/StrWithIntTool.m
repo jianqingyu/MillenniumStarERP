@@ -66,6 +66,25 @@
     return [spidStr copy];
 }
 
++ (NSString *)strWithArr:(NSArray *)array With:(NSString *)str{
+    return [self strWithArr:array and:str];
+}
+
++ (NSString *)strWithArr:(NSArray *)array and:(NSString *)str{
+    NSMutableString *spidStr = [NSMutableString string];
+    if (array.count > 0){
+        for (int i = 0; i < array.count; ++i){
+            id proId = array[i];
+            if (i == array.count-1){
+                [spidStr appendString:[NSString stringWithFormat:@"%@",proId]];
+            }else{
+                [spidStr appendString:[NSString stringWithFormat:@"%@%@",proId,str]];
+            }
+        }
+    }
+    return [spidStr copy];
+}
+
 + (NSString *)strWithIntOrStrArr:(NSArray *)array{
     NSMutableString *spidStr = [NSMutableString string];
     if (array.count > 0){

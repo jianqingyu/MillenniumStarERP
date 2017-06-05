@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0B02C56CEF9CD4F9CC95C4A6 /* libPods-MillenniumStarERP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7A030BEEA4F618DC154CD2 /* libPods-MillenniumStarERP.a */; };
+		790375FF1EDFE0DC00344FCD /* NakedDriSeaTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 790375FE1EDFE0DC00344FCD /* NakedDriSeaTableCell.m */; };
+		790376021EDFE30400344FCD /* NakedDriSeaListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 790376011EDFE30400344FCD /* NakedDriSeaListInfo.m */; };
 		79050ADB1DF7B84700DCEA69 /* DetailHeadInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 79050ADA1DF7B84700DCEA69 /* DetailHeadInfo.m */; };
 		79050ADE1DF7F92B00DCEA69 /* ZBButten.m in Sources */ = {isa = PBXBuildFile; fileRef = 79050ADD1DF7F92B00DCEA69 /* ZBButten.m */; };
 		790C2C241E092776006D9DCF /* ProgressOrderVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 790C2C221E092776006D9DCF /* ProgressOrderVc.m */; };
@@ -25,6 +27,9 @@
 		790C70A61DCC1B23007343BA /* NoNetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790C70A01DCC1B23007343BA /* NoNetViewController.xib */; };
 		790C70AB1DCC21C5007343BA /* NetworkDetermineTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 790C70A81DCC21C5007343BA /* NetworkDetermineTool.m */; };
 		790C70AC1DCC21C5007343BA /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 790C70AA1DCC21C5007343BA /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		790D22471EE115FE00EB6450 /* NakedDriConfirmHeadV.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D22461EE115FE00EB6450 /* NakedDriConfirmHeadV.m */; };
+		790D22491EE1161B00EB6450 /* NakedDriConfirmHeadV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790D22481EE1161B00EB6450 /* NakedDriConfirmHeadV.xib */; };
+		790D224C1EE136A700EB6450 /* NakedDriConfirmInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 790D224B1EE136A700EB6450 /* NakedDriConfirmInfo.m */; };
 		7915BCE01E7A6F0100407927 /* ProductionDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7915BCDF1E7A6F0100407927 /* ProductionDetailView.m */; };
 		7915BCE31E7A6F5100407927 /* SettlementDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7915BCE21E7A6F5100407927 /* SettlementDetailView.m */; };
 		7915BCE61E7A6F9B00407927 /* FinishedDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7915BCE51E7A6F9B00407927 /* FinishedDetailView.m */; };
@@ -58,6 +63,8 @@
 		792DF4BB1E021B7E00128456 /* ChooseInvoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 792DF4B91E021B7E00128456 /* ChooseInvoiceCell.m */; };
 		792DF4BC1E021B7E00128456 /* ChooseInvoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792DF4BA1E021B7E00128456 /* ChooseInvoiceCell.xib */; };
 		792E2B7E1DC9E0A10050C6D0 /* OrderPriceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 792E2B7D1DC9E0A10050C6D0 /* OrderPriceInfo.m */; };
+		7930C05C1EDFED2A00F7379E /* NakedDriOrderListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930C05B1EDFED2A00F7379E /* NakedDriOrderListView.m */; };
+		7930C05F1EDFEE6000F7379E /* NakedDriOListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930C05E1EDFEE6000F7379E /* NakedDriOListInfo.m */; };
 		7930F59C1E6D043C008549C3 /* SettlementSecHedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930F59B1E6D043C008549C3 /* SettlementSecHedView.m */; };
 		7930F59F1E6D0862008549C3 /* SettlementFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930F59E1E6D0861008549C3 /* SettlementFootView.m */; };
 		7930F5A11E6D0881008549C3 /* SettlementFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930F5A01E6D0881008549C3 /* SettlementFootView.xib */; };
@@ -66,6 +73,14 @@
 		7933D9241D9CA879006C0356 /* DistrictTableVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933D9201D9CA879006C0356 /* DistrictTableVc.m */; };
 		7933D9251D9CA879006C0356 /* SubCityTableVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933D9221D9CA879006C0356 /* SubCityTableVc.m */; };
 		7933D9281D9CA942006C0356 /* Citys.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933D9271D9CA942006C0356 /* Citys.m */; };
+		7933E2DB1EDFFCF100C6247F /* NakedDriAllListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933E2D91EDFFCF100C6247F /* NakedDriAllListCell.m */; };
+		7933E2DC1EDFFCF100C6247F /* NakedDriAllListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7933E2DA1EDFFCF100C6247F /* NakedDriAllListCell.xib */; };
+		7933E2DF1EE00AD200C6247F /* NakedDriDetailHeadV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933E2DE1EE00AD200C6247F /* NakedDriDetailHeadV.m */; };
+		7933E2E11EE00B5600C6247F /* NakedDriDetailHeadV.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7933E2E01EE00B5600C6247F /* NakedDriDetailHeadV.xib */; };
+		7933E2E41EE00FF400C6247F /* NakedDriDetailHInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933E2E31EE00FF400C6247F /* NakedDriDetailHInfo.m */; };
+		7933E2E71EE0100F00C6247F /* NakedDriDetailLInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933E2E61EE0100F00C6247F /* NakedDriDetailLInfo.m */; };
+		7933E2EB1EE012A600C6247F /* NakedDriOrderDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7933E2E91EE012A600C6247F /* NakedDriOrderDetailCell.m */; };
+		7933E2EC1EE012A600C6247F /* NakedDriOrderDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7933E2EA1EE012A600C6247F /* NakedDriOrderDetailCell.xib */; };
 		7936D5461E0BC0240056A540 /* ProOrderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7936D5451E0BC0240056A540 /* ProOrderInfo.m */; };
 		7936D5491E0BC0B20056A540 /* ProgressListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7936D5481E0BC0B20056A540 /* ProgressListInfo.m */; };
 		7936D54C1E0BCB790056A540 /* ProgressListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7936D54B1E0BCB790056A540 /* ProgressListView.m */; };
@@ -109,6 +124,24 @@
 		794EDBEA1DDD38CD0018DDF3 /* IQUIView+IQKeyboardToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 794EDBDC1DDD38CD0018DDF3 /* IQUIView+IQKeyboardToolbar.m */; };
 		794EDBEB1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = 794EDBDE1DDD38CD0018DDF3 /* IQUIWindow+Hierarchy.m */; };
 		794F22481E71306B0095899E /* DelSListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F22471E71306B0095899E /* DelSListInfo.m */; };
+		794F28821EDEB46C003EC54D /* NakedDriLibViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28801EDEB46C003EC54D /* NakedDriLibViewController.m */; };
+		794F28831EDEB46C003EC54D /* NakedDriLibViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794F28811EDEB46C003EC54D /* NakedDriLibViewController.xib */; };
+		794F28871EDEB5D8003EC54D /* NakedDriSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28851EDEB5D8003EC54D /* NakedDriSearchVC.m */; };
+		794F28881EDEB5D8003EC54D /* NakedDriSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794F28861EDEB5D8003EC54D /* NakedDriSearchVC.xib */; };
+		794F288C1EDEB619003EC54D /* NakedDriPriceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F288A1EDEB619003EC54D /* NakedDriPriceVC.m */; };
+		794F288D1EDEB619003EC54D /* NakedDriPriceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794F288B1EDEB619003EC54D /* NakedDriPriceVC.xib */; };
+		794F28911EDEB647003EC54D /* NakedDriConfirmOrderVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F288F1EDEB647003EC54D /* NakedDriConfirmOrderVc.m */; };
+		794F28921EDEB647003EC54D /* NakedDriConfirmOrderVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794F28901EDEB647003EC54D /* NakedDriConfirmOrderVc.xib */; };
+		794F28961EDEB68F003EC54D /* NakedDriDetailOrderVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28941EDEB68F003EC54D /* NakedDriDetailOrderVc.m */; };
+		794F28971EDEB68F003EC54D /* NakedDriDetailOrderVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794F28951EDEB68F003EC54D /* NakedDriDetailOrderVc.xib */; };
+		794F289B1EDEB6B1003EC54D /* NakedDriListOrderVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28991EDEB6B1003EC54D /* NakedDriListOrderVc.m */; };
+		794F289C1EDEB6B1003EC54D /* NakedDriListOrderVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794F289A1EDEB6B1003EC54D /* NakedDriListOrderVc.xib */; };
+		794F289F1EDEC5EE003EC54D /* CustomPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F289E1EDEC5EE003EC54D /* CustomPickView.m */; };
+		794F28A21EDEF062003EC54D /* NakedDriLibHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28A11EDEF062003EC54D /* NakedDriLibHeadView.m */; };
+		794F28A41EDEF093003EC54D /* NakedDriLibHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 794F28A31EDEF093003EC54D /* NakedDriLibHeadView.xib */; };
+		794F28A71EDEF8DF003EC54D /* NakedDriLibListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28A61EDEF8DF003EC54D /* NakedDriLibListCell.m */; };
+		794F28AA1EDEF903003EC54D /* NakedDriLibBLabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28A91EDEF903003EC54D /* NakedDriLibBLabCell.m */; };
+		794F28AD1EDEF914003EC54D /* NakedDriLibSLabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F28AC1EDEF914003EC54D /* NakedDriLibSLabCell.m */; };
 		795515961D9BAF7800A458AE /* AddEditAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 795515941D9BAF7800A458AE /* AddEditAddressVC.m */; };
 		795515971D9BAF7800A458AE /* AddEditAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 795515951D9BAF7800A458AE /* AddEditAddressVC.xib */; };
 		7955159A1D9BB81800A458AE /* AddressInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 795515991D9BB81800A458AE /* AddressInfo.m */; };
@@ -182,6 +215,11 @@
 		796793F01D938C05005AEBFB /* ScreeningInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 796793EF1D938C05005AEBFB /* ScreeningInfo.m */; };
 		796793F31D93A74B005AEBFB /* ScreeningTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 796793F21D93A74B005AEBFB /* ScreeningTableCell.m */; };
 		796793F61D93B46F005AEBFB /* ScreeningHeadSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 796793F51D93B46F005AEBFB /* ScreeningHeadSView.m */; };
+		7967B9CD1EDFFABA00DDC352 /* NakedDriSeaHeadV.m in Sources */ = {isa = PBXBuildFile; fileRef = 7967B9CC1EDFFABA00DDC352 /* NakedDriSeaHeadV.m */; };
+		796965771EDFA36C00F6B027 /* TTRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 796965751EDFA36C00F6B027 /* TTRangeSlider.m */; };
+		7969657A1EDFAB5700F6B027 /* NakedDriLiblistInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 796965791EDFAB5700F6B027 /* NakedDriLiblistInfo.m */; };
+		7969657D1EDFABA600F6B027 /* NakedDriLibInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969657C1EDFABA600F6B027 /* NakedDriLibInfo.m */; };
+		796965801EDFAD6C00F6B027 /* NakedDriLibImgInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969657F1EDFAD6C00F6B027 /* NakedDriLibImgInfo.m */; };
 		7969FB721DBE05FF00139681 /* ChooseAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969FB701DBE05FF00139681 /* ChooseAddressVC.m */; };
 		7969FB731DBE05FF00139681 /* ChooseAddressVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7969FB711DBE05FF00139681 /* ChooseAddressVC.xib */; };
 		7969FB771DBE068900139681 /* ChooseAddressTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7969FB751DBE068900139681 /* ChooseAddressTableCell.m */; };
@@ -202,6 +240,10 @@
 		796FD18B1E6E41BB00A50DDC /* SettlementListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 796FD1891E6E41BB00A50DDC /* SettlementListCell.xib */; };
 		7971BD991E03C9A0001A9A2A /* OrderNumTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7971BD981E03C9A0001A9A2A /* OrderNumTool.m */; };
 		79743BE21D927DEA00FB301E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 79743BE11D927DEA00FB301E /* UserInfo.m */; };
+		797688A01EE023B7001C6711 /* NakedDriPirceTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7976889E1EE023B7001C6711 /* NakedDriPirceTableCell.m */; };
+		797688A11EE023B7001C6711 /* NakedDriPirceTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7976889F1EE023B7001C6711 /* NakedDriPirceTableCell.xib */; };
+		797688A51EE025BE001C6711 /* NakedDriConfirmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 797688A31EE025BE001C6711 /* NakedDriConfirmCell.m */; };
+		797688A61EE025BE001C6711 /* NakedDriConfirmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 797688A41EE025BE001C6711 /* NakedDriConfirmCell.xib */; };
 		7979A0291E5BCFAF00604BD5 /* CommonUsedTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7979A0281E5BCFAF00604BD5 /* CommonUsedTool.m */; };
 		797E5EA71DAB34D70017F6A2 /* AllListHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 797E5EA61DAB34D70017F6A2 /* AllListHeadView.m */; };
 		7989B5C71D82422900706F5E /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7989B5C51D82422900706F5E /* ScanViewController.m */; };
@@ -214,6 +256,10 @@
 		799235E51DB766BE0003379B /* ClassListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 799235E31DB766BE0003379B /* ClassListController.xib */; };
 		79A479001DB46F6D00E2EA09 /* PayTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A478FE1DB46F6D00E2EA09 /* PayTableCell.m */; };
 		79A479011DB46F6D00E2EA09 /* PayTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A478FF1DB46F6D00E2EA09 /* PayTableCell.xib */; };
+		79AE517B1EE4DCBA0050A2FB /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 79AE51771EE4DCBA0050A2FB /* AlipaySDK.bundle */; };
+		79AE517C1EE4DCBA0050A2FB /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AE51781EE4DCBA0050A2FB /* AlipaySDK.framework */; };
+		79AE517D1EE4DCBA0050A2FB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AE51791EE4DCBA0050A2FB /* libcrypto.a */; };
+		79AE517E1EE4DCBA0050A2FB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AE517A1EE4DCBA0050A2FB /* libssl.a */; };
 		79B4B8271DA895A600B97070 /* ScreenDetailInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B4B8261DA895A600B97070 /* ScreenDetailInfo.m */; };
 		79B4B82B1DA8C3F500B97070 /* OrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B4B8291DA8C3F500B97070 /* OrderDetailVC.m */; };
 		79B4B82C1DA8C3F500B97070 /* OrderDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79B4B82A1DA8C3F500B97070 /* OrderDetailVC.xib */; };
@@ -225,6 +271,16 @@
 		79B4B83C1DA8F0B100B97070 /* StrWithIntTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B4B83B1DA8F0B100B97070 /* StrWithIntTool.m */; };
 		79C1963F1DB0BCB70098FB89 /* EditPhoneNumVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C1963D1DB0BCB70098FB89 /* EditPhoneNumVc.m */; };
 		79C196401DB0BCB70098FB89 /* EditPhoneNumVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C1963E1DB0BCB70098FB89 /* EditPhoneNumVc.xib */; };
+		79C895021EDF979500CE9333 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C895011EDF979500CE9333 /* libc++.tbd */; };
+		79C895041EDF97A500CE9333 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C895031EDF97A500CE9333 /* libz.tbd */; };
+		79C895061EDF97B400CE9333 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C895051EDF97B400CE9333 /* CoreTelephony.framework */; };
+		79C895081EDF97BE00CE9333 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C895071EDF97BE00CE9333 /* QuartzCore.framework */; };
+		79C8950A1EDF97CD00CE9333 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C895091EDF97CD00CE9333 /* CoreText.framework */; };
+		79C8950C1EDF97D700CE9333 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C8950B1EDF97D700CE9333 /* CoreGraphics.framework */; };
+		79C8950E1EDF97E200CE9333 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C8950D1EDF97E200CE9333 /* UIKit.framework */; };
+		79C895101EDF97EB00CE9333 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C8950F1EDF97EB00CE9333 /* Foundation.framework */; };
+		79C895121EDF97F600CE9333 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C895111EDF97F600CE9333 /* CFNetwork.framework */; };
+		79C895141EDF980300CE9333 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C895131EDF980300CE9333 /* CoreMotion.framework */; };
 		79CD6B991E77E39300492463 /* SearchOrderVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD6B971E77E39300492463 /* SearchOrderVc.m */; };
 		79CD6B9A1E77E39300492463 /* SearchOrderVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD6B981E77E39300492463 /* SearchOrderVc.xib */; };
 		79CD6B9D1E77E8D700492463 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD6B9C1E77E8D700492463 /* CustomTextField.m */; };
@@ -294,6 +350,10 @@
 
 /* Begin PBXFileReference section */
 		2DA28B36AF90E2D5C539E66B /* Pods-MillenniumStarERP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MillenniumStarERP.release.xcconfig"; path = "Pods/Target Support Files/Pods-MillenniumStarERP/Pods-MillenniumStarERP.release.xcconfig"; sourceTree = "<group>"; };
+		790375FD1EDFE0DC00344FCD /* NakedDriSeaTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriSeaTableCell.h; sourceTree = "<group>"; };
+		790375FE1EDFE0DC00344FCD /* NakedDriSeaTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriSeaTableCell.m; sourceTree = "<group>"; };
+		790376001EDFE30400344FCD /* NakedDriSeaListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriSeaListInfo.h; sourceTree = "<group>"; };
+		790376011EDFE30400344FCD /* NakedDriSeaListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriSeaListInfo.m; sourceTree = "<group>"; };
 		79050AD91DF7B84700DCEA69 /* DetailHeadInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailHeadInfo.h; sourceTree = "<group>"; };
 		79050ADA1DF7B84700DCEA69 /* DetailHeadInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailHeadInfo.m; sourceTree = "<group>"; };
 		79050ADC1DF7F92B00DCEA69 /* ZBButten.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBButten.h; sourceTree = "<group>"; };
@@ -322,6 +382,11 @@
 		790C70A81DCC21C5007343BA /* NetworkDetermineTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkDetermineTool.m; sourceTree = "<group>"; };
 		790C70A91DCC21C5007343BA /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		790C70AA1DCC21C5007343BA /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		790D22451EE115FE00EB6450 /* NakedDriConfirmHeadV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriConfirmHeadV.h; sourceTree = "<group>"; };
+		790D22461EE115FE00EB6450 /* NakedDriConfirmHeadV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriConfirmHeadV.m; sourceTree = "<group>"; };
+		790D22481EE1161B00EB6450 /* NakedDriConfirmHeadV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriConfirmHeadV.xib; sourceTree = "<group>"; };
+		790D224A1EE136A700EB6450 /* NakedDriConfirmInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriConfirmInfo.h; sourceTree = "<group>"; };
+		790D224B1EE136A700EB6450 /* NakedDriConfirmInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriConfirmInfo.m; sourceTree = "<group>"; };
 		7915BCDE1E7A6F0100407927 /* ProductionDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionDetailView.h; sourceTree = "<group>"; };
 		7915BCDF1E7A6F0100407927 /* ProductionDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductionDetailView.m; sourceTree = "<group>"; };
 		7915BCE11E7A6F5100407927 /* SettlementDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementDetailView.h; sourceTree = "<group>"; };
@@ -378,6 +443,10 @@
 		792DF4BA1E021B7E00128456 /* ChooseInvoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseInvoiceCell.xib; sourceTree = "<group>"; };
 		792E2B7C1DC9E0A10050C6D0 /* OrderPriceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPriceInfo.h; sourceTree = "<group>"; };
 		792E2B7D1DC9E0A10050C6D0 /* OrderPriceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPriceInfo.m; sourceTree = "<group>"; };
+		7930C05A1EDFED2A00F7379E /* NakedDriOrderListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriOrderListView.h; sourceTree = "<group>"; };
+		7930C05B1EDFED2A00F7379E /* NakedDriOrderListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriOrderListView.m; sourceTree = "<group>"; };
+		7930C05D1EDFEE6000F7379E /* NakedDriOListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriOListInfo.h; sourceTree = "<group>"; };
+		7930C05E1EDFEE6000F7379E /* NakedDriOListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriOListInfo.m; sourceTree = "<group>"; };
 		7930F59A1E6D043C008549C3 /* SettlementSecHedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementSecHedView.h; sourceTree = "<group>"; };
 		7930F59B1E6D043C008549C3 /* SettlementSecHedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementSecHedView.m; sourceTree = "<group>"; };
 		7930F59D1E6D0861008549C3 /* SettlementFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettlementFootView.h; sourceTree = "<group>"; };
@@ -393,6 +462,19 @@
 		7933D9221D9CA879006C0356 /* SubCityTableVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCityTableVc.m; sourceTree = "<group>"; };
 		7933D9261D9CA942006C0356 /* Citys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Citys.h; sourceTree = "<group>"; };
 		7933D9271D9CA942006C0356 /* Citys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Citys.m; sourceTree = "<group>"; };
+		7933E2D81EDFFCF100C6247F /* NakedDriAllListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriAllListCell.h; sourceTree = "<group>"; };
+		7933E2D91EDFFCF100C6247F /* NakedDriAllListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriAllListCell.m; sourceTree = "<group>"; };
+		7933E2DA1EDFFCF100C6247F /* NakedDriAllListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriAllListCell.xib; sourceTree = "<group>"; };
+		7933E2DD1EE00AD200C6247F /* NakedDriDetailHeadV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriDetailHeadV.h; sourceTree = "<group>"; };
+		7933E2DE1EE00AD200C6247F /* NakedDriDetailHeadV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriDetailHeadV.m; sourceTree = "<group>"; };
+		7933E2E01EE00B5600C6247F /* NakedDriDetailHeadV.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriDetailHeadV.xib; sourceTree = "<group>"; };
+		7933E2E21EE00FF400C6247F /* NakedDriDetailHInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriDetailHInfo.h; sourceTree = "<group>"; };
+		7933E2E31EE00FF400C6247F /* NakedDriDetailHInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriDetailHInfo.m; sourceTree = "<group>"; };
+		7933E2E51EE0100F00C6247F /* NakedDriDetailLInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriDetailLInfo.h; sourceTree = "<group>"; };
+		7933E2E61EE0100F00C6247F /* NakedDriDetailLInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriDetailLInfo.m; sourceTree = "<group>"; };
+		7933E2E81EE012A600C6247F /* NakedDriOrderDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriOrderDetailCell.h; sourceTree = "<group>"; };
+		7933E2E91EE012A600C6247F /* NakedDriOrderDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriOrderDetailCell.m; sourceTree = "<group>"; };
+		7933E2EA1EE012A600C6247F /* NakedDriOrderDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriOrderDetailCell.xib; sourceTree = "<group>"; };
 		7936D5441E0BC0240056A540 /* ProOrderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProOrderInfo.h; sourceTree = "<group>"; };
 		7936D5451E0BC0240056A540 /* ProOrderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProOrderInfo.m; sourceTree = "<group>"; };
 		7936D5471E0BC0B20056A540 /* ProgressListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressListInfo.h; sourceTree = "<group>"; };
@@ -476,6 +558,35 @@
 		794EDBDF1DDD38CD0018DDF3 /* KeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardManager.h; sourceTree = "<group>"; };
 		794F22461E71306B0095899E /* DelSListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelSListInfo.h; sourceTree = "<group>"; };
 		794F22471E71306B0095899E /* DelSListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelSListInfo.m; sourceTree = "<group>"; };
+		794F287F1EDEB46C003EC54D /* NakedDriLibViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLibViewController.h; sourceTree = "<group>"; };
+		794F28801EDEB46C003EC54D /* NakedDriLibViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLibViewController.m; sourceTree = "<group>"; };
+		794F28811EDEB46C003EC54D /* NakedDriLibViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriLibViewController.xib; sourceTree = "<group>"; };
+		794F28841EDEB5D8003EC54D /* NakedDriSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriSearchVC.h; sourceTree = "<group>"; };
+		794F28851EDEB5D8003EC54D /* NakedDriSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriSearchVC.m; sourceTree = "<group>"; };
+		794F28861EDEB5D8003EC54D /* NakedDriSearchVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriSearchVC.xib; sourceTree = "<group>"; };
+		794F28891EDEB619003EC54D /* NakedDriPriceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriPriceVC.h; sourceTree = "<group>"; };
+		794F288A1EDEB619003EC54D /* NakedDriPriceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriPriceVC.m; sourceTree = "<group>"; };
+		794F288B1EDEB619003EC54D /* NakedDriPriceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriPriceVC.xib; sourceTree = "<group>"; };
+		794F288E1EDEB647003EC54D /* NakedDriConfirmOrderVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriConfirmOrderVc.h; sourceTree = "<group>"; };
+		794F288F1EDEB647003EC54D /* NakedDriConfirmOrderVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriConfirmOrderVc.m; sourceTree = "<group>"; };
+		794F28901EDEB647003EC54D /* NakedDriConfirmOrderVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriConfirmOrderVc.xib; sourceTree = "<group>"; };
+		794F28931EDEB68F003EC54D /* NakedDriDetailOrderVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriDetailOrderVc.h; sourceTree = "<group>"; };
+		794F28941EDEB68F003EC54D /* NakedDriDetailOrderVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriDetailOrderVc.m; sourceTree = "<group>"; };
+		794F28951EDEB68F003EC54D /* NakedDriDetailOrderVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriDetailOrderVc.xib; sourceTree = "<group>"; };
+		794F28981EDEB6B1003EC54D /* NakedDriListOrderVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriListOrderVc.h; sourceTree = "<group>"; };
+		794F28991EDEB6B1003EC54D /* NakedDriListOrderVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriListOrderVc.m; sourceTree = "<group>"; };
+		794F289A1EDEB6B1003EC54D /* NakedDriListOrderVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriListOrderVc.xib; sourceTree = "<group>"; };
+		794F289D1EDEC5EE003EC54D /* CustomPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPickView.h; sourceTree = "<group>"; };
+		794F289E1EDEC5EE003EC54D /* CustomPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPickView.m; sourceTree = "<group>"; };
+		794F28A01EDEF062003EC54D /* NakedDriLibHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLibHeadView.h; sourceTree = "<group>"; };
+		794F28A11EDEF062003EC54D /* NakedDriLibHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLibHeadView.m; sourceTree = "<group>"; };
+		794F28A31EDEF093003EC54D /* NakedDriLibHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriLibHeadView.xib; sourceTree = "<group>"; };
+		794F28A51EDEF8DF003EC54D /* NakedDriLibListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLibListCell.h; sourceTree = "<group>"; };
+		794F28A61EDEF8DF003EC54D /* NakedDriLibListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLibListCell.m; sourceTree = "<group>"; };
+		794F28A81EDEF903003EC54D /* NakedDriLibBLabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLibBLabCell.h; sourceTree = "<group>"; };
+		794F28A91EDEF903003EC54D /* NakedDriLibBLabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLibBLabCell.m; sourceTree = "<group>"; };
+		794F28AB1EDEF914003EC54D /* NakedDriLibSLabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLibSLabCell.h; sourceTree = "<group>"; };
+		794F28AC1EDEF914003EC54D /* NakedDriLibSLabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLibSLabCell.m; sourceTree = "<group>"; };
 		795515931D9BAF7800A458AE /* AddEditAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEditAddressVC.h; sourceTree = "<group>"; };
 		795515941D9BAF7800A458AE /* AddEditAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEditAddressVC.m; sourceTree = "<group>"; };
 		795515951D9BAF7800A458AE /* AddEditAddressVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddEditAddressVC.xib; sourceTree = "<group>"; };
@@ -609,6 +720,17 @@
 		796793F21D93A74B005AEBFB /* ScreeningTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningTableCell.m; sourceTree = "<group>"; };
 		796793F41D93B46F005AEBFB /* ScreeningHeadSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreeningHeadSView.h; sourceTree = "<group>"; };
 		796793F51D93B46F005AEBFB /* ScreeningHeadSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreeningHeadSView.m; sourceTree = "<group>"; };
+		7967B9CB1EDFFAB900DDC352 /* NakedDriSeaHeadV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriSeaHeadV.h; sourceTree = "<group>"; };
+		7967B9CC1EDFFABA00DDC352 /* NakedDriSeaHeadV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriSeaHeadV.m; sourceTree = "<group>"; };
+		796965741EDFA36C00F6B027 /* TTRangeSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTRangeSlider.h; sourceTree = "<group>"; };
+		796965751EDFA36C00F6B027 /* TTRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTRangeSlider.m; sourceTree = "<group>"; };
+		796965761EDFA36C00F6B027 /* TTRangeSliderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTRangeSliderDelegate.h; sourceTree = "<group>"; };
+		796965781EDFAB5700F6B027 /* NakedDriLiblistInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLiblistInfo.h; sourceTree = "<group>"; };
+		796965791EDFAB5700F6B027 /* NakedDriLiblistInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLiblistInfo.m; sourceTree = "<group>"; };
+		7969657B1EDFABA600F6B027 /* NakedDriLibInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLibInfo.h; sourceTree = "<group>"; };
+		7969657C1EDFABA600F6B027 /* NakedDriLibInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLibInfo.m; sourceTree = "<group>"; };
+		7969657E1EDFAD6C00F6B027 /* NakedDriLibImgInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriLibImgInfo.h; sourceTree = "<group>"; };
+		7969657F1EDFAD6C00F6B027 /* NakedDriLibImgInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriLibImgInfo.m; sourceTree = "<group>"; };
 		7969FB6F1DBE05FF00139681 /* ChooseAddressVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseAddressVC.h; sourceTree = "<group>"; };
 		7969FB701DBE05FF00139681 /* ChooseAddressVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseAddressVC.m; sourceTree = "<group>"; };
 		7969FB711DBE05FF00139681 /* ChooseAddressVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseAddressVC.xib; sourceTree = "<group>"; };
@@ -641,6 +763,12 @@
 		7971BD981E03C9A0001A9A2A /* OrderNumTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderNumTool.m; sourceTree = "<group>"; };
 		79743BE01D927DEA00FB301E /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		79743BE11D927DEA00FB301E /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		7976889D1EE023B7001C6711 /* NakedDriPirceTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriPirceTableCell.h; sourceTree = "<group>"; };
+		7976889E1EE023B7001C6711 /* NakedDriPirceTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriPirceTableCell.m; sourceTree = "<group>"; };
+		7976889F1EE023B7001C6711 /* NakedDriPirceTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriPirceTableCell.xib; sourceTree = "<group>"; };
+		797688A21EE025BE001C6711 /* NakedDriConfirmCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriConfirmCell.h; sourceTree = "<group>"; };
+		797688A31EE025BE001C6711 /* NakedDriConfirmCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriConfirmCell.m; sourceTree = "<group>"; };
+		797688A41EE025BE001C6711 /* NakedDriConfirmCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NakedDriConfirmCell.xib; sourceTree = "<group>"; };
 		7979A0271E5BCFAF00604BD5 /* CommonUsedTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUsedTool.h; sourceTree = "<group>"; };
 		7979A0281E5BCFAF00604BD5 /* CommonUsedTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUsedTool.m; sourceTree = "<group>"; };
 		797E5EA51DAB34D70017F6A2 /* AllListHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllListHeadView.h; sourceTree = "<group>"; };
@@ -665,6 +793,10 @@
 		79A478FD1DB46F6D00E2EA09 /* PayTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayTableCell.h; sourceTree = "<group>"; };
 		79A478FE1DB46F6D00E2EA09 /* PayTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayTableCell.m; sourceTree = "<group>"; };
 		79A478FF1DB46F6D00E2EA09 /* PayTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayTableCell.xib; sourceTree = "<group>"; };
+		79AE51771EE4DCBA0050A2FB /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		79AE51781EE4DCBA0050A2FB /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		79AE51791EE4DCBA0050A2FB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		79AE517A1EE4DCBA0050A2FB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		79B4B8251DA895A600B97070 /* ScreenDetailInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenDetailInfo.h; sourceTree = "<group>"; };
 		79B4B8261DA895A600B97070 /* ScreenDetailInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenDetailInfo.m; sourceTree = "<group>"; };
 		79B4B8281DA8C3F500B97070 /* OrderDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailVC.h; sourceTree = "<group>"; };
@@ -683,6 +815,16 @@
 		79C1963C1DB0BCB70098FB89 /* EditPhoneNumVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPhoneNumVc.h; sourceTree = "<group>"; };
 		79C1963D1DB0BCB70098FB89 /* EditPhoneNumVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPhoneNumVc.m; sourceTree = "<group>"; };
 		79C1963E1DB0BCB70098FB89 /* EditPhoneNumVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPhoneNumVc.xib; sourceTree = "<group>"; };
+		79C895011EDF979500CE9333 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		79C895031EDF97A500CE9333 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		79C895051EDF97B400CE9333 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		79C895071EDF97BE00CE9333 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		79C895091EDF97CD00CE9333 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		79C8950B1EDF97D700CE9333 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		79C8950D1EDF97E200CE9333 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		79C8950F1EDF97EB00CE9333 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		79C895111EDF97F600CE9333 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		79C895131EDF980300CE9333 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		79CD6B961E77E39300492463 /* SearchOrderVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchOrderVc.h; sourceTree = "<group>"; };
 		79CD6B971E77E39300492463 /* SearchOrderVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOrderVc.m; sourceTree = "<group>"; };
 		79CD6B981E77E39300492463 /* SearchOrderVc.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchOrderVc.xib; sourceTree = "<group>"; };
@@ -771,6 +913,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79C895141EDF980300CE9333 /* CoreMotion.framework in Frameworks */,
+				79C895121EDF97F600CE9333 /* CFNetwork.framework in Frameworks */,
+				79C895101EDF97EB00CE9333 /* Foundation.framework in Frameworks */,
+				79C8950E1EDF97E200CE9333 /* UIKit.framework in Frameworks */,
+				79C8950C1EDF97D700CE9333 /* CoreGraphics.framework in Frameworks */,
+				79AE517E1EE4DCBA0050A2FB /* libssl.a in Frameworks */,
+				79C8950A1EDF97CD00CE9333 /* CoreText.framework in Frameworks */,
+				79AE517D1EE4DCBA0050A2FB /* libcrypto.a in Frameworks */,
+				79C895081EDF97BE00CE9333 /* QuartzCore.framework in Frameworks */,
+				79C895061EDF97B400CE9333 /* CoreTelephony.framework in Frameworks */,
+				79C895041EDF97A500CE9333 /* libz.tbd in Frameworks */,
+				79C895021EDF979500CE9333 /* libc++.tbd in Frameworks */,
+				79AE517C1EE4DCBA0050A2FB /* AlipaySDK.framework in Frameworks */,
 				79F6B8271DCC28440025E085 /* SystemConfiguration.framework in Frameworks */,
 				0B02C56CEF9CD4F9CC95C4A6 /* libPods-MillenniumStarERP.a in Frameworks */,
 			);
@@ -1116,11 +1271,23 @@
 		79655E221D7D3E01006B90FC /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				79AE51761EE4DCBA0050A2FB /* AliPaySDK */,
+				796965731EDFA36C00F6B027 /* TTRangeSlider */,
 				794EDBC51DDD38CD0018DDF3 /* IQKeyBoardManager */,
 				796218F31D98FD6100FE01D6 /* ETFoursquareImages */,
 				7989B5C91D824BD600706F5E /* PureLayout */,
 			);
 			path = ThirdSDK;
+			sourceTree = "<group>";
+		};
+		796965731EDFA36C00F6B027 /* TTRangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				796965741EDFA36C00F6B027 /* TTRangeSlider.h */,
+				796965751EDFA36C00F6B027 /* TTRangeSlider.m */,
+				796965761EDFA36C00F6B027 /* TTRangeSliderDelegate.h */,
+			);
+			path = TTRangeSlider;
 			sourceTree = "<group>";
 		};
 		7989B5C91D824BD600706F5E /* PureLayout */ = {
@@ -1137,6 +1304,17 @@
 				7989B5D21D824BD600706F5E /* PureLayoutDefines.h */,
 			);
 			path = PureLayout;
+			sourceTree = "<group>";
+		};
+		79AE51761EE4DCBA0050A2FB /* AliPaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				79AE51771EE4DCBA0050A2FB /* AlipaySDK.bundle */,
+				79AE51781EE4DCBA0050A2FB /* AlipaySDK.framework */,
+				79AE51791EE4DCBA0050A2FB /* libcrypto.a */,
+				79AE517A1EE4DCBA0050A2FB /* libssl.a */,
+			);
+			path = AliPaySDK;
 			sourceTree = "<group>";
 		};
 		79E8B21F1D7FC0F2009D7296 /* Controller */ = {
@@ -1160,6 +1338,24 @@
 				792C01B91D89043B005943AE /* ConfirmOrderVC.h */,
 				792C01BA1D89043B005943AE /* ConfirmOrderVC.m */,
 				792C01BB1D89043B005943AE /* ConfirmOrderVC.xib */,
+				794F287F1EDEB46C003EC54D /* NakedDriLibViewController.h */,
+				794F28801EDEB46C003EC54D /* NakedDriLibViewController.m */,
+				794F28811EDEB46C003EC54D /* NakedDriLibViewController.xib */,
+				794F28841EDEB5D8003EC54D /* NakedDriSearchVC.h */,
+				794F28851EDEB5D8003EC54D /* NakedDriSearchVC.m */,
+				794F28861EDEB5D8003EC54D /* NakedDriSearchVC.xib */,
+				794F28891EDEB619003EC54D /* NakedDriPriceVC.h */,
+				794F288A1EDEB619003EC54D /* NakedDriPriceVC.m */,
+				794F288B1EDEB619003EC54D /* NakedDriPriceVC.xib */,
+				794F288E1EDEB647003EC54D /* NakedDriConfirmOrderVc.h */,
+				794F288F1EDEB647003EC54D /* NakedDriConfirmOrderVc.m */,
+				794F28901EDEB647003EC54D /* NakedDriConfirmOrderVc.xib */,
+				794F28981EDEB6B1003EC54D /* NakedDriListOrderVc.h */,
+				794F28991EDEB6B1003EC54D /* NakedDriListOrderVc.m */,
+				794F289A1EDEB6B1003EC54D /* NakedDriListOrderVc.xib */,
+				794F28931EDEB68F003EC54D /* NakedDriDetailOrderVc.h */,
+				794F28941EDEB68F003EC54D /* NakedDriDetailOrderVc.m */,
+				794F28951EDEB68F003EC54D /* NakedDriDetailOrderVc.xib */,
 				792B85D91DBEFFAF00A71635 /* SearchCustomerVC.h */,
 				792B85DA1DBEFFAF00A71635 /* SearchCustomerVC.m */,
 				792B85DB1DBEFFAF00A71635 /* SearchCustomerVC.xib */,
@@ -1292,6 +1488,22 @@
 				794B71931E7FAFD400A8BCE7 /* SearchResultInfo.m */,
 				7940ACE51E84CDA600216916 /* SearchDateInfo.h */,
 				7940ACE61E84CDA600216916 /* SearchDateInfo.m */,
+				796965781EDFAB5700F6B027 /* NakedDriLiblistInfo.h */,
+				796965791EDFAB5700F6B027 /* NakedDriLiblistInfo.m */,
+				7969657B1EDFABA600F6B027 /* NakedDriLibInfo.h */,
+				7969657C1EDFABA600F6B027 /* NakedDriLibInfo.m */,
+				7969657E1EDFAD6C00F6B027 /* NakedDriLibImgInfo.h */,
+				7969657F1EDFAD6C00F6B027 /* NakedDriLibImgInfo.m */,
+				790376001EDFE30400344FCD /* NakedDriSeaListInfo.h */,
+				790376011EDFE30400344FCD /* NakedDriSeaListInfo.m */,
+				790D224A1EE136A700EB6450 /* NakedDriConfirmInfo.h */,
+				790D224B1EE136A700EB6450 /* NakedDriConfirmInfo.m */,
+				7930C05D1EDFEE6000F7379E /* NakedDriOListInfo.h */,
+				7930C05E1EDFEE6000F7379E /* NakedDriOListInfo.m */,
+				7933E2E21EE00FF400C6247F /* NakedDriDetailHInfo.h */,
+				7933E2E31EE00FF400C6247F /* NakedDriDetailHInfo.m */,
+				7933E2E51EE0100F00C6247F /* NakedDriDetailLInfo.h */,
+				7933E2E61EE0100F00C6247F /* NakedDriDetailLInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1305,6 +1517,8 @@
 				79ED9ED91DC0511F00257454 /* UserManagerScrollPageView.m */,
 				79ED9EDA1DC0511F00257454 /* UserManagerTableView.h */,
 				79ED9EDB1DC0511F00257454 /* UserManagerTableView.m */,
+				7930C05A1EDFED2A00F7379E /* NakedDriOrderListView.h */,
+				7930C05B1EDFED2A00F7379E /* NakedDriOrderListView.m */,
 				7915BCDE1E7A6F0100407927 /* ProductionDetailView.h */,
 				7915BCDF1E7A6F0100407927 /* ProductionDetailView.m */,
 				7915BCE11E7A6F5100407927 /* SettlementDetailView.h */,
@@ -1381,6 +1595,8 @@
 				792C01B61D88EAC3005943AE /* CustomLastCell.xib */,
 				796F54901DAA3AC000AD7AB2 /* CustomPopView.h */,
 				796F54911DAA3AC000AD7AB2 /* CustomPopView.m */,
+				794F289D1EDEC5EE003EC54D /* CustomPickView.h */,
+				794F289E1EDEC5EE003EC54D /* CustomPickView.m */,
 				7943F10B1E8F3D6A00268ABB /* CustomBottomView.h */,
 				7943F10C1E8F3D6A00268ABB /* CustomBottomView.m */,
 				799235DB1DB752400003379B /* RemarkPopView.h */,
@@ -1456,6 +1672,37 @@
 				7915BCE91E7A833E00407927 /* SearchResultTableCell.xib */,
 				794B718F1E7F8D9200A8BCE7 /* SearchHeadBtnView.h */,
 				794B71901E7F8D9200A8BCE7 /* SearchHeadBtnView.m */,
+				7976889D1EE023B7001C6711 /* NakedDriPirceTableCell.h */,
+				7976889E1EE023B7001C6711 /* NakedDriPirceTableCell.m */,
+				7976889F1EE023B7001C6711 /* NakedDriPirceTableCell.xib */,
+				794F28A01EDEF062003EC54D /* NakedDriLibHeadView.h */,
+				794F28A11EDEF062003EC54D /* NakedDriLibHeadView.m */,
+				794F28A31EDEF093003EC54D /* NakedDriLibHeadView.xib */,
+				794F28A51EDEF8DF003EC54D /* NakedDriLibListCell.h */,
+				794F28A61EDEF8DF003EC54D /* NakedDriLibListCell.m */,
+				794F28A81EDEF903003EC54D /* NakedDriLibBLabCell.h */,
+				794F28A91EDEF903003EC54D /* NakedDriLibBLabCell.m */,
+				794F28AB1EDEF914003EC54D /* NakedDriLibSLabCell.h */,
+				794F28AC1EDEF914003EC54D /* NakedDriLibSLabCell.m */,
+				790375FD1EDFE0DC00344FCD /* NakedDriSeaTableCell.h */,
+				790375FE1EDFE0DC00344FCD /* NakedDriSeaTableCell.m */,
+				790D22451EE115FE00EB6450 /* NakedDriConfirmHeadV.h */,
+				790D22461EE115FE00EB6450 /* NakedDriConfirmHeadV.m */,
+				790D22481EE1161B00EB6450 /* NakedDriConfirmHeadV.xib */,
+				797688A21EE025BE001C6711 /* NakedDriConfirmCell.h */,
+				797688A31EE025BE001C6711 /* NakedDriConfirmCell.m */,
+				797688A41EE025BE001C6711 /* NakedDriConfirmCell.xib */,
+				7933E2D81EDFFCF100C6247F /* NakedDriAllListCell.h */,
+				7933E2D91EDFFCF100C6247F /* NakedDriAllListCell.m */,
+				7933E2DA1EDFFCF100C6247F /* NakedDriAllListCell.xib */,
+				7967B9CB1EDFFAB900DDC352 /* NakedDriSeaHeadV.h */,
+				7967B9CC1EDFFABA00DDC352 /* NakedDriSeaHeadV.m */,
+				7933E2DD1EE00AD200C6247F /* NakedDriDetailHeadV.h */,
+				7933E2DE1EE00AD200C6247F /* NakedDriDetailHeadV.m */,
+				7933E2E01EE00B5600C6247F /* NakedDriDetailHeadV.xib */,
+				7933E2E81EE012A600C6247F /* NakedDriOrderDetailCell.h */,
+				7933E2E91EE012A600C6247F /* NakedDriOrderDetailCell.m */,
+				7933E2EA1EE012A600C6247F /* NakedDriOrderDetailCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1489,6 +1736,16 @@
 		F7FF892ECDDB77EEEDFE1A67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79C895131EDF980300CE9333 /* CoreMotion.framework */,
+				79C895111EDF97F600CE9333 /* CFNetwork.framework */,
+				79C8950F1EDF97EB00CE9333 /* Foundation.framework */,
+				79C8950D1EDF97E200CE9333 /* UIKit.framework */,
+				79C8950B1EDF97D700CE9333 /* CoreGraphics.framework */,
+				79C895091EDF97CD00CE9333 /* CoreText.framework */,
+				79C895071EDF97BE00CE9333 /* QuartzCore.framework */,
+				79C895051EDF97B400CE9333 /* CoreTelephony.framework */,
+				79C895031EDF97A500CE9333 /* libz.tbd */,
+				79C895011EDF979500CE9333 /* libc++.tbd */,
 				79F6B8261DCC28440025E085 /* SystemConfiguration.framework */,
 				DD7A030BEEA4F618DC154CD2 /* libPods-MillenniumStarERP.a */,
 			);
@@ -1605,13 +1862,17 @@
 				796FD18B1E6E41BB00A50DDC /* SettlementListCell.xib in Resources */,
 				792DF4BC1E021B7E00128456 /* ChooseInvoiceCell.xib in Resources */,
 				7948B34B1E79143400909601 /* SearchResultDetailVC.xib in Resources */,
+				794F288D1EDEB619003EC54D /* NakedDriPriceVC.xib in Resources */,
+				794F28921EDEB647003EC54D /* NakedDriConfirmOrderVc.xib in Resources */,
 				79E8B2261D7FC180009D7296 /* HomeHeadView.xib in Resources */,
 				79E8B22B1D7FEE95009D7296 /* EditUserInfoVC.xib in Resources */,
 				792B85DD1DBEFFAF00A71635 /* SearchCustomerVC.xib in Resources */,
 				7959A8EA1D81510E009CAA02 /* PopViewSingleCell.xib in Resources */,
 				790C70A41DCC1B23007343BA /* NetworkView.xib in Resources */,
+				7933E2DC1EDFFCF100C6247F /* NakedDriAllListCell.xib in Resources */,
 				792C01B81D88EAC3005943AE /* CustomLastCell.xib in Resources */,
 				79B4B82C1DA8C3F500B97070 /* OrderDetailVC.xib in Resources */,
+				794F28831EDEB46C003EC54D /* NakedDriLibViewController.xib in Resources */,
 				7922F2991DCADD9F003E0C8F /* CusTomLoginView.xib in Resources */,
 				7915BCEB1E7A833E00407927 /* SearchResultTableCell.xib in Resources */,
 				7958EF2D1D87DB0C009084B5 /* CustomProCell.xib in Resources */,
@@ -1620,9 +1881,13 @@
 				7989B5C81D82422900706F5E /* ScanViewController.xib in Resources */,
 				79A479011DB46F6D00E2EA09 /* PayTableCell.xib in Resources */,
 				790C2C251E092776006D9DCF /* ProgressOrderVc.xib in Resources */,
+				79AE517B1EE4DCBA0050A2FB /* AlipaySDK.bundle in Resources */,
+				797688A61EE025BE001C6711 /* NakedDriConfirmCell.xib in Resources */,
 				792C01C71D891FB3005943AE /* ConfirmOrdCell.xib in Resources */,
 				79655DEE1D7D0AAA006B90FC /* LoginViewController.xib in Resources */,
+				794F28A41EDEF093003EC54D /* NakedDriLibHeadView.xib in Resources */,
 				79E177971E6917F200318916 /* DeliveryOrderTableCell.xib in Resources */,
+				7933E2E11EE00B5600C6247F /* NakedDriDetailHeadV.xib in Resources */,
 				7969FB731DBE05FF00139681 /* ChooseAddressVC.xib in Resources */,
 				79655E1C1D7D0F06006B90FC /* InformationVC.xib in Resources */,
 				79E177881E690F6400318916 /* DeliveryOrderVC.xib in Resources */,
@@ -1639,12 +1904,16 @@
 				796B1F5C1E6FACFC006B7330 /* AppDownViewC.xib in Resources */,
 				7930F5A11E6D0881008549C3 /* SettlementFootView.xib in Resources */,
 				7959A8C41D810CC5009CAA02 /* ProductListVC.xib in Resources */,
+				790D22491EE1161B00EB6450 /* NakedDriConfirmHeadV.xib in Resources */,
+				794F28971EDEB68F003EC54D /* NakedDriDetailOrderVc.xib in Resources */,
 				799235E51DB766BE0003379B /* ClassListController.xib in Resources */,
 				79FF7A8E1E6D3A81003EF5E7 /* OrderSettlementTableCell.xib in Resources */,
 				790C70A61DCC1B23007343BA /* NoNetViewController.xib in Resources */,
+				7933E2EC1EE012A600C6247F /* NakedDriOrderDetailCell.xib in Resources */,
 				790C70A21DCC1B23007343BA /* NearbyNetworkView.xib in Resources */,
 				796BFF8D1DE28F73008D78A4 /* ProduceHeadView.xib in Resources */,
 				796FD1811E6E3CDE00A50DDC /* SettlementListVC.xib in Resources */,
+				794F289C1EDEB6B1003EC54D /* NakedDriListOrderVc.xib in Resources */,
 				7948B3461E79138100909601 /* SearchResultsVC.xib in Resources */,
 				7948B33B1E78DEB200909601 /* CustomDatePick.xib in Resources */,
 				794EDBE11DDD38CD0018DDF3 /* IQKeyboardManager.bundle in Resources */,
@@ -1667,6 +1936,8 @@
 				79ED9EE31DC0531A00257454 /* OrderListController.xib in Resources */,
 				790C2C2A1E092914006D9DCF /* ProgressHeadView.xib in Resources */,
 				79B4B8391DA8DD3A00B97070 /* OrderHeadView.xib in Resources */,
+				794F28881EDEB5D8003EC54D /* NakedDriSearchVC.xib in Resources */,
+				797688A11EE023B7001C6711 /* NakedDriPirceTableCell.xib in Resources */,
 				79E8B23B1D800063009D7296 /* EditAddressVC.xib in Resources */,
 				79E177921E6910AA00318916 /* DeliveryOrderHeadView.xib in Resources */,
 				79B4B8311DA8C5F100B97070 /* OrderBottomTableCell.xib in Resources */,
@@ -1768,6 +2039,8 @@
 				792C01B21D88EAA5005943AE /* CustomFirstCell.m in Sources */,
 				7969FB721DBE05FF00139681 /* ChooseAddressVC.m in Sources */,
 				793377661DD96039007959BB /* OrderNewInfo.m in Sources */,
+				7933E2E41EE00FF400C6247F /* NakedDriDetailHInfo.m in Sources */,
+				7969657A1EDFAB5700F6B027 /* NakedDriLiblistInfo.m in Sources */,
 				79655DE61D7D0AAA006B90FC /* UIView+Extension.m in Sources */,
 				796793F01D938C05005AEBFB /* ScreeningInfo.m in Sources */,
 				793B9F4F1D910B7F00DCFB6E /* AllListPopView.m in Sources */,
@@ -1777,12 +2050,14 @@
 				794EDBE71DDD38CD0018DDF3 /* IQTitleBarButtonItem.m in Sources */,
 				794EDBE81DDD38CD0018DDF3 /* IQToolbar.m in Sources */,
 				79655E101D7D0E53006B90FC /* BaseViewController.m in Sources */,
+				797688A51EE025BE001C6711 /* NakedDriConfirmCell.m in Sources */,
 				7930F59C1E6D043C008549C3 /* SettlementSecHedView.m in Sources */,
 				790C70A11DCC1B23007343BA /* NearbyNetworkView.m in Sources */,
 				79655DE71D7D0AAA006B90FC /* UIWindow+Extension.m in Sources */,
 				793BD0961E7240C700E32389 /* ArrayWithDict.m in Sources */,
 				79E177901E69109600318916 /* DeliveryOrderHeadView.m in Sources */,
 				79655DF61D7D0AAA006B90FC /* CommonUtils.m in Sources */,
+				794F28821EDEB46C003EC54D /* NakedDriLibViewController.m in Sources */,
 				7940ACE71E84CDA600216916 /* SearchDateInfo.m in Sources */,
 				79B4B82B1DA8C3F500B97070 /* OrderDetailVC.m in Sources */,
 				7915BCE01E7A6F0100407927 /* ProductionDetailView.m in Sources */,
@@ -1798,6 +2073,7 @@
 				79743BE21D927DEA00FB301E /* UserInfo.m in Sources */,
 				796401061D8681A2006E5338 /* PopViewMultipleCell.m in Sources */,
 				794EDBE91DDD38CD0018DDF3 /* IQUIView+Hierarchy.m in Sources */,
+				794F289F1EDEC5EE003EC54D /* CustomPickView.m in Sources */,
 				7948B34A1E79143400909601 /* SearchResultDetailVC.m in Sources */,
 				7962BEAC1DB5D7C500459245 /* DetailStone.m in Sources */,
 				794B71911E7F8D9200A8BCE7 /* SearchHeadBtnView.m in Sources */,
@@ -1809,6 +2085,7 @@
 				7989B5D51D824BD600706F5E /* NSLayoutConstraint+PureLayout.m in Sources */,
 				7989B5D31D824BD600706F5E /* ALView+PureLayout.m in Sources */,
 				796218FA1D98FFF400FE01D6 /* FinishedProFCell.m in Sources */,
+				790375FF1EDFE0DC00344FCD /* NakedDriSeaTableCell.m in Sources */,
 				7948B3391E78DE9600909601 /* CustomDatePick.m in Sources */,
 				792B85DC1DBEFFAF00A71635 /* SearchCustomerVC.m in Sources */,
 				79E1779A1E6924E800318916 /* DeliveryHeadInfo.m in Sources */,
@@ -1821,6 +2098,7 @@
 				79A479001DB46F6D00E2EA09 /* PayTableCell.m in Sources */,
 				79E8B23A1D800063009D7296 /* EditAddressVC.m in Sources */,
 				7936D5461E0BC0240056A540 /* ProOrderInfo.m in Sources */,
+				797688A01EE023B7001C6711 /* NakedDriPirceTableCell.m in Sources */,
 				792C01AB1D88E41B005943AE /* CustomDetailView.m in Sources */,
 				7933D9281D9CA942006C0356 /* Citys.m in Sources */,
 				79FA0F931E554B85007D4BD7 /* NewUIAlertTool.m in Sources */,
@@ -1832,27 +2110,36 @@
 				793FC6771E4C15C8009F6296 /* PackagingTool.m in Sources */,
 				79655DF51D7D0AAA006B90FC /* AccountTool.m in Sources */,
 				796793F61D93B46F005AEBFB /* ScreeningHeadSView.m in Sources */,
+				7969657D1EDFABA600F6B027 /* NakedDriLibInfo.m in Sources */,
+				794F289B1EDEB6B1003EC54D /* NakedDriListOrderVc.m in Sources */,
 				7958EF2C1D87DB0C009084B5 /* CustomProCell.m in Sources */,
 				794F22481E71306B0095899E /* DelSListInfo.m in Sources */,
 				79050ADB1DF7B84700DCEA69 /* DetailHeadInfo.m in Sources */,
 				7915BCEA1E7A833E00407927 /* SearchResultTableCell.m in Sources */,
 				7959A8DD1D814F23009CAA02 /* SKTag.m in Sources */,
 				79F1C7D11D9D165D00C58335 /* PayViewController.m in Sources */,
+				7967B9CD1EDFFABA00DDC352 /* NakedDriSeaHeadV.m in Sources */,
 				7926B6251E6952030022B4A3 /* SettlementHeadInfo.m in Sources */,
 				7948B33E1E78ED6900909601 /* CustomBtnView.m in Sources */,
 				7969FB771DBE068900139681 /* ChooseAddressTableCell.m in Sources */,
 				7959A8BE1D80FC03009CAA02 /* HomePageCollectionCell.m in Sources */,
+				7930C05F1EDFEE6000F7379E /* NakedDriOListInfo.m in Sources */,
 				790C70971DCC18D8007343BA /* BaseResponse.m in Sources */,
 				7959A8D01D814897009CAA02 /* ProductListTableCell.m in Sources */,
 				79050ADE1DF7F92B00DCEA69 /* ZBButten.m in Sources */,
 				79655DF71D7D0AAA006B90FC /* MBProgressHUD+MJ.m in Sources */,
 				792E2B7E1DC9E0A10050C6D0 /* OrderPriceInfo.m in Sources */,
+				7933E2DF1EE00AD200C6247F /* NakedDriDetailHeadV.m in Sources */,
+				794F28961EDEB68F003EC54D /* NakedDriDetailOrderVc.m in Sources */,
+				794F28AD1EDEF914003EC54D /* NakedDriLibSLabCell.m in Sources */,
+				790D22471EE115FE00EB6450 /* NakedDriConfirmHeadV.m in Sources */,
 				792DF4BB1E021B7E00128456 /* ChooseInvoiceCell.m in Sources */,
 				79E1779D1E69256400318916 /* DeliveryListInfo.m in Sources */,
 				796218F61D98FD6200FE01D6 /* ETFoursquareImages.m in Sources */,
 				7915BCE61E7A6F9B00407927 /* FinishedDetailView.m in Sources */,
 				7948B3451E79138100909601 /* SearchResultsVC.m in Sources */,
 				79CDBCF31E710839004080CE /* OrderSetmentInfo.m in Sources */,
+				796965771EDFA36C00F6B027 /* TTRangeSlider.m in Sources */,
 				7962BEA91DB5D6B000459245 /* DetailModel.m in Sources */,
 				79655DED1D7D0AAA006B90FC /* LoginViewController.m in Sources */,
 				7915BCE31E7A6F5100407927 /* SettlementDetailView.m in Sources */,
@@ -1878,8 +2165,10 @@
 				795E25491DF11E9000DC0A88 /* YQCustomBtn.m in Sources */,
 				796BFF8B1DE28F60008D78A4 /* ProduceHeadView.m in Sources */,
 				7944C19B1DDECCF400F6C15F /* OrderSatueInfo.m in Sources */,
+				796965801EDFAD6C00F6B027 /* NakedDriLibImgInfo.m in Sources */,
 				7959A8E21D815088009CAA02 /* ProductPopView.m in Sources */,
 				7926B62B1E6952D60022B4A3 /* SettlementHeadView.m in Sources */,
+				794F28A71EDEF8DF003EC54D /* NakedDriLibListCell.m in Sources */,
 				796F548F1DAA384E00AD7AB2 /* DetailTypeInfo.m in Sources */,
 				79F1C7CD1D9D06CF00C58335 /* ProductInfo.m in Sources */,
 				790C70AB1DCC21C5007343BA /* NetworkDetermineTool.m in Sources */,
@@ -1887,40 +2176,50 @@
 				79C1963F1DB0BCB70098FB89 /* EditPhoneNumVc.m in Sources */,
 				7936D5491E0BC0B20056A540 /* ProgressListInfo.m in Sources */,
 				792B85D81DBEF20E00A71635 /* OrderListInfo.m in Sources */,
+				794F28AA1EDEF903003EC54D /* NakedDriLibBLabCell.m in Sources */,
 				79E177871E690F6400318916 /* DeliveryOrderVC.m in Sources */,
 				79B4B83C1DA8F0B100B97070 /* StrWithIntTool.m in Sources */,
+				794F28911EDEB647003EC54D /* NakedDriConfirmOrderVc.m in Sources */,
 				792C01BC1D89043B005943AE /* ConfirmOrderVC.m in Sources */,
 				79655DE81D7D0AAA006B90FC /* YQStatusPhotosView.m in Sources */,
 				7933D9251D9CA879006C0356 /* SubCityTableVc.m in Sources */,
 				790C2C241E092776006D9DCF /* ProgressOrderVc.m in Sources */,
 				7926B6281E6952200022B4A3 /* SettlementListInfo.m in Sources */,
 				79FCA3B21D990D1D001BC8BC /* FinishedListView.m in Sources */,
+				794F288C1EDEB619003EC54D /* NakedDriPriceVC.m in Sources */,
 				79CD81A91D9E376C00B7BC84 /* PayReturnPageVC.m in Sources */,
 				79B4B8371DA8DD2E00B97070 /* OrderHeadView.m in Sources */,
+				7933E2DB1EDFFCF100C6247F /* NakedDriAllListCell.m in Sources */,
 				79655DF41D7D0AAA006B90FC /* Account.m in Sources */,
 				794EDBE61DDD38CD0018DDF3 /* IQTextView.m in Sources */,
 				7959A8DF1D814F23009CAA02 /* SKTagView.m in Sources */,
 				79B4B8301DA8C5F100B97070 /* OrderBottomTableCell.m in Sources */,
 				790C70AC1DCC21C5007343BA /* Reachability.m in Sources */,
 				79ED9EE21DC0531A00257454 /* OrderListController.m in Sources */,
+				790D224C1EE136A700EB6450 /* NakedDriConfirmInfo.m in Sources */,
+				794F28871EDEB5D8003EC54D /* NakedDriSearchVC.m in Sources */,
 				79655DF91D7D0AAA006B90FC /* YQItemTool.m in Sources */,
 				79655E121D7D0E53006B90FC /* RequestClient.m in Sources */,
 				79655E201D7D0F1D006B90FC /* HelpMenuVC.m in Sources */,
 				794EDBE21DDD38CD0018DDF3 /* IQKeyboardManager.m in Sources */,
+				794F28A21EDEF062003EC54D /* NakedDriLibHeadView.m in Sources */,
 				79ED9EDD1DC0512000257454 /* UserManagerScrollPageView.m in Sources */,
 				794B71941E7FAFD400A8BCE7 /* SearchResultInfo.m in Sources */,
 				79ED9EDE1DC0512000257454 /* UserManagerTableView.m in Sources */,
 				7959A8CA1D813E36009CAA02 /* ProductListHeadBtn.m in Sources */,
 				7943F10D1E8F3D6A00268ABB /* CustomBottomView.m in Sources */,
 				794EDBE51DDD38CD0018DDF3 /* IQSegmentedNextPrevious.m in Sources */,
+				7930C05C1EDFED2A00F7379E /* NakedDriOrderListView.m in Sources */,
 				797E5EA71DAB34D70017F6A2 /* AllListHeadView.m in Sources */,
 				7959A8C31D810CC5009CAA02 /* ProductListVC.m in Sources */,
 				7989B5D41D824BD600706F5E /* NSArray+PureLayout.m in Sources */,
 				79655DF01D7D0AAA006B90FC /* MainTabViewController.m in Sources */,
 				7926B6301E6955A30022B4A3 /* SettlementTableCell.m in Sources */,
 				7933D9241D9CA879006C0356 /* DistrictTableVc.m in Sources */,
+				7933E2EB1EE012A600C6247F /* NakedDriOrderDetailCell.m in Sources */,
 				796FD18A1E6E41BB00A50DDC /* SettlementListCell.m in Sources */,
 				79655DEF1D7D0AAA006B90FC /* MainNavViewController.m in Sources */,
+				790376021EDFE30400344FCD /* NakedDriSeaListInfo.m in Sources */,
 				7959A8D51D814A71009CAA02 /* SearchInfo.m in Sources */,
 				79ED9EDC1DC0512000257454 /* UserManagerMenuHrizontal.m in Sources */,
 				7933D9231D9CA879006C0356 /* AddressTableVC.m in Sources */,
@@ -1934,6 +2233,7 @@
 				792C01B71D88EAC3005943AE /* CustomLastCell.m in Sources */,
 				7924C55E1DF8ED1E005B89FA /* BaseCusLoginView.m in Sources */,
 				7979A0291E5BCFAF00604BD5 /* CommonUsedTool.m in Sources */,
+				7933E2E71EE0100F00C6247F /* NakedDriDetailLInfo.m in Sources */,
 				7959A8DE1D814F23009CAA02 /* SKTagButton.m in Sources */,
 				7959A8E91D81510E009CAA02 /* PopViewSingleCell.m in Sources */,
 			);
@@ -2083,11 +2383,19 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MillenniumStarERP/ThirdSDK/AliPaySDK",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MillenniumStarERP/ERPfile.pch";
 				INFOPLIST_FILE = MillenniumStarERP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/MillenniumStarERP/ThirdSDK/AliPay";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MillenniumStarERP/ThirdSDK/AliPaySDK",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.mStar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2105,11 +2413,19 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MillenniumStarERP/ThirdSDK/AliPaySDK",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MillenniumStarERP/ERPfile.pch";
 				INFOPLIST_FILE = MillenniumStarERP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/MillenniumStarERP/ThirdSDK/AliPay";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MillenniumStarERP/ThirdSDK/AliPaySDK",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.millenniumStar.mStar;
 				PRODUCT_NAME = "$(TARGET_NAME)";

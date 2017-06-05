@@ -23,14 +23,21 @@
     self.title = @"支付成功页面";
     self.orderBtn.layer.cornerRadius = 5;
     self.centerBtn.layer.cornerRadius = 5;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_return"] style:UIBarButtonItemStyleDone target:self action:@selector(back)];
+}
+
+- (void)back{
+    BaseViewController *baseVc = self.navigationController.viewControllers[1];
+    [self.navigationController popToViewController:baseVc animated:YES];
 }
 
 - (IBAction)continueClick:(id)sender {
-    
+    BaseViewController *baseVc = self.navigationController.viewControllers[1];
+    [self.navigationController popToViewController:baseVc animated:YES];
 }
 
 - (IBAction)centerClick:(id)sender {
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

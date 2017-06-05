@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="2048" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -90,11 +90,12 @@
                 <outlet property="bg" destination="vuw-5s-215" id="nyq-eP-TZM"/>
                 <outlet property="headImage" destination="hHf-Lt-saA" id="ytP-a9-Oss"/>
                 <outlet property="officialPrice" destination="bRW-p0-N1b" id="hgO-fk-Z5y"/>
+                <outlet property="priceView" destination="mjn-0Z-Qbr" id="sga-rT-ggT"/>
                 <outlet property="tapGesture" destination="IVs-Pa-R6p" id="yJe-J2-6Sa"/>
                 <outlet property="title" destination="9WQ-jk-YMB" id="Oew-DX-rdF"/>
                 <outlet property="topbackView" destination="KEI-hr-SR4" id="fVj-wS-7cZ"/>
             </connections>
-            <point key="canvasLocation" x="318" y="217"/>
+            <point key="canvasLocation" x="-73" y="221"/>
         </view>
         <tapGestureRecognizer id="IVs-Pa-R6p">
             <connections>

@@ -10,4 +10,13 @@
 
 @implementation DetailTypeInfo
 
+- (DetailTypeInfo *)newInfo{
+    DetailTypeInfo *new = [DetailTypeInfo new];
+    new.title = self.title;
+    new.id = self.id;
+    new.isSel = self.isSel;
+    new.price = self.price;
+    return new;
+}
+
 @end

@@ -317,6 +317,8 @@
             if ([YQObjectBool boolForObject:response.data]){
                 [self setupDataWithDict:response.data];
                 [self setupListDataWithDict:response.data[@"currentOrderlList"]];
+                BOOL isPay = [response.data[@"isNeetPay"]boolValue];
+                self.depositBtn.hidden = !isPay;
                 [self.tableView reloadData];
             }
             [SVProgressHUD dismiss];
@@ -647,10 +649,6 @@
     return 1;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 185;
-//}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 10.0f;
 }
@@ -841,7 +839,9 @@
 }
 
 - (IBAction)payPrice:(id)sender {
-   [MBProgressHUD showError:@"功能暂未开放"];
+    PayViewController *payVc = [PayViewController new];
+    payVc.orderId = [NSString stringWithFormat:@"%d",self.editId];
+    [self.navigationController pushViewController:payVc animated:YES];
 }
 
 - (IBAction)confirmClick:(id)sender {
@@ -916,6 +916,7 @@
 - (void)gotoNextViewConter:(id)dic{
     if ([dic[@"isNeetPay"]intValue]==1) {
         PayViewController *payVc = [PayViewController new];
+        payVc.orderId = dic[@"orderNum"];
         [self.navigationController pushViewController:payVc animated:YES];
     }else{
         if ([dic[@"isErpOrder"]intValue]==0) {

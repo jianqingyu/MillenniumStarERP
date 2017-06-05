@@ -16,8 +16,9 @@
 @interface EditUserInfoVC ()<UITableViewDelegate,UITableViewDataSource,
                  UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong)UITableView *tableView;
-@property (nonatomic,  copy)NSArray *textArr;
+@property (nonatomic,assign)BOOL isShow;
 @property (nonatomic,strong)UIImage *image;
+@property (nonatomic,  copy)NSArray *textArr;
 @property (nonatomic,strong)NSMutableDictionary *mutDic;
 @end
 
@@ -32,7 +33,7 @@
 }
 
 - (void)setBaseViewData{
-    self.textArr = @[@[@"用户名",@"修改头像",@"是否申请升级为定制用户"],@[@"修改密码",@"修改手机号码",@"管理地址"]];
+    self.textArr = @[@[@"用户名",@"修改头像",@"是否申请升级为定制用户",@"是否显示价格"],@[@"修改密码",@"修改手机号码",@"管理地址",@"清理缓存"]];
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -67,6 +68,7 @@
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {
             if ([YQObjectBool boolForObject:response.data]) {
+                self.isShow = [response.data[@"isShowPrice"]intValue];
                 if ([YQObjectBool boolForObject:response.data[@"userName"]]) {
                     self.mutDic[@"用户名"] = response.data[@"userName"];
                 }
@@ -133,6 +135,12 @@
         tableCell.accessoryView = switchBtn;
         [switchBtn addTarget:self action:@selector(changeClick:)
                                   forControlEvents:UIControlEventTouchUpInside];
+    }else if (indexPath.section==0&&indexPath.row==3){
+        UISwitch *switchBtn = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
+        [switchBtn setOn:self.isShow];
+        tableCell.accessoryView = switchBtn;
+        [switchBtn addTarget:self action:@selector(showPriceClick:)
+            forControlEvents:UIControlEventTouchUpInside];
     }
     if (indexPath.section==0&&indexPath.row==0) {
         tableCell.accessoryType = UITableViewCellAccessoryNone;
@@ -180,9 +188,11 @@
                 [MBProgressHUD showSuccess:@"功能暂未开放"];
 //                EditPhoneNumVc *editNum = [EditPhoneNumVc new];
 //                [self.navigationController pushViewController:editNum animated:YES];
-            }else{
+            }else if(indexPath.row==2){
                 EditAddressVC *addVc = [EditAddressVC new];
                 [self.navigationController pushViewController:addVc animated:YES];
+            }else{
+                [self clearTmpPics];
             }
             break;
         default:
@@ -192,6 +202,25 @@
 
 - (void)changeClick:(UISwitch *)btn{
     
+}
+
+- (void)showPriceClick:(UISwitch *)btn{
+    NSString *url = [NSString stringWithFormat:@"%@UpdateIsShowPrice",baseUrl];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"value"] = @(btn.on);
+    params[@"tokenKey"] = [AccountTool account].tokenKey;
+    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
+        if ([response.error intValue]==0) {
+            [MBProgressHUD showSuccess:@"更新成功"];
+        }
+    } requestURL:url params:params];
+}
+
+- (void)clearTmpPics{
+    [[SDImageCache sharedImageCache] clearDisk];
+    float tmpSize = [[SDImageCache sharedImageCache] getSize];
+    NSString *clearCacheName = tmpSize >= 1 ? [NSString stringWithFormat:@"清理缓存(%.2fM)",tmpSize] : [NSString stringWithFormat:@"清理缓存(%.2fK)",tmpSize * 1024];
+    [MBProgressHUD showSuccess:clearCacheName];
 }
 
 - (void)creatUIAlertView:(UIView *)cell{

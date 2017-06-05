@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"定制";
+    self.title = @"历史订单";
     titleArray = @[@{@"title":@"待审核",@"netUrl":@"ModelOrderWaitCheckList",@"proId":@"10"},
                    @{@"title":@"生产中",@"netUrl":@"ModelOrderProduceListPage",@"proId":@"20"},
                    @{@"title":@"已发货",@"netUrl":@"ModelBillList",@"proId":@"30"},

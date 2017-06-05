@@ -9,9 +9,9 @@
 #import "CustomProCell.h"
 #import "DetailStone.h"
 #import "DetailTypeInfo.h"
-@interface CustomProCell()<UITextFieldDelegate>
+@interface CustomProCell()
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
-@property (weak, nonatomic) IBOutlet UITextField *numFie;
+@property (weak, nonatomic) IBOutlet UIButton *numFie;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btns;
 @property (weak, nonatomic) IBOutlet UIButton *mainBtn;
@@ -32,24 +32,24 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self = [[NSBundle mainBundle]loadNibNamed:@"CustomProCell" owner:nil options:nil][0];
-        self.numFie.delegate = self;
         for (UIButton *btn in self.btns) {
-            [btn setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
+            [btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
         }
-        [self.mainBtn setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
-        [self.priceLab setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
+        [self.mainBtn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
+        [self.priceLab setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
         [self.priceLab setAdjustsFontSizeToFitWidth:YES];
     }
     return self;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (IBAction)numClick:(id)sender {
     [self setBtnBackLine];
     [self setNumberFie];
     if (self.tableBack) {
-        self.tableBack(textField.text);
+        self.tableBack(@"数量");
     }
 }
+
 //赋值
 - (void)setTitleStr:(NSString *)titleStr{
     if (titleStr) {
@@ -64,7 +64,11 @@
 - (void)setNumber:(NSString *)number{
     if (number) {
         _number = number;
-        self.numFie.text = _number;
+        if (_number.length>0) {
+            [self.numFie setTitle:_number forState:UIControlStateNormal];
+        }else{
+            [self.numFie setTitle:@"数量" forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -89,7 +93,7 @@
 }
 //设置红框方法
 - (void)setBtnBackLine{
-    BOOL isStaue = !self.mainBtn.selected&&([self boolWithOneArr:_list]||self.numFie.text.length>0);
+    BOOL isStaue = !self.mainBtn.selected&&([self boolWithOneArr:_list]||self.number.length>0);
     for (int i=0; i<self.list.count; i++) {
         if ([_list[i]isKindOfClass:[DetailTypeInfo class]]) {
             UIButton *btn = self.btns[i];
@@ -101,7 +105,7 @@
                 if (isStaue) {
                     [btn setLayerWithW:3.0 andColor:MAIN_COLOR andBackW:0.5];
                 }else{
-                    [btn setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
+                    [btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
                 }
             }
         }
@@ -109,11 +113,11 @@
 }
 //设置数量红框
 - (void)setNumberFie{
-    BOOL isStaue = [self boolWithOneArr:_list]&&self.numFie.text.length==0&&!self.mainBtn.selected;
+    BOOL isStaue = [self boolWithOneArr:_list]&&self.number.length==0&&!self.mainBtn.selected;
     if (isStaue) {
         [self.numFie setLayerWithW:3.0 andColor:MAIN_COLOR andBackW:0.5];
     }else{
-        [self.numFie setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
+        [self.numFie setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
     }
 }
 
@@ -147,8 +151,6 @@
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {
             self.priceLab.text = response.data[@"price"];
-        }else{
-            [MBProgressHUD showError:response.message];
         }
     }requestURL:regiUrl params:params];
 }
@@ -175,7 +177,7 @@
         if (sender.selected) {
             [self clearAllViewStaue];
         }else{
-            self.numFie.text = self.number;
+            [self.numFie setTitle:_number forState:UIControlStateNormal];
             [self setBtnBackLine];
             [self setNumberFie];
         }
@@ -188,7 +190,7 @@
 - (void)setupAllBtnStaue:(BOOL)isMain{
     if (isMain) {
         for (UIButton *btn in self.btns) {
-            [btn setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
+            [btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
         }
     }else{
         for (int i=0; i<_list.count; i++) {
@@ -207,9 +209,9 @@
         UIButton *btn = self.btns[i];
         [btn setTitle:titleArr[i] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [btn setLayerWithW:3.0 andColor:DefaultColor andBackW:0.001];
+        [btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
     }
-    self.numFie.text = @"";
+    [self.numFie setTitle:@"数量" forState:UIControlStateNormal];
     [self setNumberFie];
 }
 

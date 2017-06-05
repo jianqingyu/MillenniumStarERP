@@ -25,6 +25,7 @@
 @property (retain, nonatomic) IBOutlet UITapGestureRecognizer *tapGesture;
 @property (retain, nonatomic) ProductInfo *proInfo;
 @property (weak, nonatomic) IBOutlet UIView *topbackView;
+@property (weak, nonatomic) IBOutlet UIView *priceView;
 - (IBAction)tapGesture:(id)sender;
 + (ProductListView*)shareListView;
 

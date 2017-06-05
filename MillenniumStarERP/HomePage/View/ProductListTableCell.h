@@ -11,9 +11,8 @@
 @interface ProductListTableCell : UITableViewCell
 
 @property (nonatomic, strong) NSMutableArray *devItemArray;
-
 //初始化
-+ (id)cellWithTableView:(UITableView *)tableView andDelegate:(id)delegate;
++ (id)cellWithTableView:(UITableView *)tableView andDelegate:(id)delegate with:(BOOL)isShow;
 //数据更新
 - (void)updateDevInfoWith:(NSMutableArray*)devInfoArray index:(int)index;
 //- (void)updateNakedWith:(NSMutableArray*)devInfoArray index:(int)index;

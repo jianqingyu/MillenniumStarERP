@@ -34,17 +34,21 @@
 @property (nonatomic,strong) CustomerInfo *cusInfo;
 @property (strong,nonatomic) IBOutletCollection(UIView) NSArray *dateViews;
 @property (strong,nonatomic) IBOutletCollection(UIButton) NSArray *dateBtns;
+@property (weak, nonatomic) IBOutlet UIView *topBackView;
 @property (weak,  nonatomic) IBOutlet UITextField *textFie;
+@property (weak, nonatomic) IBOutlet UIView *backFieView;
 @end
 
 @implementation SearchOrderVc
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"订单搜索";
     self.view.backgroundColor = DefaultColor;
     self.dict = [NSMutableDictionary new];
     [self setNaviTitleAndRight];
     [self loadDatePick];
+    [self.backFieView setLayerWithW:3 andColor:BordColor andBackW:0.5];
     for (UIView *baV in self.dateViews) {
         baV.layer.cornerRadius = 3;
     }
@@ -58,13 +62,10 @@
 
 #pragma mark -- NaviBarTitleView
 - (void)setNaviTitleAndRight{
-    CGFloat width = SDevWidth*0.70;
+    CGFloat width = SDevWidth-15-92;
     CGFloat sWidth = 65;
-    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 30)];
-    titleView.layer.cornerRadius = 5;
-    titleView.layer.masksToBounds = YES;
-    titleView.layer.borderWidth = 0.5;
-    titleView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(92, 9, width, 30)];
+    [titleView setLayerWithW:3 andColor:BordColor andBackW:0.5];
     titleView.backgroundColor = DefaultColor;
     
     CustomBtnView *btnV = [CustomBtnView creatView];
@@ -80,7 +81,7 @@
     titleFie.borderStyle = UITextBorderStyleNone;
     [titleView addSubview:titleFie];
     _searchFie = titleFie;
-    self.navigationItem.titleView = titleView;
+    [self.topBackView addSubview:titleView];
     
     self.textFie.tag = 1082;
     __weak __typeof(&*self)weakSelf = self;
@@ -126,7 +127,7 @@
 }
 
 - (void)creatSearchBtn:(NSArray *)arr{
-    CGRect frame = CGRectMake(0, 146,SDevWidth , 60);
+    CGRect frame = CGRectMake(0, 196,SDevWidth , 60);
     SearchHeadBtnView *head = [[SearchHeadBtnView alloc]initWithFrame:frame withArr:arr];
     frame.size.height = head.height;
     head.frame = frame;

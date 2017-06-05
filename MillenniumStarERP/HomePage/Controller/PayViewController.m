@@ -7,51 +7,53 @@
 //
 
 #import "PayViewController.h"
-//#import "WXApi.h"
-//#import "ReturnpageVc.h"
-//#import "AliPayTool.h"
-//#import "CommonUtils.h"
-//#import "payRequsestHandler.h"
+#import <AlipaySDK/AlipaySDK.h>
 #import "CustomInvoice.h"
 #import "PayReturnPageVC.h"
 #import "PayTableCell.h"
-@interface PayViewController ()<UITableViewDataSource, UITableViewDelegate>{
-    UILabel*totalPriceLabel;
-    UIWindow *__customView;
-}
-@property (nonatomic, retain) UITableView *payTable;
-@property (nonatomic, retain) NSMutableArray *dataArray;
-@property (nonatomic, retain) NSArray *payImageArray;
-@property (nonatomic, retain) NSArray *payTitleArray;
+@interface PayViewController ()<UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) UITableView *payTable;
+@property (nonatomic,   weak) UILabel *titleLab;
+@property (nonatomic,   weak) UILabel *totalLab;
+@property (nonatomic,   copy) NSArray *payImageArray;
+@property (nonatomic,   copy) NSArray *payTitleArray;
 @property (nonatomic, assign) NSInteger selectIndex;
-@property (nonatomic, copy) NSString *message;
-
+@property (nonatomic,   copy) NSString *message;
 @end
 
 @implementation PayViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     self.title = @"支付";
     [self creatTableView];
     [self initHeadAndFootView];
+    [self loadHomePayData];
 }
 
 - (void)creatTableView{
     CGRect frame = CGRectMake(0, 0, SDevWidth, SDevHeight);
-    self.payImageArray = @[@"icon_pay_ye",@"icon_pay_zfb",@"icon_pay_wx",@"unionpay"];
-    self.payTitleArray = @[@"余额",@"支付宝支付",@"微信支付",@"银联支付"];
+    self.payImageArray = @[@"icon_pay_zfb",@"icon_pay_wx"];
+    self.payTitleArray = @[@"支付宝支付",@"微信支付"];
     self.payTable = [[UITableView alloc] initWithFrame:frame];
     self.payTable.delegate = self;
     self.payTable.dataSource = self;
     [self.view addSubview:self.payTable];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    __customView.hidden = YES;
-    __customView = nil;
+- (void)loadHomePayData{
+    NSString *str = self.isStone?@"PaymentCurrentOrderStonePage":@"PaymentCurrentOrderPage";
+    NSString *url = [NSString stringWithFormat:@"%@%@",baseUrl,str];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"orderId"] = self.orderId;
+    params[@"tokenKey"] = [AccountTool account].tokenKey;
+    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
+        if ([response.error intValue]==0) {
+            self.titleLab.text = response.data[@"title"];
+            double price = [response.data[@"needPayPrice"]doubleValue];
+            self.totalLab.text = [NSString stringWithFormat:@"￥%.2f",price];
+        }
+    } requestURL:url params:params];
 }
 
 - (void)initHeadAndFootView{
@@ -97,16 +99,18 @@
         make.centerX.mas_equalTo(headView.mas_centerX);
         make.top.equalTo(headView).offset(20);
     }];
-
-    totalPriceLabel = [UILabel new];
+    self.titleLab = lable;
+    
+    UILabel * totalPriceLabel = [UILabel new];
     [headView addSubview:totalPriceLabel];
-    totalPriceLabel.text = [NSString stringWithFormat:@"￥%0.2f",_amount];
+    totalPriceLabel.text = @"￥0.00";
     totalPriceLabel.textColor = [UIColor redColor];
     totalPriceLabel.font = [UIFont systemFontOfSize:16];
     [totalPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(headView.mas_centerX);
         make.top.equalTo(lable.mas_bottom).offset(5);
     }];
+    self.totalLab = totalPriceLabel;
     
     UILabel*lable2 = [UILabel new];
     [headView addSubview:lable2];
@@ -169,43 +173,58 @@
 }
 //支付按钮
 - (void)payBtnClick:(UIButton*)button{
-    __customView = [CustomInvoice showAlertViewCallBlock:^(NSString *message) {
-        if (message.length>0) {
-            _message = message;
-            PayReturnPageVC *pageVc = [PayReturnPageVC new];
-            [self.navigationController pushViewController:pageVc animated:YES];
-        }
-        __customView.hidden = YES;
-        __customView = nil;
-    }];
-//    if (self.selectIndex == 0) {
-//        [self alipayMent];
-//    }else if(self.selectIndex == 1){
+    if (self.selectIndex == 0) {
+        [self alipayMent];
+    }else if(self.selectIndex == 1){
 //        if ([WXApi isWXAppInstalled]) {
 //            [self wechatPay];
 //        } else {
 //            UIAlertView*alert = [[UIAlertView alloc]initWithTitle:@"温馨提醒" message:@"您的手机没有安装微信" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
 //            [alert show];
 //        }
-//    }
+    }
 }
-////支付宝支付
-//-(void)alipayMent{
-//    App;
-//    app.aliPayCallBack = ^(BOOL isSuccees) {
-//        if(isSuccees){
-//            ReturnpageVc *pageVc = [[ReturnpageVc alloc]init];
-//            pageVc.price   = self.amount;
-//            pageVc.address = self.address;
-//            pageVc.orderId = self.orderId;
-//            pageVc.isOrder = self.isOrder;
-//            [self.navigationController pushViewController:pageVc animated:YES];
-//        }
-//    };
-//    
-//    [AliPayTool alipayMentWithTradeNO:self.trade_no andProductName:self.productName andProductDescription:self.productDescription andPrice:self.amount];
-//}
-////微信支付
+//支付宝支付
+- (void)alipayMent{
+    App;
+    app.aliPayCallBack = ^(BOOL isSuccees) {
+        if(isSuccees){
+            [self openReturnPageVc];
+        }
+    };
+    NSString *url = @"http://appapi1.fanerweb.com/api/Payment/GetAilpayModelOrderPayStr";
+    if (self.isStone) {
+        url = @"http://appapi1.fanerweb.com/api/Payment/GetAilpayStoneOrderPayStr";
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"orderId"] = self.orderId;
+    params[@"tokenKey"] = [AccountTool account].tokenKey;
+    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
+        if ([response.error intValue]==0) {
+            NSString *strUrl = response.data;
+            NSString *orderString = [strUrl stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+            [self openAliPayWith:orderString];
+        }else{
+            [MBProgressHUD showError:response.message];
+        }
+    } requestURL:url params:params];
+}
+
+- (void)openAliPayWith:(NSString *)order{
+    [[AlipaySDK defaultService] payOrder:order fromScheme:@"MillenniumStarERP2" callback:^(NSDictionary *resultDic) {
+        if ([resultDic[@"resultStatus"]intValue]==9000) {
+            [self openReturnPageVc];
+            return ;
+        }
+        [MBProgressHUD showError:resultDic[@"memo"]];
+    }];
+}
+//打开支付成功页面
+- (void)openReturnPageVc{
+    PayReturnPageVC *pageVc = [PayReturnPageVC new];
+    [self.navigationController pushViewController:pageVc animated:YES];
+}
+//微信支付
 //-(void)wechatPay{
 //    [SVProgressHUD show];
 //    App;
