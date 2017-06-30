@@ -8,46 +8,37 @@
 
 #import "ProductListVC.h"
 #import "YQItemTool.h"
-#import "ProductListHeadBtn.h"
-#import "ProductListTableCell.h"
-#import "ProductListView.h"
+#import "ProductCollectionCell.h"
 #import "ProductPopView.h"
 #import "ScanViewController.h"
 #import "CustomProDetailVC.h"
 #import "AllListPopView.h"
 #import "CDRTranslucentSideBar.h"
 #import "ScreeningRightView.h"
-#import "ScreenPopView.h"
-#import "FinishedProInfoVC.h"
 #import "ProductInfo.h"
 #import "ScreeningInfo.h"
-#import "OrderDetailVC.h"
 #import "StrWithIntTool.h"
 #import "DetailTypeInfo.h"
-#import "AllListHeadView.h"
 #import "ClassListController.h"
 #import "OrderListController.h"
 #import "ConfirmOrderVC.h"
 #import "OrderNumTool.h"
 #import "CustomTextField.h"
-#define MENUHEIHT 40
-@interface ProductListVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,
-                        productItemClickDelegate,CDRTranslucentSideBarDelegate>{
+@interface ProductListVC ()<UICollectionViewDataSource,UICollectionViewDelegate,
+                             UITextFieldDelegate,CDRTranslucentSideBarDelegate>{
     int curPage;
     int pageCount;
     int totalCount;//商品总数量
 }
-@property (weak, nonatomic) AllListHeadView *heaView;
 @property (weak, nonatomic) UITextField *searchFie;
+@property(strong,nonatomic) UICollectionView *rightCollection;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIButton *titleBtn;
 @property (weak, nonatomic) IBOutlet UILabel *orderNumLab;
 @property (copy, nonatomic) NSString *keyWord;
 @property (nonatomic, assign) int index;
-@property (nonatomic, strong) UIView *baView;
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic,   weak) UIView *baView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) ScreenPopView *screenPop;
 @property (nonatomic, strong) AllListPopView *popClassView;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
 @property (nonatomic, strong) ScreeningRightView *slideRightTab;
@@ -56,35 +47,32 @@
 
 @implementation ProductListVC
 
-- (UIView *)baView{
-    if (_baView==nil) {
-        _baView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth, SDevHeight)];
-        _baView.backgroundColor = CUSTOM_COLOR_ALPHA(0, 0, 0, 0.5);
-    }
-    return _baView;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBaseAllViewData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+}
+
+- (void)orientChange:(NSNotification *)notification{
+    self.popClassView.frame = CGRectMake(0, 40, SDevWidth, SDevHeight-40);
+    [self.rightCollection reloadData];
 }
 
 - (void)setBaseAllViewData{
+    self.backDict =[NSMutableDictionary new];
     self.dataArray = [NSMutableArray new];
     self.orderNumLab.layer.cornerRadius = 8;
     self.orderNumLab.layer.masksToBounds = YES;
     [self.orderNumLab setAdjustsFontSizeToFitWidth:YES];
-    pageCount = 10;
     curPage = 1;
     [self setupSearchBar];
     [self setupRightItem];
     [self setupRightSiderBar];
     [self setProTableView];
     [self setPopView];
-    [self setupHeadView];
     [self setupHeaderRefresh];
     [self creatNearNetView:^(BOOL isWifi) {
-        [self.tableView.header beginRefreshing];
+        [self.rightCollection.header beginRefreshing];
     }];
 }
 
@@ -94,40 +82,68 @@
     [OrderNumTool orderWithNum:app.shopNum andView:self.orderNumLab];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [_searchFie resignFirstResponder];
-}
-
 #pragma mark -- 创建导航按钮-头视图
 - (void)setProTableView{
-    self.tableView = [[UITableView alloc]init];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundColor = DefaultColor;
-    [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.minimumLineSpacing = 5.0f;
+    flowLayout.minimumInteritemSpacing = 5.0f;//左右间隔
+    flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);//边距距
+    self.rightCollection = [[UICollectionView alloc] initWithFrame:CGRectZero
+                                               collectionViewLayout:flowLayout];
+    self.rightCollection.backgroundColor = DefaultColor;
+    self.rightCollection.delegate = self;
+    self.rightCollection.dataSource = self;
+    [self.view addSubview:_rightCollection];
+    [_rightCollection mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(40.5);
         make.left.equalTo(self.view).offset(0);
         make.right.equalTo(self.view).offset(0);
         make.bottom.equalTo(self.view).offset(0);
     }];
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    //设置当数据小于一屏幕时也能滚动
+    self.rightCollection.alwaysBounceVertical = YES;
+    UINib *nib = [UINib nibWithNibName:@"ProductCollectionCell" bundle:nil];
+    [self.rightCollection registerNib:nib
+           forCellWithReuseIdentifier:@"ProductCollectionCell"];
+    
+    UIView *bView = [UIView new];
+    bView.backgroundColor = CUSTOM_COLOR_ALPHA(0, 0, 0, 0.5);
+    [self.view addSubview:bView];
+    [bView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(2*SDevHeight);
+        make.left.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+    }];
+    self.baView = bView;
 }
 
 - (void)setupSearchBar{
     CGFloat width = SDevWidth*0.70;
     UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,  width, 30)];
+    [titleView setLayerWithW:5 andColor:BordColor andBackW:0.5];
     titleView.backgroundColor = [UIColor clearColor];
-    CustomTextField *titleFie = [[CustomTextField alloc]initWithFrame:CGRectMake(0, 0, width-40, 30)];
+    CustomTextField *titleFie = [[CustomTextField alloc]initWithFrame:CGRectZero];
+    [titleView addSubview:titleFie];
+    titleFie.borderStyle = UITextBorderStyleNone;
+    [titleFie mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(titleView).offset(10);
+        make.top.equalTo(titleView).offset(0);
+        make.right.equalTo(titleView).offset(-40);
+        make.height.mas_equalTo(@30);
+    }];
     titleFie.delegate = self;
-
+    
     UIButton *seaBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    seaBtn.frame = CGRectMake(width-35, 0, 30, 30);
     [seaBtn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
     [seaBtn setImage:[UIImage imageNamed:@"icon_search"] forState:UIControlStateNormal];
-    [titleView addSubview:titleFie];
     [titleView addSubview:seaBtn];
+    [seaBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleView).offset(0);
+        make.left.equalTo(titleFie.mas_right).with.offset(0);
+        make.right.equalTo(titleView).offset(0);
+        make.height.mas_equalTo(@30);
+    }];
     _searchFie = titleFie;
     self.navigationItem.titleView = titleView;
 }
@@ -173,20 +189,23 @@
 - (void)changeTextFieKeyWord:(NSString *)searchWord{
     _searchFie.text = searchWord;
     _keyWord = searchWord;
-    [self.tableView.header beginRefreshing];
+    [self.rightCollection.header beginRefreshing];
 }
 
 #pragma mark -- 创建侧滑菜单
 - (void)setupRightSiderBar{
+    CGFloat width = MIN(SDevWidth, SDevHeight);
+    CGFloat height = MAX(SDevWidth, SDevHeight);
     self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirection:YES];
     self.rightSideBar.delegate = self;
-    self.rightSideBar.sideBarWidth = SDevWidth*0.8;
-    CGRect frame = CGRectMake(0, 20, SDevWidth*0.8, SDevHeight-20);
+    self.rightSideBar.sideBarWidth = width*0.8;
+    CGRect frame = CGRectMake(0, 20, width*0.8, height-20);
     ScreeningRightView *slideTab = [[ScreeningRightView alloc]initWithFrame:frame];
+    slideTab.isTop = YES;
     slideTab.tableBack = ^(NSDictionary *dict,BOOL isSel){
         [self.backDict removeAllObjects];
         [self.backDict addEntriesFromDictionary:dict];
-        [self.tableView.header beginRefreshing];
+        [self.rightCollection.header beginRefreshing];
     };
     [self.rightSideBar setContentViewInSideBar:slideTab];
     slideTab.rightSideBar = self.rightSideBar;
@@ -205,12 +224,20 @@
 #pragma mark - CDRTranslucentSideBarDelegate
 - (void)sideBar:(CDRTranslucentSideBar *)sideBar willAppear:(BOOL)animated
 {
-    [self.view addSubview:self.baView];
+    if (self.titleBtn.selected){
+        self.titleBtn.selected = NO;
+    }
+    [self.popClassView removeFromSuperview];
+    [self.baView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+    }];
 }
 
 - (void)sideBar:(CDRTranslucentSideBar *)sideBar willDisappear:(BOOL)animated
 {
-    [self.baView removeFromSuperview];
+    [self.baView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(2*SDevHeight);
+    }];
 }
 
 #pragma mark -- 顶部5个按钮
@@ -238,7 +265,7 @@
     ClassListController *classVc = [ClassListController new];
     classVc.listBack = ^(BOOL isYes){
         if (isYes) {
-            [self.tableView.header beginRefreshing];
+            [self.rightCollection.header beginRefreshing];
         }
     };
     [self.navigationController pushViewController:classVc animated:YES];
@@ -253,36 +280,13 @@
     if (self.titleBtn.selected){
         self.titleBtn.selected = NO;
     }
-    if (self.heaView.lBtn.selected){
-        self.heaView.lBtn.selected = NO;
-    }
     [self.popClassView removeFromSuperview];
-    [self.screenPop removeFromSuperview];
-}
-#pragma mark -- 头视图
-- (void)setupHeadView{
-    CGRect frame = CGRectMake(0, 0, SDevWidth, 40);
-    AllListHeadView *headView = [[AllListHeadView alloc]initWithFrame:frame];
-    [headView.tBtn addTarget:self action:@selector(openClick:)
-                                  forControlEvents:UIControlEventTouchUpInside];
-    self.tableView.tableHeaderView = headView;
-    self.heaView = headView;
 }
 
-- (void)openClick:(UIButton *)btn{
-    [_searchFie resignFirstResponder];
-    self.heaView.lBtn.selected = !self.heaView.lBtn.selected;
-    if (self.heaView.lBtn.selected) {
-        [self.view addSubview:self.screenPop];
-    }else{
-        [self.screenPop removeFromSuperview];
-    }
-}
 //弹出视图
 - (void)setPopView{
     CGRect allFrame = CGRectMake(0, 40, SDevWidth, SDevHeight-40);
-    AllListPopView * allPop = [[AllListPopView alloc]initWithFrame:allFrame
-                                                          andFloat:self.titleLab.x];
+    AllListPopView *allPop = [[AllListPopView alloc]initWithFrame:allFrame];
     allPop.popBack = ^(id dict){
         if (self.titleBtn.selected){
             self.titleBtn.selected = NO;
@@ -293,18 +297,6 @@
         [self changeTextFieKeyWord:@""];
     };
     self.popClassView = allPop;
-    
-    CGRect frame = CGRectMake(0, 80, SDevWidth, SDevHeight-80);
-    ScreenPopView *popView = [[ScreenPopView alloc]initWithFrame:frame];
-    popView.popBack = ^(NSDictionary *dict){
-        if (self.heaView.lBtn.selected){
-            self.heaView.lBtn.selected = NO;
-        }
-        [_backDict removeAllObjects];
-        [_backDict addEntriesFromDictionary:dict];
-        [self.tableView.header beginRefreshing];
-    };
-    self.screenPop = popView;
 }
 
 #pragma mark -- 网络请求
@@ -316,8 +308,8 @@
     [header setTitle:@"用力往下拉我!!!" forState:MJRefreshStateIdle];
     [header setTitle:@"快放开我!!!" forState:MJRefreshStatePulling];
     [header setTitle:@"努力刷新中..." forState:MJRefreshStateRefreshing];
-    _tableView.header = header;
-    [self.tableView.header beginRefreshing];
+    _rightCollection.header = header;
+    [self.rightCollection.header beginRefreshing];
 }
 
 - (void)setupFootRefresh{
@@ -328,7 +320,7 @@
     [footer setTitle:@"上拉有惊喜" forState:MJRefreshStateIdle];
     [footer setTitle:@"好了，可以放松一下手指" forState:MJRefreshStatePulling];
     [footer setTitle:@"努力加载中，请稍候" forState:MJRefreshStateRefreshing];
-    _tableView.footer = footer;
+    _rightCollection.footer = footer;
 }
 #pragma mark - MJRefresh
 - (void)headerRereshing{
@@ -366,14 +358,14 @@
     [SVProgressHUD show];
     NSString *url = [NSString stringWithFormat:@"%@modelListPage",baseUrl];
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
-        [self.tableView.header endRefreshing];
-        [self.tableView.footer endRefreshing];
+        [self.rightCollection.header endRefreshing];
+        [self.rightCollection.footer endRefreshing];
         if ([response.error intValue]==0) {
             [self setupFootRefresh];
             if ([YQObjectBool boolForObject:response.data]){
                 [self setupDataWithData:response.data];
                 [self setupListDataWithDict:response.data];
-                [self.tableView reloadData];
+                [self.rightCollection reloadData];
                 if ([YQObjectBool boolForObject:response.data[@"waitOrderCount"]]) {
                     App;
                     app.shopNum = [response.data[@"waitOrderCount"]intValue];
@@ -386,16 +378,16 @@
 }
 //初始化数据
 - (void)setupDataWithData:(NSDictionary *)data{
-    if([YQObjectBool boolForObject:data[@"model"]]){
+    if([YQObjectBool boolForObject:data[@"model"][@"isShowPrice"]]){
         self.isShowPrice = [data[@"model"][@"isShowPrice"]intValue];
     }
     if([YQObjectBool boolForObject:data[@"typeList"]]){
         self.slideRightTab.goods = [ScreeningInfo
                               objectArrayWithKeyValuesArray:data[@"typeList"]];
     }
-    if (data[@"typeFiler"]||data[@"searchValue"]) {
-        self.screenPop.list = @[data[@"typeFiler"],data[@"searchValue"]];
-    }
+//    if (data[@"typeFiler"]||data[@"searchValue"]) {
+//        self.screenPop.list = @[data[@"typeFiler"],data[@"searchValue"]];
+//    }
     if([YQObjectBool boolForObject:data[@"customList"]]){
         self.popClassView.productList = [DetailTypeInfo
                              objectArrayWithKeyValuesArray:data[@"customList"]];
@@ -404,58 +396,67 @@
 //初始化列表数据
 - (void)setupListDataWithDict:(NSDictionary *)data{
     if([YQObjectBool boolForObject:data[@"model"][@"modelList"]]){
-        self.tableView.footer.state = MJRefreshStateIdle;
+        self.rightCollection.footer.state = MJRefreshStateIdle;
         curPage++;
         totalCount = [data[@"model"][@"list_count"]intValue];
         NSArray *seaArr = [ProductInfo objectArrayWithKeyValuesArray:data[@"model"][@"modelList"]];
         [_dataArray addObjectsFromArray:seaArr];
         if(_dataArray.count>=totalCount){
-            MJRefreshAutoNormalFooter*footer = (MJRefreshAutoNormalFooter*)self.tableView.footer;
+            MJRefreshAutoNormalFooter*footer = (MJRefreshAutoNormalFooter*)self.rightCollection.footer;
             [footer setTitle:@"没有更多了" forState:MJRefreshStateNoMoreData];
-            self.tableView.footer.state = MJRefreshStateNoMoreData;
+            self.rightCollection.footer.state = MJRefreshStateNoMoreData;
         }
     }else{
-        MJRefreshAutoNormalFooter*footer = (MJRefreshAutoNormalFooter*)self.tableView.footer;
+        MJRefreshAutoNormalFooter*footer = (MJRefreshAutoNormalFooter*)self.rightCollection.footer;
         [footer setTitle:@"暂时没有商品" forState:MJRefreshStateNoMoreData];
-        self.tableView.footer.state = MJRefreshStateNoMoreData;
+        self.rightCollection.footer.state = MJRefreshStateNoMoreData;
     }
 }
 
-#pragma mark - tableViewDatasouce
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark--CollectionView-------
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    int row = 0;
-    if (self.dataArray.count %2 == 0)
-    {
-        row = (int)self.dataArray.count/2;
-    }else{
-        row = (int)self.dataArray.count/2 + 1;
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ProductCollectionCell *collcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ProductCollectionCell" forIndexPath:indexPath];
+    collcell.isShow = !self.isShowPrice;
+    ProductInfo *proInfo;
+    if (indexPath.row<self.dataArray.count) {
+        proInfo = self.dataArray[indexPath.row];
     }
-    return row;
+    collcell.proInfo = proInfo;
+    return collcell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    return cell.frame.size.height;
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    CGFloat rowH = self.isShowPrice?64:33;
+    int num = SDevWidth>SDevHeight?4:2;
+    CGFloat width = (SDevWidth-(num+1)*5)/num;
+    return CGSizeMake(width, width+rowH);
 }
 
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ProductListTableCell *tableCell = [ProductListTableCell cellWithTableView:tableView
-                                                andDelegate:self with:self.isShowPrice];
-    [tableCell updateDevInfoWith:self.dataArray index:(int)indexPath.row];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    return tableCell;
-}
-
-#pragma mark - productItemClickDelegate
-- (void)productItemClickWith:(int)index
-{
-    ProductInfo *info = self.dataArray[index];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    ProductInfo *info = self.dataArray[indexPath.row];
     CustomProDetailVC *customDeVC = [CustomProDetailVC new];
     customDeVC.proId = info.id;
     [self.navigationController pushViewController:customDeVC animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_searchFie resignFirstResponder];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

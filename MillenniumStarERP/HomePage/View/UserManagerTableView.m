@@ -31,8 +31,7 @@
     if (self) {
         curPage = 1;
         _dataArray = [NSMutableArray array];
-        CGRect tabFrame = CGRectMake(0, 0, SDevWidth, self.frame.size.height-64);
-        _mTableView = [[UITableView alloc]initWithFrame:tabFrame
+        _mTableView = [[UITableView alloc]initWithFrame:CGRectZero
                                                 style:UITableViewStyleGrouped];
         _mTableView.delegate = self;
         _mTableView.dataSource = self;
@@ -40,6 +39,12 @@
         _mTableView.estimatedRowHeight = 80;
         _mTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
         [self addSubview:_mTableView];
+        [_mTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(0);
+            make.top.equalTo(self).offset(0);
+            make.right.equalTo(self).offset(0);
+            make.bottom.equalTo(self).offset(0);
+        }];
         [self setupHeaderRefresh];
     }
     return self;
@@ -170,26 +175,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.001f;
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    CGFloat rowH = 0;
-//    switch ([self.dict[@"proId"]intValue]) {
-//        case 10:case 20:
-//            rowH = 220+(SDevWidth-70)/4;
-//            break;
-//        case 30:
-//            rowH = 165;
-//            break;
-//        case 40:
-//            rowH = 0;
-//            break;
-//        default:
-//            rowH = 0;
-//            break;
-//    }
-//    return rowH;
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

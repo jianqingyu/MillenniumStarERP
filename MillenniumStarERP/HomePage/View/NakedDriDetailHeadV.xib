@@ -36,18 +36,18 @@
                     <color key="backgroundColor" red="0.94509803920000002" green="0.16862745100000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="I4E-ZL-xiU" firstAttribute="leading" secondItem="JmK-f0-PsN" secondAttribute="leading" constant="15" id="0Yn-Yf-xjP"/>
-                        <constraint firstAttribute="height" constant="80" id="6aK-sA-Hhb"/>
                         <constraint firstItem="pZv-Dc-SQS" firstAttribute="leading" secondItem="JmK-f0-PsN" secondAttribute="leading" constant="15" id="9l9-4W-PXW"/>
                         <constraint firstItem="pZv-Dc-SQS" firstAttribute="top" secondItem="JmK-f0-PsN" secondAttribute="top" constant="8" id="Gdd-nT-AH1"/>
                         <constraint firstItem="I4E-ZL-xiU" firstAttribute="centerY" secondItem="JmK-f0-PsN" secondAttribute="centerY" id="OCZ-Ub-UWp"/>
                         <constraint firstItem="pE8-rM-Ivj" firstAttribute="leading" secondItem="JmK-f0-PsN" secondAttribute="leading" constant="15" id="T7u-xN-8Gy"/>
                         <constraint firstAttribute="bottom" secondItem="pE8-rM-Ivj" secondAttribute="bottom" constant="8" id="YLl-MH-Cm5"/>
+                        <constraint firstItem="pE8-rM-Ivj" firstAttribute="top" secondItem="I4E-ZL-xiU" secondAttribute="bottom" constant="6" id="uuz-f9-8aj"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tnA-j8-8f5">
                     <rect key="frame" x="0.0" y="80" width="320" height="80"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_map" translatesAutoresizingMaskIntoConstraints="NO" id="Hzm-wn-csU">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_map" translatesAutoresizingMaskIntoConstraints="NO" id="Hzm-wn-csU">
                             <rect key="frame" x="15" y="30" width="16" height="20"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1PU-Bp-UvS">
@@ -76,7 +76,7 @@
                         <constraint firstItem="Hzm-wn-csU" firstAttribute="centerY" secondItem="tnA-j8-8f5" secondAttribute="centerY" id="FQl-Yd-VQT"/>
                         <constraint firstItem="Mje-FR-c0Z" firstAttribute="leading" secondItem="1PU-Bp-UvS" secondAttribute="trailing" constant="15" id="Fjc-dM-ZY8"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RaH-fw-W7W" secondAttribute="trailing" constant="15" id="HaF-dw-kes"/>
-                        <constraint firstAttribute="height" constant="80" id="eWL-I1-sRo"/>
+                        <constraint firstItem="RaH-fw-W7W" firstAttribute="top" secondItem="1PU-Bp-UvS" secondAttribute="bottom" constant="14" id="Q2X-wy-3hL"/>
                         <constraint firstItem="RaH-fw-W7W" firstAttribute="leading" secondItem="1PU-Bp-UvS" secondAttribute="leading" id="fQD-f5-wah"/>
                         <constraint firstItem="Mje-FR-c0Z" firstAttribute="centerY" secondItem="1PU-Bp-UvS" secondAttribute="centerY" id="qxB-ug-CTT"/>
                         <constraint firstAttribute="bottom" secondItem="RaH-fw-W7W" secondAttribute="bottom" constant="15" id="x6Z-lz-n4x"/>
@@ -193,7 +193,7 @@
                 <outlet property="remakeLab" destination="boj-Ve-3nn" id="xDI-rP-tqF"/>
                 <outlet property="staueLab" destination="pZv-Dc-SQS" id="te6-sQ-Xha"/>
             </connections>
-            <point key="canvasLocation" x="473" y="135"/>
+            <point key="canvasLocation" x="307" y="134"/>
         </view>
     </objects>
     <resources>

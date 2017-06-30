@@ -10,5 +10,6 @@
 
 @interface DetailHeadInfo : NSObject
 @property (nonatomic,copy)NSString *title;
+@property (nonatomic,copy)NSString *weight;
 @property (nonatomic,copy)NSArray *pics;
 @end

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailModel.h"
 typedef void (^CustomFirBack)(BOOL isSel,NSString*messArr);
 @interface CustomFirstCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *btn;
 @property (weak, nonatomic) IBOutlet UITextField *fie1;
 @property (weak, nonatomic) IBOutlet UIButton *handbtn;
 @property (nonatomic, copy) NSString *messArr;
 @property (nonatomic, copy) NSString *handSize;
 @property (nonatomic, copy) CustomFirBack MessBack;
 + (id)cellWithTableView:(UITableView *)tableView;
+@property (nonatomic,strong)DetailModel *modelInfo;
 @end

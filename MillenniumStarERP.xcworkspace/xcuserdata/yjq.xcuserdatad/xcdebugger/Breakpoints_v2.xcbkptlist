@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MillenniumStarERP/HomePage/View/NakedDriOrderListView.m"
-            timestampString = "518316410.84956"
+            filePath = "MillenniumStarERP/HomePage/View/ProductionDetailView.m"
+            timestampString = "519186858.468853"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-loadOrderData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

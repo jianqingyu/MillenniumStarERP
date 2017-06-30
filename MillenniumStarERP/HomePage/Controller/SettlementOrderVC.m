@@ -15,7 +15,7 @@
 #import "SettlementFootView.h"
 #import "ArrayWithDict.h"
 @interface SettlementOrderVC ()<UITableViewDelegate,UITableViewDataSource>
-@property (weak,  nonatomic) IBOutlet UITableView *settlementTab;
+@property (strong,nonatomic) UITableView *settlementTab;
 @property (nonatomic,strong) NSArray *listArr;
 @property (nonatomic,  weak) SettlementHeadView *delHView;
 @property (nonatomic,  weak) SettlementFootView *delFView;
@@ -31,6 +31,17 @@
 }
 
 - (void)setBaseView{
+    self.settlementTab = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.settlementTab.delegate = self;
+    self.settlementTab.dataSource = self;
+    [self.view addSubview:self.settlementTab];
+    [self.settlementTab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+        make.left.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+    }];
+    
     self.settlementTab.backgroundColor = DefaultColor;
     UIView *headV = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth, 130)];
     headV.backgroundColor = DefaultColor;

@@ -7,13 +7,19 @@
 //
 
 #import "AppDelegate.h"
-#import "UIWindow+Extension.h"
 #import "CommonUtils.h"
 #import "Reachability.h"
 #import "ShowLoginViewTool.h"
+#import "UIWindow+Extension.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import <LocalAuthentication/LocalAuthentication.h>
-@interface AppDelegate (){
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WXApi.h"
+#import "WeiboSDK.h"
+@interface AppDelegate ()<WXApiDelegate>{
     Reachability *hostReach;
 }
 @end
@@ -38,13 +44,61 @@
     [[UINavigationBar appearance] setTintColor:CUSTOM_COLOR(50, 50, 50)];
     NSDictionary *attbutes = @{NSForegroundColorAttributeName:CUSTOM_COLOR(50, 50, 50)};
     [[UINavigationBar appearance]setTitleTextAttributes:attbutes];
+    [self setShareSDK];
+    [WXApi registerApp:@"wx303dc6296f3aed55"];
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
+- (void)setShareSDK{
+    [ShareSDK registerApp:@"1e74aa44eb1e0"
+          activePlatforms:@[@(SSDKPlatformTypeSinaWeibo),
+                            @(SSDKPlatformTypeWechat),
+                            @(SSDKPlatformTypeQQ),]
+                 onImport:^(SSDKPlatformType platformType)
+     {
+         switch (platformType)
+         {
+             case SSDKPlatformTypeWechat:
+                 [ShareSDKConnector connectWeChat:[WXApi class]];
+                 break;
+             case SSDKPlatformTypeQQ:
+                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                 break;
+             case SSDKPlatformTypeSinaWeibo:
+                 [ShareSDKConnector connectWeibo:[WeiboSDK class]];
+                 break;
+             default:
+                 break;
+         }
+     }
+          onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo)
+     {
+         switch (platformType)
+         {
+             case SSDKPlatformTypeSinaWeibo:
+                 //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
+                 [appInfo SSDKSetupSinaWeiboByAppKey:@"2196544773"
+                                           appSecret:@"1123259b9fb76e7ad9daeb05b53c07bc"
+                                         redirectUri:@"http://www.sharesdk.cn"
+                                            authType:SSDKAuthTypeBoth];
+                 break;
+             case SSDKPlatformTypeWechat:
+                 [appInfo SSDKSetupWeChatByAppId:@"wx303dc6296f3aed55"
+                                       appSecret:@"2cb13f5188eea61860b7a62067785d92"];
+                 break;
+             case SSDKPlatformTypeQQ:
+                 [appInfo SSDKSetupQQByAppId:@"1105719784"
+                                      appKey:@"aRie3uZpITCKy65H"
+                                    authType:SSDKAuthTypeBoth];
+                 break;
+             default:
+                 break;
+         }
+     }];
+}
+
+- (BOOL)application:(UIApplication *)application   openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication    annotation:(id)annotation {
     
     if ([url.host isEqualToString:@"safepay"]) {
         // 支付跳转支付宝钱包进行支付，处理支付结果
@@ -75,7 +129,7 @@
             }
         }];
     }
-    return YES;
+    return [WXApi handleOpenURL:url delegate:self];
 }
 
 // NOTE: 9.0以后使用新API接口
@@ -110,7 +164,30 @@
             }
         }];
     }
-    return YES;
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+- (void) onResp:(BaseResp*)resp{
+    NSString *resultMsg;
+    //    NSString *resultMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    NSString *strTitle = nil;
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        strTitle = [NSString stringWithFormat:@"支付结果"];
+        switch (resp.errCode) {
+            case WXSuccess:
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                if (self.weChatPayBlock) {
+                    self.weChatPayBlock(YES);
+                }
+                break;
+            default:
+                resultMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:resultMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+                break;
+        }
+    }
 }
 
 - (void)reachabilityChanged:(NSNotification *)note {

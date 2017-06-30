@@ -94,8 +94,8 @@
         [self setLabWithRed:self.sliderLab1 and:dic[@"title"] and:slider];
         self.mutDic[dic[@"keyword"]] = sDic;
     }else if (sender == self.sliderView2){
-        NSString *slider = [NSString stringWithFormat:@"%0.1f ~ %0.1f",selectedMinimum, selectedMaximum];
-        NSString *sDic = [NSString stringWithFormat:@"%0.1f,%0.1f",selectedMinimum, selectedMaximum];
+        NSString *slider = [NSString stringWithFormat:@"%0.0f ~ %0.0f",selectedMinimum, selectedMaximum];
+        NSString *sDic = [NSString stringWithFormat:@"%0.0f,%0.0f",selectedMinimum, selectedMaximum];
         NSDictionary *dic = _dicArr[1];
         [self setLabWithRed:self.sliderLab2 and:dic[@"title"] and:slider];
         self.mutDic[dic[@"keyword"]] = sDic;

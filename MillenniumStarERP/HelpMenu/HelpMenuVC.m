@@ -19,8 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.helpTable.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    self.helpArr = @[@"iOS下载地址",@"安卓下载地址"];
-    self.dictArr = @[@{@"title":@"苹果最新版",@"image":@"iOSCode",@"url":@"https://www.pgyer.com/2H57"},@{@"title":@"安卓最新版",@"image":@"AndroidCode",@"url":@"https://www.pgyer.com/IGab"}];
+    self.helpArr = @[@"iOS下载地址"];
+//  self.dictArr = @[@{@"title":@"苹果最新版",@"image":@"iOSCode",@"url":
+//          @"https://itunes.apple.com/cn/app/千禧之星珠宝/id1227342902?mt=8"}];
+    self.dictArr = @[@{@"title":@"苹果最新版",@"image":@"iOSCode2",@"url":
+            @"https://itunes.apple.com/cn/app/千禧之星珠宝2/id1244977034?mt=8"}];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

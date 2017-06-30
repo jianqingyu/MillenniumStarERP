@@ -17,14 +17,13 @@
     int pageCount;
     int totalCount;//商品总数量
 }
-@property (weak,   nonatomic) IBOutlet UILabel *headLab;
-@property (weak,   nonatomic) IBOutlet UIScrollView *backScr;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *bottomBtns;
-@property (nonatomic, assign)BOOL isSel;
 @property (nonatomic,   copy)NSArray *hedArr;
 @property (nonatomic,   copy)NSString *sortStr;
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *dataArray;
+@property (weak,   nonatomic) IBOutlet UILabel *headLab;
+@property (weak,   nonatomic) IBOutlet UIScrollView *backScr;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *bottomBtns;
 @end
 
 @implementation NakedDriSearchVC
@@ -40,23 +39,20 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.isSel = NO;
-    [self interfaceOrientation:UIInterfaceOrientationPortrait];
 }
 
 - (void)setRightNaviBar{
     UIButton *bar = [UIButton buttonWithType:UIButtonTypeCustom];
-    bar.frame = CGRectMake(0, 0, 100, 30);
+    bar.frame = CGRectMake(0, 0, 80, 30);
     [bar setTitle:@"横竖屏切换" forState:UIControlStateNormal];
-    bar.titleLabel.font = [UIFont systemFontOfSize:16];
+    bar.titleLabel.font = [UIFont systemFontOfSize:12];
     [bar setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [bar addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:bar];
 }
 
 - (void)btnClick:(id)sender{
-    self.isSel = !self.isSel;
-    if (self.isSel) {
+    if (SDevWidth<SDevHeight) {
         [self interfaceOrientation:UIInterfaceOrientationLandscapeLeft];
     }else{
         [self interfaceOrientation:UIInterfaceOrientationPortrait];
@@ -90,7 +86,8 @@
         make.left.equalTo(self.backScr).offset(0);
         make.right.equalTo(self.backScr).offset(0);
         make.bottom.equalTo(self.backScr).offset(0);
-        make.size.mas_equalTo(CGSizeMake(SDevWidth, SDevHeight-164));
+        make.centerY.mas_equalTo(self.backScr.mas_centerY);
+        make.width.mas_equalTo(SDevWidth);
     }];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
@@ -285,14 +282,6 @@
         }
     }
     return mutA.copy;
-}
-
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskAll;
 }
 
 @end

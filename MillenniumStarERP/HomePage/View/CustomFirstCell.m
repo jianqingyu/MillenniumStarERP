@@ -8,7 +8,11 @@
 
 #import "CustomFirstCell.h"
 @interface CustomFirstCell()<UITextFieldDelegate>
-
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *ptLab;
+@property (weak, nonatomic) IBOutlet UIButton *btn;
+@property (weak, nonatomic) IBOutlet UIView *driView;
+@property (weak, nonatomic) IBOutlet UILabel *codeLab;
 @end
 @implementation CustomFirstCell
 
@@ -21,6 +25,7 @@
         [addCell.btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
         [addCell.fie1 setLayerWithW:3.0 andColor:BordColor andBackW:0.001];
         [addCell.handbtn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
+        addCell.ptLab.adjustsFontSizeToFitWidth = YES;
     }
     return addCell;
 }
@@ -77,6 +82,15 @@
     }
 }
 
+- (void)setModelInfo:(DetailModel *)modelInfo{
+    if (modelInfo) {
+        _modelInfo = modelInfo;
+        self.titleLab.text = _modelInfo.title;
+        self.ptLab.text = _modelInfo.weight;
+        [self.btn setTitle:_modelInfo.categoryTitle forState:UIControlStateNormal];
+    }
+}
+
 - (void)setMessArr:(NSString *)messArr{
     if (messArr) {
         _messArr = messArr;
@@ -87,8 +101,13 @@
 - (void)setHandSize:(NSString *)handSize{
     if (handSize) {
         _handSize = handSize;
+        if (_handSize.length>0) {
+            self.handbtn.selected = YES;
+            [self.handbtn setTitle:_handSize forState:UIControlStateSelected];
+        }else{
+            self.handbtn.selected = NO;
+        }
     }
-    [self.handbtn setTitle:_handSize forState:UIControlStateNormal];
 }
 
 @end

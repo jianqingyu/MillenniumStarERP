@@ -56,8 +56,8 @@
     }
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {
-            if ([YQObjectBool boolForObject:response.data[@"address"][@"data"]]) {
-                self.addressInfo = [AddressInfo objectWithKeyValues:response.data[@"address"][@"data"]];
+            if ([YQObjectBool boolForObject:response.data[@"address"]]) {
+                self.addressInfo = [AddressInfo objectWithKeyValues:response.data[@"address"]];
             }
             if ([YQObjectBool boolForObject:response.data[@"customer"]]) {
                 self.cusInfo = [CustomerInfo objectWithKeyValues:response.data[@"customer"]];

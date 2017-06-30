@@ -115,8 +115,10 @@
 }
 
 - (void)btnClick:(id)sender{
+    DetailTypeInfo *info = [DetailTypeInfo new];
+    info.title = @"";
     if (self.textBack) {
-        self.textBack(@"");
+        self.textBack(@{self.section:info});
         [self removeFromSuperview];
     }
 }

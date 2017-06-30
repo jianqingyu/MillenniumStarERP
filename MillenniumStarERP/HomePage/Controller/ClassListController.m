@@ -54,8 +54,7 @@
     }];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    CGRect frame = CGRectMake(SDevWidth*0.2, 0, SDevWidth*0.8, SDevHeight-64);
-    self.slideRightTab = [[ScreeningRightView alloc]initWithFrame:frame];
+    self.slideRightTab = [[ScreeningRightView alloc]initWithFrame:CGRectZero];
     __weak typeof(self) weakSelf = self;
     self.slideRightTab.tableBack = ^(NSDictionary *dict,BOOL isSel){
         NSMutableDictionary *mutD = dict.mutableCopy;
@@ -77,6 +76,12 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     [self.view addSubview:self.slideRightTab];
+    [self.slideRightTab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+        make.left.equalTo(self.tableView.mas_right).with.offset(0);
+    }];
 }
 
 - (BOOL)boolWithArr:(NSArray *)arr andMutDic:(NSMutableDictionary *)mutDic andDic:(NSDictionary *)dict{

@@ -7,7 +7,7 @@
 //
 
 #import "NakedDriSeaTableCell.h"
-
+#import "CustomShapeBtn.h"
 @implementation NakedDriSeaTableCell
 
 + (id)cellWithTableView:(UITableView *)tableView{
@@ -111,12 +111,12 @@
 }
 
 - (UIButton *)creatBtn{
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    CustomShapeBtn *btn = [CustomShapeBtn buttonWithType:UIButtonTypeCustom];
     btn.backgroundColor = [UIColor whiteColor];
     btn.titleLabel.font = [UIFont systemFontOfSize:12.0];
     [btn.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [btn setLayerWithW:0.001 andColor:BordColor andBackW:0.5];
+//    [btn setLayerWithW:0.001 andColor:BordColor andBackW:0.5];
     [self.contentView addSubview:btn];
     return btn;
 }

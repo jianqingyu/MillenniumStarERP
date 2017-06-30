@@ -7,21 +7,22 @@
 //
 
 #import "HomePageVC.h"
-#import "HomeHeadView.h"
-#import "EditUserInfoVC.h"
-#import "HomePageCollectionCell.h"
-#import "ProductListVC.h"
 #import "UserInfo.h"
+#import "HomeHeadView.h"
+#import "ProductListVC.h"
+#import "EditUserInfoVC.h"
 #import "CusTomLoginView.h"
+#import "HomePageCollectionCell.h"
 #import "NakedDriLibViewController.h"
 @interface HomePageVC ()<UINavigationControllerDelegate,UICollectionViewDataSource,
                                    UICollectionViewDelegate>
 @property(strong,nonatomic) UICollectionView * rightCollection;
+@property(nonatomic,  copy) NSArray *list;
+@property(nonatomic,  weak) UIButton *selBtn;
 @property(strong,nonatomic) UserInfo *userInfo;
 @property(nonatomic,  weak) HomeHeadView *headView;
-@property(nonatomic,  copy) NSArray *list;
 @property(nonatomic,  copy) NSDictionary *versionDic;
-@property(nonatomic,  weak) UIButton *selBtn;
+@property (nonatomic, copy) NSString *openUrl;
 @end
 
 @implementation HomePageVC
@@ -32,6 +33,25 @@
     [self setHeaderView];
     [self setupFootBtn];
     [self loadHomeData];
+    //self.openUrl = @"https://itunes.apple.com/cn/app/千禧之星珠宝/id1227342902?mt=8";
+    self.openUrl = @"https://itunes.apple.com/cn/app/千禧之星珠宝2/id1244977034?mt=8";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+}
+
+- (void)orientChange:(NSNotification *)notification{
+    BOOL isDev = [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeLeft
+    || [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeRight;
+    CGFloat height = MAX(SDevHeight*0.38, 200);
+    if (isDev) {
+        [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(180);
+        }];
+    }else{
+        [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(height);
+        }];
+    }
+    [self.rightCollection reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -67,7 +87,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     UIApplication *application = [UIApplication sharedApplication];
-    [application openURL:[NSURL URLWithString:self.versionDic[@"url"]]];
+    [application openURL:[NSURL URLWithString:self.openUrl]];
     application = nil;
 }
 
@@ -86,7 +106,7 @@
 }
 
 - (void)setHeaderView{
-    CGFloat height = MAX(SDevHeight*0.38, 220);
+    CGFloat height = MAX(SDevHeight*0.38, 200);
     HomeHeadView *headView = [HomeHeadView view];
     [self.view addSubview:headView];
     self.headView = headView;
@@ -99,15 +119,16 @@
     }];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    flowLayout.minimumInteritemSpacing = 0.f;//左右间隔
-    flowLayout.minimumLineSpacing = 5.0f;
+    flowLayout.minimumInteritemSpacing = 5.0f;//左右间隔
+    flowLayout.minimumLineSpacing = 5.0f;//上下间隔
+    flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);//边距距
     self.rightCollection = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     self.rightCollection.backgroundColor = DefaultColor;
     self.rightCollection.delegate = self;
     self.rightCollection.dataSource = self;
     [self.view addSubview:_rightCollection];
     [_rightCollection mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headView.mas_bottom).offset(10);
+        make.top.equalTo(headView.mas_bottom).offset(0);
         make.left.equalTo(self.view).offset(0);
         make.right.equalTo(self.view).offset(0);
         make.bottom.equalTo(self.view).offset(0);
@@ -115,7 +136,8 @@
     //设置当数据小于一屏幕时也能滚动
     self.rightCollection.alwaysBounceVertical = YES;
     UINib *nib = [UINib nibWithNibName:@"HomePageCollectionCell" bundle:nil];
-    [self.rightCollection registerNib: nib forCellWithReuseIdentifier:@"HomePageCollectionCell"];
+    [self.rightCollection registerNib:nib
+                 forCellWithReuseIdentifier:@"HomePageCollectionCell"];
 }
 
 - (void)setupFootBtn{
@@ -173,11 +195,14 @@
     return self.list.count;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake((SDevWidth-5*5)/4, 80);
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HomePageCollectionCell *collcell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomePageCollectionCell" forIndexPath:indexPath];
-    collcell.layer.borderWidth = 0.1;
-    collcell.layer.borderColor = CUSTOM_COLOR(207, 207, 210).CGColor;
+    [collcell setLayerWithW:0.1 andColor:BordColor andBackW:0.1];
     NSDictionary *dict = self.list[indexPath.row];
     [collcell.image sd_setImageWithURL:dict[@"pic"] placeholderImage:DefaultImage];
     collcell.title.text = dict[@"title"];
@@ -190,7 +215,6 @@
     switch (indexPath.row) {
         case 0:{
             ProductListVC*listVc = [[ProductListVC alloc]init];
-            listVc.backDict = [NSMutableDictionary new];
             [self.navigationController pushViewController:listVc animated:YES];
         }
             break;
@@ -203,37 +227,16 @@
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat width = (SDevWidth-0.8)/4;
-    return CGSizeMake(width, 80);
-}
-
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0.1, 0.1, 0.1, 0.1);
-}
-
-- (CGFloat) collectionView:(UICollectionView *)collectionView
-                    layout:(UICollectionViewLayout *)collectionViewLayout
-                     minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0.001f;
-}
-
-- (CGFloat) collectionView:(UICollectionView *)collectionView
-                    layout:(UICollectionViewLayout *)collectionViewLayout
-                          minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0.001f;
-}
-
 - (void)setClick:(id)sender{
     EditUserInfoVC *infoVc = [[EditUserInfoVC alloc]init];
-    infoVc.url = self.userInfo.headPic;
     infoVc.editBack = ^(id isSel){
-        self.userInfo.headPic = isSel;
         [self.headView.titleImg sd_setImageWithURL:[NSURL URLWithString:isSel] placeholderImage:DefaultImage];
     };
     [self.navigationController pushViewController:infoVc animated:YES];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

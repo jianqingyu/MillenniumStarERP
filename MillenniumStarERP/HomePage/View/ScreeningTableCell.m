@@ -10,7 +10,6 @@
 #import "ScreenDetailInfo.h"
 #import "StrWithIntTool.h"
 @interface ScreeningTableCell()<UITextFieldDelegate>
-//@property (nonatomic,strong)NSMutableArray *screenArr;
 @property (nonatomic,strong)NSMutableArray *screenBtns;
 @end
 @implementation ScreeningTableCell
@@ -19,19 +18,12 @@
     static NSString *Id = @"screenCell";
     ScreeningTableCell *addCell = [tableView dequeueReusableCellWithIdentifier:Id];
     if (addCell==nil) {
-        addCell = [[ScreeningTableCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Id];
+        addCell = [[ScreeningTableCell alloc]initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:Id];
         addCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return addCell;
 }
-
-//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//    if (self) {
-//        
-//    }
-//    return self;
-//}
 
 - (void)setInfo:(ScreeningInfo *)info{
     if (info) {
@@ -63,7 +55,7 @@
 }
 
 - (UIView *)setupTextField{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(ROWSPACE, ROWSPACE, SDevWidth*0.8-20, ROWHEIHT)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(ROWSPACE, ROWSPACE, MIN(SDevHeight, SDevWidth)*0.8-20, ROWHEIHT)];
     view.backgroundColor = DefaultColor;
     view.layer.cornerRadius = 5;
     view.layer.masksToBounds = YES;
@@ -101,6 +93,7 @@
             sBtn.selected = NO;
             dInfo.isSelect = NO;
         }
+        
         if (self.minFie.text.length>0&&self.maxFie.text.length==0) {
             self.clickblock([NSString stringWithFormat:@"%@|",self.minFie.text]);
         }

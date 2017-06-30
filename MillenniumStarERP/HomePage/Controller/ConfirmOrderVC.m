@@ -16,7 +16,6 @@
 #import "AddressInfo.h"
 #import "DetailTypeInfo.h"
 #import "SearchCustomerVC.h"
-#import "CustomPopView.h"
 #import "CustomerInfo.h"
 #import "StrWithIntTool.h"
 #import "CustomProDetailVC.h"
@@ -25,6 +24,7 @@
 #import "ConfirmEditHeadView.h"
 #import "InvoiceViewController.h"
 #import "ProductionOrderVC.h"
+#import "CustomPickView.h"
 @interface ConfirmOrderVC ()<UITableViewDelegate,UITableViewDataSource,
                             ConfirmOrdHeadViewDelegate,ConfirmOrdCellDelegate>{
     int curPage;
@@ -43,7 +43,6 @@
 @property (weak, nonatomic) UIButton *topBtn;
 @property (weak, nonatomic) ConfirmEditHeadView *headEView;
 @property (nonatomic,strong)UITableView *tableView;
-@property (nonatomic,strong)CustomPopView *popView;
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic,strong)NSMutableArray *selectDataArray;
 @property (nonatomic,strong)NSArray *qualityArr;
@@ -54,13 +53,16 @@
 @property (nonatomic,strong)DetailTypeInfo *colorInfo;
 @property (nonatomic,strong)CustomerInfo *cusInfo;
 @property (nonatomic,strong)AddressInfo *addressInfo;
+@property (nonatomic,  weak)CustomPickView *pickView;
 @property (nonatomic,assign)BOOL isSelBtn;
+@property (nonatomic,assign)CGFloat headH;
 @end
 
 @implementation ConfirmOrderVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self changeHeightWithDev];
     [self setupTableView];
     [self creatHeadView];
     self.dataArray = @[].mutableCopy;
@@ -80,6 +82,25 @@
         self.title = @"确认订单";
         self.secondView.hidden = YES;
         [self setupHeaderRefresh];
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
+- (void)orientChange:(NSNotification *)notification{
+    [self changeHeightWithDev];
+    if (!self.topBtn.selected) {
+        [self.topBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(self.headH);
+        }];
+    }
+}
+
+- (void)changeHeightWithDev{
+    self.headH = 375;
+    BOOL isDev = [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeLeft
+    || [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeRight;
+    if (isDev&&IsPhone) {
+        self.headH = 200;
     }
 }
 
@@ -128,21 +149,6 @@
 
 #pragma mark -- HeadView
 - (void)creatHeadView{
-    ConfirmOrdHeadView *view = [ConfirmOrdHeadView view];
-    view.delegate = self;
-    [self.view addSubview:view];
-    [view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(0);
-        make.top.equalTo(self.view).offset(0);
-        make.right.equalTo(self.view).offset(0);
-        make.height.mas_equalTo(@375);
-    }];
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]
-                        initWithTarget:self action:@selector(handleSwipeFrom:)];
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
-    [view addGestureRecognizer:recognizer];
-    self.headView = view;
-    
     UIButton *headBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [headBtn setLayerWithW:0.1 andColor:DefaultColor andBackW:0.8];
     [headBtn setImage:[UIImage imageNamed:@"icon_up"] forState:UIControlStateNormal];
@@ -152,20 +158,30 @@
       forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:headBtn];
     [headBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(0);
         make.top.equalTo(self.view).offset(0);
+        make.left.equalTo(self.view).offset(0);
         make.right.equalTo(self.view).offset(0);
         make.height.mas_equalTo(@40);
     }];
+    
+    ConfirmOrdHeadView *view = [ConfirmOrdHeadView view];
+    view.delegate = self;
+    [self.view addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+        make.bottom.equalTo(headBtn.mas_top).with.offset(0);
+        make.left.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+    }];
+    
+    self.headView = view;
     self.topBtn = headBtn;
     self.topBtn.selected = YES;
-    self.headView.hidden = YES;
 }
 
 - (void)dismissHeadView{
     [UIView animateWithDuration:1 animations:^{
         self.topBtn.selected = YES;
-        self.headView.hidden = YES;
         [self.topBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(0);
         }];
@@ -175,17 +191,10 @@
 - (void)showHeadView{
     [UIView animateWithDuration:1 animations:^{
         self.topBtn.selected = NO;
-        self.headView.hidden = NO;
         [self.topBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(375);
+            make.top.equalTo(self.view).offset(self.headH);
         }];
     }];
-}
-
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
-    if (!self.topBtn.selected) {
-        [self dismissHeadView];
-    }
 }
 
 - (void)btnShow:(UIButton *)btn{
@@ -204,13 +213,30 @@
 
 #pragma mark -- CustomPopView
 - (void)setupPopView{
-    CustomPopView *popV = [[CustomPopView alloc]initWithFrame:
-                           CGRectMake(0, 0, SDevWidth, SDevHeight)];
-    popV.popBack = ^(id dict){
+    CustomPickView *popV = [[CustomPickView alloc]init];
+    popV.popBack = ^(int staue,id dict){
         [self chooseHeadView:dict];
+        [self dismissCustomPopView];
     };
-    self.popView = popV;
+    [self.view addSubview:popV];
+    [popV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+        make.left.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+    }];
+    self.pickView = popV;
+    [self dismissCustomPopView];
 }
+
+- (void)showCustomPopView{
+    self.pickView.hidden = NO;
+}
+
+- (void)dismissCustomPopView{
+    self.pickView.hidden = YES;
+}
+
 //选择成色与质量
 - (void)chooseHeadView:(NSDictionary *)dict{
     NSIndexPath *path = [dict allKeys][0];
@@ -240,10 +266,6 @@
         _addressInfo = addressInfo;
         self.headView.addInfo = _addressInfo;
     }
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.popView removeFromSuperview];
 }
 
 - (void)loadUpOrderPrice{
@@ -406,12 +428,10 @@
                         dict[@"customer"]];
     }
     if (dict[@"modelColor"]) {
-        self.colorArr = [DetailTypeInfo
-                         objectArrayWithKeyValuesArray:dict[@"modelColor"]];
+        self.colorArr = dict[@"modelColor"];
     }
     if (dict[@"modelQuality"]) {
-        self.qualityArr = [DetailTypeInfo
-                        objectArrayWithKeyValuesArray:dict[@"modelQuality"]];
+        self.qualityArr = dict[@"modelQuality"];
     }
     if (self.editId&&dict[@"orderInfo"]&&dict[@"totalPrice"]&&dict[@"totalNeedPayPrice"]) {
         OrderNewInfo *orderInfo = [OrderNewInfo objectWithKeyValues:dict[@"orderInfo"]];
@@ -555,13 +575,22 @@
 
 - (void)openPopTableWithInPath:(NSInteger)index{
     if (index==2) {
-        self.popView.typeList = self.qualityArr;
+        self.pickView.titleStr = @"质量等级";
+        self.pickView.selTitle = self.qualityInfo.title;
+        self.pickView.typeList = self.qualityArr;
     }else{
-        self.popView.typeList = self.colorArr;
+        self.pickView.titleStr = @"成色";
+        self.pickView.selTitle = self.colorInfo.title;
+        self.pickView.typeList = self.colorArr;
     }
+    self.pickView.staue = 1;
     NSIndexPath *inPath = [NSIndexPath indexPathForRow:0 inSection:index];
-    self.popView.section = inPath;
-    [self.view addSubview:self.popView];
+    self.pickView.section = inPath;
+    [self showCustomPopView];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self dismissCustomPopView];
 }
 #pragma mark 修改未审核订单信息
 - (void)editAddress{
@@ -952,6 +981,10 @@
             [MBProgressHUD showError:response.message];
         }
     } requestURL:url params:params];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

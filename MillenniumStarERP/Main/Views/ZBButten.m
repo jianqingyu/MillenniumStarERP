@@ -9,7 +9,7 @@
 #import "ZBButten.h"
 @interface ZBButten()
 @property(nonatomic,strong)NSTimer *zbtimer;
-@property(nonatomic,assign)NSInteger oldtimer;
+@property(nonatomic,assign)int oldtimer;
 @property(nonatomic,strong)NSString *frontstr;
 @property(nonatomic,strong)NSString *backstr;
 @end
@@ -51,7 +51,7 @@
     [self setTitle:_normaltext forState:UIControlStateNormal];
 }
 
-- (void)setTimer:(NSInteger)Timer
+- (void)setTimer:(int)Timer
 {
     _Timer = Timer;
     _oldtimer=_Timer;
@@ -68,7 +68,7 @@
 {
     if (_Timer>0) {
         
-        [self setTitle:[NSString stringWithFormat:@"%@%ld%@",self.frontstr,_Timer,self.backstr] forState:UIControlStateNormal];
+        [self setTitle:[NSString stringWithFormat:@"%@%d%@",self.frontstr,_Timer,self.backstr] forState:UIControlStateNormal];
         _Timer = _Timer-1;
     }else{
         [self setTitle:_normaltext forState:UIControlStateNormal];
@@ -81,7 +81,7 @@
 - (void)sendAction:(SEL)action to:(nullable id)target forEvent:(nullable UIEvent *)event
 {
     [super sendAction:action to:target forEvent:event];
-    [self setTitle:[NSString stringWithFormat:@"%@%ld%@",self.frontstr,_Timer,self.backstr] forState:UIControlStateNormal];
+    [self setTitle:[NSString stringWithFormat:@"%@%d%@",self.frontstr,_Timer,self.backstr] forState:UIControlStateNormal];
     [self.zbtimer setFireDate:[NSDate distantPast]];
     self.userInteractionEnabled = NO;
 }

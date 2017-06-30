@@ -47,7 +47,7 @@
                                     <constraint firstAttribute="height" constant="40" id="sa9-3c-Vpp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="添加副石">
+                                <state key="normal" title="添加副石" image="icon_+">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -125,6 +125,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icon_+" width="17" height="17"/>
         <image name="icon_del" width="17" height="17"/>
         <image name="icon_reset" width="17" height="17"/>
     </resources>

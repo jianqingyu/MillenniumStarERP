@@ -24,8 +24,9 @@
 #import "OrderNumTool.h"
 #import "CommonUtils.h"
 #import "CustomPickView.h"
-@interface CustomProDetailVC ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,MWPhotoBrowserDelegate,imageTapDelegate>
-@property (nonatomic,  weak) IBOutlet UITableView *tableView;
+@interface CustomProDetailVC ()<UINavigationControllerDelegate,UITableViewDelegate,
+                  UITableViewDataSource,MWPhotoBrowserDelegate,imageTapDelegate>
+@property (nonatomic,  weak) UITableView *tableView;
 @property (nonatomic,  weak) IBOutlet UIButton *lookBtn;
 @property (nonatomic,  weak) IBOutlet UIButton *addBtn;
 @property (nonatomic,  weak) IBOutlet UILabel *numLab;
@@ -34,10 +35,11 @@
 @property (nonatomic,  copy)NSArray *typeSArr;
 @property (nonatomic,  copy)NSArray*chooseArr;
 @property (nonatomic,  copy)NSArray*detailArr;
-@property (nonatomic,  copy)NSString *firstStr;
-@property (nonatomic,  copy)NSString *handStr;
+@property (nonatomic,  copy)NSString*firstStr;
+@property (nonatomic,  copy)NSString*handStr;
 @property (nonatomic,  copy)NSArray*remakeArr;
 @property (nonatomic,  copy)NSArray*IDarray;
+@property (nonatomic,  copy)NSArray*headImg;
 @property (nonatomic,  copy)NSArray*photos;
 @property (nonatomic,  copy)NSArray*specTitles;
 @property (nonatomic,  copy)NSString*lastMess;
@@ -49,7 +51,8 @@
 @property (nonatomic,  strong)DetailModel *modelInfo;
 @property (nonatomic,  strong)CustomPickView *pickView;
 @property (nonatomic,  strong)DetailTextCustomView *textCView;
-@property (nonatomic,  weak) ETFoursquareImages *foursquareImages;
+@property (nonatomic,    weak) ETFoursquareImages *foursquareImages;
+@property (nonatomic,  strong)UIView *hView;
 @end
 
 @implementation CustomProDetailVC
@@ -57,6 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"定制信息";
+    self.view.backgroundColor = DefaultColor;
     self.numLab.layer.cornerRadius = 8;
     self.numLab.layer.masksToBounds = YES;
     [self.numLab setAdjustsFontSizeToFitWidth:YES];
@@ -69,6 +73,7 @@
     self.mutArr = @[].mutableCopy;
     self.nums = @[@"",@"",@"",@""].mutableCopy;
     self.bools = @[@YES,@NO,@NO,@NO].mutableCopy;
+    [self setBaseTableView];
     [self setupPopView];
     [self setupTextView];
     [self setupDetailData];
@@ -77,11 +82,55 @@
         [self setupDetailData];
     }];
     [self setHandSize];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+}
+
+- (void)orientChange:(NSNotification *)notification{
+    self.textCView.frame = CGRectMake(0, 0, SDevWidth, SDevHeight);
+    [self changeTableHeadView];
+}
+
+- (void)changeTableHeadView{
+    if (SDevHeight>SDevWidth) {
+        [self.hView removeFromSuperview];
+        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(0);
+        }];
+        [self setupHeadView:self.headImg and:YES];
+    }else{
+        self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
+        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(SDevWidth/2);
+        }];
+        [self setupHeadView:self.headImg and:NO];
+    }
+}
+
+- (void)setBaseTableView{
+    UITableView *table = [[UITableView alloc]init];
+    table.backgroundColor = DefaultColor;
+    table.separatorStyle = UITableViewCellSeparatorStyleNone;
+    table.delegate = self;
+    table.dataSource = self;
+    [self.view addSubview:table];
+    [table mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(0);
+        make.left.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(-50);
+    }];
+    self.tableView = table;
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
 
 - (void)setHandSize{
     self.typeTArr = @[@"类型",@"规格",@"形状",@"颜色",@"净度"];
-    self.numArr = @[@{@"title":@"1"},@{@"title":@"2"},@{@"title":@"3"},@{@"title":@"4"},@{@"title":@"5"},@{@"title":@"6"},@{@"title":@"7"},@{@"title":@"8"},@{@"title":@"9"},@{@"title":@"10"},@{@"title":@"11"},@{@"title":@"12"},@{@"title":@"13"},@{@"title":@"14"},@{@"title":@"15"},@{@"title":@"16"},@{@"title":@"17"}];
+    self.numArr = @[@{@"title":@"1"},@{@"title":@"2"},@{@"title":@"3"},
+                  @{@"title":@"4"}, @{@"title":@"5"},@{@"title":@"6"},
+                  @{@"title":@"7"},@{@"title":@"8"},@{@"title":@"9"},
+                  @{@"title":@"10"},@{@"title":@"11"},@{@"title":@"12"},
+                  @{@"title":@"13"},@{@"title":@"14"},@{@"title":@"15"},
+                  @{@"title":@"16"},@{@"title":@"17"},@{@"title":@"18"}];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -273,34 +322,33 @@
         mPic = @[@"pic"].mutableCopy;
     }
     headArr = mPic.copy;
+    self.headImg = headArr;
     self.IDarray = [bPic copy];
-    [self setupHeadView:headArr];
+    [self changeTableHeadView];
 }
 
-- (void)setupHeadView:(NSArray *)headArr{
-    UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth, SDevWidth+44)];
-    CGRect frame = CGRectMake(0, 0, SDevWidth, SDevWidth);
+- (void)setupHeadView:(NSArray *)headArr and:(BOOL)isHead{
+    CGRect headF = CGRectMake(0, 0, (int)SDevWidth/2, SDevHeight-60);
+    if (isHead) {
+        headF = CGRectMake(0, 0, SDevWidth, SDevWidth);
+    }
+    UIView *headView = [[UIView alloc]initWithFrame:headF];
+    CGFloat wid = headView.width;
+    CGFloat height = headView.height;
+    CGRect frame = CGRectMake(0, 0, wid, height);
     ETFoursquareImages *Images = [[ETFoursquareImages alloc]initWithFrame:frame];
-    [Images setImagesHeight:SDevWidth];
+    [Images setImagesHeight:height];
     Images.delegate = self;
     [Images setImages:headArr];
     [headView addSubview:Images];
     self.foursquareImages = Images;
-    
-    UIView *fView = [[UIView alloc]init];
-    fView.backgroundColor = [UIColor whiteColor];
-    UILabel *titleLab = [[UILabel alloc]init];
-    titleLab.numberOfLines = 2;
-    titleLab.text = self.modelInfo.title;
-    CGRect rect = CGRectMake(0, 0, SDevWidth-30, 999);
-    rect = [titleLab textRectForBounds:rect limitedToNumberOfLines:0];
-    fView.frame = CGRectMake(0, SDevWidth, SDevWidth, 10+rect.size.height);
-    titleLab.frame = CGRectMake(15, 5, rect.size.width,rect.size.height);
-    [fView addSubview:titleLab];
-    [headView addSubview:fView];
-    
-    self.tableView.tableHeaderView = headView;
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    self.hView = headView;
+    if (isHead) {
+        self.tableView.tableHeaderView = self.hView;
+    }else{
+        [self.view addSubview:self.hView];
+        [self.view sendSubviewToBack:self.hView];
+    }
 }
 
 #pragma mark - imageTapDelegate
@@ -358,20 +406,17 @@
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:
              UITableViewRowAnimationNone];
         }
-        [UIView animateWithDuration:1 animations:^{
-            [self.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.view).offset(SDevHeight);
-            }];
-        }];
+        [self dismissCustomPopView];
     };
     [self.view addSubview:popV];
     [popV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(0);
         make.left.equalTo(self.view).offset(0);
-        make.top.equalTo(self.view).offset(SDevHeight);
-        make.bottom.equalTo(self.view).offset(256);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
     }];
     self.pickView = popV;
+    [self dismissCustomPopView];
 }
 
 #pragma mark -- CustomPopView
@@ -393,7 +438,8 @@
         [self.bools setObject:@NO atIndexedSubscript:path.section];
     }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:path.section+1 inSection:0];
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:
+                                                   UITableViewRowAnimationNone];
 }
 //一个石头里面的数据齐全
 - (BOOL)boolWithArr:(NSArray *)arr{
@@ -415,11 +461,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [UIView animateWithDuration:1 animations:^{
-        [self.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(SDevHeight);
-        }];
-    }];
+    [self dismissCustomPopView];
     [self.textCView removeFromSuperview];
 }
 
@@ -436,6 +478,9 @@
 - (CGFloat)tableView:(UITableView *)tableView
                   heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     CGFloat height = 90;
+    if (indexPath.row==0) {
+        height = 125;
+    }
     if (indexPath.row==self.mutArr.count+1) {
         height = 210;
     }
@@ -446,7 +491,6 @@
                      cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==0) {
         CustomFirstCell *firstCell = [CustomFirstCell cellWithTableView:tableView];
-        [firstCell.btn setTitle:self.modelInfo.categoryTitle forState:UIControlStateNormal];
         firstCell.MessBack = ^(BOOL isSel,NSString *messArr){
             if (isSel) {
                 self.firstStr = messArr;
@@ -454,6 +498,7 @@
                 [self openNumberAndhandSize:2 and:indexPath];
             }
         };
+        firstCell.modelInfo = self.modelInfo;
         firstCell.messArr = self.firstStr;
         firstCell.handSize = self.handStr;
         return firstCell;
@@ -494,6 +539,14 @@
     }
 }
 
+- (void)showCustomPopView{
+    self.pickView.hidden = NO;
+}
+
+- (void)dismissCustomPopView{
+    self.pickView.hidden = YES;
+}
+
 - (void)openNumberAndhandSize:(int)staue and:(NSIndexPath *)index{
     if (staue==2) {
         self.pickView.typeList = self.handArr;
@@ -507,13 +560,7 @@
     }
     self.pickView.section = index;
     self.pickView.staue = staue;
-    [UIView animateWithDuration:1 animations:^{
-        [UIView animateWithDuration:1 animations:^{
-            [self.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.view).offset(0);
-            }];
-        }];
-    }];
+    [self showCustomPopView];
 }
 
 - (void)editStoneWith:(id)number{
@@ -568,13 +615,7 @@
         self.pickView.titleStr = self.typeTArr[inPath.row];
         self.pickView.selTitle = info.title;
         self.pickView.staue = 1;
-        [UIView animateWithDuration:1 animations:^{
-            [UIView animateWithDuration:1 animations:^{
-                [self.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.view).offset(0);
-                }];
-            }];
-        }];
+        [self showCustomPopView];
     }
 }
 
@@ -583,13 +624,7 @@
     self.pickView.section = [NSIndexPath indexPathForRow:0 inSection:0];
     self.pickView.titleStr = @"备注";
     self.pickView.staue = 4;
-    [UIView animateWithDuration:1 animations:^{
-        [UIView animateWithDuration:1 animations:^{
-            [self.pickView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.view).offset(0);
-            }];
-        }];
-    }];
+    [self showCustomPopView];
 }
 
 - (IBAction)lookOrder:(id)sender {

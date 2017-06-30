@@ -12,7 +12,7 @@
 /**
  专用于定时器的butten默认是60秒
  */
-@property(nonatomic,assign)NSInteger Timer;
+@property(nonatomic,assign)int Timer;
 /**
  初试的文字
  */

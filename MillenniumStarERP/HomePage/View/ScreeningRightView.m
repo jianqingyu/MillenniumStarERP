@@ -14,10 +14,12 @@
 #import "ScreeningHeadSView.h"
 #import "StrWithIntTool.h"
 #import "ScreenDetailInfo.h"
+#import "ScreeningTopView.h"
 @interface ScreeningRightView()<UITableViewDataSource,UITableViewDelegate>{
-    UITableView*_sildeTableView;
-    NSMutableArray*_imgBtns;
+    UITableView *_sildeTableView;
+    NSMutableArray *_imgBtns;
 }
+@property (nonatomic, weak)ScreeningTopView *topView;
 @end
 @implementation ScreeningRightView
 
@@ -30,46 +32,71 @@
 }
 
 - (void)setBaseView:(CGRect)frame{
+    ScreeningTopView *topV = [[ScreeningTopView alloc]init];
+    topV.back = ^(NSArray *arr){
+        self.goods = arr;
+    };
+    [self addSubview:topV];
+    [topV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(0);
+        make.left.equalTo(self).offset(0);
+        make.right.equalTo(self).offset(0);
+        make.height.mas_equalTo(@0);
+    }];
+    self.topView = topV;
+    
     _imgBtns = [NSMutableArray new];
-    CGRect tabFrame = frame;
-    tabFrame.origin.x = 0;
-    tabFrame.size.height = frame.size.height-40;
-    _sildeTableView = [[UITableView alloc]initWithFrame:tabFrame
+    _sildeTableView = [[UITableView alloc]initWithFrame:CGRectZero
                                             style:UITableViewStyleGrouped];
+    _sildeTableView.backgroundColor = [UIColor whiteColor];
     _sildeTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLineEtched;
     _sildeTableView.delegate = self;
     _sildeTableView.dataSource = self;
     _sildeTableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     _dictB = @{}.mutableCopy;
     [self addSubview:_sildeTableView];
-    
+    [_sildeTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_topView.mas_bottom).with.offset(0);
+        make.left.equalTo(self).offset(0);
+        make.right.equalTo(self).offset(0);
+        make.bottom.equalTo(self).offset(-40);
+    }];
     self.backgroundColor = [UIColor whiteColor];
-    UIButton *sureBtn = [self createBtnTitle:@"确定" andse:@selector(btnClick)
-                                                           andColor:MAIN_COLOR];
+    UIButton *sureBtn = [self setB:@"确定" andS:88 andC:MAIN_COLOR];
+    UIButton *cancelBtn = [self setB:@"重置筛选" andS:89 andC:CUSTOM_COLOR(242, 140, 42)];
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(0);
         make.height.mas_equalTo(@40);
         make.bottom.equalTo(self).offset(0);
-        make.width.mas_equalTo(@(frame.size.width/2));
+        make.width.equalTo(cancelBtn);
+        make.right.equalTo(cancelBtn.mas_left).with.offset(0);
     }];
-    UIButton *cancelBtn = [self createBtnTitle:@"重置筛选" andse:@selector(cancelClick)
-                                                andColor:CUSTOM_COLOR(242, 140, 42)];
     [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(sureBtn.mas_right).offset(0);
-        make.height.mas_equalTo(@40);
+        make.height.equalTo(sureBtn);
         make.bottom.equalTo(self).offset(0);
         make.right.equalTo(self).offset(0);
+        make.width.equalTo(sureBtn);
     }];
 }
 
-- (UIButton *)createBtnTitle:(NSString *)title andse:(SEL)tag
-             andColor:(UIColor *)color{
+- (UIButton *)setB:(NSString *)title andS:(int)tag andC:(UIColor *)color{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.tag = tag;
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setBackgroundColor:color];
-    [btn addTarget:self action:tag forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(bottomBtnClick:)
+                                forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
     return btn;
+}
+
+- (void)bottomBtnClick:(UIButton *)btn{
+    if (btn.tag==88) {
+        [self btnClick];
+    }else{
+        [self cancelClick];
+    }
 }
 
 - (void)btnClick{
@@ -114,12 +141,32 @@
 - (void)setGoods:(NSArray *)goods{
     if (goods.count>0) {
         _goods = goods;
+        if (_isTop) {
+            NSMutableArray *mutA = [NSMutableArray array];
+            for (ScreeningInfo *info in _goods) {
+                for (ScreenDetailInfo *dInfo in info.attributeList) {
+                    if (dInfo.isSelect) {
+                        [mutA addObject:info];
+                    }
+                }
+            }
+            CGFloat labH = 30;
+            CGFloat height = 24;
+            int row = 0;
+            if (mutA.count>0) {
+                row = (int)(mutA.count-1)/4+1;
+            }
+            CGFloat topH = labH+(height+5)*row;
+            _topView.goods = _goods;
+            [_topView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(topH);
+            }];
+        }
         [_dictB removeAllObjects];
         [_sildeTableView reloadData];
     }
 }
 #pragma mark - UITableViewDelegate
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.goods.count;

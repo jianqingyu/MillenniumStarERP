@@ -47,7 +47,6 @@
     self.view.backgroundColor = DefaultColor;
     self.dict = [NSMutableDictionary new];
     [self setNaviTitleAndRight];
-    [self loadDatePick];
     [self.backFieView setLayerWithW:3 andColor:BordColor andBackW:0.5];
     for (UIView *baV in self.dateViews) {
         baV.layer.cornerRadius = 3;
@@ -62,26 +61,38 @@
 
 #pragma mark -- NaviBarTitleView
 - (void)setNaviTitleAndRight{
-    CGFloat width = SDevWidth-15-92;
     CGFloat sWidth = 65;
-    UIView *titleView = [[UIView alloc]initWithFrame:CGRectMake(92, 9, width, 30)];
+    UIView *titleView = [[UIView alloc]init];
     [titleView setLayerWithW:3 andColor:BordColor andBackW:0.5];
     titleView.backgroundColor = DefaultColor;
+    [self.topBackView addSubview:titleView];
+    [titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.topBackView).offset(92);
+        make.top.equalTo(self.topBackView).offset(9);
+        make.right.equalTo(self.topBackView).offset(-15);
+        make.height.mas_equalTo(@30);
+    }];
     
     CustomBtnView *btnV = [CustomBtnView creatView];
     btnV.frame = CGRectMake(5, 0, sWidth, 30);
     [btnV.selBtn setImage:[UIImage imageNamed:@"icon_xxx"] forState:UIControlStateNormal];
-    [btnV.allBtn addTarget:self action:@selector(clickDown) forControlEvents:UIControlEventTouchUpInside];
+    [btnV.allBtn addTarget:self action:@selector(clickDown) forControlEvents:
+                                                   UIControlEventTouchUpInside];
     [titleView addSubview:btnV];
     self.btnView = btnV;
     
-    CustomTextField *titleFie = [[CustomTextField alloc]initWithFrame:CGRectMake(sWidth+5, 0, width-sWidth-5, 30)];
+    CustomTextField *titleFie = [[CustomTextField alloc]initWithFrame:CGRectZero];
     titleFie.tag = 1081;
     titleFie.delegate = self;
     titleFie.borderStyle = UITextBorderStyleNone;
     [titleView addSubview:titleFie];
+    [titleFie mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(titleView).offset(sWidth+5);
+        make.top.equalTo(titleView).offset(0);
+        make.right.equalTo(titleView).offset(0);
+        make.height.mas_equalTo(@30);
+    }];
     _searchFie = titleFie;
-    [self.topBackView addSubview:titleView];
     
     self.textFie.tag = 1082;
     __weak __typeof(&*self)weakSelf = self;
@@ -147,12 +158,13 @@
     [self.view addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(10);
-        make.top.equalTo(head.mas_bottom).with.offset(20);
+        make.top.equalTo(head.mas_bottom).with.offset(10);
         make.right.equalTo(self.view).offset(-10);
         make.height.mas_equalTo(@40);
     }];
     [btn addTarget:self action:@selector(searchClick)
                                   forControlEvents:UIControlEventTouchUpInside];
+     [self loadDatePick];
 }
 
 #pragma mark -- 导航点击事件
@@ -204,7 +216,13 @@
 #pragma mark -- 日历选择
 - (void)loadDatePick{
     CustomDatePick *date = [CustomDatePick creatCustomView];
-    date.frame = CGRectMake(0, 0, SDevWidth, SDevHeight-64);
+    [self.view addSubview:date];
+    [date mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+    }];
     date.backgroundColor = CUSTOM_COLOR_ALPHA(0, 0, 0, 0.5);
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     // 设置时间格式
@@ -220,11 +238,12 @@
             self.dict[@"sdate"] = str;
         }
     };
+    date.hidden = YES;
     self.datePickView = date;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self.datePickView removeFromSuperview];
+    self.datePickView.hidden = YES;
 }
 
 - (IBAction)dateClick:(UIButton *)sender {
@@ -235,7 +254,7 @@
     // 设置时间格式
     formatter.dateFormat = @"yyyy-MM-dd";
     [self.datePickView.datePick setDate:[formatter dateFromString:str] animated:YES];
-    [self.view addSubview:self.datePickView];
+    self.datePickView.hidden = NO;
 }
 
 #pragma mark 客户选择

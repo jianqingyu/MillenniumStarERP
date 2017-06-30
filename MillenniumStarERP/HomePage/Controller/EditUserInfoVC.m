@@ -13,10 +13,14 @@
 #import "EditPhoneNumVc.h"
 #import "LoginViewController.h"
 #import "CommonUsedTool.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
 @interface EditUserInfoVC ()<UITableViewDelegate,UITableViewDataSource,
                  UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,assign)BOOL isShow;
+@property (nonatomic,  copy)NSString *url;
 @property (nonatomic,strong)UIImage *image;
 @property (nonatomic,  copy)NSArray *textArr;
 @property (nonatomic,strong)NSMutableDictionary *mutDic;
@@ -33,7 +37,8 @@
 }
 
 - (void)setBaseViewData{
-    self.textArr = @[@[@"用户名",@"修改头像",@"是否申请升级为定制用户",@"是否显示价格"],@[@"修改密码",@"修改手机号码",@"管理地址",@"清理缓存"]];
+    self.textArr = @[@[@"用户名",@"修改头像",@"是否申请升级为定制用户",@"是否显示价格"],
+                  @[@"修改密码",@"修改手机号码",@"管理地址",@"清理缓存",@"分享该应用"]];
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -69,6 +74,9 @@
         if ([response.error intValue]==0) {
             if ([YQObjectBool boolForObject:response.data]) {
                 self.isShow = [response.data[@"isShowPrice"]intValue];
+                if ([YQObjectBool boolForObject:response.data[@"headPic"]]) {
+                    self.url = response.data[@"headPic"];
+                }
                 if ([YQObjectBool boolForObject:response.data[@"userName"]]) {
                     self.mutDic[@"用户名"] = response.data[@"userName"];
                 }
@@ -127,23 +135,26 @@
     NSString *key = arr[indexPath.row];
     tableCell.textLabel.text = key;
     NSString *detailStr = self.mutDic[key];
-    if (indexPath.section==0&&indexPath.row==1){
-        UIImageView *imageView = [self creatImageView];
-        tableCell.accessoryView = imageView;
-    }else if (indexPath.section==0&&indexPath.row==2){
-        UISwitch *switchBtn = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
-        tableCell.accessoryView = switchBtn;
-        [switchBtn addTarget:self action:@selector(changeClick:)
-                                  forControlEvents:UIControlEventTouchUpInside];
-    }else if (indexPath.section==0&&indexPath.row==3){
-        UISwitch *switchBtn = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
-        [switchBtn setOn:self.isShow];
-        tableCell.accessoryView = switchBtn;
-        [switchBtn addTarget:self action:@selector(showPriceClick:)
-            forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (indexPath.section==0&&indexPath.row==0) {
-        tableCell.accessoryType = UITableViewCellAccessoryNone;
+    if (indexPath.section==0) {
+        if (indexPath.row==0) {
+            tableCell.accessoryType = UITableViewCellAccessoryNone;
+        }else if(indexPath.row==1){
+            if ([key isEqualToString:@"修改头像"]) {
+                UIImageView *imageView = [self creatImageView];
+                tableCell.accessoryView = imageView;
+            }
+        }else if(indexPath.row==2){
+            UISwitch *switchBtn = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
+            tableCell.accessoryView = switchBtn;
+            [switchBtn addTarget:self action:@selector(changeClick:)
+                forControlEvents:UIControlEventTouchUpInside];
+        }else{
+            UISwitch *switchBtn = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
+            [switchBtn setOn:self.isShow];
+            tableCell.accessoryView = switchBtn;
+            [switchBtn addTarget:self action:@selector(showPriceClick:)
+                forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     tableCell.detailTextLabel.text = detailStr;
     return tableCell;
@@ -160,10 +171,7 @@
         [imageView sd_setImageWithURL:[NSURL URLWithString:self.url]placeholderImage:
                                               [UIImage imageNamed:@"head_nor"]];
     }
-    imageView.layer.cornerRadius = width/2;
-    imageView.clipsToBounds = YES;
-    imageView.layer.borderWidth = 3.0f;
-    imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    [imageView setLayerWithW:35 andColor:[UIColor whiteColor] andBackW:3.0f];
     return imageView;
 }
 
@@ -191,8 +199,11 @@
             }else if(indexPath.row==2){
                 EditAddressVC *addVc = [EditAddressVC new];
                 [self.navigationController pushViewController:addVc animated:YES];
-            }else{
+            }else if(indexPath.row==3){
                 [self clearTmpPics];
+            }else{
+                [MBProgressHUD showSuccess:@"功能暂未开放"];
+//                [self setShare];
             }
             break;
         default:
@@ -217,10 +228,33 @@
 }
 
 - (void)clearTmpPics{
-    [[SDImageCache sharedImageCache] clearDisk];
-    float tmpSize = [[SDImageCache sharedImageCache] getSize];
+    float tmpSize = [[SDImageCache sharedImageCache] getSize]/1024.0/1024.0;
     NSString *clearCacheName = tmpSize >= 1 ? [NSString stringWithFormat:@"清理缓存(%.2fM)",tmpSize] : [NSString stringWithFormat:@"清理缓存(%.2fK)",tmpSize * 1024];
+    [[SDImageCache sharedImageCache] clearDisk];
     [MBProgressHUD showSuccess:clearCacheName];
+}
+
+- (void)setShare{
+    //1、创建分享参数（必要）
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    [shareParams SSDKSetupShareParamsByText:@"分享内容"
+                                     images:[UIImage imageNamed:@"传入的图片名"]
+                                        url:[NSURL URLWithString:@"http://mob.com"]
+                                      title:@"分享标题" type:SSDKContentTypeAuto];
+    // 定制新浪微博的分享内容
+    [shareParams SSDKSetupSinaWeiboShareParamsByText:@"定制新浪微博的分享内容"title:nil
+                                               image:[UIImage imageNamed:@"传入的图片名"]
+                                                 url:nil latitude:0 longitude:0
+                                            objectID:nil type:SSDKContentTypeAuto];
+    // 定制微信好友的分享内容
+    [shareParams SSDKSetupWeChatParamsByText:@"定制微信的分享内容" title:@"title"
+                                         url:[NSURL URLWithString:@"http://mob.com"]
+                                  thumbImage:nil image:[UIImage imageNamed:@"传入的图片名"]
+                                musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil
+                                        type:SSDKContentTypeAuto  forPlatformSubType:SSDKPlatformSubTypeWechatSession];// 微信好友子平台
+    [ShareSDK showShareActionSheet:self.view items:nil shareParams:shareParams
+               onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+    }];
 }
 
 - (void)creatUIAlertView:(UIView *)cell{
@@ -270,14 +304,16 @@
     NSString *url = [NSString stringWithFormat:@"%@userModifyHeadPicDo?tokenKey=%@",baseUrl,key];
     [CommonUsedTool loadUpDate:^(NSDictionary *response, NSError *error) {
         NSString *imageStr;
-        if (response[@"data"][@"headPic"]) {
-            imageStr = response[@"data"][@"headPic"];
-        }
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            if (self.editBack) {
-                self.editBack(imageStr);
+        if ([response[@"error"]intValue]==0) {
+            if ([YQObjectBool boolForObject:response[@"data"][@"headPic"]]) {
+                imageStr = response[@"data"][@"headPic"];
             }
-        }];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                if (self.editBack) {
+                    self.editBack(imageStr);
+                }
+            }];
+        }
     } image:image Dic:params Url:url];
 }
 

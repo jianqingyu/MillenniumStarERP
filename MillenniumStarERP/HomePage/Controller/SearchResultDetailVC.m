@@ -13,7 +13,7 @@
 #import "ProduceOrderInfo.h"
 #import "OrderSetmentInfo.h"
 #import "DelSListInfo.h"
-#define MENUHEIHT 40
+
 @interface SearchResultDetailVC ()<UserManagerMenuHrizontalDelegate,UserManagerScrollPageViewDelegate>{
     NSMutableArray *titleArray;
     NSMutableArray *strArr;
@@ -32,6 +32,11 @@
     dataArr = [NSMutableArray new];
     strArr = [NSMutableArray new];
     [self loadSearchResultData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+}
+
+- (void)orientChange:(NSNotification *)notification{
+    [mScrollPageView moveScrollowViewToFirst];
 }
 
 - (void)loadSearchResultData{
@@ -91,24 +96,37 @@
 #pragma mark UI初始化
 - (void)initCustomView{
     //main view
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    CGRect vViewRect = CGRectMake(0, 0, SDevWidth, SDevHeight);
-    UIView *mainContentView = [[UIView alloc] initWithFrame:vViewRect];
-    menuHorizontalView = [[UserManagerMenuHrizontal alloc] initWithFrame:CGRectMake(0, 0, SDevWidth, MENUHEIHT) ButtonItems:titleArray];
+    UIView *mainContentView = [[UIView alloc] init];
+    menuHorizontalView = [[UserManagerMenuHrizontal alloc] initWithFrame:CGRectZero ButtonItems:titleArray];
     menuHorizontalView.delegate = self;
     //默认选中第一个button
     [menuHorizontalView clickButtonAtIndex:_index];
-    
     [mainContentView addSubview:menuHorizontalView];
+    
     //初始化滑动列表
-    mScrollPageView = [[UserManagerScrollPageView alloc] initScrollPageView:CGRectMake(0, MENUHEIHT, SDevWidth, mainContentView.frame.size.height - MENUHEIHT) navigation:self.navigationController];
+    mScrollPageView = [[UserManagerScrollPageView alloc] initScrollPageView:CGRectZero navigation:self.navigationController];
     mScrollPageView.delegate = self;
-    [mScrollPageView setContentOfTables:dataArr andStr:strArr];
+    [mScrollPageView setContentOfTables:dataArr andId:strArr];
     [mainContentView addSubview:mScrollPageView];
     //初始化选择
     [mScrollPageView moveScrollowViewAthIndex:_index];
     [menuHorizontalView changeButtonStateAtIndex:_index];
     [self.view addSubview:mainContentView];
+    [mainContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
+    [menuHorizontalView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(mainContentView).offset(0);
+        make.left.equalTo(mainContentView).offset(0);
+        make.right.equalTo(mainContentView).offset(0);
+        make.height.mas_equalTo(40);
+    }];
+    [mScrollPageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(mainContentView).offset(0);
+        make.top.equalTo(menuHorizontalView.mas_bottom).with.offset(0);
+        make.bottom.equalTo(mainContentView).offset(0);
+        make.right.equalTo(mainContentView).offset(0);
+    }];
 }
 
 #pragma mark - 其他辅助功能
@@ -123,4 +141,7 @@
     [menuHorizontalView changeButtonStateAtIndex:page];
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 @end

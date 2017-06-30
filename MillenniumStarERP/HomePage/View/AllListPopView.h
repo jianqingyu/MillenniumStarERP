@@ -11,5 +11,5 @@ typedef void (^AllPopViewBack)(id dict);
 @interface AllListPopView : UIView
 @property (nonatomic,copy) NSArray *productList;
 @property (nonatomic,copy)AllPopViewBack popBack;
-- (id)initWithFrame:(CGRect)frame andFloat:(CGFloat)tableX;
+- (id)initWithFrame:(CGRect)frame;
 @end

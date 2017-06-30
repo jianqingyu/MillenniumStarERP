@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -52,6 +52,12 @@
                                         <action selector="determineClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="eAk-1f-tAY"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择范围日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwD-PX-DTk">
+                                    <rect key="frame" x="104" y="7" width="112" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -59,7 +65,9 @@
                                 <constraint firstItem="TRS-yd-M96" firstAttribute="top" secondItem="uy6-kh-tG2" secondAttribute="top" id="C6O-Bx-FfK"/>
                                 <constraint firstItem="8nY-1Y-g8o" firstAttribute="top" secondItem="uy6-kh-tG2" secondAttribute="top" id="Hja-Ho-P3w"/>
                                 <constraint firstItem="8nY-1Y-g8o" firstAttribute="centerY" secondItem="uy6-kh-tG2" secondAttribute="centerY" id="VH8-OB-Khe"/>
+                                <constraint firstItem="qwD-PX-DTk" firstAttribute="centerY" secondItem="uy6-kh-tG2" secondAttribute="centerY" id="b1V-Gx-6dt"/>
                                 <constraint firstAttribute="trailing" secondItem="8nY-1Y-g8o" secondAttribute="trailing" id="gbJ-VG-iiN"/>
+                                <constraint firstItem="qwD-PX-DTk" firstAttribute="centerX" secondItem="uy6-kh-tG2" secondAttribute="centerX" id="qcy-8W-geL"/>
                                 <constraint firstItem="TRS-yd-M96" firstAttribute="leading" secondItem="uy6-kh-tG2" secondAttribute="leading" id="qsI-h3-Cfk"/>
                                 <constraint firstAttribute="bottom" secondItem="8nY-1Y-g8o" secondAttribute="bottom" id="yA2-ZM-j6I"/>
                             </constraints>

@@ -14,4 +14,5 @@ typedef void (^ProRightViewBack)(NSDictionary *dic,BOOL isSel);
 @property (nonatomic,strong)CDRTranslucentSideBar *rightSideBar;
 @property (nonatomic,  copy)ProRightViewBack tableBack;
 @property (nonatomic,strong)NSMutableDictionary *dictB;
+@property (nonatomic,assign)BOOL isTop;
 @end

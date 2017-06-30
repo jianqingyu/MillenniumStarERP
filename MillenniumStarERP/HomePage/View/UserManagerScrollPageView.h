@@ -12,8 +12,7 @@
 - (void)didScrollPageViewChangedPage:(NSInteger)aPage;
 @end
 
-@interface UserManagerScrollPageView : UIView<UIScrollViewDelegate>
-{
+@interface UserManagerScrollPageView : UIView<UIScrollViewDelegate>{
     NSInteger mCurrentPage;
     BOOL mNeedUseDelegate;
     NSArray *proArr;
@@ -26,10 +25,11 @@
 
 @property (nonatomic,assign) id<UserManagerScrollPageViewDelegate> delegate;
 #pragma mark 添加ScrollowViewd的ContentView
-- (void)setContentOfTables:(NSArray*)proidArray table:(NSString *)table;
-- (void)setContentOfTables:(NSArray*)proidArray andStr:(NSArray *)arr;
+- (void)setContentOfTables:(NSArray *)proidArr andId:(id)idTab;
 #pragma mark 滑动到某个页面
 - (void)moveScrollowViewAthIndex:(NSInteger)index;
+#pragma mark 滑动到第一个页面
+- (void)moveScrollowViewToFirst;
 #pragma mark 改变TableView上面滚动栏的内容
 - (id)initScrollPageView:(CGRect)frame navigation:(UINavigationController*)navigation;
 

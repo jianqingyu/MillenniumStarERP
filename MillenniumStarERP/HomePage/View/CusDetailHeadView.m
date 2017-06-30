@@ -14,7 +14,6 @@
 @interface CusDetailHeadView()
 @property (nonatomic,strong)CustomDetailView *photosView;
 @property (nonatomic,strong)UILabel *titleLab;
-@property (nonatomic,strong)UILabel *priceLab;
 @property (nonatomic,strong)UILabel *ptLab;
 @end
 @implementation CusDetailHeadView
@@ -38,12 +37,8 @@
         self.titleLab.font = [UIFont systemFontOfSize:16];
         [self addSubview:self.titleLab];
         
-        self.priceLab = [[UILabel alloc]init];
-        self.priceLab.font = [UIFont systemFontOfSize:12];
-        [self addSubview:self.priceLab];
-        
         self.ptLab = [[UILabel alloc]init];
-        self.ptLab.font = [UIFont systemFontOfSize:12];
+        self.ptLab.font = [UIFont systemFontOfSize:16];
         [self addSubview:self.ptLab];
     }
     return self;
@@ -58,6 +53,7 @@
             [self setBasePhotos:@[@"http://appapi.fanerweb.com"]];
         }
         self.titleLab.text = _headInfo.title;
+        self.ptLab.text = _headInfo.weight;
         [self setupBaseView];
     }
 }
@@ -77,22 +73,17 @@
 }
 
 - (void)setupBaseView{
-    CGRect rect = CGRectMake(0, 0, DevWidth-20, 999);
+    CGRect rect = CGRectMake(0, 0, DevWidth/2, 999);
     rect = [self.titleLab textRectForBounds:rect limitedToNumberOfLines:0];
     
     self.titleLab.x = 10;
     self.titleLab.size = rect.size;
     self.titleLab.y = CGRectGetMaxY(self.photosView.frame)+20;
     
-//    self.ptLab.x = 10;
-//    self.ptLab.width = 80;
-//    self.ptLab.height = 17;
-//    self.ptLab.y = CGRectGetMaxY(self.titleLab.frame)+20;
-//    
-//    self.priceLab.x = CGRectGetMaxX(self.ptLab.frame)+2;
-//    self.priceLab.width = 90;
-//    self.priceLab.height = 17;
-//    self.priceLab.y = CGRectGetMaxY(self.titleLab.frame)+20;
+    self.ptLab.x = SDevWidth/2;
+    self.ptLab.width = SDevWidth/2;
+    self.ptLab.height = 20;
+    self.ptLab.y = self.titleLab.y;
 }
 
 - (CGFloat)height{

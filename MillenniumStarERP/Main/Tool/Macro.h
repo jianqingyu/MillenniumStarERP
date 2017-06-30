@@ -13,13 +13,6 @@
 #define IS_OS_6_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0)
 #define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
-//判断字符串是否为空
-#define IS_String_nil(v)                                 (v = (v != nil) ? v : @"")
-//判断NSNumber是否为空
-#define IS_Number_nil(v)                        (v = (v != nil) ? v : [NSNumber numberWithInt:0])
-//判断是否是字符串
-#define IS_String(v)                                 (v = ([v isKindOfClass:[NSString class]]) ? v : [NSString stringWithFormat:@"%@",v])
-#define MianScreenBounds [[UIScreen mainScreen] bounds]
 #define REQUEST_CALLBACK void (^)(BaseResponse *response, NSError *error)
 //new
 #define App AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate
@@ -60,7 +53,12 @@
 #define BordColor [UIColor colorWithRed:200/255.0f green:200/255.0f blue:200/255.0f alpha:1]
 //网络接口
 #define baseUrl @"http://appapi1.fanerweb.com/api/aproxy/"
-#define WeiXinPay @"http://www.fanershop.com/mobile/api/payment/wxpay/redirect_uri.php"//微信支付网址
+//支付宝支付网址
+#define ZFBStonePay @"http://appapi1.fanerweb.com/api/Payment/GetAilpayStoneOrderPayStr"
+#define ZFBPay @"http://appapi1.fanerweb.com/api/Payment/GetAilpayModelOrderPayStr"
+//微信支付网址
+#define WXStonePay @"http://appapi1.fanerweb.com/api/Payment/GetWxpayStoneParameter"
+#define WXPay @"http://appapi1.fanerweb.com/api/Payment/GetWxpayModelParameter"
 /**选择地址通知名字*/
 #define NotificationName @"NotificationChangeCity"
 #define UserInfoName @"userinfoCityName"

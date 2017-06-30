@@ -10,6 +10,7 @@
 
 @interface DetailModel : NSObject
 @property (nonatomic,copy)NSString *title;
+@property (nonatomic,copy)NSString *weight;
 @property (nonatomic,copy)NSString *categoryTitle;
 @property (nonatomic,copy)NSString *remark;
 @property (nonatomic,assign)float price;

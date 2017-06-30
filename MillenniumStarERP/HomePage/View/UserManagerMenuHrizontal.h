@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define NOMALKEY   @"normalKey"
-#define HEIGHTKEY  @"helightKey"
-#define TITLEKEY   @"titleKey"
-#define TITLEWIDTH @"titleWidth"
-#define TOTALWIDTH @"totalWidth"
-
 @protocol UserManagerMenuHrizontalDelegate <NSObject>
 
 @optional
@@ -23,12 +17,10 @@
     NSMutableArray        *mButtonArray;
     NSMutableArray        *mItemInfoArray;
     NSMutableArray        *mLabArray;
-    UIScrollView          *mScrollView;
-    float                 mTotalWidth;
 }
 @property (nonatomic,strong)NSArray *imgArr;
 @property (nonatomic,assign) id <UserManagerMenuHrizontalDelegate> delegate;
-
+@property (nonatomic,strong) UIScrollView*mScrollView;
 #pragma mark 初始化菜单
 - (id)initWithFrame:(CGRect)frame ButtonItems:(NSArray *)aItemsArray;
 

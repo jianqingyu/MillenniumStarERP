@@ -95,7 +95,7 @@
                 <outlet property="title" destination="9WQ-jk-YMB" id="Oew-DX-rdF"/>
                 <outlet property="topbackView" destination="KEI-hr-SR4" id="fVj-wS-7cZ"/>
             </connections>
-            <point key="canvasLocation" x="-73" y="221"/>
+            <point key="canvasLocation" x="-25" y="220"/>
         </view>
         <tapGestureRecognizer id="IVs-Pa-R6p">
             <connections>

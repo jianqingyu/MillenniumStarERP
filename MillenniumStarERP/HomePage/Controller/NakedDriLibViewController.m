@@ -262,6 +262,7 @@
     self.headView.dicArr = self.headArr;
     self.headView.info = _hedInfo;
     self.headView.numFie.text = @"";
+    self.dict = @{};
     [self.tableView reloadData];
 }
 

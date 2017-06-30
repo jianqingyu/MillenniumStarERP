@@ -63,12 +63,6 @@
     changeBtn.backgroundColor = MAIN_COLOR;
     [changeBtn addTarget:self action:@selector(bottomClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:changeBtn];
-    [changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(0);
-        make.bottom.equalTo(self).offset(0);
-        make.right.equalTo(self).offset(-SDevWidth/2);
-        make.height.mas_equalTo(@44);
-    }];
     
     UIButton *nextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [nextBtn setTitle:@"查看进度" forState:UIControlStateNormal];
@@ -76,11 +70,20 @@
     nextBtn.backgroundColor = CUSTOM_COLOR(242, 140, 42);
     [nextBtn addTarget:self action:@selector(lookProgress:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:nextBtn];
+
+    [changeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(0);
+        make.left.equalTo(self).offset(0);
+        make.right.equalTo(nextBtn.mas_left).with.offset(0);
+        make.height.mas_equalTo(@44);
+        make.width.equalTo(nextBtn);
+    }];
     [nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).offset(SDevWidth/2);
         make.bottom.equalTo(self).offset(0);
         make.right.equalTo(self).offset(0);
+        make.left.equalTo(changeBtn.mas_right).with.offset(0);
         make.height.mas_equalTo(@44);
+        make.width.equalTo(changeBtn);
     }];
 }
 

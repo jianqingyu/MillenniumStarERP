@@ -24,12 +24,17 @@
 }
 
 - (void)creatProTabView{
-    CGRect frame = CGRectMake(0, 0, SDevWidth, SDevHeight-64);
-    ProductionDetailView *proV = [[ProductionDetailView alloc]initWithFrame:frame];
-    [self.view addSubview:proV];
+    ProductionDetailView *proV = [[ProductionDetailView alloc]initWithFrame:CGRectZero];
     proV.back = ^(BOOL isLoad){
         [self loadOrderDataWithBool:isLoad];
     };
+    [self.view addSubview:proV];
+    [proV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+    }];
     self.proView = proV;
     self.proView.superNav = self.navigationController;
 }

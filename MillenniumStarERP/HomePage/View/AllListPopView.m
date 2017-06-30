@@ -10,29 +10,35 @@
 #import "DetailTypeInfo.h"
 @interface AllListPopView()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)UITableView *tableView;
-@property (nonatomic,weak)UIView *backView;
 @property (nonatomic,assign)int seIndex;
 @end
 @implementation AllListPopView
 
-- (id)initWithFrame:(CGRect)frame andFloat:(CGFloat)tableX{
+- (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = CUSTOM_COLOR_ALPHA(0, 0, 0, 0.5);
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SDevWidth, 0.5)];
-        line.backgroundColor = [UIColor lightGrayColor];
+        UIView *line = [[UIView alloc]init];
+        line.backgroundColor = BordColor;
         [self addSubview:line];
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(0);
+            make.left.equalTo(self).offset(0);
+            make.right.equalTo(self).offset(0);
+            make.height.mas_equalTo(@0.5);
+        }];
         
-        UIView *back = [[UIView alloc]initWithFrame:CGRectMake(0, 0.5, SDevWidth, 0)];
-        back.backgroundColor = [UIColor whiteColor];
-        [self addSubview:back];
-        self.backView = back;
-        
-        _tableView = [[UITableView alloc]initWithFrame:
-                      CGRectMake(tableX-10, 0, SDevWidth-tableX-10, 0) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]init];
+        _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        [back addSubview:_tableView];
+        [self addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(0);
+            make.top.equalTo(self).offset(0.5);
+            make.right.equalTo(self).offset(0);
+            make.height.mas_equalTo(@0);
+        }];
         _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     }
     return self;
@@ -41,8 +47,9 @@
 - (void)setProductList:(NSArray *)productList{
     if (productList.count>0) {
         _productList = productList;
-        self.tableView.height = _productList.count*44;
-        self.backView.height = _productList.count*44;
+        [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(@(productList.count*44));
+        }];
         [self.tableView reloadData];
     }
 }

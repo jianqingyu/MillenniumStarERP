@@ -26,7 +26,7 @@
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(self);
             make.height.mas_equalTo(@(_typeList.count*44));
-            make.width.mas_equalTo(@(SDevWidth*0.6));
+            make.width.mas_equalTo(@(SDevWidth*0.5));
         }];
         
         UILabel *title = [[UILabel alloc]init];
@@ -36,10 +36,10 @@
         title.text = @"请选择类型";
         [self addSubview:title];
         [title mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(SDevWidth*0.2);
-            make.bottom.equalTo(self.tableView.mas_top).offset(0);
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.bottom.equalTo(self.tableView.mas_top).with.offset(0);
             make.height.mas_equalTo(@44);
-            make.width.mas_equalTo(@(SDevWidth*0.6));
+            make.width.mas_equalTo(@(SDevWidth*0.5));
         }];
         
         UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -49,10 +49,10 @@
         cancel.backgroundColor = DefaultColor;
         [self addSubview:cancel];
         [cancel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(SDevWidth*0.2);
+            make.centerX.mas_equalTo(self.mas_centerX);
             make.top.equalTo(self.tableView.mas_bottom).offset(0);
             make.height.mas_equalTo(@44);
-            make.width.mas_equalTo(@(SDevWidth*0.6));
+            make.width.mas_equalTo(@(SDevWidth*0.5));
         }];
     }
     return self;
@@ -61,7 +61,7 @@
 - (void)setTypeList:(NSArray *)typeList{
     if (typeList.count>0) {
         _typeList = typeList;
-        CGFloat height = MIN(SDevHeight *0.6, _typeList.count*44);
+        CGFloat height = MIN(5*44, _typeList.count*44);
         self.types = [DetailTypeInfo objectArrayWithKeyValuesArray:_typeList];
         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@(height));

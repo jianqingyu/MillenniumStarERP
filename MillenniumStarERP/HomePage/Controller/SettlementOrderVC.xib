@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettlementOrderVC">
             <connections>
-                <outlet property="settlementTab" destination="GQx-MC-Gj6" id="DmF-XR-oYZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,23 +14,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="GQx-MC-Gj6">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="18M-9D-wUf"/>
-                        <outlet property="delegate" destination="-1" id="ZZ8-l3-Tt6"/>
-                    </connections>
-                </tableView>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="GQx-MC-Gj6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Pp-Kj-giy"/>
-                <constraint firstAttribute="bottom" secondItem="GQx-MC-Gj6" secondAttribute="bottom" id="49f-ZA-27F"/>
-                <constraint firstItem="GQx-MC-Gj6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="foG-WL-25h"/>
-                <constraint firstAttribute="trailing" secondItem="GQx-MC-Gj6" secondAttribute="trailing" id="pMw-eU-RkG"/>
-            </constraints>
             <point key="canvasLocation" x="454" y="198"/>
         </view>
     </objects>

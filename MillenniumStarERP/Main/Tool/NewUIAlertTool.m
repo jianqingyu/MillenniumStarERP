@@ -30,8 +30,7 @@
     if(IsPhone){
         [con presentViewController:alert animated:YES completion:nil];
     }else{
-        UIPopoverPresentationController *popPresenter = [alert
-                                                         popoverPresentationController];
+        UIPopoverPresentationController *popPresenter = alert.popoverPresentationController;
         popPresenter.sourceView = view;
         popPresenter.sourceRect = view.bounds;
         [con presentViewController:alert animated:YES completion:nil];

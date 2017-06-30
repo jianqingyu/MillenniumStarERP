@@ -7,10 +7,11 @@
 //
 
 #import "PayViewController.h"
+#import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "PayTableCell.h"
 #import "CustomInvoice.h"
 #import "PayReturnPageVC.h"
-#import "PayTableCell.h"
 @interface PayViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *payTable;
 @property (nonatomic,   weak) UILabel *titleLab;
@@ -19,6 +20,7 @@
 @property (nonatomic,   copy) NSArray *payTitleArray;
 @property (nonatomic, assign) NSInteger selectIndex;
 @property (nonatomic,   copy) NSString *message;
+@property (nonatomic,   copy) NSString *appName;
 @end
 
 @implementation PayViewController
@@ -26,19 +28,25 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.title = @"支付";
+    self.appName = @"MillenniumStarERP2";
     [self creatTableView];
     [self initHeadAndFootView];
     [self loadHomePayData];
 }
 
 - (void)creatTableView{
-    CGRect frame = CGRectMake(0, 0, SDevWidth, SDevHeight);
     self.payImageArray = @[@"icon_pay_zfb",@"icon_pay_wx"];
     self.payTitleArray = @[@"支付宝支付",@"微信支付"];
-    self.payTable = [[UITableView alloc] initWithFrame:frame];
+    self.payTable = [[UITableView alloc] init];
     self.payTable.delegate = self;
     self.payTable.dataSource = self;
     [self.view addSubview:self.payTable];
+    [self.payTable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+    }];
 }
 
 - (void)loadHomePayData{
@@ -176,6 +184,7 @@
     if (self.selectIndex == 0) {
         [self alipayMent];
     }else if(self.selectIndex == 1){
+        [MBProgressHUD showSuccess:@"功能暂未开放"];
 //        if ([WXApi isWXAppInstalled]) {
 //            [self wechatPay];
 //        } else {
@@ -186,15 +195,16 @@
 }
 //支付宝支付
 - (void)alipayMent{
+    [SVProgressHUD show];
     App;
     app.aliPayCallBack = ^(BOOL isSuccees) {
         if(isSuccees){
             [self openReturnPageVc];
         }
     };
-    NSString *url = @"http://appapi1.fanerweb.com/api/Payment/GetAilpayModelOrderPayStr";
+    NSString *url = ZFBPay;
     if (self.isStone) {
-        url = @"http://appapi1.fanerweb.com/api/Payment/GetAilpayStoneOrderPayStr";
+        url = ZFBStonePay;
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"orderId"] = self.orderId;
@@ -211,12 +221,32 @@
 }
 
 - (void)openAliPayWith:(NSString *)order{
-    [[AlipaySDK defaultService] payOrder:order fromScheme:@"MillenniumStarERP2" callback:^(NSDictionary *resultDic) {
-        if ([resultDic[@"resultStatus"]intValue]==9000) {
+    [[AlipaySDK defaultService] payOrder:order fromScheme:self.appName callback:^(NSDictionary *resultDic) {
+        NSInteger orderState = [resultDic[@"resultStatus"]integerValue];
+        if (orderState==9000) {
+            [MBProgressHUD showSuccess:@"支付成功"];
             [self openReturnPageVc];
             return ;
+        }else{
+            NSString *returnStr;
+            switch (orderState) {
+                case 8000:
+                    returnStr = @"订单正在处理中";
+                    break;
+                case 4000:
+                    returnStr = @"订单支付失败";
+                    break;
+                case 6001:
+                    returnStr = @"订单取消";
+                    break;
+                case 6002:
+                    returnStr = @"网络连接出错";
+                    break;
+                default:
+                    break;
+            }
+            [MBProgressHUD showError:returnStr];
         }
-        [MBProgressHUD showError:resultDic[@"memo"]];
     }];
 }
 //打开支付成功页面
@@ -225,38 +255,36 @@
     [self.navigationController pushViewController:pageVc animated:YES];
 }
 //微信支付
-//-(void)wechatPay{
-//    [SVProgressHUD show];
-//    App;
-//    app.weChatPayBlock = ^(BOOL isSuccees){
-//        if(isSuccees){
-//            ReturnpageVc *pageVc = [[ReturnpageVc alloc]init];
-//            pageVc.price   = self.amount;
-//            pageVc.address = self.address;
-//            pageVc.orderId = self.orderId;
-//            pageVc.isOrder = self.isOrder;
-//            [self.navigationController pushViewController:pageVc animated:YES];
-//        }
-//    };
-//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//    dic[@"out_trade_no"] = _trade_no;
-//    dic[@"total_fee"] = @(int(self.amount*100));
-//    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
-//        [SVProgressHUD dismiss];
-//        if([response.error intValue]==0){
-//                //调起微信支付
-//                PayReq* req             = [[PayReq alloc] init];
-//                req.openID              = APP_ID;
-//                req.partnerId           = MCH_ID;
-//                req.prepayId            = response.data[@"prepayid"];
-//                req.nonceStr            = response.data[@"noncestr"];
-//                req.timeStamp           = [response.data[@"timestamp"]intValue];
-//                req.package             = @"Sign=WXPay";
-//                req.sign                = response.data[@"sign"];
-//            [WXApi sendReq:req];
-////            NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",req.openID,req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign);
-//        }
-//    } requestURL:WeiXinPay params:dic];
-//}
+- (void)wechatPay{
+    [SVProgressHUD show];
+    App;
+    app.weChatPayBlock = ^(BOOL isSuccees){
+        if(isSuccees){
+            [self openReturnPageVc];
+        }
+    };
+    NSString *url = WXPay;
+    if (self.isStone) {
+        url = WXStonePay;
+    }
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"orderId"] = self.orderId;
+    dic[@"tokenKey"] = [AccountTool account].tokenKey;
+    [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
+        [SVProgressHUD dismiss];
+        if([response.error intValue]==0){
+                //调起微信支付
+                PayReq* req             = [[PayReq alloc] init];
+                req.openID              = response.data[@"appid"];
+                req.partnerId           = response.data[@"partnerid"];
+                req.prepayId            = response.data[@"prepayid"];
+                req.nonceStr            = response.data[@"noncestr"];
+                req.timeStamp           = [response.data[@"timestamp"]intValue];
+                req.package             = @"Sign=WXPay";
+                req.sign                = response.data[@"sign"];
+            [WXApi sendReq:req];
+        }
+    } requestURL:url params:dic];
+}
 
 @end

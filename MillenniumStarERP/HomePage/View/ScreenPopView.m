@@ -91,7 +91,6 @@
             WeightInfo *info = self.arrB[j];
             [btn setTitle:info.txt forState:UIControlStateNormal];
         }
-        
         [self createBtnFrame:CGRectMake(0, height+Bheight, SDevWidth/2, 40) andTitle:@"确定"
                       andTag:10 andColor:MAIN_COLOR andTColor:[UIColor whiteColor]];
         [self createBtnFrame:CGRectMake(SDevWidth/2, height+Bheight, SDevWidth/2, 40)

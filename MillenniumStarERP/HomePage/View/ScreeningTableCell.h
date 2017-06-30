@@ -11,7 +11,7 @@
 #define COLUMN 3
 #define ROWHEIHT 36
 #define ROWSPACE 10
-#define ROWWIDTH (SDevWidth*0.8 - 4*ROWSPACE)/3
+#define ROWWIDTH (MIN(SDevHeight, SDevWidth)*0.8 - 4*ROWSPACE)/3
 typedef void (^ScreenClickBack)(id data);
 @interface ScreeningTableCell : UITableViewCell
 + (id)cellWithTableView:(UITableView *)tableView;

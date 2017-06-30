@@ -18,9 +18,16 @@
     self = [super init];
     if (self) {
         self.backgroundColor = CUSTOM_COLOR_ALPHA(0, 0, 0, 0.5);
-        UIView *backV = [[UIView alloc]initWithFrame:CGRectMake(0, SDevHeight-256, SDevWidth, 256)];
+        UIView *backV = [[UIView alloc]init];
         backV.backgroundColor = [UIColor whiteColor];
         [self addSubview:backV];
+        [backV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(0);
+            make.bottom.equalTo(self).offset(0);
+            make.right.equalTo(self).offset(0);
+            make.height.mas_equalTo(@256);
+        }];
+        
         UILabel *title = [[UILabel alloc]init];
         title.font = [UIFont systemFontOfSize:18];
         title.textAlignment = NSTextAlignmentCenter;
@@ -64,11 +71,17 @@
 }
 
 - (void)setPickerView:(UIView *)backV{
-    UIPickerView *pickView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 44, SDevWidth, 216)];
+    UIPickerView *pickView = [[UIPickerView alloc]init];
     pickView.backgroundColor = DefaultColor;
     pickView.delegate = self;
     pickView.dataSource = self;
     [backV addSubview:pickView];
+    [pickView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(backV).offset(0);
+        make.bottom.equalTo(backV).offset(0);
+        make.right.equalTo(backV).offset(0);
+        make.height.mas_equalTo(@216);
+    }];
     self.pickView = pickView;
 }
 
@@ -80,7 +93,7 @@
 }
 
 - (void)setTypeList:(NSArray *)typeList{
-    if (typeList) {
+    if (typeList.count>0) {
         _typeList = typeList;
         [self.pickView reloadComponent:0];
     }
@@ -121,7 +134,11 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     NSDictionary *info = self.typeList[row];
-    return info[@"title"];
+    NSString *title = info[@"title"];
+    if ([YQObjectBool boolForObject:info[@"price"]]) {
+        title = [NSString stringWithFormat:@"%@  %@/g",title,info[@"price"]];
+    }
+    return title;
 }
 
 - (void)cancelBtnClick:(id)sender{

@@ -14,6 +14,7 @@
 
 + (void)getNoLogGeneralData:(REQUEST_CALLBACK)callback requestURL:(NSString*)requestURL
                 params:(NSMutableDictionary*)params{
+    params[@"QxVersion"] = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     [[RequestClient sharedClient] GET:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         BaseResponse*result = [[BaseResponse alloc]init];
         result.error = responseObject[@"error"];
@@ -31,6 +32,7 @@
 }
 //更新数据接口
 + (void)upData:(REQUEST_CALLBACK)callback URL:(NSString*)URL params:(NSMutableDictionary*)params{
+    params[@"QxVersion"] = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     [[RequestClient sharedClient] GET:URL parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         BaseResponse*result = [[BaseResponse alloc]init];
         result.error = responseObject[@"error"];
@@ -50,6 +52,7 @@
  */
 + (void)getGeneralData:(REQUEST_CALLBACK)callback requestURL:(NSString*)requestURL
                                              params:(NSMutableDictionary*)params{
+    params[@"QxVersion"] = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     [[RequestClient sharedClient] GET:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         BaseResponse*result = [[BaseResponse alloc]init];
         result.error = responseObject[@"error"];
@@ -79,6 +82,7 @@
  */
 + (void)postGeneralData:(REQUEST_CALLBACK)callback requestURL:(NSString*)requestURL
                                             params:(NSMutableDictionary*)params{
+    params[@"QxVersion"] = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     [[RequestClient sharedClient] POST:requestURL parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         BaseResponse*result = [[BaseResponse alloc]init];
         result.error = responseObject[@"error"];

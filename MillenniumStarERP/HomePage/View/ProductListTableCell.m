@@ -42,7 +42,7 @@
         ProductListView *listView =  [ProductListView shareListView];
         listView.delegate = delegate;
         CGRect itemRect = listView.frame;
-        itemRect.size.width = (SDevWidth-15)/2;
+        itemRect.size.width = (SDevWidth-(perNum+1)*5)/perNum;
         itemRect.origin.x = i*(itemRect.size.width+5)+5;
         if (isShow) {
             itemRect.size.height = itemRect.size.width+74;
@@ -57,7 +57,6 @@
         [self addSubview:listView];
     }
 }
-
 //数据更新
 - (void)updateDevInfoWith:(NSMutableArray*)devInfoArray index:(int)index{
     int num = perNum;

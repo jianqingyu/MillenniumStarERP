@@ -25,7 +25,7 @@
     UIWindow *lastWindow = [UIApplication sharedApplication].keyWindow;
     lastWindow.frame = CGRectMake(0, 0, SDevWidth, SDevHeight);
     CusTomLoginView * cusLog = [CusTomLoginView createLoginView];
-    cusLog.btnBack = ^(BOOL isYes){
+    cusLog.btnBack = ^(int isYes){
         if (isYes&&isBack) {
             [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
             [self upData];

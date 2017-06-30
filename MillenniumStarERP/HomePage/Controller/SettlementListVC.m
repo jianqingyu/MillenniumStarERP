@@ -24,9 +24,14 @@
 }
 
 - (void)setupSettlementView{
-    CGRect frame = CGRectMake(0, 0, SDevWidth, SDevHeight-64);
-    SettlementDetailView *setV = [[SettlementDetailView alloc]initWithFrame:frame];
+    SettlementDetailView *setV = [[SettlementDetailView alloc]init];
     [self.view addSubview:setV];
+    [setV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(0);
+        make.right.equalTo(self.view).offset(0);
+        make.bottom.equalTo(self.view).offset(0);
+    }];
     self.setView = setV;
     self.setView.superNav = self.navigationController;
 }

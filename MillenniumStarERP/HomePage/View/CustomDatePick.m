@@ -10,6 +10,7 @@
 @interface CustomDatePick()
 
 @end
+
 @implementation CustomDatePick
 
 + (id)creatCustomView{
@@ -17,14 +18,14 @@
 }
 
 - (IBAction)cancelClick:(id)sender {
-    [self removeFromSuperview];
+    self.hidden = YES;
 }
 
 - (IBAction)determineClick:(id)sender {
     if (self.back) {
         self.back([self.datePick date]);
     }
-    [self removeFromSuperview];
+    self.hidden = YES;
 }
 
 @end
