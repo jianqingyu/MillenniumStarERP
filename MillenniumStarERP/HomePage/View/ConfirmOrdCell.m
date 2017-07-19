@@ -46,6 +46,7 @@
         [self.picImg sd_setImageWithURL:[ NSURL URLWithString:_listInfo.pic] placeholderImage:DefaultImage];
         self.titleLab.text = _listInfo.title;
         self.baseLab.text = _listInfo.baseInfo;
+        self.priceLab.hidden = ![[AccountTool account].isShow intValue];
         self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",_listInfo.price];
         self.numLab.text = [NSString stringWithFormat:@"%@件",_listInfo.number];
         self.infoLab.text = _listInfo.info;

@@ -7,11 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void (^toolBack)(id result);
+
 @interface ShowLoginViewTool : NSObject
-@property (nonatomic,strong)NSMutableDictionary *dict;
-@property (nonatomic,copy)NSString *url;
-@property (nonatomic,copy)toolBack toBack;
-+ (ShowLoginViewTool *)creatTool;
-- (void)showLoginView:(BOOL)isBack;
++ (UIViewController *)getCurrentVC;
 @end

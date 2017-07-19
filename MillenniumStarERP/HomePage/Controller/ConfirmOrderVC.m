@@ -62,6 +62,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self creatConfirmOrder];
+}
+
+- (void)creatConfirmOrder{
+    self.priceLab.hidden = ![[AccountTool account].isShow intValue];
     [self changeHeightWithDev];
     [self setupTableView];
     [self creatHeadView];
@@ -829,7 +834,7 @@
                 value = value+collectInfo.price;
             }
         }
-        self.priceLab.text = [NSString stringWithFormat:@"￥%0.2f",value];
+        self.priceLab.text = [NSString stringWithFormat:@"参考总价:￥%0.2f",value];
     }else{
         double needValue = 0.0;
         if (_dataArray.count){
@@ -877,6 +882,9 @@
     if (self.editId) {
         [self cancelOrder];
     }else{
+        if (![[AccountTool account].isShow intValue]) {
+            return;
+        }
         [self confirmOrder];
     }
 }

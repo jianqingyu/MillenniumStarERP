@@ -19,6 +19,7 @@
 }
 @property (nonatomic,   copy)NSArray *hedArr;
 @property (nonatomic,   copy)NSString *sortStr;
+@property (nonatomic,assign)BOOL isShow;
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *dataArray;
 @property (weak,   nonatomic) IBOutlet UILabel *headLab;
@@ -31,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"搜索结果";
+    self.isShow = [[AccountTool account].isShow intValue];
     self.dataArray = @[].mutableCopy;
     [self setupBaseTableView];
     [self setupHeaderRefresh];
@@ -170,7 +172,13 @@
         self.headLab.text = data[@"stone"][@"searchKey"];
     }
     if([YQObjectBool boolForObject:data[@"stone"][@"headline"]]){
-        self.hedArr = data[@"stone"][@"headline"];
+        NSArray *topArr = data[@"stone"][@"headline"];
+        if (!self.isShow) {
+            NSMutableArray *mutA = topArr.mutableCopy;
+            [mutA removeObjectAtIndex:2];
+            topArr = mutA.copy;
+        }
+        self.hedArr = topArr;
         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo((self.hedArr.count*60+100));
         }];
@@ -211,6 +219,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NakedDriSeaTableCell *cell = [NakedDriSeaTableCell cellWithTableView:tableView];
+    cell.isShow = self.isShow;
     cell.back = ^(BOOL isSel,NSString *mess){
         [self cellBackWith:isSel and:mess and:indexPath.row-1];
     };
@@ -232,6 +241,9 @@
         _sortStr = str;
         [self.tableView.header beginRefreshing];
     }else{
+        if (!self.isShow) {
+            return;
+        }
         NakedDriSeaListInfo *listInfo = self.dataArray[index];
         NakedDriPriceVC *nakedVc = [NakedDriPriceVC new];
         nakedVc.orderId = listInfo.id;
@@ -247,6 +259,9 @@
 }
 
 - (IBAction)priceClick:(id)sender {
+    if (!self.isShow) {
+        return;
+    }
     NSArray *arr = [self arrWithIsSel];
     if (arr.count==0) {
         [MBProgressHUD showError:@"请选择钻石"];
@@ -261,6 +276,9 @@
 }
 
 - (IBAction)orderCliCk:(id)sender {
+    if (!self.isShow) {
+        return;
+    }
     NSArray *arr = [self arrWithIsSel];
     if (arr.count==0) {
         [MBProgressHUD showError:@"请选择钻石"];

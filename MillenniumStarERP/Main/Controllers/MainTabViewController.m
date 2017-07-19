@@ -10,6 +10,7 @@
 #import "MainNavViewController.h"
 #import "InformationVC.h"
 #import "HelpMenuVC.h"
+#import "EditUserInfoVC.h"
 #import "LoginViewController.h"
 #import "HomePageVC.h"
 #import "NetworkDetermineTool.h"
@@ -31,9 +32,11 @@
     infoVC = [[InformationVC alloc]init];
     [self addChildVcWithVC:infoVC Title:@"信息" imageName:@"icon_emill_s" selectImage:@"icon_emill"];
     
-    HelpMenuVC *helpVC = [[HelpMenuVC alloc]init];
-    [self addChildVcWithVC:helpVC Title:@"帮助" imageName:@"icon_bz_s" selectImage:@"icon_bz"];
-
+//    HelpMenuVC *helpVC = [[HelpMenuVC alloc]init];
+//    [self addChildVcWithVC:helpVC Title:@"帮助" imageName:@"icon_bz_s" selectImage:@"icon_bz"];
+    
+    EditUserInfoVC *infoVc = [EditUserInfoVC new];
+    [self addChildVcWithVC:infoVc Title:@"我的" imageName:@"icon_index_s" selectImage:@"icon_index"];
     [self.tabBar setBarTintColor:CUSTOM_COLOR(245, 245, 247)];
 }
 

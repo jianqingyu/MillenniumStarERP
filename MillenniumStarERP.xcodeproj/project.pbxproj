@@ -62,6 +62,11 @@
 		792DF4BB1E021B7E00128456 /* ChooseInvoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 792DF4B91E021B7E00128456 /* ChooseInvoiceCell.m */; };
 		792DF4BC1E021B7E00128456 /* ChooseInvoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792DF4BA1E021B7E00128456 /* ChooseInvoiceCell.xib */; };
 		792E2B7E1DC9E0A10050C6D0 /* OrderPriceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 792E2B7D1DC9E0A10050C6D0 /* OrderPriceInfo.m */; };
+		792F57B61F0B4FCB00343976 /* DockMenuSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792F57AD1F0B4FCB00343976 /* DockMenuSubView.m */; };
+		792F57B71F0B4FCB00343976 /* DockMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792F57AF1F0B4FCB00343976 /* DockMenuView.m */; };
+		792F57B81F0B4FCB00343976 /* HYBLoadImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792F57B11F0B4FCB00343976 /* HYBLoadImageView.m */; };
+		792F57B91F0B4FCB00343976 /* HYBLoopScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792F57B31F0B4FCB00343976 /* HYBLoopScrollView.m */; };
+		792F57BA1F0B4FCB00343976 /* HYBPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 792F57B51F0B4FCB00343976 /* HYBPageControl.m */; };
 		7930C05C1EDFED2A00F7379E /* NakedDriOrderListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930C05B1EDFED2A00F7379E /* NakedDriOrderListView.m */; };
 		7930C05F1EDFEE6000F7379E /* NakedDriOListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930C05E1EDFEE6000F7379E /* NakedDriOListInfo.m */; };
 		7930F59C1E6D043C008549C3 /* SettlementSecHedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7930F59B1E6D043C008549C3 /* SettlementSecHedView.m */; };
@@ -471,6 +476,16 @@
 		792DF4BA1E021B7E00128456 /* ChooseInvoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseInvoiceCell.xib; sourceTree = "<group>"; };
 		792E2B7C1DC9E0A10050C6D0 /* OrderPriceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPriceInfo.h; sourceTree = "<group>"; };
 		792E2B7D1DC9E0A10050C6D0 /* OrderPriceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPriceInfo.m; sourceTree = "<group>"; };
+		792F57AC1F0B4FCB00343976 /* DockMenuSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockMenuSubView.h; sourceTree = "<group>"; };
+		792F57AD1F0B4FCB00343976 /* DockMenuSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockMenuSubView.m; sourceTree = "<group>"; };
+		792F57AE1F0B4FCB00343976 /* DockMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DockMenuView.h; sourceTree = "<group>"; };
+		792F57AF1F0B4FCB00343976 /* DockMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DockMenuView.m; sourceTree = "<group>"; };
+		792F57B01F0B4FCB00343976 /* HYBLoadImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYBLoadImageView.h; sourceTree = "<group>"; };
+		792F57B11F0B4FCB00343976 /* HYBLoadImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYBLoadImageView.m; sourceTree = "<group>"; };
+		792F57B21F0B4FCB00343976 /* HYBLoopScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYBLoopScrollView.h; sourceTree = "<group>"; };
+		792F57B31F0B4FCB00343976 /* HYBLoopScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYBLoopScrollView.m; sourceTree = "<group>"; };
+		792F57B41F0B4FCB00343976 /* HYBPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYBPageControl.h; sourceTree = "<group>"; };
+		792F57B51F0B4FCB00343976 /* HYBPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYBPageControl.m; sourceTree = "<group>"; };
 		7930C05A1EDFED2A00F7379E /* NakedDriOrderListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriOrderListView.h; sourceTree = "<group>"; };
 		7930C05B1EDFED2A00F7379E /* NakedDriOrderListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NakedDriOrderListView.m; sourceTree = "<group>"; };
 		7930C05D1EDFEE6000F7379E /* NakedDriOListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NakedDriOListInfo.h; sourceTree = "<group>"; };
@@ -1052,6 +1067,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		792F57AB1F0B4FCB00343976 /* BannerView */ = {
+			isa = PBXGroup;
+			children = (
+				792F57AC1F0B4FCB00343976 /* DockMenuSubView.h */,
+				792F57AD1F0B4FCB00343976 /* DockMenuSubView.m */,
+				792F57AE1F0B4FCB00343976 /* DockMenuView.h */,
+				792F57AF1F0B4FCB00343976 /* DockMenuView.m */,
+				792F57B01F0B4FCB00343976 /* HYBLoadImageView.h */,
+				792F57B11F0B4FCB00343976 /* HYBLoadImageView.m */,
+				792F57B21F0B4FCB00343976 /* HYBLoopScrollView.h */,
+				792F57B31F0B4FCB00343976 /* HYBLoopScrollView.m */,
+				792F57B41F0B4FCB00343976 /* HYBPageControl.h */,
+				792F57B51F0B4FCB00343976 /* HYBPageControl.m */,
+			);
+			path = BannerView;
+			sourceTree = "<group>";
+		};
 		794EDBC51DDD38CD0018DDF3 /* IQKeyBoardManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1369,6 +1401,7 @@
 		79655E221D7D3E01006B90FC /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				792F57AB1F0B4FCB00343976 /* BannerView */,
 				79B254661EE6946200BBD7A5 /* ShareSDK */,
 				79AE51761EE4DCBA0050A2FB /* AliPaySDK */,
 				796965731EDFA36C00F6B027 /* TTRangeSlider */,
@@ -2273,9 +2306,11 @@
 				79655E101D7D0E53006B90FC /* BaseViewController.m in Sources */,
 				797688A51EE025BE001C6711 /* NakedDriConfirmCell.m in Sources */,
 				7930F59C1E6D043C008549C3 /* SettlementSecHedView.m in Sources */,
+				792F57BA1F0B4FCB00343976 /* HYBPageControl.m in Sources */,
 				790C70A11DCC1B23007343BA /* NearbyNetworkView.m in Sources */,
 				79655DE71D7D0AAA006B90FC /* UIWindow+Extension.m in Sources */,
 				793BD0961E7240C700E32389 /* ArrayWithDict.m in Sources */,
+				792F57B61F0B4FCB00343976 /* DockMenuSubView.m in Sources */,
 				79E177901E69109600318916 /* DeliveryOrderHeadView.m in Sources */,
 				79655DF61D7D0AAA006B90FC /* CommonUtils.m in Sources */,
 				794F28821EDEB46C003EC54D /* NakedDriLibViewController.m in Sources */,
@@ -2304,6 +2339,7 @@
 				7937D3741DF5482100FE7844 /* ProduceOrderInfo.m in Sources */,
 				799235E41DB766BE0003379B /* ClassListController.m in Sources */,
 				7989B5D51D824BD600706F5E /* NSLayoutConstraint+PureLayout.m in Sources */,
+				792F57B81F0B4FCB00343976 /* HYBLoadImageView.m in Sources */,
 				7989B5D31D824BD600706F5E /* ALView+PureLayout.m in Sources */,
 				796218FA1D98FFF400FE01D6 /* FinishedProFCell.m in Sources */,
 				790375FF1EDFE0DC00344FCD /* NakedDriSeaTableCell.m in Sources */,
@@ -2413,6 +2449,8 @@
 				794F288C1EDEB619003EC54D /* NakedDriPriceVC.m in Sources */,
 				79CD81A91D9E376C00B7BC84 /* PayReturnPageVC.m in Sources */,
 				79B4B8371DA8DD2E00B97070 /* OrderHeadView.m in Sources */,
+				792F57B71F0B4FCB00343976 /* DockMenuView.m in Sources */,
+				792F57B91F0B4FCB00343976 /* HYBLoopScrollView.m in Sources */,
 				7933E2DB1EDFFCF100C6247F /* NakedDriAllListCell.m in Sources */,
 				79655DF41D7D0AAA006B90FC /* Account.m in Sources */,
 				794EDBE61DDD38CD0018DDF3 /* IQTextView.m in Sources */,

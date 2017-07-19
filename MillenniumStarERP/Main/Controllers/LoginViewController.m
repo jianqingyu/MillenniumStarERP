@@ -27,7 +27,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSString *token = [AccountTool account].tokenKey;
-        if (token.length>0) {
+        if (token.length>0&&!_noLogin) {
             //指纹验证
             [self authenticateUser];
         }
@@ -74,6 +74,10 @@
     [self.view addSubview:loginV];
     loginV.btnBack = ^(int staue){
         if (staue==1) {
+            if (_noLogin) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+                return;
+            }
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
             window.rootViewController = [[MainTabViewController alloc]init];
         }else if (staue==2){

@@ -24,8 +24,9 @@
 #import "OrderNumTool.h"
 #import "CommonUtils.h"
 #import "CustomPickView.h"
+#import "HYBLoopScrollView.h"
 @interface CustomProDetailVC ()<UINavigationControllerDelegate,UITableViewDelegate,
-                  UITableViewDataSource,MWPhotoBrowserDelegate,imageTapDelegate>
+                  UITableViewDataSource,MWPhotoBrowserDelegate>
 @property (nonatomic,  weak) UITableView *tableView;
 @property (nonatomic,  weak) IBOutlet UIButton *lookBtn;
 @property (nonatomic,  weak) IBOutlet UIButton *addBtn;
@@ -51,7 +52,7 @@
 @property (nonatomic,  strong)DetailModel *modelInfo;
 @property (nonatomic,  strong)CustomPickView *pickView;
 @property (nonatomic,  strong)DetailTextCustomView *textCView;
-@property (nonatomic,    weak) ETFoursquareImages *foursquareImages;
+
 @property (nonatomic,  strong)UIView *hView;
 @end
 
@@ -336,12 +337,14 @@
     CGFloat wid = headView.width;
     CGFloat height = headView.height;
     CGRect frame = CGRectMake(0, 0, wid, height);
-    ETFoursquareImages *Images = [[ETFoursquareImages alloc]initWithFrame:frame];
-    [Images setImagesHeight:height];
-    Images.delegate = self;
-    [Images setImages:headArr];
-    [headView addSubview:Images];
-    self.foursquareImages = Images;
+    HYBLoopScrollView *loop = [HYBLoopScrollView loopScrollViewWithFrame:
+                               frame imageUrls:headArr];
+    loop.timeInterval = 6.0;
+    loop.didSelectItemBlock = ^(NSInteger atIndex,HYBLoadImageView  *sender){
+        [self imageTapGestureWithIndex:atIndex];
+    };
+    loop.alignment = kPageControlAlignRight;
+    [headView addSubview:loop];
     self.hView = headView;
     if (isHead) {
         self.tableView.tableHeaderView = self.hView;
@@ -351,8 +354,7 @@
     }
 }
 
-#pragma mark - imageTapDelegate
-- (void)imageTapGestureWithIndex:(int)index{
+- (void)imageTapGestureWithIndex:(NSInteger )index{
     //网络图片展示
     if (self.IDarray.count==0) {
         [MBProgressHUD showError:@"暂无图片"];

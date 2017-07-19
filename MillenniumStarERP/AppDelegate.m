@@ -192,7 +192,7 @@
 
 - (void)reachabilityChanged:(NSNotification *)note {
     Reachability* curReach = [note object];
-    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+//    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
     NetworkStatus status = [curReach currentReachabilityStatus];
     BOOL isYes = !(status == NotReachable);
     if (self.loadBack) {

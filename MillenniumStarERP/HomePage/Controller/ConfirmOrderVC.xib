@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -42,12 +42,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEy-eF-dz8">
                             <rect key="frame" x="0.0" y="0.0" width="230" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参考总价:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1c-vN-Gpf">
-                                    <rect key="frame" x="76" y="16" width="65" height="18"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" red="0.91372549020000005" green="0.062745098040000002" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PO6-eS-L8j">
                                     <rect key="frame" x="0.0" y="8" width="76" height="35"/>
                                     <constraints>
@@ -67,19 +61,17 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥00.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mx2-xI-2PL">
-                                    <rect key="frame" x="141" y="16" width="55" height="18"/>
+                                    <rect key="frame" x="76" y="16" width="55" height="18"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.91372549020000005" green="0.062745098040000002" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="w1c-vN-Gpf" firstAttribute="centerY" secondItem="kEy-eF-dz8" secondAttribute="centerY" id="5Va-JN-9mS"/>
+                                <constraint firstItem="Mx2-xI-2PL" firstAttribute="leading" secondItem="PO6-eS-L8j" secondAttribute="trailing" id="6TE-XY-O19"/>
                                 <constraint firstItem="Mx2-xI-2PL" firstAttribute="centerY" secondItem="kEy-eF-dz8" secondAttribute="centerY" id="8A3-9a-g4b"/>
-                                <constraint firstItem="Mx2-xI-2PL" firstAttribute="leading" secondItem="w1c-vN-Gpf" secondAttribute="trailing" id="C5A-j3-Ww5"/>
                                 <constraint firstItem="PO6-eS-L8j" firstAttribute="centerY" secondItem="kEy-eF-dz8" secondAttribute="centerY" id="CyR-ze-fMg"/>
                                 <constraint firstItem="PO6-eS-L8j" firstAttribute="leading" secondItem="kEy-eF-dz8" secondAttribute="leading" id="Fwj-7U-o1A"/>
-                                <constraint firstItem="w1c-vN-Gpf" firstAttribute="leading" secondItem="PO6-eS-L8j" secondAttribute="trailing" id="KMM-12-7Dr"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Mx2-xI-2PL" secondAttribute="trailing" id="y2K-R2-hJ5"/>
                             </constraints>
                         </view>

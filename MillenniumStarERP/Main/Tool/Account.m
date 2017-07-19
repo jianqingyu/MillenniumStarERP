@@ -20,6 +20,7 @@
         self.password = dict[@"password"];
         self.tokenKey = dict[@"tokenKey"];
         self.phone    = dict[@"phone"];
+        self.isShow   = dict[@"isShow"];
     }
     return self;
 }
@@ -31,6 +32,7 @@
     [aCoder encodeObject:self.password forKey:@"password"];
     [aCoder encodeObject:self.tokenKey forKey:@"tokenKey"];
     [aCoder encodeObject:self.phone forKey:@"phone"];
+    [aCoder encodeObject:self.isShow forKey:@"isShow"];
 }
 /**
  *当从沙盒中解当时，就会调用这个方法
@@ -41,6 +43,7 @@
         self.password = [aDecoder decodeObjectForKey:@"password"];
         self.tokenKey = [aDecoder decodeObjectForKey:@"tokenKey"];
         self.phone    = [aDecoder decodeObjectForKey:@"phone"];
+        self.isShow   = [aDecoder decodeObjectForKey:@"isShow"];
     }
     return self;
 }

@@ -13,5 +13,6 @@
 @property (nonatomic,copy)NSString *password;
 @property (nonatomic,copy)NSString *phone;
 @property (nonatomic,copy)NSString *tokenKey;
+@property (nonatomic,copy)NSNumber *isShow;
 + (instancetype)accountWithDict:(NSDictionary *)dict;
 @end

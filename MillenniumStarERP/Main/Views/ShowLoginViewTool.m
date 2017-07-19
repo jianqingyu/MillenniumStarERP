@@ -7,49 +7,37 @@
 //
 
 #import "ShowLoginViewTool.h"
-#import "IQKeyboardManager.h"
-#import "CusTomLoginView.h"
+
 @implementation ShowLoginViewTool
 
-+ (ShowLoginViewTool *)creatTool{
-    static ShowLoginViewTool *_tool = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _tool = [[ShowLoginViewTool alloc]init];
-    });
-    return _tool;
-}
-
-- (void)showLoginView:(BOOL)isBack{
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
-    UIWindow *lastWindow = [UIApplication sharedApplication].keyWindow;
-    lastWindow.frame = CGRectMake(0, 0, SDevWidth, SDevHeight);
-    CusTomLoginView * cusLog = [CusTomLoginView createLoginView];
-    cusLog.btnBack = ^(int isYes){
-        if (isYes&&isBack) {
-            [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
-            [self upData];
-        }
-    };
-    cusLog.frame = lastWindow.frame;
-    [UIView animateWithDuration:0.5 animations:^{
-        [lastWindow addSubview:cusLog];
-    }];
-    SHOWALERTVIEW(@"请重新登录");
-}
-
-- (void)upData{
-    if (_dict.count==0||_url.length==0) {
-        return;
++ (UIViewController *)getCurrentVC {
+    UIWindow *window = [[UIApplication sharedApplication].windows firstObject];
+    if (!window) {
+        return nil;
     }
-    _dict[@"tokenKey"] = [AccountTool account].tokenKey;
-    [BaseApi upData:^(BaseResponse *response, NSError *error) {
-        if ([response.error intValue]==0) {
-            if (self.toBack) {
-                self.toBack(response);
-            }
+    UIView *tempView;
+    for (UIView *subview in window.subviews) {
+        if ([[subview.classForCoder description] isEqualToString:@"UILayoutContainerView"]) {
+            tempView = subview;
+            break;
         }
-    }URL:_url params:_dict];
+    }
+    if (!tempView) {
+        tempView = [window.subviews lastObject];
+    }
+    
+    id nextResponder = [tempView nextResponder];
+    while (![nextResponder isKindOfClass:[UIViewController class]] ||
+           [nextResponder isKindOfClass:[UINavigationController class]] ||
+           [nextResponder isKindOfClass:[UITabBarController class]]) {
+        tempView =  [tempView.subviews firstObject];
+        
+        if (!tempView) {
+            return nil;
+        }
+        nextResponder = [tempView nextResponder];
+    }
+    return  (UIViewController *)nextResponder;
 }
 
 @end
