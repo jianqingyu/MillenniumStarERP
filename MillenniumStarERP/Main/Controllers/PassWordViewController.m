@@ -103,6 +103,7 @@
             params[@"userName"] = [AccountTool account].userName;
             params[@"phoneCode"] = [AccountTool account].phone;
             params[@"isShow"] = [AccountTool account].isShow;
+            params[@"isNorm"] = [AccountTool account].isNorm;
             params[@"tokenKey"] = response.data[@"tokenKey"];
             Account *account = [Account accountWithDict:params];
             //自定义类型存储用NSKeyedArchiver

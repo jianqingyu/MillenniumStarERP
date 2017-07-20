@@ -32,15 +32,20 @@
     self.view.backgroundColor = DefaultColor;
     [self setHeaderView];
     [self setupFootBtn];
-    [self loadHomeData];
+    [self  loadHomeData];
     //self.openUrl = @"https://itunes.apple.com/cn/app/千禧之星珠宝/id1227342902?mt=8";
     self.openUrl = @"https://itunes.apple.com/cn/app/千禧之星珠宝2/id1244977034?mt=8";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeHeadImg:) name:NotificationImg object:nil];
+}
+
+- (void)changeHeadImg:(NSNotification *)notification{
+    NSString *imgUrl = notification.userInfo[UserInfoImg];
+    [self.headView.titleImg sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:DefaultImage];
 }
 
 - (void)orientChange:(NSNotification *)notification{
-    BOOL isDev = [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeLeft
-    || [[UIDevice currentDevice] orientation] == UIInterfaceOrientationLandscapeRight;
+    BOOL isDev = SDevWidth>SDevHeight;
     CGFloat height = MAX(SDevHeight*0.38, 200);
     if (isDev) {
         [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -55,8 +60,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    //注册kvo通知
-    //[self addObserver:self.tabBarController forKeyPath:@"tabCount" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
     [super viewWillAppear:animated];
     self.navigationController.delegate = self;
     [self loadNewVersion];
@@ -229,9 +232,6 @@
 
 - (void)setClick:(id)sender{
     EditUserInfoVC *infoVc = [[EditUserInfoVC alloc]init];
-    infoVc.editBack = ^(id isSel){
-        [self.headView.titleImg sd_setImageWithURL:[NSURL URLWithString:isSel] placeholderImage:DefaultImage];
-    };
     [self.navigationController pushViewController:infoVc animated:YES];
 }
 

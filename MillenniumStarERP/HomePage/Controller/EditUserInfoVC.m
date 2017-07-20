@@ -36,7 +36,8 @@
 }
 
 - (void)setBaseViewData{
-    self.textArr = @[@[@"用户名",@"修改头像",@"是否显示价格"],
+    self.isShow = [[AccountTool account].isShow intValue];
+    self.textArr = @[@[@"用户名",@"修改头像",@"是否高级定制",@"是否显示价格"],
                   @[@"修改密码",@"修改手机号码",@"管理地址",@"清理缓存",@"分享该应用"]];
     self.tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -72,7 +73,6 @@
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {
             if ([YQObjectBool boolForObject:response.data]) {
-                self.isShow = [response.data[@"isShowPrice"]intValue];
                 if ([YQObjectBool boolForObject:response.data[@"headPic"]]) {
                     self.url = response.data[@"headPic"];
                 }
@@ -142,6 +142,12 @@
                 tableCell.accessoryView = imageView;
             }else if(indexPath.row==2){
                 UISwitch *switchBtn = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
+                [switchBtn setOn:[[AccountTool account].isNorm intValue]];
+                tableCell.accessoryView = switchBtn;
+                [switchBtn addTarget:self action:@selector(changeEasyClick:)
+                    forControlEvents:UIControlEventTouchUpInside];
+            }else if(indexPath.row==3){
+                UISwitch *switchBtn = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
                 [switchBtn setOn:self.isShow];
                 tableCell.accessoryView = switchBtn;
                 [switchBtn addTarget:self action:@selector(showPriceClick:)
@@ -208,11 +214,26 @@
     }
 }
 
+- (void)changeEasyClick:(UISwitch *)btn{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"userName"] = [AccountTool account].userName;
+    params[@"password"] = [AccountTool account].password;
+    params[@"phone"] = [AccountTool account].phone;
+    params[@"tokenKey"] = [AccountTool account].tokenKey;
+    params[@"isShow"] = [AccountTool account].isShow;
+    params[@"isNorm"] = @(btn.on);
+    Account *account = [Account accountWithDict:params];
+    //自定义类型存储用NSKeyedArchiver
+    [AccountTool saveAccount:account];
+    [MBProgressHUD showSuccess:@"修改成功"];
+}
+
 - (void)showPriceClick:(UISwitch *)btn{
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"userName"] = [AccountTool account].userName;
     params[@"password"] = [AccountTool account].password;
     params[@"phone"] = [AccountTool account].phone;
+    params[@"isNorm"] = [AccountTool account].isNorm;
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     params[@"isShow"] = @(btn.on);
     Account *account = [Account accountWithDict:params];
@@ -311,11 +332,7 @@
             if ([YQObjectBool boolForObject:response[@"data"][@"headPic"]]) {
                 imageStr = response[@"data"][@"headPic"];
             }
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                if (self.editBack) {
-                    self.editBack(imageStr);
-                }
-            }];
+            [[NSNotificationCenter defaultCenter]postNotificationName:NotificationImg object:nil userInfo:@{UserInfoImg:imageStr}];
         }
     } image:image Dic:params Url:url];
 }

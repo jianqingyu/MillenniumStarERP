@@ -7,9 +7,5 @@
 //
 
 #import "BaseViewController.h"
-typedef void (^EditUserBack)(id isSel);
 @interface EditUserInfoVC : BaseViewController
-
-@property (nonatomic,assign)BOOL *isTpye;
-@property (nonatomic,copy)EditUserBack editBack;
 @end

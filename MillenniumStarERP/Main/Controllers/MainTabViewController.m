@@ -27,16 +27,16 @@
     [super viewDidLoad];
     self.delegate = self;
     homePage = [[HomePageVC alloc]init];
-    [self addChildVcWithVC:homePage Title:@"首页"imageName:@"icon_index_s" selectImage:@"icon_index"];
+    [self addChildVcWithVC:homePage Title:@"首页"imageName:@"icon_ho" selectImage:@"icon_ho2"];
     
     infoVC = [[InformationVC alloc]init];
-    [self addChildVcWithVC:infoVC Title:@"信息" imageName:@"icon_emill_s" selectImage:@"icon_emill"];
+    [self addChildVcWithVC:infoVC Title:@"信息" imageName:@"icon_lw" selectImage:@"icon_lw2"];
     
 //    HelpMenuVC *helpVC = [[HelpMenuVC alloc]init];
 //    [self addChildVcWithVC:helpVC Title:@"帮助" imageName:@"icon_bz_s" selectImage:@"icon_bz"];
     
     EditUserInfoVC *infoVc = [EditUserInfoVC new];
-    [self addChildVcWithVC:infoVc Title:@"我的" imageName:@"icon_index_s" selectImage:@"icon_index"];
+    [self addChildVcWithVC:infoVc Title:@"我的" imageName:@"icon_set" selectImage:@"icon_set2"];
     [self.tabBar setBarTintColor:CUSTOM_COLOR(245, 245, 247)];
 }
 
@@ -61,12 +61,10 @@
     [self addChildViewController:nav];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if([keyPath isEqualToString:@"tabCount"])
-    {
-        if (homePage.tabCount!=0)
-        {
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
+                       context:(void *)context{
+    if([keyPath isEqualToString:@"tabCount"]){
+        if (homePage.tabCount!=0){
             infoVC.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",homePage.tabCount];
         }else{
             infoVC.tabBarItem.badgeValue = nil;

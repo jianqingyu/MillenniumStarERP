@@ -10,6 +10,7 @@
 #import "ConfirmOrderVC.h"
 #import "CustomFirstCell.h"
 #import "CustomProCell.h"
+#import "CustomEditTableCell.h"
 #import "CustomLastCell.h"
 #import "CusDetailHeadView.h"
 #import "DetailTextCustomView.h"
@@ -52,7 +53,6 @@
 @property (nonatomic,  strong)DetailModel *modelInfo;
 @property (nonatomic,  strong)CustomPickView *pickView;
 @property (nonatomic,  strong)DetailTextCustomView *textCView;
-
 @property (nonatomic,  strong)UIView *hView;
 @end
 
@@ -61,6 +61,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"定制信息";
+    [self  loadCustomProBaseView];
+}
+
+- (void)loadCustomProBaseView{
     self.view.backgroundColor = DefaultColor;
     self.numLab.layer.cornerRadius = 8;
     self.numLab.layer.masksToBounds = YES;
@@ -101,7 +105,7 @@
     }else{
         self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(SDevWidth/2);
+            make.left.equalTo(self.view).offset(SDevWidth*0.5);
         }];
         [self setupHeadView:self.headImg and:NO];
     }
@@ -113,15 +117,22 @@
     table.separatorStyle = UITableViewCellSeparatorStyleNone;
     table.delegate = self;
     table.dataSource = self;
+    table.rowHeight = UITableViewAutomaticDimension;
+    table.estimatedRowHeight = 125;
     [self.view addSubview:table];
+    CGFloat headF = 0;
+    if (!IsPhone){
+        headF = 20;
+    }
     [table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(0);
+        make.top.equalTo(self.view).offset(headF);
         make.left.equalTo(self.view).offset(0);
         make.right.equalTo(self.view).offset(0);
         make.bottom.equalTo(self.view).offset(-50);
     }];
     self.tableView = table;
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:
+                                      CGRectMake(0, 0, SDevWidth, 10)];
 }
 
 - (void)setHandSize{
@@ -305,7 +316,8 @@
     NSMutableArray *mPic = @[].mutableCopy;
     NSMutableArray *bPic = @[].mutableCopy;
     for (NSDictionary*dict in self.modelInfo.pics) {
-        NSString *str = [dict[@"pic"]stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString *str = [dict[@"pic"]stringByAddingPercentEscapesUsingEncoding:
+                         NSUTF8StringEncoding];
         if (str.length>0) {
             [pic addObject:str];
         }
@@ -329,7 +341,10 @@
 }
 
 - (void)setupHeadView:(NSArray *)headArr and:(BOOL)isHead{
-    CGRect headF = CGRectMake(0, 0, (int)SDevWidth/2, SDevHeight-60);
+    CGRect headF = CGRectMake(0, 0, SDevWidth*0.5, SDevHeight-60);
+    if (!IsPhone){
+        headF = CGRectMake(0, 20, SDevWidth*0.5, SDevHeight-80);
+    }
     if (isHead) {
         headF = CGRectMake(0, 0, SDevWidth, SDevWidth);
     }
@@ -404,7 +419,7 @@
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }else if (staue==4){
             self.lastMess = [NSString stringWithFormat:@"%@%@",self.lastMess,info.title];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.mutArr.count+1 inSection:0];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.mutArr.count+2 inSection:0];
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:
              UITableViewRowAnimationNone];
         }
@@ -474,19 +489,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
                          numberOfRowsInSection:(NSInteger)section{
-    return self.mutArr.count+2;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView
-                  heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CGFloat height = 90;
-    if (indexPath.row==0) {
-        height = 125;
-    }
-    if (indexPath.row==self.mutArr.count+1) {
-        height = 210;
-    }
-    return height;
+    return self.mutArr.count+3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -505,14 +508,18 @@
         firstCell.handSize = self.handStr;
         return firstCell;
     }else if (indexPath.row==self.mutArr.count+1){
+        CustomEditTableCell *editCell = [CustomEditTableCell cellWithTableView:tableView];
+        editCell.back = ^(id staue){
+            [self editStoneWith:staue];
+        };
+        return editCell;
+    }else if (indexPath.row==self.mutArr.count+2){
         CustomLastCell *lastCell = [CustomLastCell cellWithTableView:tableView];
         [lastCell.btn addTarget:self action:@selector(openRemark:)
                                   forControlEvents:UIControlEventTouchUpInside];
         lastCell.messBack = ^(id message){
             if ([message isKindOfClass:[NSString class]]) {
                 self.lastMess = message;
-            }else{
-                [self editStoneWith:message];
             }
         };
         lastCell.message = self.lastMess;

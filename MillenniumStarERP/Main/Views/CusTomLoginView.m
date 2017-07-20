@@ -313,6 +313,7 @@
         if (response !=nil&&[response.error intValue]==0) {
             params[@"tokenKey"] = response.data[@"tokenKey"];
             params[@"isShow"] = [AccountTool account].isShow;
+            params[@"isNorm"] = [AccountTool account].isNorm;
             Account *account = [Account accountWithDict:params];
             //自定义类型存储用NSKeyedArchiver
             [AccountTool saveAccount:account];

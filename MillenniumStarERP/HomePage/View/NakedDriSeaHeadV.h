@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void (^NakedDriSeaHBack)(NSString *mess);
 @interface NakedDriSeaHeadV : UIView
-
+@property (nonatomic,strong)NSArray *topArr;
+@property (nonatomic,  copy)NakedDriSeaHBack back;
+@property (nonatomic,  copy)NSString *string;
 @end

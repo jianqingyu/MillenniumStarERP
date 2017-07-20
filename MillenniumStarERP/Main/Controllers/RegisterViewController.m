@@ -97,6 +97,7 @@
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {
             params[@"isShow"] = [AccountTool account].isShow;
+            params[@"isNorm"] = [AccountTool account].isNorm;
             Account *account = [Account accountWithDict:params];
             //自定义类型存储用NSKeyedArchiver
             [AccountTool saveAccount:account];

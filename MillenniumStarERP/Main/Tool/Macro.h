@@ -63,7 +63,13 @@
 #define WXPay [NSString stringWithFormat:@"%@Payment/GetWxpayModelParameter",baseNet]
 /**选择地址通知名字*/
 #define NotificationName @"NotificationChangeCity"
-#define UserInfoName @"userinfoCityName"
+#define UserInfoName @"UserinfoCityName"
+/**选择裸钻通知名字*/
+#define NotificationDriName @"NotificationChangeDri"
+#define UserInfoDriName @"userinfoDriName"
+/**选择头像通知名字*/
+#define NotificationImg @"NotificationChangeImg"
+#define UserInfoImg @"UserinfoHeadImg"
 /**管理地址通知*/
 #define NotificationCaseType @"NotificationManagerCaseType"
 #define UserInfoCaseType @"UserinfoManagerCaseType"

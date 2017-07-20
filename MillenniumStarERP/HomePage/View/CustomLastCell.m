@@ -18,7 +18,6 @@
     if (addCell==nil) {
         addCell = [[CustomLastCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Id];
         addCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [addCell.btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
         [addCell.textView setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
         addCell.textView.placehoder = @"填写备注";
     }
@@ -44,24 +43,6 @@
     if (message) {
         _message = message;
         self.textView.text = _message;
-    }
-}
-
-- (IBAction)resetClick:(id)sender {
-    if (self.messBack) {
-        self.messBack(@1);
-    }
-}
-
-- (IBAction)deleClick:(id)sender {
-    if (self.messBack) {
-        self.messBack(@2);
-    }
-}
-
-- (IBAction)addClick:(id)sender {
-    if (self.messBack) {
-        self.messBack(@3);
     }
 }
 

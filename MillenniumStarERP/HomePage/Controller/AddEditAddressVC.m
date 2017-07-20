@@ -31,6 +31,7 @@
     if (self.addId) {
         [self loadAddress];
     }
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddressText:) name:NotificationName object:nil];
 }
 
 - (void)loadAddress{
@@ -60,11 +61,6 @@
     proID = self.info.province_id;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    //添加通知
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddressText:) name:NotificationName object:nil];
-}
 //显示地址
 - (void)changeAddressText:(NSNotification *)notification{
     NSMutableArray *address = notification.userInfo[UserInfoName];

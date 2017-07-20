@@ -244,6 +244,7 @@
         params[@"percent"] = self.headView.numFie.text;
     }
     NakedDriSearchVC *seaVc = [NakedDriSearchVC new];
+    seaVc.isSel = self.isSel;
     seaVc.seaDic = params;
     [self.navigationController pushViewController:seaVc animated:YES];
 }

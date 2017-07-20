@@ -67,6 +67,7 @@
 
 - (void)creatConfirmOrder{
     self.priceLab.hidden = ![[AccountTool account].isShow intValue];
+    self.conBtn.enabled = [[AccountTool account].isShow intValue];
     [self changeHeightWithDev];
     [self setupTableView];
     [self creatHeadView];
@@ -882,9 +883,6 @@
     if (self.editId) {
         [self cancelOrder];
     }else{
-        if (![[AccountTool account].isShow intValue]) {
-            return;
-        }
         [self confirmOrder];
     }
 }

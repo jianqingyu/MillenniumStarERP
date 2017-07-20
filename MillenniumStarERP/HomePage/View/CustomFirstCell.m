@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 @property (weak, nonatomic) IBOutlet UIView *driView;
 @property (weak, nonatomic) IBOutlet UILabel *codeLab;
+@property (weak, nonatomic) IBOutlet UIButton *accBtn;
+@property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @end
 @implementation CustomFirstCell
 
@@ -22,10 +24,9 @@
     if (addCell==nil) {
         addCell = [[CustomFirstCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Id];
         addCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [addCell.btn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
         [addCell.fie1 setLayerWithW:3.0 andColor:BordColor andBackW:0.001];
         [addCell.handbtn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
-        addCell.ptLab.adjustsFontSizeToFitWidth = YES;
+        [addCell.codeLab setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
     }
     return addCell;
 }
@@ -82,6 +83,21 @@
     }
 }
 
+- (void)setCertCode:(NSString *)certCode{
+    if (certCode) {
+        _certCode = certCode;
+        if (!_isNew) {
+            self.driView.hidden = !_certCode.length;
+            self.codeLab.text = _certCode;
+        }else{
+            self.driView.hidden = YES;
+            self.accBtn.enabled = !_certCode.length;
+            self.addBtn.enabled = !_certCode.length;
+            self.fie1.userInteractionEnabled = !_certCode.length;
+        }
+    }
+}
+
 - (void)setModelInfo:(DetailModel *)modelInfo{
     if (modelInfo) {
         _modelInfo = modelInfo;
@@ -101,7 +117,7 @@
 - (void)setHandSize:(NSString *)handSize{
     if (handSize) {
         _handSize = handSize;
-        if (_handSize.length>0) {
+        if (_handSize.length>0&&![_handSize isEqualToString:@"0"]) {
             self.handbtn.selected = YES;
             [self.handbtn setTitle:_handSize forState:UIControlStateSelected];
         }else{

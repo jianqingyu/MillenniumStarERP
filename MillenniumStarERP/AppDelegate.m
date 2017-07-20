@@ -97,8 +97,8 @@
      }];
 }
 
-- (BOOL)application:(UIApplication *)application   openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication    annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication  annotation:(id)annotation {
     
     if ([url.host isEqualToString:@"safepay"]) {
         // 支付跳转支付宝钱包进行支付，处理支付结果

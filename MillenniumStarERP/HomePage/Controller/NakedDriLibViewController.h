@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface NakedDriLibViewController : BaseViewController
-
+@property (nonatomic,assign)BOOL isSel;
 @end

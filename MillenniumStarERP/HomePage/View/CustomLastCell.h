@@ -12,7 +12,7 @@ typedef void (^CustomLastBack)(id message);
 @interface CustomLastCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 @property (weak, nonatomic) IBOutlet YQTextView *textView;
+@property (nonatomic, copy)NSString *message;
 @property (copy, nonatomic) CustomLastBack messBack;
 + (id)cellWithTableView:(UITableView *)tableView;
-@property (nonatomic,copy)NSString *message;
 @end

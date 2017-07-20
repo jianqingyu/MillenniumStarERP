@@ -24,6 +24,7 @@
 #import "ConfirmOrderVC.h"
 #import "OrderNumTool.h"
 #import "CustomTextField.h"
+#import "NewCustomProDetailVC.h"
 @interface ProductListVC ()<UICollectionViewDataSource,UICollectionViewDelegate,
                              UITextFieldDelegate,CDRTranslucentSideBarDelegate>{
     int curPage;
@@ -35,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UIButton *titleBtn;
 @property (weak, nonatomic) IBOutlet UILabel *orderNumLab;
+@property (weak, nonatomic) IBOutlet UIButton *hisBtn;
 @property (copy, nonatomic) NSString *keyWord;
 @property (nonatomic, assign) int index;
 @property (nonatomic,   weak) UIView *baView;
@@ -59,7 +61,6 @@
 }
 
 - (void)setBaseAllViewData{
-    self.isShowPrice = [[AccountTool account].isShow intValue];
     self.backDict =[NSMutableDictionary new];
     self.dataArray = [NSMutableArray new];
     self.orderNumLab.layer.cornerRadius = 8;
@@ -79,6 +80,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.isShowPrice = [[AccountTool account].isShow intValue];
+    self.hisBtn.enabled = [[AccountTool account].isShow intValue];
     App;
     [OrderNumTool orderWithNum:app.shopNum andView:self.orderNumLab];
 }
@@ -258,9 +261,6 @@
 }
 
 - (IBAction)historyOrder:(id)sender {
-    if (![[AccountTool account].isShow intValue]) {
-        return;
-    }
     OrderListController *listVC = [OrderListController new];
     [self.navigationController pushViewController:listVC animated:YES];
 }
@@ -449,9 +449,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     ProductInfo *info = self.dataArray[indexPath.row];
-    CustomProDetailVC *customDeVC = [CustomProDetailVC new];
-    customDeVC.proId = info.id;
-    [self.navigationController pushViewController:customDeVC animated:YES];
+    if ([[AccountTool account].isNorm intValue]==0) {
+        NewCustomProDetailVC *new = [NewCustomProDetailVC new];
+        new.proId = info.id;
+        [self.navigationController pushViewController:new animated:YES];
+    }else{
+        CustomProDetailVC *customDeVC = [CustomProDetailVC new];
+        customDeVC.proId = info.id;
+        [self.navigationController pushViewController:customDeVC animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
