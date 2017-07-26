@@ -13,7 +13,7 @@
 @property (weak, nonatomic) UITextField *codeField;
 @property (weak, nonatomic) UIView *loginView;
 @property (weak, nonatomic) UIButton *loginBtn;
-@property (weak, nonatomic) UIButton *codeBtn;
+@property (weak, nonatomic) ZBButten *getCodeBtn;
 @property (weak, nonatomic) UIImageView *backImg;
 @property (weak, nonatomic) UIView *logView;
 @property (copy, nonatomic) NSString *code;
@@ -221,6 +221,7 @@
             [btn addTarget:self action:@selector(getCode:)
                                   forControlEvents:UIControlEventTouchUpInside];
             [view addSubview:btn];
+            self.getCodeBtn = btn;
             [btn mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(line1.mas_bottom).with.offset(heightMar);
                 make.right.equalTo(view).offset(0);
@@ -282,7 +283,12 @@
     params[@"userName"] = self.nameFie.text;
     params[@"password"] = self.passWordFie.text;
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
-        [MBProgressHUD showMessage:response.message];
+        if ([response.error intValue]==0) {
+            [MBProgressHUD showSuccess:response.message];
+        }else{
+            [self.getCodeBtn resetBtn];
+            SHOWALERTVIEW(response.message);
+        }
     } requestURL:codeUrl params:params];
 }
 

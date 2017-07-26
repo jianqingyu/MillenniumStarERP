@@ -24,9 +24,6 @@
     if (addCell==nil) {
         addCell = [[CustomFirstCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Id];
         addCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [addCell.fie1 setLayerWithW:3.0 andColor:BordColor andBackW:0.001];
-        [addCell.handbtn setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
-        [addCell.codeLab setLayerWithW:3.0 andColor:BordColor andBackW:0.5];
     }
     return addCell;
 }

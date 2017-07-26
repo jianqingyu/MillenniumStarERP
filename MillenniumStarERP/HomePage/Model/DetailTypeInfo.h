@@ -13,5 +13,7 @@
 @property (nonatomic,assign)BOOL isSel;
 @property (nonatomic,copy)NSString *title;
 @property (nonatomic,copy)NSString *price;
+@property (nonatomic,copy)NSString *pic;
+@property (nonatomic,copy)NSString *pic1;
 - (DetailTypeInfo *)newInfo;
 @end

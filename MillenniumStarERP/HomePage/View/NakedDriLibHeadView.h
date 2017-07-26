@@ -10,8 +10,8 @@
 #import"NakedDriLiblistInfo.h"
 typedef void (^NakedHBack)(id mess);
 @interface NakedDriLibHeadView : UIView
-@property (weak, nonatomic) IBOutlet UITextField *numFie;
 @property (nonatomic,strong)NakedDriLiblistInfo *info;
-@property (nonatomic,  copy)NSArray *dicArr;
+@property (nonatomic,  copy)NSArray *topArr;
 @property (nonatomic,  copy)NakedHBack back;
+- (void)setAllNoChoose;
 @end

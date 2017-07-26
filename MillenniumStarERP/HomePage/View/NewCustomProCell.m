@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *infoLab;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *nextBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (weak, nonatomic) IBOutlet UIView *backView;
 @end
 @implementation NewCustomProCell
@@ -41,10 +41,22 @@
         _titleStr = titleStr;
         self.titleLab.text = _titleStr;
         if ([_titleStr isEqualToString:@"主   石"]) {
-            self.nextBtn.hidden = NO;
+            self.nextBtn.enabled = NO;
         }else{
-            self.nextBtn.hidden = YES;
+            self.nextBtn.enabled = YES;
+            self.infoLab.hidden = _isSel;
+            self.nextBtn.selected = _isSel;
+            [self.nextBtn addTarget:self action:@selector(nakedClick:) forControlEvents:
+                             UIControlEventTouchUpInside];
         }
+    }
+}
+
+- (void)nakedClick:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    self.infoLab.hidden = sender.selected;
+    if (self.back) {
+        self.back(sender.selected);
     }
 }
 

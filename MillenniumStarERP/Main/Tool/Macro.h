@@ -49,8 +49,9 @@
 #define MAIN_COLOR [UIColor colorWithRed:244/255.0f green:43/255.0f blue:56/255.0f alpha:1]
 #define CUSTOM_COLOR(a,b,c) [UIColor colorWithRed:a/255.0f green:b/255.0f blue:c/255.0f alpha:1]
 #define CUSTOM_COLOR_ALPHA(a,b,c,d) [UIColor colorWithRed:a/255.0f green:b/255.0f blue:c/255.0f alpha:d]
-#define DefaultColor [UIColor colorWithRed:240/255.0f green:239/255.0f blue:245/255.0f alpha:1]
-#define BordColor [UIColor colorWithRed:200/255.0f green:200/255.0f blue:200/255.0f alpha:1]
+#define BarColor CUSTOM_COLOR(245,245,247)
+#define DefaultColor CUSTOM_COLOR(240,239,245)
+#define BordColor CUSTOM_COLOR(200,200,200)
 //基础接口
 #define baseNet @"http://appapi1.fanerweb.com/api/"
 //网络接口

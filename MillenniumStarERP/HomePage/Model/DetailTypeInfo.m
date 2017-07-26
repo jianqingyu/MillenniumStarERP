@@ -16,6 +16,8 @@
     new.id = self.id;
     new.isSel = self.isSel;
     new.price = self.price;
+    new.pic = self.pic;
+    new.pic1 = self.pic1;
     return new;
 }
 

@@ -66,6 +66,7 @@
         if ([response.error intValue]==0) {
             [MBProgressHUD showSuccess:response.message];
         }else{
+            [self.codeBtn resetBtn];
             SHOWALERTVIEW(response.message);
         }
     } requestURL:codeUrl params:params];

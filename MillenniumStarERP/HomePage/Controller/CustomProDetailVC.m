@@ -37,7 +37,7 @@
 @property (nonatomic,  copy)NSArray *typeSArr;
 @property (nonatomic,  copy)NSArray*chooseArr;
 @property (nonatomic,  copy)NSArray*detailArr;
-@property (nonatomic,  copy)NSString*firstStr;
+@property (nonatomic,  copy)NSString*proNum;
 @property (nonatomic,  copy)NSString*handStr;
 @property (nonatomic,  copy)NSArray*remakeArr;
 @property (nonatomic,  copy)NSArray*IDarray;
@@ -61,10 +61,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"定制信息";
-    [self  loadCustomProBaseView];
+    [self loadCustomProBaseView];
 }
 
 - (void)loadCustomProBaseView{
+    self.proNum = @"1";
     self.view.backgroundColor = DefaultColor;
     self.numLab.layer.cornerRadius = 8;
     self.numLab.layer.masksToBounds = YES;
@@ -221,7 +222,7 @@
     self.modelInfo = modelIn;
     self.lastMess = modelIn.remark;
     if (self.isEdit) {
-        self.firstStr = modelIn.number;
+        self.proNum = modelIn.number;
         self.handStr = modelIn.handSize;
     }
     [self setupNumbers:@[modelIn.stone,modelIn.stoneA,
@@ -445,7 +446,7 @@
     };
     self.textCView = popV;
 }
-//选择石头
+//选择规格
 - (void)chooseType:(NSDictionary *)dict{
     NSIndexPath *path = [dict allKeys][0];
     DetailTypeInfo *info = [dict allValues][0];
@@ -498,13 +499,13 @@
         CustomFirstCell *firstCell = [CustomFirstCell cellWithTableView:tableView];
         firstCell.MessBack = ^(BOOL isSel,NSString *messArr){
             if (isSel) {
-                self.firstStr = messArr;
+                self.proNum = messArr;
             }else{
                 [self openNumberAndhandSize:2 and:indexPath];
             }
         };
         firstCell.modelInfo = self.modelInfo;
-        firstCell.messArr = self.firstStr;
+        firstCell.messArr = self.proNum;
         firstCell.handSize = self.handStr;
         return firstCell;
     }else if (indexPath.row==self.mutArr.count+1){
@@ -611,7 +612,10 @@
 
 - (void)openPopTableWithInPath:(NSIndexPath *)inPath{
     if (inPath.row==1) {
+        NSArray *list = self.mutArr[inPath.section];
+        DetailTypeInfo *info = list[inPath.row];
         NSString *titleStr = self.specTitles[inPath.section];
+        self.textCView.scanfText.text = info.title;
         self.textCView.section = inPath;
         self.textCView.topLab.text = titleStr;
         [self.view addSubview:self.textCView];
@@ -646,7 +650,7 @@
 }
 #pragma mark -- 提交订单
 - (IBAction)addOrder:(id)sender {
-    if ([self.firstStr length]==0) {
+    if ([self.proNum length]==0) {
         [MBProgressHUD showError:@"请选择件数"];
         return;
     }
@@ -709,17 +713,13 @@
     NSString *proId = self.isEdit?@"itemId":@"productId";
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     params[proId] = @(self.proId);
-    params[@"number"] = self.firstStr;
+    params[@"number"] = self.proNum;
     if ([self.handStr length]>0) {
         params[@"handSize"] = self.handStr;
     }
     params[@"isSelfStone"] = self.bools[0];
     if (!self.isEdit) {
         params[@"categoryId"] = @(self.modelInfo.categoryId);
-    }
-    if (_qualityId&&_colorId) {
-        params[@"qualityId"] = @(_qualityId);
-        params[@"purityId"] = @(_colorId);
     }
     if (self.lastMess.length>0) {
         params[@"remarks"] = self.lastMess;

@@ -25,6 +25,7 @@
 #import "InvoiceViewController.h"
 #import "ProductionOrderVC.h"
 #import "CustomPickView.h"
+#import "NewCustomProDetailVC.h"
 @interface ConfirmOrderVC ()<UITableViewDelegate,UITableViewDataSource,
                             ConfirmOrdHeadViewDelegate,ConfirmOrdCellDelegate>{
     int curPage;
@@ -762,30 +763,39 @@
 //编辑
 - (void)editIndex:(NSInteger)index{
     OrderListInfo *collectInfo = self.dataArray[index];
-    CustomProDetailVC *detailVc = [CustomProDetailVC new];
-    if (self.editId) {
-        detailVc.isEdit = 2;
+    if ([[AccountTool account].isNorm intValue]==0) {
+        NewCustomProDetailVC *newVc = [NewCustomProDetailVC new];
+        newVc.isEdit = self.editId?2:1;
+        newVc.proId = collectInfo.id;
+        newVc.orderBack = ^(OrderListInfo *dict){
+            [self detailOrderBack:dict andIdx:index];
+        };
+        [self.navigationController pushViewController:newVc animated:YES];
     }else{
-        detailVc.isEdit = 1;
-        detailVc.qualityId = self.qualityInfo.id;
-        detailVc.colorId = self.colorInfo.id;
+        CustomProDetailVC *detailVc = [CustomProDetailVC new];
+        detailVc.isEdit = self.editId?2:1;
+        detailVc.proId = collectInfo.id;
+        detailVc.orderBack = ^(OrderListInfo *dict){
+            [self detailOrderBack:dict andIdx:index];
+        };
+        [self.navigationController pushViewController:detailVc animated:YES];
     }
-    detailVc.proId = collectInfo.id;
-    detailVc.orderBack = ^(OrderListInfo *dict){
-        if (![dict isKindOfClass:[OrderListInfo class]]) {
-            return;
-        }
-        self.dataArray[index] = dict;
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                                   withRowAnimation:UITableViewRowAnimationNone];
-        self.allBtn.selected = NO;
-        if ([self.selectDataArray containsObject:collectInfo]){
-            [self.selectDataArray removeObject:collectInfo];
-        }
-        [self syncPriceLabel];
-    };
-    [self.navigationController pushViewController:detailVc animated:YES];
+}
+
+- (void)detailOrderBack:(OrderListInfo *)dict andIdx:(NSInteger)index{
+    OrderListInfo *collectInfo = self.dataArray[index];
+    if (![dict isKindOfClass:[OrderListInfo class]]) {
+        return;
+    }
+    self.dataArray[index] = dict;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationNone];
+    self.allBtn.selected = NO;
+    if ([self.selectDataArray containsObject:collectInfo]){
+        [self.selectDataArray removeObject:collectInfo];
+    }
+    [self syncPriceLabel];
 }
 //删除
 - (void)deleteIndex:(NSInteger)index{

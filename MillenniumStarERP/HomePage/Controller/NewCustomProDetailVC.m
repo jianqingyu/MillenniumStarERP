@@ -24,7 +24,7 @@
 #import "CustomPickView.h"
 #import "HYBLoopScrollView.h"
 #import "NakedDriSeaListInfo.h"
-#import "NakedDriLibViewController.h"
+#import "ChooseNakedDriVC.h"
 @interface NewCustomProDetailVC ()<UINavigationControllerDelegate,UITableViewDelegate,
 UITableViewDataSource,MWPhotoBrowserDelegate>
 @property (nonatomic,  weak) UITableView *tableView;
@@ -32,10 +32,9 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 @property (nonatomic,  weak) IBOutlet UIButton *addBtn;
 @property (nonatomic,  weak) IBOutlet UILabel *numLab;
 @property (nonatomic,  copy)NSArray *typeArr;
-@property (nonatomic,  copy)NSArray *typeTArr;
 @property (nonatomic,  copy)NSArray *typeSArr;
 @property (nonatomic,  copy)NSArray*detailArr;
-@property (nonatomic,  copy)NSString*firstStr;
+@property (nonatomic,  copy)NSString*proNum;
 @property (nonatomic,  copy)NSString*handStr;
 @property (nonatomic,  copy)NSArray*remakeArr;
 @property (nonatomic,  copy)NSArray*IDarray;
@@ -44,8 +43,10 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 @property (nonatomic,  copy)NSArray*specTitles;
 @property (nonatomic,  copy)NSString*lastMess;
 @property (nonatomic,  copy)NSArray *handArr;
-@property (nonatomic,  copy)NSArray *numArr;
+@property (nonatomic,  copy)NSArray *chooseArr;
+@property (nonatomic,  strong)NSMutableArray*bools;
 @property (nonatomic,  strong)NSMutableArray*mutArr;
+@property (nonatomic,  strong)NSMutableArray*nums;
 @property (nonatomic,    copy)NSString *driCode;
 @property (nonatomic,    copy)NSString *driPrice;
 @property (nonatomic,    copy)NSString *driId;
@@ -53,6 +54,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 @property (nonatomic,  strong)DetailModel *modelInfo;
 @property (nonatomic,  strong)CustomPickView *pickView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
+@property (weak, nonatomic) IBOutlet UILabel *allLab;
 @end
 
 @implementation NewCustomProDetailVC
@@ -65,16 +67,20 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 }
 
 - (void)loadBaseCustomView{
+    self.proNum = @"1";
     [self.numLab setLayerWithW:8 andColor:BordColor andBackW:0.001];
     [self.lookBtn setLayerWithW:5 andColor:BordColor andBackW:0.5];
     [self.addBtn setLayerWithW:5 andColor:BordColor andBackW:0.001];
     self.priceLab.hidden = ![[AccountTool account].isShow intValue];
+    self.allLab.hidden = ![[AccountTool account].isShow intValue];
     [self.priceLab setAdjustsFontSizeToFitWidth:YES];
     [self.numLab setAdjustsFontSizeToFitWidth:YES];
     if (self.isEdit) {
         [self.lookBtn setTitle:@"取消" forState:UIControlStateNormal];
         [self.addBtn setTitle:@"确定" forState:UIControlStateNormal];
     }
+    self.nums = @[@"1",@"1",@"1",@"1"].mutableCopy;
+    self.bools = @[@NO,@NO,@NO,@NO].mutableCopy;
     self.typeArr = @[@"主   石",@"副石A",@"副石B",@"副石C"];
     self.typeSArr = @[@"stone",@"stoneA",@"stoneB",@"stoneC"];
     self.mutArr = @[].mutableCopy;
@@ -85,7 +91,6 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
     [self creatNearNetView:^(BOOL isWifi) {
         [self setupDetailData];
     }];
-    [self setHandSize];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddress:)
                                                 name:NotificationDriName object:nil];
@@ -104,7 +109,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
     self.driCode = listInfo.CertCode;
     self.driPrice = listInfo.Price;
     self.driId = listInfo.id;
-    self.firstStr = @"1";
+    self.proNum = @"1";
     [self.tableView reloadData];
 }
 
@@ -124,7 +129,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
     self.driCode = CusInfo.jewelStoneCode;
     self.driPrice = CusInfo.jewelStonePrice;
     self.driId = CusInfo.jewelStoneId;
-    self.firstStr = @"1";
+    self.proNum = @"1";
     [self.mutArr addObject:mutA];
     [self.tableView reloadData];
 }
@@ -171,16 +176,6 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
     self.tableView = table;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:
                                                CGRectMake(0, 0, SDevWidth, 10)];
-}
-
-- (void)setHandSize{
-    self.typeTArr = @[@"类型",@"规格",@"形状",@"颜色",@"净度"];
-    self.numArr = @[@{@"title":@"1"},@{@"title":@"2"},@{@"title":@"3"},
-                    @{@"title":@"4"}, @{@"title":@"5"},@{@"title":@"6"},
-                    @{@"title":@"7"},@{@"title":@"8"},@{@"title":@"9"},
-                    @{@"title":@"10"},@{@"title":@"11"},@{@"title":@"12"},
-                    @{@"title":@"13"},@{@"title":@"14"},@{@"title":@"15"},
-                    @{@"title":@"16"},@{@"title":@"17"},@{@"title":@"18"}];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -236,6 +231,13 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
                 [self creatCusTomHeadView];
                 [self.tableView reloadData];
             }
+            if ([YQObjectBool boolForObject:response.data[@"stoneType"]]) {
+                self.chooseArr = @[[self arrWithModel:response.data[@"stoneType"]],
+                                   [self arrWithModel:response.data[@"stoneColor"]],
+                                   [self arrWithModel:response.data[@"stoneShape"]],
+                                   [self arrWithModel:response.data[@"stoneColor"]],
+                                   [self arrWithModel:response.data[@"stonePurity"]]];
+            }
             if ([YQObjectBool boolForObject:response.data[@"handSizeData"]]) {
                 NSMutableArray *mutA = [NSMutableArray new];
                 for (NSString *title in response.data[@"handSizeData"]) {
@@ -251,13 +253,20 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
     } requestURL:regiUrl params:params];
 }
 
+- (NSArray *)arrWithModel:(NSDictionary *)dic{
+    NSArray *arr = [DetailTypeInfo objectArrayWithKeyValuesArray:dic];
+    return arr;
+}
+
 - (void)setupBaseListData:(DetailModel *)modelIn{
     self.modelInfo = modelIn;
     self.lastMess = modelIn.remark;
     if (self.isEdit) {
-        self.firstStr = modelIn.number;
+        self.proNum = modelIn.number;
         self.handStr = modelIn.handSize;
     }
+    [self setupNumbers:@[modelIn.stone,modelIn.stoneA,
+                         modelIn.stoneB,modelIn.stoneC]];
     self.detailArr  = @[[self arrWithDict:modelIn.stone],
                         [self arrWithDict:modelIn.stoneA],
                         [self arrWithDict:modelIn.stoneB],
@@ -276,6 +285,16 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
             }
         }
         i++;
+    }
+}
+
+- (void)setupNumbers:(NSArray *)stoneArr{
+    for (int i=0; i<stoneArr.count; i++) {
+        NSDictionary *dict = stoneArr[i];
+        if ([YQObjectBool boolForObject:dict[@"number"]]) {
+            NSString *numStr = [dict[@"number"] description];
+            [self.nums setObject:numStr atIndexedSubscript:i];
+        }
     }
 }
 
@@ -462,7 +481,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
         CustomFirstCell *firstCell = [CustomFirstCell cellWithTableView:tableView];
         firstCell.MessBack = ^(BOOL isSel,NSString *messArr){
             if (isSel) {
-                self.firstStr = messArr;
+                self.proNum = messArr;
             }else{
                 [self openNumberAndhandSize:2 and:indexPath];
             }
@@ -472,7 +491,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
             firstCell.certCode = self.driCode;
         }
         firstCell.modelInfo = self.modelInfo;
-        firstCell.messArr = self.firstStr;
+        firstCell.messArr = self.proNum;
         firstCell.handSize = self.handStr;
         return firstCell;
     }else if (indexPath.row==self.mutArr.count+1){
@@ -493,6 +512,10 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
         if (self.driCode) {
             proCell.certCode = self.driCode;
         }
+        proCell.isSel = self.bools[indexPath.row-1];
+        proCell.back = ^(BOOL isSel){
+             [self.bools setObject:@(isSel) atIndexedSubscript:indexPath.row-1];
+        };
         return proCell;
     }
 }
@@ -536,8 +559,17 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 }
 
 - (void)gotoNakedDriLib{
-    NakedDriLibViewController *libVc = [NakedDriLibViewController new];
-    libVc.isSel = YES;
+    ChooseNakedDriVC *libVc = [ChooseNakedDriVC new];
+    libVc.number = self.nums[0];
+    libVc.infoArr = self.mutArr[0];
+    libVc.dataArr = self.chooseArr;
+    libVc.eidtBack = ^(NSDictionary *dic){
+        NSString *num = [dic allKeys][0];
+        [self.nums setObject:num atIndexedSubscript:0];
+        NSMutableArray *arr = [dic allValues][0];
+        [self.mutArr setObject:arr atIndexedSubscript:0];
+        [self.tableView reloadData];
+    };
     [self.navigationController pushViewController:libVc animated:YES];
 }
 
@@ -551,12 +583,16 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 }
 #pragma mark -- 提交订单
 - (IBAction)addOrder:(id)sender {
-    if ([self.firstStr length]==0) {
+    if ([self.proNum length]==0) {
         [MBProgressHUD showError:@"请选择件数"];
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     for (int i=0; i<self.mutArr.count; i++) {
+        if ([self.bools[i]boolValue]) {
+            params[self.typeSArr[i]] = @"||||||1";
+            continue;
+        }
         NSMutableArray *arr = self.mutArr[i];
         [self paramsWithArr:arr andI:i andD:params];
     }
@@ -576,6 +612,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
             }
         }
     }
+    [mutA addObject:self.nums[i]];
     NSString *str = [StrWithIntTool strWithIntOrStrArr:mutA];
     NSString *key = self.typeSArr[i];
     if (![key isEqualToString:@"stone"]) {
@@ -587,17 +624,17 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 - (void)addOrderWithDict:(NSMutableDictionary *)params{
     NSString *detail;
     if (self.isEdit==1) {
-        detail = @"OrderCurrentEditModelItemDo";
+        detail = @"OrderCurrentEditModelItemForDefaultDo";
     }else if (self.isEdit==2){
-        detail = @"ModelOrderWaitCheckOrderCurrentEditModelItemDo";
+        detail = @"ModelOrderWaitCheckOrderCurrentEditModelItemForDefaultDo";
     }else{
-        detail = @"OrderDoCurrentModelItemDo";
+        detail = @"OrderCurrentDoModelItemForDefaultDo";
     }
     NSString *regiUrl = [NSString stringWithFormat:@"%@%@",baseUrl,detail];
     NSString *proId = self.isEdit?@"itemId":@"productId";
     params[@"tokenKey"] = [AccountTool account].tokenKey;
     params[proId] = @(self.proId);
-    params[@"number"] = self.firstStr;
+    params[@"number"] = self.proNum;
     if ([self.handStr length]>0) {
         params[@"handSize"] = self.handStr;
     }

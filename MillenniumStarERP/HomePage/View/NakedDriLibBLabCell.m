@@ -8,6 +8,10 @@
 
 #import "NakedDriLibBLabCell.h"
 #import "NakedDriLibInfo.h"
+#import "StrWithIntTool.h"
+@interface NakedDriLibBLabCell()
+@property (nonatomic,  weak)UILabel *topLab;
+@end
 @implementation NakedDriLibBLabCell
 
 + (id)cellWithTableView:(UITableView *)tableView{
@@ -32,6 +36,14 @@
         lab.text = _textInfo.title;
         [self.contentView addSubview:lab];
         
+        CGFloat height2 = CGRectGetMaxX(lab.frame)+2;
+        UILabel *lab2 = [[UILabel alloc]initWithFrame:CGRectMake(height2, 5, SDevWidth-height2, 20)];
+        lab2.textColor = MAIN_COLOR;
+        lab2.font = [UIFont systemFontOfSize:13];
+        [self.contentView addSubview:lab2];
+        self.topLab = lab2;
+        NSMutableArray *mutLab = [NSMutableArray new];
+        
         int COLUMN = 5;
         CGFloat ROWSPACE = 10;
         NSInteger total = _textInfo.values.count;
@@ -48,8 +60,12 @@
             btn.tag = i;
             [btn setTitle:dInfo.name forState:UIControlStateNormal];
             btn.selected = dInfo.isSel;
+            if (dInfo.isSel) {
+                [mutLab addObject:dInfo.name];
+            }
             cellHeight = CGRectGetMaxY(btn.frame)+10;
         }
+        lab2.text = [StrWithIntTool strWithArr:mutLab With:@","];
         self.bounds = CGRectMake(0, 0, SDevWidth, cellHeight);
     }
 }
@@ -71,6 +87,13 @@
     NakedDriLibInfo *dInfo = _textInfo.values[btn.tag];
     btn.selected = !btn.selected;
     dInfo.isSel = btn.selected;
+    NSMutableArray *arr = [NSMutableArray new];
+    for (NakedDriLibInfo *dInfo in _textInfo.values) {
+        if (dInfo.isSel) {
+            [arr addObject:dInfo.name];
+        }
+    }
+    self.topLab.text = [StrWithIntTool strWithArr:arr With:@","];
 }
 
 @end
