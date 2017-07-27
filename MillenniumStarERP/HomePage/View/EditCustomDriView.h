@@ -10,7 +10,7 @@
 typedef void (^ChEditDriBack)(id model);
 @interface EditCustomDriView : UIView
 + (EditCustomDriView *)creatCustomView;
-@property (nonatomic,copy)NSString *number;
+@property (nonatomic,  copy)NSString *number;
 @property (nonatomic,strong)NSArray *infoArr;
 @property (nonatomic,strong)NSMutableArray *NakedArr;
 @property (nonatomic,strong)UINavigationController *supNav;

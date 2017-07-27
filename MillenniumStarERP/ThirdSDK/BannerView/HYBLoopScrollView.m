@@ -25,6 +25,7 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
     self.imageView = [[HYBLoadImageView alloc] init];
+      
     [self addSubview:self.imageView];
     
     self.titleLabel = [[UILabel alloc] init];
@@ -71,13 +72,13 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
 }
 
 - (void)startTimer {
-  if (self.timer) {
-    [self.timer setFireDate:[NSDate distantPast]];
-  }
+    if (self.timer) {
+       [self.timer setFireDate:[NSDate distantPast]];
+    }
 }
 
 - (HYBPageControl *)pageControl {
-  return _pageControl;
+   return _pageControl;
 }
 
 + (instancetype)loopScrollViewWithFrame:(CGRect)frame imageUrls:(NSArray *)imageUrls {

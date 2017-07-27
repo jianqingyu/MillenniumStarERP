@@ -45,6 +45,9 @@
 		7926B62D1E6952E70022B4A3 /* SettlementHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7926B62C1E6952E70022B4A3 /* SettlementHeadView.xib */; };
 		7926B6301E6955A30022B4A3 /* SettlementTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7926B62F1E6955A30022B4A3 /* SettlementTableCell.m */; };
 		7928A9791F282A2600BE69C0 /* EditCustomImgDriLibCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928A9781F282A2600BE69C0 /* EditCustomImgDriLibCell.m */; };
+		7928A97D1F28761800BE69C0 /* NewHomeBannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928A97B1F28761800BE69C0 /* NewHomeBannerVC.m */; };
+		7928A97E1F28761800BE69C0 /* NewHomeBannerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7928A97C1F28761800BE69C0 /* NewHomeBannerVC.xib */; };
+		7928A9811F287F3E00BE69C0 /* CustomTopBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928A9801F287F3E00BE69C0 /* CustomTopBtn.m */; };
 		792B85D81DBEF20E00A71635 /* OrderListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 792B85D71DBEF20E00A71635 /* OrderListInfo.m */; };
 		792B85DC1DBEFFAF00A71635 /* SearchCustomerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 792B85DA1DBEFFAF00A71635 /* SearchCustomerVC.m */; };
 		792B85DD1DBEFFAF00A71635 /* SearchCustomerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792B85DB1DBEFFAF00A71635 /* SearchCustomerVC.xib */; };
@@ -466,6 +469,11 @@
 		7926B62F1E6955A30022B4A3 /* SettlementTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettlementTableCell.m; sourceTree = "<group>"; };
 		7928A9771F282A2600BE69C0 /* EditCustomImgDriLibCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCustomImgDriLibCell.h; sourceTree = "<group>"; };
 		7928A9781F282A2600BE69C0 /* EditCustomImgDriLibCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCustomImgDriLibCell.m; sourceTree = "<group>"; };
+		7928A97A1F28761800BE69C0 /* NewHomeBannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHomeBannerVC.h; sourceTree = "<group>"; };
+		7928A97B1F28761800BE69C0 /* NewHomeBannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHomeBannerVC.m; sourceTree = "<group>"; };
+		7928A97C1F28761800BE69C0 /* NewHomeBannerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewHomeBannerVC.xib; sourceTree = "<group>"; };
+		7928A97F1F287F3E00BE69C0 /* CustomTopBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTopBtn.h; sourceTree = "<group>"; };
+		7928A9801F287F3E00BE69C0 /* CustomTopBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTopBtn.m; sourceTree = "<group>"; };
 		792B85D61DBEF20E00A71635 /* OrderListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListInfo.h; sourceTree = "<group>"; wrapsLines = 0; };
 		792B85D71DBEF20E00A71635 /* OrderListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListInfo.m; sourceTree = "<group>"; };
 		792B85D91DBEFFAF00A71635 /* SearchCustomerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCustomerVC.h; sourceTree = "<group>"; };
@@ -1367,6 +1375,8 @@
 				7924C55D1DF8ED1E005B89FA /* BaseCusLoginView.m */,
 				79CD6B9B1E77E8D700492463 /* CustomTextField.h */,
 				79CD6B9C1E77E8D700492463 /* CustomTextField.m */,
+				7928A97F1F287F3E00BE69C0 /* CustomTopBtn.h */,
+				7928A9801F287F3E00BE69C0 /* CustomTopBtn.m */,
 				7959A8D61D814F23009CAA02 /* SKTagView */,
 			);
 			path = Views;
@@ -1391,6 +1401,9 @@
 				79655E131D7D0EE2006B90FC /* HomePageVC.h */,
 				79655E141D7D0EE2006B90FC /* HomePageVC.m */,
 				79655E151D7D0EE2006B90FC /* HomePageVC.xib */,
+				7928A97A1F28761800BE69C0 /* NewHomeBannerVC.h */,
+				7928A97B1F28761800BE69C0 /* NewHomeBannerVC.m */,
+				7928A97C1F28761800BE69C0 /* NewHomeBannerVC.xib */,
 				79E8B21F1D7FC0F2009D7296 /* Controller */,
 				79E8B2201D7FC0F2009D7296 /* Model */,
 				79E8B2211D7FC0F2009D7296 /* View */,
@@ -2212,6 +2225,7 @@
 				79A479011DB46F6D00E2EA09 /* PayTableCell.xib in Resources */,
 				790C2C251E092776006D9DCF /* ProgressOrderVc.xib in Resources */,
 				79AE517B1EE4DCBA0050A2FB /* AlipaySDK.bundle in Resources */,
+				7928A97E1F28761800BE69C0 /* NewHomeBannerVC.xib in Resources */,
 				797688A61EE025BE001C6711 /* NakedDriConfirmCell.xib in Resources */,
 				792C01C71D891FB3005943AE /* ConfirmOrdCell.xib in Resources */,
 				79655DEE1D7D0AAA006B90FC /* LoginViewController.xib in Resources */,
@@ -2395,6 +2409,7 @@
 				7930F59C1E6D043C008549C3 /* SettlementSecHedView.m in Sources */,
 				795C944F1F20640E00D2C044 /* NewCustomProCell.m in Sources */,
 				792F57BA1F0B4FCB00343976 /* HYBPageControl.m in Sources */,
+				7928A9811F287F3E00BE69C0 /* CustomTopBtn.m in Sources */,
 				790C70A11DCC1B23007343BA /* NearbyNetworkView.m in Sources */,
 				795C94611F20687300D2C044 /* CustomFirstCell.m in Sources */,
 				79655DE71D7D0AAA006B90FC /* UIWindow+Extension.m in Sources */,
@@ -2403,6 +2418,7 @@
 				79E177901E69109600318916 /* DeliveryOrderHeadView.m in Sources */,
 				79655DF61D7D0AAA006B90FC /* CommonUtils.m in Sources */,
 				794F28821EDEB46C003EC54D /* NakedDriLibViewController.m in Sources */,
+				7928A97D1F28761800BE69C0 /* NewHomeBannerVC.m in Sources */,
 				7940ACE71E84CDA600216916 /* SearchDateInfo.m in Sources */,
 				79B4B82B1DA8C3F500B97070 /* OrderDetailVC.m in Sources */,
 				7915BCE01E7A6F0100407927 /* ProductionDetailView.m in Sources */,

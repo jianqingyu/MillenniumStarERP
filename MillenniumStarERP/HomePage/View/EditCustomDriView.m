@@ -74,7 +74,7 @@
             for (DetailTypeInfo *dinfo in _NakedArr[i]) {
                 if (dinfo.id==info.id) {
                     dinfo.isSel = YES;
-                };
+                }
             }
         }
     }
@@ -238,8 +238,8 @@
 
 - (void)resetClick:(id)sender {
     for (NSArray *arr in self.NakedArr) {
-        for (id info in arr) {
-            [info setValue:@NO forKey:@"isSel"];
+        for (DetailTypeInfo *info in arr) {
+            info.isSel = NO;
         }
     }
     self.number = @"";

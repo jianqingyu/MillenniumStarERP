@@ -31,6 +31,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 @property (nonatomic,  weak) IBOutlet UIButton *lookBtn;
 @property (nonatomic,  weak) IBOutlet UIButton *addBtn;
 @property (nonatomic,  weak) IBOutlet UILabel *numLab;
+@property (nonatomic,assign)int isCan;
 @property (nonatomic,  copy)NSArray *typeArr;
 @property (nonatomic,  copy)NSArray *typeSArr;
 @property (nonatomic,  copy)NSArray*detailArr;
@@ -92,11 +93,11 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
         [self setupDetailData];
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddress:)
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeNakedDri:)
                                                 name:NotificationDriName object:nil];
 }
-//显示地址
-- (void)changeAddress:(NSNotification *)notification{
+//修改裸石
+- (void)changeNakedDri:(NSNotification *)notification{
     NakedDriSeaListInfo *listInfo = notification.userInfo[UserInfoDriName];
     NSArray *infoArr = @[@"钻石",listInfo.Weight,@"圆形",listInfo.Color,listInfo.Purity];
     NSArray *arr = self.mutArr[0];
@@ -106,6 +107,7 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
         NSString *title = [infoArr[i] length]>0?infoArr[i]:@"默认";
         info.title = title;
     }
+    [self.nums setObject:@"1" atIndexedSubscript:0];
     self.driCode = listInfo.CertCode;
     self.driPrice = listInfo.Price;
     self.driId = listInfo.id;
@@ -221,6 +223,9 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
     params[proId] = @(_proId);
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {
+            if ([YQObjectBool boolForObject:response.data[@"IsCanSelectStone"]]) {
+                self.isCan = [response.data[@"IsCanSelectStone"]intValue];
+            }
             if ([YQObjectBool boolForObject:response.data[@"jewelStone"]]) {
                 [self addStoneWithDic:response.data[@"jewelStone"]];
             }
@@ -507,12 +512,13 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
         return lastCell;
     }else{
         NewCustomProCell *proCell = [NewCustomProCell cellWithTableView:tableView];
+        proCell.num = self.nums[indexPath.row-1];
         proCell.titleStr = self.typeArr[indexPath.row-1];
         proCell.list = self.mutArr[indexPath.row-1];
         if (self.driCode) {
             proCell.certCode = self.driCode;
         }
-        proCell.isSel = self.bools[indexPath.row-1];
+        proCell.isSel = [self.bools[indexPath.row-1]boolValue];
         proCell.back = ^(BOOL isSel){
              [self.bools setObject:@(isSel) atIndexedSubscript:indexPath.row-1];
         };
@@ -560,17 +566,30 @@ UITableViewDataSource,MWPhotoBrowserDelegate>
 
 - (void)gotoNakedDriLib{
     ChooseNakedDriVC *libVc = [ChooseNakedDriVC new];
+    libVc.isCan = self.isCan;
     libVc.number = self.nums[0];
     libVc.infoArr = self.mutArr[0];
-    libVc.dataArr = self.chooseArr;
+    libVc.dataArr = [self arrWithDataArr];
     libVc.eidtBack = ^(NSDictionary *dic){
         NSString *num = [dic allKeys][0];
         [self.nums setObject:num atIndexedSubscript:0];
         NSMutableArray *arr = [dic allValues][0];
         [self.mutArr setObject:arr atIndexedSubscript:0];
+        self.driPrice = @"";
+        self.driCode = @"";
+        self.driId = @"";
         [self.tableView reloadData];
     };
     [self.navigationController pushViewController:libVc animated:YES];
+}
+//数组里面模型深拷贝
+- (NSArray *)arrWithDataArr{
+    NSMutableArray *mutA = @[].mutableCopy;
+    for (NSArray *arr in self.chooseArr) {
+        NSArray *new = [[NSMutableArray alloc] initWithArray:arr copyItems:YES];
+        [mutA addObject:new];
+    }
+    return mutA.copy;
 }
 
 - (IBAction)lookOrder:(id)sender {

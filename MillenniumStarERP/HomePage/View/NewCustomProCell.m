@@ -75,6 +75,9 @@
                     [mutA addObject:str];
                 }
             }
+            if (self.num.length>0) {
+                [mutA addObject:[NSString stringWithFormat:@"数量:%@粒",self.num]];
+            }
             self.infoLab.text = [StrWithIntTool strWithArr:mutA With:@","];
         }else{
             self.addBtn.hidden = NO;

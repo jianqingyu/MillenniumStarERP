@@ -44,6 +44,7 @@
 }
 
 - (void)configureLayout {
+  self.contentMode = UIViewContentModeScaleAspectFill;
   self.layer.masksToBounds = YES;
   self.clipsToBounds = YES;
   [self setContentScaleFactor:[[UIScreen mainScreen] scale]];

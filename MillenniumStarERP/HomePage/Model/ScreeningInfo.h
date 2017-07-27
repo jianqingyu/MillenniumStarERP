@@ -13,7 +13,7 @@
 @property (nonatomic,assign)int id;
 @property (nonatomic,assign)int sort;
 @property (nonatomic,assign)BOOL mulSelect;
-@property (nonatomic,copy) NSString *title;
-@property (nonatomic,copy) NSString *groupKey;
-@property (nonatomic,copy) NSArray *attributeList;
+@property (nonatomic,  copy) NSString *title;
+@property (nonatomic,  copy) NSString *groupKey;
+@property (nonatomic,  copy) NSArray *attributeList;
 @end

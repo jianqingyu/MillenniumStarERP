@@ -10,4 +10,25 @@
 
 @implementation ScreenDetailInfo
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    ScreenDetailInfo *new = [[ScreenDetailInfo allocWithZone:zone] init];
+    new.isSelect = self.isSelect;
+    new.id = self.id;
+    new.groupKey = self.groupKey;
+    new.title = self.title;
+    new.value = self.value;
+    return new;
+}
+
+- (id)mutableCopyWithZone:(NSZone *)zone{
+    ScreenDetailInfo *new = [[ScreenDetailInfo allocWithZone:zone] init];
+    new.isSelect = self.isSelect;
+    new.id = self.id;
+    new.groupKey = self.groupKey;
+    new.title = self.title;
+    new.value = self.value;
+    return new;
+}
+
 @end

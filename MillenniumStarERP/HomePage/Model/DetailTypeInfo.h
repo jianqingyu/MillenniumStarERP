@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DetailTypeInfo : NSObject
+@interface DetailTypeInfo : NSObject<NSCopying,NSMutableCopying>
 @property (nonatomic,assign)int id;
 @property (nonatomic,assign)BOOL isSel;
 @property (nonatomic,copy)NSString *title;

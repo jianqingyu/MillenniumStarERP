@@ -21,4 +21,27 @@
     return new;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    DetailTypeInfo *new = [[DetailTypeInfo allocWithZone:zone] init];
+    new.title = self.title;
+    new.id = self.id;
+    new.isSel = self.isSel;
+    new.price = self.price;
+    new.pic = self.pic;
+    new.pic1 = self.pic1;
+    return new;
+}
+
+- (id)mutableCopyWithZone:(NSZone *)zone{
+    DetailTypeInfo *new = [[DetailTypeInfo allocWithZone:zone] init];
+    new.title = self.title;
+    new.id = self.id;
+    new.isSel = self.isSel;
+    new.price = self.price;
+    new.pic = self.pic;
+    new.pic1 = self.pic1;
+    return new;
+}
+
 @end

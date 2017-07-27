@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ScreenDetailInfo : NSObject
+@interface ScreenDetailInfo : NSObject<NSCopying,NSMutableCopying>
 @property (nonatomic,assign)BOOL isSelect;
 @property (nonatomic,assign)int id;
 @property (nonatomic,copy) NSString *groupKey;

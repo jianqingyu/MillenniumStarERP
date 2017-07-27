@@ -67,13 +67,15 @@
 - (void)setTopArr:(NSArray *)topArr{
     if (topArr) {
         _topArr = topArr;
-        NSDictionary *dict = _topArr[0];
-        _weightArr = [SearchDateInfo objectArrayWithKeyValuesArray:dict[@"list"]];
-        [self creatBaseView:_weightArr isYes:YES];
-        
-        NSDictionary *dict2 = _topArr[1];
-        _priceArr = [SearchDateInfo objectArrayWithKeyValuesArray:dict2[@"list"]];
-        [self creatBaseView:_priceArr isYes:NO];
+        if (_topArr.count>1) {
+            NSDictionary *dict = _topArr[0];
+            _weightArr = [SearchDateInfo objectArrayWithKeyValuesArray:dict[@"list"]];
+            [self creatBaseView:_weightArr isYes:YES];
+            
+            NSDictionary *dict2 = _topArr[1];
+            _priceArr = [SearchDateInfo objectArrayWithKeyValuesArray:dict2[@"list"]];
+            [self creatBaseView:_priceArr isYes:NO];
+        }
     }
 }
 

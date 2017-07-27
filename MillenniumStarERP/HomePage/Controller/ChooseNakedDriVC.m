@@ -25,10 +25,10 @@
     [self creatEditDriView];
     self.editBtn.enabled = NO;
     self.nakeBtn.enabled = YES;
-    if (self.isCan==1) {
+    if (self.isCan==0) {
         self.nakeBtn.hidden = YES;
         self.NakedDriV.hidden = YES;
-    }else if(self.isCan==2){
+    }else if(self.isCan==1){
         self.editBtn.hidden = YES;
         self.nakeBtn.enabled = NO;
         self.editDriV.hidden = YES;

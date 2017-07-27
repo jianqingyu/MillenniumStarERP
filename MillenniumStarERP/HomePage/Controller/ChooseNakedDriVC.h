@@ -10,7 +10,7 @@
 typedef void (^chooseDriBack)(id model);
 @interface ChooseNakedDriVC : BaseViewController
 @property (nonatomic,assign)int isCan;
-@property (nonatomic,copy)NSString *number;
+@property (nonatomic,  copy)NSString *number;
 @property (nonatomic,  copy)NSArray *dataArr;
 @property (nonatomic,  copy)chooseDriBack eidtBack;
 @property (nonatomic,strong)NSArray *infoArr;

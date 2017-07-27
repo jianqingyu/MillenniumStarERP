@@ -52,11 +52,14 @@
         CGFloat labH = 30;
         CGFloat height = 24;
         CGFloat width = (self.width - 5*5)/4;
+        if (width<0) {
+            width = (MIN(SDevWidth, SDevHeight)*0.8 - 5*5)/4;
+        }
         for (int i=0; i<self.mutA.count; i++) {
             int column = i % num;
             int row = i / num;
             ScreenDetailInfo *dInfo = self.mutA[i];
-            UIButton *btn = [self creatBtnAction:@selector(subCateBtnAction:)];
+            UIButton *btn = [self creatBtn];
             btn.frame = CGRectMake((width+5)*column+5,labH+(height+5)*row,width, height);
             btn.tag = i;
             NSString *title = [NSString stringWithFormat:@"x %@",dInfo.title];
@@ -66,17 +69,15 @@
     }
 }
 
-- (UIButton *)creatBtnAction:(SEL)action{
+- (UIButton *)creatBtn{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.backgroundColor = [UIColor whiteColor];
     btn.titleLabel.font = [UIFont systemFontOfSize:14.0];
     [btn setTitleColor:MAIN_COLOR forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateSelected];
-    btn.layer.cornerRadius = 5;
-    btn.layer.masksToBounds = YES;
-    btn.layer.borderWidth = 1;
-    btn.layer.borderColor = MAIN_COLOR.CGColor;
-    [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [btn setLayerWithW:5 andColor:MAIN_COLOR andBackW:1];
+    [btn addTarget:self action:@selector(subCateBtnAction:)
+                                 forControlEvents:UIControlEventTouchUpInside]; 
     [self addSubview:btn];
     return btn;
 }

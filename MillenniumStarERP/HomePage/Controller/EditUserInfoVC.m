@@ -34,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的";
     self.mutDic = [NSMutableDictionary new];
     [self setBaseViewData];
 }

@@ -7,13 +7,14 @@
 //
 
 #import "LoginViewController.h"
-#import <LocalAuthentication/LocalAuthentication.h>
 #import "MainTabViewController.h"
 #import "MainNavViewController.h"
 #import "RegisterViewController.h"
 #import "PassWordViewController.h"
 #import "IQKeyboardManager.h"
 #import "CusTomLoginView.h"
+#import "NewHomeBannerVC.h"
+#import <LocalAuthentication/LocalAuthentication.h>
 @interface LoginViewController ()
 @property (nonatomic,weak)CusTomLoginView *loginView;
 @end
@@ -48,8 +49,12 @@
             if (success) {
                 //验证成功，主线程处理UI
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//                    window.rootViewController = [[MainTabViewController alloc]init];
                     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                    window.rootViewController = [[MainTabViewController alloc]init];
+                    NewHomeBannerVC *newVc = [NewHomeBannerVC new];
+                    MainNavViewController *nav = [[MainNavViewController alloc]initWithRootViewController:newVc];
+                    window.rootViewController = nav;
                  }];
                 return;
             }else{
@@ -78,8 +83,12 @@
                 [self dismissViewControllerAnimated:YES completion:nil];
                 return;
             }
+//            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//            window.rootViewController = [[MainTabViewController alloc]init];
             UIWindow *window = [UIApplication sharedApplication].keyWindow;
-            window.rootViewController = [[MainTabViewController alloc]init];
+            NewHomeBannerVC *newVc = [NewHomeBannerVC new];
+            MainNavViewController *nav = [[MainNavViewController alloc]initWithRootViewController:newVc];
+            window.rootViewController = nav;
         }else if (staue==2){
             [self registerClick];
         }else{
