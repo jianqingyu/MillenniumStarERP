@@ -63,7 +63,7 @@
     }];
     self.backgroundColor = [UIColor whiteColor];
     UIButton *sureBtn = [self setB:@"确定" andS:88 andC:MAIN_COLOR];
-    UIButton *cancelBtn = [self setB:@"重置筛选" andS:89 andC:CUSTOM_COLOR(242, 140, 42)];
+    UIButton *cancelBtn = [self setB:@"重置筛选" andS:89 andC:[UIColor lightGrayColor]];
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(0);
         make.height.mas_equalTo(@40);

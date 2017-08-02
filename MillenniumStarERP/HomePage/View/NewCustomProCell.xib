@@ -44,7 +44,7 @@
                                     <color key="titleColor" red="0.94509803920000002" green="0.16862745100000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r95-x5-kV4">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r95-x5-kV4">
                                 <rect key="frame" x="190" y="22" width="48" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="封石" image="icon_select4">

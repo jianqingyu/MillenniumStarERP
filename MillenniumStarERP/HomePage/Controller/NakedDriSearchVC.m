@@ -90,7 +90,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.backScr addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.backScr).offset(0);
+        make.top.equalTo(self.backScr).offset(30);
         make.left.equalTo(self.backScr).offset(0);
         make.right.equalTo(self.backScr).offset(0);
         make.bottom.equalTo(self.backScr).offset(0);
@@ -197,13 +197,20 @@
 }
 
 - (void)setTableViewHeadView:(NSArray *)arr{
-    NakedDriSeaHeadV *head = [[NakedDriSeaHeadV alloc]initWithFrame:CGRectMake(0, 0, SDevWidth, 30)];
+    NakedDriSeaHeadV *head = [[NakedDriSeaHeadV alloc]initWithFrame:CGRectMake(0, 0, arr.count*60+100, 30)];
     head.back = ^(NSString *mess){
         _sortStr = mess;
         [self.tableView.header beginRefreshing];
     };
     head.topArr = arr;
-    self.tableView.tableHeaderView = head;
+    [self.backScr addSubview:head];
+    [head mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.backScr).offset(0);
+        make.left.equalTo(self.backScr).offset(0);
+        make.right.equalTo(self.backScr).offset(0);
+        make.height.mas_equalTo(30);
+    }];
+//    self.tableView.tableHeaderView = head;
 }
 
 //初始化列表数据

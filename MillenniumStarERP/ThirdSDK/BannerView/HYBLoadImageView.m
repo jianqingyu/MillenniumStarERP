@@ -59,7 +59,6 @@
 
 - (void)setImage:(UIImage *)image isFromCache:(BOOL)isFromCache {
   self.image = image;
-  
   if (!isFromCache && _isAnimated) {
     CATransition *animation = [CATransition animation];
     [animation setDuration:0.65f];
@@ -67,7 +66,6 @@
     animation.removedOnCompletion = YES;
     [self.layer addAnimation:animation forKey:@"transition"];
   }
-  self.contentMode = UIViewContentModeScaleAspectFill;
 }
 
 - (void)setAnimated:(BOOL)animated {

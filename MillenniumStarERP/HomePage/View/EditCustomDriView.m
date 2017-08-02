@@ -16,9 +16,6 @@
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, assign)BOOL isSel;
 @property (nonatomic,   copy)NSArray *arr;
-@property (nonatomic,   copy)NSArray *sArr;
-@property (nonatomic,   copy)NSArray *bigArr;
-@property (nonatomic,   copy)NSString *topStr;
 @property (nonatomic,   copy)NSString *weight;
 @property (nonatomic, strong)NSDictionary *dict;
 @property (nonatomic,   weak)EditCustomDriTableCell *fieCell;
@@ -43,20 +40,6 @@
     [self.tableView reloadData];
 }
 
-- (void)setNakedArr:(NSMutableArray *)NakedArr{
-    if (NakedArr) {
-        _NakedArr = NakedArr;
-        self.bigArr = _NakedArr[0];
-        NSMutableArray *mutA = @[].mutableCopy;
-        for (int i=0; i<10; i++) {
-            DetailTypeInfo *info = self.bigArr[i];
-            [mutA addObject:info];
-        }
-        self.sArr = mutA.copy;
-        [_NakedArr setObject:self.sArr atIndexedSubscript:0];
-    }
-}
-
 - (void)setInfoArr:(NSArray *)infoArr{
     if (infoArr) {
         _infoArr = infoArr;
@@ -64,9 +47,6 @@
             DetailTypeInfo *info = _infoArr[i];
             if (info.title.length==0) {
                 continue;
-            }
-            if (i==0) {
-                self.topStr = info.title;
             }
             if (i==1) {
                 self.weight = info.title;
@@ -93,7 +73,10 @@
         make.bottom.equalTo(self).offset(-50);
     }];
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    
+    // 9.0以上才有这个属性，针对ipad
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0){
+        self.tableView.cellLayoutMarginsFollowReadableWidth = NO;
+    }
     UIButton *sureBtn = [self setB:@"确定" andS:88 andC:MAIN_COLOR];
     UIButton *cancelBtn = [self setB:@"重置" andS:89 andC:[UIColor lightGrayColor]];
     [sureBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -175,9 +158,7 @@
     NSArray *arr = self.NakedArr[indexPath.section];
     if (indexPath.section==0) {
         EditCustomDriLibCell *BCell = [EditCustomDriLibCell cellWithTableView:tableView];
-        if (self.topStr>0) {
-            BCell.topStr = self.topStr;
-        }
+        BCell.isSmall = !self.isSel;
         BCell.titleStr = self.arr[indexPath.section];
         BCell.libArr = arr;
         return BCell;
@@ -205,11 +186,6 @@
 
 - (void)btnClick:(UIButton *)btn{
     self.isSel = !self.isSel;
-    if (self.isSel) {
-        [self.NakedArr setObject:self.bigArr atIndexedSubscript:0];
-    }else{
-        [self.NakedArr setObject:self.sArr atIndexedSubscript:0];
-    }
     [self.tableView reloadData];
 }
 
@@ -244,7 +220,6 @@
     }
     self.number = @"";
     self.weight = @"";
-    self.topStr = @"";
     [self.tableView reloadData];
 }
 

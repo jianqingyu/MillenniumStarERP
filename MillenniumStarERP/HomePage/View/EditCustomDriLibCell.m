@@ -45,14 +45,27 @@
     lab2.font = [UIFont systemFontOfSize:13];
     [self.contentView addSubview:lab2];
     self.topLab = lab2;
+    for (DetailTypeInfo *dInfo in _libArr) {
+        if (dInfo.isSel) {
+            lab2.text = dInfo.title;
+        }
+    }
     
     int COLUMN = 5;
     CGFloat ROWSPACE = 10;
-    NSInteger total = _libArr.count;
-    CGFloat rowWid = (SDevWidth - 6*10)/5;
     CGFloat rowhei = 25;
-    
+    NSInteger total = _libArr.count;
+    if (!IsPhone) {
+        COLUMN = SDevHeight>SDevWidth?8:10;
+    }else{
+        COLUMN = SDevHeight>SDevWidth?5:8;
+    }
+    if (total>2*COLUMN&&self.isSmall) {
+        total = 2*COLUMN;
+    }
+    CGFloat rowWid = (SDevWidth - (COLUMN+1)*10)/COLUMN;
     CGFloat cellHeight = 0;
+    
     for (int i=0; i<total; i++) {
         int row = i / COLUMN;
         int column = i % COLUMN;
@@ -63,12 +76,6 @@
         [btn setTitle:dInfo.title forState:UIControlStateNormal];
         btn.selected = dInfo.isSel;
         cellHeight = CGRectGetMaxY(btn.frame)+10;
-        if (dInfo.isSel) {
-            lab2.text = dInfo.title;
-        }
-    }
-    if (lab2.text.length==0&&self.topStr.length>0&&[_titleStr isEqualToString:@"类型"]) {
-        lab2.text = self.topStr;
     }
     self.bounds = CGRectMake(0, 0, SDevWidth, cellHeight);
 }

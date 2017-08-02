@@ -39,9 +39,14 @@
     [self.contentView addSubview:lab];
     
     int COLUMN = 5;
+    if (!IsPhone) {
+        COLUMN = SDevHeight>SDevWidth?8:10;
+    }else{
+        COLUMN = SDevHeight>SDevWidth?5:8;
+    }
     CGFloat ROWSPACE = 10;
     NSInteger total = _libArr.count;
-    CGFloat rowWid = (SDevWidth - 6*10)/5;
+    CGFloat rowWid = (SDevWidth - (COLUMN+1)*10)/COLUMN;
     CGFloat rowhei = rowWid+15;
     CGFloat cellHeight = 0;
     for (int i=0; i<total; i++) {

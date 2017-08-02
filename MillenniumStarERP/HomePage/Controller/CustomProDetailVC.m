@@ -32,6 +32,7 @@
 @property (nonatomic,  weak) IBOutlet UIButton *lookBtn;
 @property (nonatomic,  weak) IBOutlet UIButton *addBtn;
 @property (nonatomic,  weak) IBOutlet UILabel *numLab;
+@property (nonatomic,assign)float wid;
 @property (nonatomic,  copy)NSArray *typeArr;
 @property (nonatomic,  copy)NSArray *typeTArr;
 @property (nonatomic,  copy)NSArray *typeSArr;
@@ -61,6 +62,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"定制信息";
+    self.wid = IsPhone?0.5:0.65;
     [self loadCustomProBaseView];
 }
 
@@ -127,7 +129,7 @@
     }else{
         self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectZero];
         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(SDevWidth*0.5);
+            make.left.equalTo(self.view).offset(SDevWidth*self.wid);
         }];
         [self setupHeadView:self.headImg and:NO];
     }
@@ -363,9 +365,9 @@
 }
 
 - (void)setupHeadView:(NSArray *)headArr and:(BOOL)isHead{
-    CGRect headF = CGRectMake(0, 0, SDevWidth*0.5, SDevHeight-60);
+    CGRect headF = CGRectMake(0, 0, SDevWidth*self.wid, SDevHeight-60);
     if (!IsPhone){
-        headF = CGRectMake(0, 20, SDevWidth*0.5, SDevHeight-80);
+        headF = CGRectMake(0, 20, SDevWidth*self.wid, SDevHeight-80);
     }
     if (isHead) {
         headF = CGRectMake(0, 0, SDevWidth, SDevWidth);

@@ -35,6 +35,9 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <state key="normal" title="确定"/>
+                            <state key="disabled">
+                                <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
                                 <action selector="confirmClick:" destination="-1" eventType="touchUpInside" id="iQj-OW-NFe"/>
                             </connections>

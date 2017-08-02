@@ -268,19 +268,17 @@ NSString * const kCellIdentifier = @"ReuseCellIdentifier";
   
   NSInteger itemIndex = indexPath.item % self.imageUrls.count;
   if (itemIndex < self.imageUrls.count) {
-    NSString *urlString = self.imageUrls[itemIndex];
-    if ([urlString isKindOfClass:[UIImage class]]) {
-      cell.imageView.image = (UIImage *)urlString;
-    } else if ([urlString hasPrefix:@"http://"]
-               || [urlString hasPrefix:@"https://"]
-               || [urlString containsString:@"/"]) {
-      [cell.imageView setImageWithURLString:urlString placeholder:self.placeholder];
-    } else {
-      cell.imageView.image = [UIImage imageNamed:urlString];
-    }
-//      cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        NSString *urlString = self.imageUrls[itemIndex];
+        if ([urlString isKindOfClass:[UIImage class]]) {
+          cell.imageView.image = (UIImage *)urlString;
+        } else if ([urlString hasPrefix:@"http://"]
+                   || [urlString hasPrefix:@"https://"]
+                   || [urlString containsString:@"/"]) {
+          [cell.imageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.placeholder];
+        } else {
+          cell.imageView.image = [UIImage imageNamed:urlString];
+        }
   }
-  
   if (self.alignment == kPageControlAlignRight && itemIndex < self.adTitles.count) {
     cell.titleLabel.text = [NSString stringWithFormat:@"   %@", self.adTitles[itemIndex]];
     cell.titleLabel.textColor = MAIN_COLOR;

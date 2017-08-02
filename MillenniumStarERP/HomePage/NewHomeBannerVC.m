@@ -81,7 +81,7 @@
 
 - (void)loadNewHomeData{
     [SVProgressHUD show];
-    NSString *url = [NSString stringWithFormat:@"%@IndexRoundPic",baseUrl];
+    NSString *url = [NSString stringWithFormat:@"%@IndexPageForQxzx",baseUrl];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [BaseApi getGeneralData:^(BaseResponse *response, NSError *error) {
         if ([response.error intValue]==0) {

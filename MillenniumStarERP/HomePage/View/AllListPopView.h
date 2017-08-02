@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 typedef void (^AllPopViewBack)(id dict);
 @interface AllListPopView : UIView
+@property (nonatomic,assign)int seIndex;
 @property (nonatomic,copy) NSArray *productList;
 @property (nonatomic,copy)AllPopViewBack popBack;
-- (id)initWithFrame:(CGRect)frame;
 @end

@@ -50,6 +50,10 @@
     [self setNakedHeadView];
     [self setHomeData];
     self.NakedArr = @[].mutableCopy;
+    // 9.0以上才有这个属性，针对ipad
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0){
+        self.tableView.cellLayoutMarginsFollowReadableWidth = NO;
+    }
 }
 
 - (void)setNakedTableView{

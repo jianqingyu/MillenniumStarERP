@@ -10,10 +10,8 @@
 #import "DetailTypeInfo.h"
 @interface AllListPopView()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)UITableView *tableView;
-@property (nonatomic,assign)int seIndex;
 @end
 @implementation AllListPopView
-
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
@@ -40,6 +38,10 @@
             make.height.mas_equalTo(@0);
         }];
         _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+        // 9.0以上才有这个属性，针对ipad
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0){
+            _tableView.cellLayoutMarginsFollowReadableWidth = NO;
+        }
     }
     return self;
 }

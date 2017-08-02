@@ -10,7 +10,7 @@
 
 @interface EditCustomDriLibCell : UITableViewCell
 + (id)cellWithTableView:(UITableView *)tableView;
-@property (nonatomic,copy)NSString *topStr;
 @property (nonatomic,copy)NSArray *libArr;
 @property (nonatomic,copy)NSString *titleStr;
+@property (nonatomic,assign)BOOL isSmall;
 @end
