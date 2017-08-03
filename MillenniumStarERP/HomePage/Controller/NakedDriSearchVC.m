@@ -13,6 +13,7 @@
 #import "NakedDriPriceVC.h"
 #import "StrWithIntTool.h"
 #import "NakedDriSeaHeadV.h"
+#import "ProductListVC.h"
 @interface NakedDriSearchVC ()<UITableViewDelegate,UITableViewDataSource>{
     int curPage;
     int pageCount;
@@ -28,6 +29,7 @@
 @property (weak,  nonatomic) IBOutlet UILabel *headLab;
 @property (weak,  nonatomic) IBOutlet UIScrollView *backScr;
 @property (strong,nonatomic) IBOutletCollection(UIButton) NSArray *bottomBtns;
+@property (weak, nonatomic) IBOutlet UIButton *chooseBtn;
 @end
 
 @implementation NakedDriSearchVC
@@ -40,11 +42,10 @@
     [self setupBaseTableView];
     [self setupHeaderRefresh];
     [self setRightNaviBar];
-    if (self.isSel) {
-        self.bottomV.hidden = YES;
-    }else{
-        self.sureBtn.hidden = YES;
-    }
+    self.bottomV.hidden = self.isSel;
+    self.sureBtn.hidden = !self.isSel;
+    BOOL isHid = !(!self.isSel&&[[AccountTool account].isNorm intValue]==0);
+    self.chooseBtn.hidden = isHid;
 }
 
 - (void)setRightNaviBar{
@@ -82,6 +83,7 @@
         btn.enabled = [[AccountTool account].isShow intValue];
         [btn setLayerWithW:3 andColor:BordColor andBackW:0.001];
     }
+    [self.chooseBtn setLayerWithW:3 andColor:BordColor andBackW:0.001];
     [self.sureBtn setLayerWithW:3 andColor:BordColor andBackW:0.001];
     self.backScr.bounces = NO;
     self.tableView = [[UITableView alloc]init];
@@ -296,6 +298,27 @@
     NSInteger count = self.navigationController.viewControllers.count;
     BaseViewController *baseVc = self.navigationController.viewControllers[count-3];
     [self.navigationController popToViewController:baseVc animated:YES];
+}
+
+- (IBAction)chooseProClick:(id)sender {
+    NSArray *arr = [self arrWithInfo];
+    if (arr.count==0) {
+        [MBProgressHUD showError:@"请选择钻石"];
+        return;
+    }
+    if (arr.count>1) {
+        [MBProgressHUD showError:@"只能选择一个钻石"];
+        return;
+    }
+    NakedDriSeaListInfo *listInfo = arr[0];
+    if (listInfo.CertCode.length==0) {
+        [MBProgressHUD showError:@"没有证书不能选择"];
+        return;
+    }
+    ProductListVC *listVc = [ProductListVC new];
+    listVc.driInfo = listInfo;
+    listVc.backDict = @{@"weight":listInfo.Weight}.mutableCopy;
+    [self.navigationController pushViewController:listVc animated:YES];
 }
 
 - (IBAction)priceClick:(id)sender {

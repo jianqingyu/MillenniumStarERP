@@ -70,6 +70,10 @@
 }
 
 - (void)creatBaseView{
+    CGFloat loWid = MIN(SDevWidth, SDevHeight)*0.7;
+    if (!IsPhone) {
+        loWid = MIN(SDevWidth, SDevHeight)*0.4;
+    }
     UIImageView *imageB = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"backView"]];
     [self addSubview:imageB];
     [imageB mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,7 +92,7 @@
         make.top.equalTo(self).offset(SDevHeight*0.5);
         make.centerX.mas_equalTo(self.mas_centerX);
         make.bottom.equalTo(self).offset(0);
-        make.width.mas_equalTo(SDevWidth*0.7);
+        make.width.mas_equalTo(loWid);
     }];
     self.logView = loginV;
     
@@ -105,6 +109,7 @@
     UIView *listView3 = [self creatListView:loginV isC:3];
     
     UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    loginBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [loginBtn setBackgroundImage:[UIImage imageNamed:@"logbtn"] forState:UIControlStateNormal];
     [loginBtn setTitle:@"登  陆" forState:UIControlStateNormal];
     [loginBtn addTarget:self action:@selector(loginClick:)
@@ -242,6 +247,10 @@
 }
 
 - (UIView *)creatLineChange:(UIView *)view{
+    CGFloat loWid = MIN(SDevWidth, SDevHeight)*0.7;
+    if (!IsPhone) {
+        loWid = MIN(SDevWidth, SDevHeight)*0.4;
+    }
     UIView *line = [[UIView alloc]init];
     line.backgroundColor = [UIColor clearColor];
     CAGradientLayer *layer = [CAGradientLayer new];
@@ -250,7 +259,7 @@
                      (__bridge id)[UIColor clearColor].CGColor];
     layer.startPoint = CGPointMake(0, 0);
     layer.endPoint = CGPointMake(1, 0);
-    layer.frame = (CGRect){CGPointZero, CGSizeMake(SDevWidth*0.7, 0.8)};
+    layer.frame = (CGRect){CGPointZero, CGSizeMake(loWid, 0.8)};
     [line.layer addSublayer:layer];
     [view addSubview:line];
     return line;

@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="backScr" destination="ph5-Ve-5pr" id="hF1-DR-Pg5"/>
                 <outlet property="bottomV" destination="a99-oz-3yg" id="0OK-Ma-ZXn"/>
+                <outlet property="chooseBtn" destination="ahH-3h-ett" id="RYD-iz-TlU"/>
                 <outlet property="headLab" destination="9o8-tv-ws2" id="wYg-8L-Kdg"/>
                 <outlet property="sureBtn" destination="bXN-4H-Jd1" id="u7u-S6-YYZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -113,6 +114,19 @@
                                 <action selector="sureClick:" destination="-1" eventType="touchUpInside" id="6sW-9o-wcG"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahH-3h-ett">
+                            <rect key="frame" x="83" y="6" width="46" height="24"/>
+                            <color key="backgroundColor" red="0.94509803920000002" green="0.16862745100000001" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="Zx5-Be-69k"/>
+                                <constraint firstAttribute="height" constant="24" id="vnD-Lc-fkR"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <state key="normal" title="选戒托"/>
+                            <connections>
+                                <action selector="chooseProClick:" destination="-1" eventType="touchUpInside" id="fCn-Tb-jQV"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.92941176469999998" green="0.91764705879999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -124,9 +138,11 @@
                         <constraint firstItem="yh8-4K-jI3" firstAttribute="width" secondItem="wcz-sp-Bjg" secondAttribute="width" id="Lp1-lk-AOA"/>
                         <constraint firstAttribute="height" constant="35" id="UVI-DC-nLA"/>
                         <constraint firstAttribute="trailing" secondItem="bXN-4H-Jd1" secondAttribute="trailing" constant="10" id="W1h-Sy-9tU"/>
+                        <constraint firstItem="ahH-3h-ett" firstAttribute="leading" secondItem="wcz-sp-Bjg" secondAttribute="trailing" constant="5" id="Wah-26-maA"/>
                         <constraint firstItem="wcz-sp-Bjg" firstAttribute="centerY" secondItem="z7i-8Q-Iei" secondAttribute="centerY" id="cfh-vV-gCr"/>
                         <constraint firstItem="d8Y-Az-lpU" firstAttribute="height" secondItem="wcz-sp-Bjg" secondAttribute="height" id="kgx-dy-gjK"/>
                         <constraint firstItem="d8Y-Az-lpU" firstAttribute="width" secondItem="wcz-sp-Bjg" secondAttribute="width" id="oQK-2p-AHa"/>
+                        <constraint firstItem="ahH-3h-ett" firstAttribute="centerY" secondItem="z7i-8Q-Iei" secondAttribute="centerY" id="xOi-kw-jZY"/>
                         <constraint firstItem="a99-oz-3yg" firstAttribute="top" secondItem="z7i-8Q-Iei" secondAttribute="top" id="zPd-TK-qfr"/>
                     </constraints>
                 </view>

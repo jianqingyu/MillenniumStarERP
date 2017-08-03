@@ -62,6 +62,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"定制信息";
+    self.view.backgroundColor = [UIColor whiteColor];
     self.wid = IsPhone?0.5:0.65;
     [self loadCustomProBaseView];
 }
@@ -137,7 +138,6 @@
 
 - (void)setBaseTableView{
     UITableView *table = [[UITableView alloc]init];
-    table.backgroundColor = DefaultColor;
     table.separatorStyle = UITableViewCellSeparatorStyleNone;
     table.delegate = self;
     table.dataSource = self;

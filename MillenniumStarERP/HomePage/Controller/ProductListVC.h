@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
-
+#import "NakedDriSeaListInfo.h"
 @interface ProductListVC : BaseViewController
 @property (nonatomic, strong) NSMutableDictionary *backDict;
+@property (nonatomic, strong)NakedDriSeaListInfo *driInfo;
 @end

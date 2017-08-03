@@ -447,6 +447,7 @@
     ProductInfo *info = self.dataArray[indexPath.row];
     if ([[AccountTool account].isNorm intValue]==0) {
         NewCustomProDetailVC *new = [NewCustomProDetailVC new];
+        new.seaInfo = self.driInfo;
         new.proId = info.id;
         [self.navigationController pushViewController:new animated:YES];
     }else{
